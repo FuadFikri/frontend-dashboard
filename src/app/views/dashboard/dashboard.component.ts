@@ -1,17 +1,39 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { EmployeeService } from './employee.service';
+
+import 'rxjs/add/operator/takeWhile';
+import { Observable, of, timer } from 'rxjs';
+
 @Component({
   templateUrl: 'dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
 
+  public count;
   public brandPrimary = '#20a8d8';
   public brandSuccess = '#4dbd74';
   public brandInfo = '#63c2de';
   public brandWarning = '#f8cb00';
   public brandDanger = '#f86c6b';
 
+  alive = true;
+
+  constructor(private appTest : EmployeeService) {
+    Observable.timer(0,20000)
+    .takeWhile(() => this.alive) // only fires when component is alive
+    .subscribe(() => {
+      this.appTest.getData().subscribe(data=> {
+        this.count=data.d;
+        console.log(this.count);
+      })
+    });
+  }
+
+  ngOnDestroy(){
+    this.alive = false; // switches your IntervalObservable off
+  }
   // dropdown buttons
   // public status: { isopen } = { isopen: false };
   // public toggleDropdown($event: MouseEvent): void {
