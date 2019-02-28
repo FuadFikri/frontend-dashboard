@@ -12,23 +12,32 @@ import { Observable, of, timer } from 'rxjs';
 export class DashboardComponent implements OnInit {
 
   public count;
-  public brandPrimary = '#20a8d8';
+  public brandPrimary = '#FFFFFF';
   public brandSuccess = '#4dbd74';
   public brandInfo = '#63c2de';
   public brandWarning = '#f8cb00';
   public brandDanger = '#f86c6b';
-
+  colors = ['primary', 'danger', 'warning', 'success'];
   alive = true;
 
   constructor(private appTest : EmployeeService) {
-    Observable.timer(0,20000)
-    .takeWhile(() => this.alive) // only fires when component is alive
-    .subscribe(() => {
-      this.appTest.getData().subscribe(data=> {
-        this.count=data.d;
-        console.log(this.count);
-      })
-    });
+    // Observable.timer(0,20000)
+    // .takeWhile(() => this.alive) // only fires when component is alive
+    // .subscribe(() => {
+    //   this.appTest.getData().subscribe(data=> {
+    //     // this.count=data;
+    //     // console.log(this.count);
+    //   })
+    // });
+  }
+
+  hapus($event){
+    let card = this.getParent($event);
+    card.style.visibility="hidden";
+  }
+
+  private getParent($event){
+    return $event.target.parentElement.parentElement.parentElement.parentElement.parentElement;
   }
 
   ngOnDestroy(){
