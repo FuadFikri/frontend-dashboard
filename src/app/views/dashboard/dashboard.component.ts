@@ -1,17 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { EmployeeService } from './employee.service';
 
 import 'rxjs/add/operator/takeWhile';
 import { Observable, of, timer } from 'rxjs';
+import { widgetInterface } from './widgetInterface';
 
 @Component({
   templateUrl: 'dashboard.component.html'
 })
+
+
 export class DashboardComponent implements OnInit {
 
-  public count;
+  widget1=[];
   public brandPrimary = '#FFFFFF';
   public brandSuccess = '#4dbd74';
   public brandInfo = '#63c2de';
@@ -20,15 +23,17 @@ export class DashboardComponent implements OnInit {
   colors = ['primary', 'danger', 'warning', 'success'];
   alive = true;
 
-  constructor(private appTest : EmployeeService) {
-    // Observable.timer(0,20000)
-    // .takeWhile(() => this.alive) // only fires when component is alive
-    // .subscribe(() => {
-    //   this.appTest.getData().subscribe(data=> {
-    //     // this.count=data;
-    //     // console.log(this.count);
-    //   })
-    // });
+  constructor(@Inject(EmployeeService) private empService: EmployeeService) {
+    Observable.timer(0,30000)
+    .takeWhile(() => this.alive) // only fires when component is alive
+    .subscribe(() => {
+      this.empService.getData().subscribe(resp=> {
+        this.widget1 = resp.d[0];
+        console.log("with [0]" , this.widget1);
+        console.log("without [0]" , resp.d);
+        // console.log(data.d[0].max);
+      })
+    }); 
   }
 
   hapus($event){
@@ -497,5 +502,7 @@ export class DashboardComponent implements OnInit {
       this.mainChartData2.push(this.random(80, 100));
       this.mainChartData3.push(65);
     }
+
+   
   }
 }

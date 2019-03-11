@@ -1,7 +1,7 @@
 <div class="animated fadeIn">
-  <div class="row">
-    <div class="col-sm-6 col-lg-3" *ngFor="let color of colors">
-      <div class="card text-white bg-{{color}}">
+  <div class="row" >
+  <div class="col-sm-6 {{widget1.widget_size}}">
+      <div class="card text-white bg-{{colors[0]}}">
         <div class="card-body pb-0">
           <div class="btn-group float-right" dropdown>
             <button type="button" class="btn btn-transparent dropdown-toggle p-0" dropdownToggle>
@@ -13,8 +13,8 @@
               <a class="dropdown-item hapus" href="#"  (click)="hapus($event)">close</a>
             </div>
           </div>
-          <h4 class="mb-0">{{count}}</h4>
-          <p>Members online</p>
+          <h4 class="mb-0">{{widget1.widget_title}}</h4>
+          <p>{{widget1.salary}}</p>
         </div>
         <div class="chart-wrapper px-3" style="height:140px;">
           <canvas baseChart class="chart"
