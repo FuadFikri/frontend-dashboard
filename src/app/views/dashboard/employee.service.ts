@@ -11,13 +11,16 @@ import { widgetInterface } from './widgetInterface';
 })
 export class EmployeeService {
 
-  private url = this.a.SERVER_URL + '/master/Widget/list';
+  private url = this.a.SERVER_URL + '/master/Widget/';
 
   constructor(private http:HttpClient, private a: AppConstant) { }
 
   
 
+  getWidget(){
+    return this.http.get<widgetInterface>(this.url+'list');
+  }
   getData(){
-    return this.http.get<widgetInterface>(this.url);
+    return this.http.get<widgetInterface>(this.url+'data');
   }
 }

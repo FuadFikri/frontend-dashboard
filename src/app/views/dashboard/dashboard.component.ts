@@ -15,6 +15,7 @@ import { widgetInterface } from './widgetInterface';
 export class DashboardComponent implements OnInit {
 
   widgets:any;
+  widgetsData:any;
   public brandPrimary = '#FFFFFF';
   public brandSuccess = '#4dbd74';
   public brandInfo = '#63c2de';
@@ -26,11 +27,15 @@ export class DashboardComponent implements OnInit {
     Observable.timer(0,30000)
     .takeWhile(() => this.alive) // only fires when component is alive
     .subscribe(() => {
-      this.empService.getData().subscribe(resp=> {
+      this.empService.getWidget().subscribe(resp=> {
         this.widgets = resp.d;
-        console.log("with [0]" , this.widgets);
+        console.log("widget",this.widgets);
         // console.log("without [0]" , resp.d);
         // console.log(data.d[0].max);
+      })
+      this.empService.getData().subscribe(res=>{
+        this.widgetsData = res.d;
+        console.log("data",this.widgetsData);
       })
     }); 
   }
@@ -58,7 +63,7 @@ export class DashboardComponent implements OnInit {
   // lineChart1
   public lineChart1Data: Array<any> = [
     {
-      data: [65, 59, 84, 84, 51, 55, 40],
+      data: [22 , 45, 78 ,55 ,85, 99],
       label: 'Series A'
     }
   ];
