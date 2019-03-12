@@ -1,7 +1,7 @@
 <div class="animated fadeIn">
   <div class="row" >
-  <div class="col-sm-6 {{widget1.widget_size}}">
-      <div class="card text-white bg-{{colors[0]}}">
+  <div  *ngFor="let widget of widgets" class="col-sm-6 col-lg-3" >
+      <div class="card text-white bg-{{widget.color}}">
         <div class="card-body pb-0">
           <div class="btn-group float-right" dropdown>
             <button type="button" class="btn btn-transparent dropdown-toggle p-0" dropdownToggle>
@@ -10,13 +10,13 @@
             <div class="dropdown-menu dropdown-menu-right" *dropdownMenu>
               <a class="dropdown-item" href="#">Action</a>
               <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item hapus" href="#"  (click)="hapus($event)">close</a>
+              <a class="dropdown-item hapus"  (click)="hapus($event)">close</a>
             </div>
           </div>
-          <h4 class="mb-0">{{widget1.widget_title}}</h4>
-          <p>{{widget1.salary}}</p>
+          <h4 class="mb-0">{{widget.widget_title}}</h4>
+          <p>p</p>
         </div>
-        <div class="chart-wrapper px-3" style="height:140px;">
+        <div class="chart-wrapper px-3" style="height:70px;">
           <canvas baseChart class="chart"
           [datasets]="lineChart1Data"
           [labels]="lineChart1Labels"
@@ -29,8 +29,8 @@
         </div>
       </div>
     </div>
-    
   </div><!--/.row-->
+
   <div class="card">
     <div class="card-body">
       <div class="row">

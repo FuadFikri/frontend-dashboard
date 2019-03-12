@@ -35,4 +35,13 @@ web service
 -   tidak perlu looping 
 
 
-offset 
+offset -> untuk skip grid
+
+1.  satu widget satu view ?
+    1 widget 1 endpoint
+
+TODO 
+1. refactor dashboard component.
+    pisah pisah jadi per widget
+
+

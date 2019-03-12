@@ -14,13 +14,12 @@ import { widgetInterface } from './widgetInterface';
 
 export class DashboardComponent implements OnInit {
 
-  widget1=[];
+  widgets:any;
   public brandPrimary = '#FFFFFF';
   public brandSuccess = '#4dbd74';
   public brandInfo = '#63c2de';
   public brandWarning = '#f8cb00';
   public brandDanger = '#f86c6b';
-  colors = ['primary', 'danger', 'warning', 'success'];
   alive = true;
 
   constructor(@Inject(EmployeeService) private empService: EmployeeService) {
@@ -28,9 +27,9 @@ export class DashboardComponent implements OnInit {
     .takeWhile(() => this.alive) // only fires when component is alive
     .subscribe(() => {
       this.empService.getData().subscribe(resp=> {
-        this.widget1 = resp.d[0];
-        console.log("with [0]" , this.widget1);
-        console.log("without [0]" , resp.d);
+        this.widgets = resp.d;
+        console.log("with [0]" , this.widgets);
+        // console.log("without [0]" , resp.d);
         // console.log(data.d[0].max);
       })
     }); 
