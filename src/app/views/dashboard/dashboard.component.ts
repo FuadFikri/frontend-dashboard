@@ -15,7 +15,8 @@ import { widgetInterface } from './widgetInterface';
 export class DashboardComponent implements OnInit {
 
   widgets:any;
-  widgetsData:any;
+  widgetsData:any=[];
+  data:any=[];
   public brandPrimary = '#FFFFFF';
   public brandSuccess = '#4dbd74';
   public brandInfo = '#63c2de';
@@ -34,10 +35,26 @@ export class DashboardComponent implements OnInit {
         // console.log(data.d[0].max);
       })
       this.empService.getData().subscribe(res=>{
-        this.widgetsData = res.d;
-        console.log("data",this.widgetsData);
+        // console.log(res.d);
+        this.data = res.d;
+        // // console.log("data",this.widgetsData);
+        let x = res.d;
+          for (let index = 0; index < x.length; index++) {
+            this.widgetsData.push(this.data[index]);
+            
+          }
+        
+          
+        
+        
       })
     }); 
+    
+  }
+
+  getWidgetData(){
+    console.log("after ",JSON.parse(this.widgetsData));
+    console.log("before ",this.widgetsData);
   }
 
   hapus($event){
@@ -507,6 +524,5 @@ export class DashboardComponent implements OnInit {
       this.mainChartData3.push(65);
     }
 
-   
   }
 }

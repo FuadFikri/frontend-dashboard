@@ -1,5 +1,6 @@
 export interface widgetInterface {
-    d:Object;
+    // d:any;
+    d:Array<Object>;
     // auto_refresh: number;
     // closable: number;
     // did: number;​

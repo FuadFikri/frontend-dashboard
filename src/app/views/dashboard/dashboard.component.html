@@ -1,6 +1,6 @@
 <div class="animated fadeIn">
   <div class="row" >
-  <div  *ngFor="let widget of widgets" class="col-sm-6 col-lg-3" >
+  <div  *ngFor="let widget of widgets; let i = index" class="col-sm-6 col-lg-3" >
       <div class="card text-white bg-{{widget.color}}">
         <div class="card-body pb-0">
           <div class="btn-group float-right" dropdown>
@@ -9,12 +9,12 @@
             </button>
             <div class="dropdown-menu dropdown-menu-right" *dropdownMenu>
               <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" (click)="getWidgetData()">Another action</a>
               <a class="dropdown-item hapus"  (click)="hapus($event)">close</a>
             </div>
           </div>
           <h4 class="mb-0">{{widget.widget_title}}</h4>
-          <p></p>
+          <p>{{data[i].salary}}</p>
         </div>
         <div class="chart-wrapper px-3" style="height:140px;">
           <canvas baseChart class="chart"
