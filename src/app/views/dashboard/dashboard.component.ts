@@ -16,7 +16,8 @@ export class DashboardComponent implements OnInit {
 
   widgets:any;
   widgetsData:any=[];
-  data:any=[];
+  data:any;
+  closeable:Array<boolean>=[];
   public brandPrimary = '#FFFFFF';
   public brandSuccess = '#4dbd74';
   public brandInfo = '#63c2de';
@@ -25,36 +26,45 @@ export class DashboardComponent implements OnInit {
   alive = true;
 
   constructor(@Inject(EmployeeService) private empService: EmployeeService) {
+    
+  }
+
+  ngOnInit(): void {
+    // generate random values for mainChart
+    for (let i = 0; i <= this.mainChartElements; i++) {
+      this.mainChartData1.push(this.random(50, 200));
+      this.mainChartData2.push(this.random(80, 100));
+      this.mainChartData3.push(65);
+    }
+
     Observable.timer(0,30000)
     .takeWhile(() => this.alive) // only fires when component is alive
     .subscribe(() => {
       this.empService.getWidget().subscribe(resp=> {
         this.widgets = resp.d;
         console.log("widget",this.widgets);
-        // console.log("without [0]" , resp.d);
-        // console.log(data.d[0].max);
+        let x = resp.d;
+        this.closeable=[];
+          for (let index = 0; index < x.length; index++) {
+            if (this.widgets[index].closeable == 'TRUE') {
+              this.closeable.push(true);
+            }else{
+              this.closeable.push(false);
+            }
+            
+        }
       })
       this.empService.getData().subscribe(res=>{
-        // console.log(res.d);
         this.data = res.d;
-        // // console.log("data",this.widgetsData);
-        let x = res.d;
-          for (let index = 0; index < x.length; index++) {
-            this.widgetsData.push(this.data[index]);
-            
-          }
-        
-          
-        
-        
+        console.log("data",this.data);
       })
     }); 
     
   }
 
   getWidgetData(){
-    console.log("after ",JSON.parse(this.widgetsData));
-    console.log("before ",this.widgetsData);
+    // console.log("after ",JSON.parse(this.widgetsData));
+    console.log("closable ",this.closeable);
   }
 
   hapus($event){
@@ -516,13 +526,5 @@ export class DashboardComponent implements OnInit {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-  ngOnInit(): void {
-    // generate random values for mainChart
-    for (let i = 0; i <= this.mainChartElements; i++) {
-      this.mainChartData1.push(this.random(50, 200));
-      this.mainChartData2.push(this.random(80, 100));
-      this.mainChartData3.push(65);
-    }
-
-  }
+  
 }

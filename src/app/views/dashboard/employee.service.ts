@@ -18,9 +18,9 @@ export class EmployeeService {
   
 
   getWidget(){
-    return this.http.get<widgetInterface>(this.url+'list');
+    return this.http.get<any>(this.url+'list');
   }
   getData(){
-    return this.http.get<widgetInterface>(this.url+'data');
+    return this.http.get<any>(this.url+'data');
   }
 }

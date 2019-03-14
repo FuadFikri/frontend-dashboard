@@ -10,11 +10,12 @@
             <div class="dropdown-menu dropdown-menu-right" *dropdownMenu>
               <a class="dropdown-item" href="#">Action</a>
               <a class="dropdown-item" (click)="getWidgetData()">Another action</a>
-              <a class="dropdown-item hapus"  (click)="hapus($event)">close</a>
+              <a class="dropdown-item hapus" *ngIf="closeable[i]"  (click)="hapus($event)">close</a>
             </div>
           </div>
           <h4 class="mb-0">{{widget.widget_title}}</h4>
-          <p>{{data[i].salary}}</p>
+          <!-- <p>{{data[i].salary}}</p> -->
+          <p>{{widget.closeable[i]}}</p>
         </div>
         <div class="chart-wrapper px-3" style="height:140px;">
           <canvas baseChart class="chart"
