@@ -5,7 +5,6 @@ import { EmployeeService } from './employee.service';
 
 import 'rxjs/add/operator/takeWhile';
 import { Observable, of, timer } from 'rxjs';
-import { widgetInterface } from './widgetInterface';
 
 @Component({
   templateUrl: 'dashboard.component.html'
