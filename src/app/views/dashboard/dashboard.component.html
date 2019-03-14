@@ -1,7 +1,8 @@
 <div class="animated fadeIn">
   <div class="row" >
   <div  *ngFor="let widget of widgets; let i = index" class="col-sm-6 col-lg-3" >
-      <div class="card text-white bg-{{widget.color}}">
+    <!-- <div *ngFor="let item of data"> -->
+      <div class="card text-white bg-{{widget.color}}"  >
         <div class="card-body pb-0">
           <div class="btn-group float-right" dropdown>
             <button type="button" class="btn btn-transparent dropdown-toggle p-0" dropdownToggle>
@@ -14,8 +15,7 @@
             </div>
           </div>
           <h4 class="mb-0">{{widget.widget_title}}</h4>
-          <!-- <p>{{data[i].salary}}</p> -->
-          <p>{{widget.closeable[i]}}</p>
+          <p *ngIf="data">{{data[i].salary}}</p>
         </div>
         <div class="chart-wrapper px-3" style="height:140px;">
           <canvas baseChart class="chart"
@@ -30,6 +30,7 @@
         </div>
       </div>
     </div>
+    <!-- </div> -->
   </div><!--/.row-->
 
   <div class="card">
