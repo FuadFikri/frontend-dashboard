@@ -1,13 +1,14 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { EmployeeService } from './employee.service';
 
 import 'rxjs/add/operator/takeWhile';
 import { Observable, of, timer } from 'rxjs';
-
+import { DxCircularGaugeComponent } from 'devextreme-angular';
 @Component({
-  templateUrl: 'dashboard.component.html'
+  templateUrl: 'dashboard.component.html',
+  styleUrls: ['dashboard.css']
 })
 
 
@@ -24,6 +25,8 @@ export class DashboardComponent implements OnInit {
   public brandDanger = '#f86c6b';
   alive = true;
 
+  @ViewChild("gauge") gauge: DxCircularGaugeComponent
+
   constructor(@Inject(EmployeeService) private empService: EmployeeService) {
     
   }
@@ -36,7 +39,7 @@ export class DashboardComponent implements OnInit {
       this.mainChartData3.push(65);
     }
 
-    Observable.timer(0,30000)
+    Observable.timer(0,300000)
     .takeWhile(() => this.alive) // only fires when component is alive
     .subscribe(() => {
       this.empService.getWidget().subscribe(resp=> {
@@ -62,8 +65,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getWidgetData(){
-    // console.log("after ",JSON.parse(this.widgetsData));
-    console.log("closable ",this.closeable);
+    this.gauge.instance.render();
   }
 
   hapus($event){

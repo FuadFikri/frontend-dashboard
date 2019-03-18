@@ -11,7 +11,8 @@ import {
   DxSelectBoxModule,
   DxTabPanelModule, DxTextAreaModule,
   DxTextBoxModule,
-  DxPieChartModule
+  DxPieChartModule,
+  DxCircularGaugeModule
 } from 'devextreme-angular';
 import {TranslateModule} from '@ngx-translate/core';
 import {SharedModule} from '../shared/shared.module';
@@ -43,7 +44,8 @@ import {CommonModule} from '@angular/common';
     DxAutocompleteModule,
     DxPivotGridModule,
     DxChartModule,
-    DxPieChartModule
+    DxPieChartModule,
+    DxCircularGaugeModule
   ],
   declarations: [ DashboardComponent]
 })
