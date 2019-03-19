@@ -17,10 +17,17 @@ export class EmployeeService {
 
   
 
-  getWidget(){
-    return this.http.get<any>(this.url+'list');
+  getCards(){
+    return this.http.get<any>(this.url+'cards');
   }
-  getData(){
-    return this.http.get<any>(this.url+'data');
+  getCardsData(){
+    return this.http.get<any>(this.url+'dataCards');
+  }
+
+  getCircularGauge(){
+    return this.http.get<any>(this.url+'circularGauges');
+  }
+  getCircularGaugeData(){
+    return this.http.get<any>(this.url+'dataCircularGauges');
   }
 }
