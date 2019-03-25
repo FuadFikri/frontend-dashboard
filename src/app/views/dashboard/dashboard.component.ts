@@ -41,7 +41,7 @@ export class DashboardComponent implements OnInit {
       this.mainChartData3.push(65);
     }
 
-    Observable.timer(0,300000)
+    Observable.timer(0,30000)
     .takeWhile(() => this.alive) // only fires when component is alive
     .subscribe(() => {
       this.empService.getCards().subscribe(resp=> {
