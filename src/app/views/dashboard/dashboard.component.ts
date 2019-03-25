@@ -17,7 +17,7 @@ export class DashboardComponent implements OnInit {
   cards:any;
   cardsData:any;
   circularGauge:any;
-  circularGaugeData:any;
+  circularGaugeData:Array<String>=[];
   
   closeable:Array<boolean>=[];
   public brandPrimary = '#FFFFFF';
@@ -46,7 +46,7 @@ export class DashboardComponent implements OnInit {
     .subscribe(() => {
       this.empService.getCards().subscribe(resp=> {
         this.cards = resp.d;
-        console.log("widget",this.cards);
+        console.log("card",this.cards);
         let x = resp.d;
         this.closeable=[];
           for (let index = 0; index < x.length; index++) {
@@ -60,7 +60,7 @@ export class DashboardComponent implements OnInit {
       })
       this.empService.getCardsData().subscribe(res=>{
         this.cardsData = res.d;
-        console.log("data",this.cardsData);
+        console.log("data card",this.cardsData);
       })
 
       // circular gauge
@@ -68,14 +68,25 @@ export class DashboardComponent implements OnInit {
         this.circularGauge = resp.d;
         console.log('gauge',this.circularGauge);
       })
+
+      this.empService.getCircularGaugeData().subscribe(res=>{
+        // this.circularGaugeData = res.d;
+        let x = res.d;
+        this.circularGaugeData = [];
+        for (let index = 0; index < x.length; index++) {
+         this.circularGaugeData.push(x[index].employee_id);
+          
+        }
+        console.log("data gauge",this.circularGaugeData);
+      })
     }); 
     
   }
 
-  getWidgetData(){
-    let a = this.gauge.instance.element();
-    // console.log("element",a.parentElement.parentElement.parentElement);
-    a.parentElement.parentElement.parentElement.style.visibility="hidden";
+  deleteGauge($event){
+    let card = $event.target.parentElement.parentElement.parentElement.parentElement;
+    console.log(card);
+    card.style.visibility="hidden";
   }
 
   hapus($event){
