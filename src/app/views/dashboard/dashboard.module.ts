@@ -45,7 +45,8 @@ import {CommonModule} from '@angular/common';
     DxPivotGridModule,
     DxChartModule,
     DxPieChartModule,
-    DxCircularGaugeModule
+    DxCircularGaugeModule,
+    
   ],
   declarations: [ DashboardComponent]
 })

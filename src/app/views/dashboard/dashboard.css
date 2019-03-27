@@ -13,3 +13,9 @@
     font-size: 10pt !important;
 
 }
+::ng-deep #pivotgrid {
+    margin-top: 20px;
+}
+::ng-deep .currency {
+    text-align: center;
+}

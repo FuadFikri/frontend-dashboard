@@ -1,11 +1,12 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { EmployeeService } from './employee.service';
-
+import { DashboardService } from './dashboard.service';
 import 'rxjs/add/operator/takeWhile';
 import { Observable, of, timer } from 'rxjs';
 import { DxCircularGaugeComponent } from 'devextreme-angular';
+
+import {  DxPivotGridComponent, DxChartComponent } from 'devextreme-angular';
+import PivotGridDataSource from 'devextreme/ui/pivot_grid/data_source';
 @Component({
   templateUrl: 'dashboard.component.html',
   styleUrls: ['dashboard.css']
@@ -27,10 +28,43 @@ export class DashboardComponent implements OnInit {
   public brandDanger = '#f86c6b';
   alive = true;
 
-  @ViewChild("gauge") gauge: DxCircularGaugeComponent
+  @ViewChild(DxPivotGridComponent) pivotGrid: DxPivotGridComponent;
+  @ViewChild(DxChartComponent) chart: DxChartComponent;
 
-  constructor(@Inject(EmployeeService) private empService: EmployeeService) {
-    
+  pivotGridDataSource: any;
+  constructor(@Inject(DashboardService) private dashService: DashboardService) {
+    this.customizeTooltip = this.customizeTooltip.bind(this);
+
+    this.pivotGridDataSource = {
+      fields: [{
+        caption: "Region",
+        width: 120,
+        dataField: "region",
+        area: "row",
+        sortBySummaryField: "Total"
+      }, {
+        caption: "City",
+        dataField: "city",
+        width: 150,
+        area: "row"
+      }, {
+        dataField: "date",
+        dataType: "date",
+        area: "column"
+      }, {
+        groupName: "date",
+        groupInterval: "month",
+        visible: false
+      }, {
+        caption: "Total",
+        dataField: "amount",
+        dataType: "number",
+        summaryType: "sum",
+        format: "currency",
+        area: "data"
+      }],
+      store: dashService.getSales()
+    }
   }
 
   ngOnInit(): void {
@@ -44,7 +78,7 @@ export class DashboardComponent implements OnInit {
     Observable.timer(0,30000)
     .takeWhile(() => this.alive) // only fires when component is alive
     .subscribe(() => {
-      this.empService.getCards().subscribe(resp=> {
+      this.dashService.getCards().subscribe(resp=> {
         this.cards = resp.d;
         console.log("card",this.cards);
         let x = resp.d;
@@ -58,18 +92,18 @@ export class DashboardComponent implements OnInit {
             
         }
       })
-      this.empService.getCardsData().subscribe(res=>{
+      this.dashService.getCardsData().subscribe(res=>{
         this.cardsData = res.d;
         console.log("data card",this.cardsData);
       })
 
       // circular gauge
-      this.empService.getCircularGauge().subscribe(resp=>{
+      this.dashService.getCircularGauge().subscribe(resp=>{
         this.circularGauge = resp.d;
         console.log('gauge',this.circularGauge);
       })
 
-      this.empService.getCircularGaugeData().subscribe(res=>{
+      this.dashService.getCircularGaugeData().subscribe(res=>{
         // this.circularGaugeData = res.d;
         let x = res.d;
         this.circularGaugeData = [];
@@ -101,6 +135,30 @@ export class DashboardComponent implements OnInit {
   ngOnDestroy(){
     this.alive = false; // switches your IntervalObservable off
   }
+
+  ngAfterViewInit() {
+    this.pivotGrid.instance.bindChart(this.chart.instance, {
+      dataFieldsDisplayMode: "splitPanes",
+      alternateDataFields: false
+    });
+
+    setTimeout(() => {
+        var dataSource = this.pivotGrid.instance.getDataSource();
+        dataSource.expandHeaderItem('row', ['North America']);
+        dataSource.expandHeaderItem('column', [2013]);
+    }, 0);
+  }
+
+  customizeTooltip(args) {
+    return {
+      html: args.seriesName + " | Total<div class='currency'>" + args.valueText + "</div>"
+    };
+  }
+
+
+
+
+
   // dropdown buttons
   // public status: { isopen } = { isopen: false };
   // public toggleDropdown($event: MouseEvent): void {
