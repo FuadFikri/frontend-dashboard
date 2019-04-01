@@ -19,3 +19,27 @@
 ::ng-deep .currency {
     text-align: center;
 }
+
+
+
+.carousel{
+    border: 0pt !important;
+}
+
+carousel-component .container{
+    width: 1309px !important;
+    height: 1000px !important;
+    max-width:1400px !important;
+    margin: 30px !important;
+}
+
+.item-carousel {
+    border: 0px !important;
+}
+
+.container{
+    max-width: 1309px !important;
+}
+/* [_nghost-c1] .container[_ngcontent-c1] .carousel[_ngcontent-c1] .item-carousel {
+    border : 0px !important;
+} */

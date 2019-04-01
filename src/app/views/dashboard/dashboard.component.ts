@@ -7,6 +7,7 @@ import { DxCircularGaugeComponent } from 'devextreme-angular';
 
 import {  DxPivotGridComponent, DxChartComponent } from 'devextreme-angular';
 import PivotGridDataSource from 'devextreme/ui/pivot_grid/data_source';
+import { CarouselComponent } from 'ngx-carousel-lib';
 @Component({
   templateUrl: 'dashboard.component.html',
   styleUrls: ['dashboard.css']
@@ -14,7 +15,7 @@ import PivotGridDataSource from 'devextreme/ui/pivot_grid/data_source';
 
 
 export class DashboardComponent implements OnInit {
-
+  @ViewChild('topCarousel') topCarousel: CarouselComponent;
   cards:any;
   cardsData:any;
   circularGauge:any;

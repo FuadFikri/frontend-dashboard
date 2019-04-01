@@ -1,5 +1,7 @@
-<div class="animated fadeIn">
-  <div class="row">
+<!-- <div class="animated fadeIn"> -->
+    <carousel-component #topCarousel>
+        <div class="item-carousel">
+      <!-- <div class="row"> -->
     <div *ngFor="let card of cards; let i = index" class="col-sm-6 {{card.widget_size}}">
       <div class="card border-0 shadow-sm text-light bg-{{card.color}}">
         <div class="card-body">
@@ -18,7 +20,6 @@
             
             <h4 class="font-weight-bold text-center uk-margin-large-top myCard-value" *ngIf="cardsData">{{cardsData[i].salary}}
             </h4>
-           
           </div>
           <p class="font-weight-italic myCard-label">{{card.widget_label}}</p>
           <!-- <canvas baseChart class="chart" [datasets]="lineChart1Data" [labels]="lineChart1Labels"
@@ -28,10 +29,12 @@
         </div>
       </div>
     </div>
+  <!-- </div> -->
   </div>
   <!--/.row-->
 
-  <div class="row">
+  <div class="item-carousel">
+  <!-- <div class="row"> -->
     <div *ngFor="let item of circularGauge; let i = index" class="col-sm-6 {{item.widget_size}} ">
       <div class="card ">
         <div class="card-body">
@@ -66,8 +69,10 @@
         </div>
       </div>
     </div>
+  <!-- </div> -->
   </div>
 
+  <div class="item-carousel">
     <div id="pivotgrid-demo">
       <dx-chart id="sales-chart">
         <dxo-common-series-settings type="bar"></dxo-common-series-settings>
@@ -90,7 +95,7 @@
         <dxo-scrolling mode="virtual"></dxo-scrolling>
       </dx-pivot-grid>
     </div>
-
+  </div>
   <!-- <div class="card">
     <div class="card-body">
       <div class="row">
@@ -922,4 +927,5 @@
     <!--/.col-->
   </div>
   <!--/.row-->
-</div>
+<!-- </div> -->
+</carousel-component>
