@@ -12,13 +12,14 @@ import {
   DxTabPanelModule, DxTextAreaModule,
   DxTextBoxModule,
   DxPieChartModule,
-  DxCircularGaugeModule
+  DxCircularGaugeModule,
+  DxBarGaugeModule
 } from 'devextreme-angular';
 import {TranslateModule} from '@ngx-translate/core';
 import {SharedModule} from '../shared/shared.module';
 import {TabsModule} from 'ngx-bootstrap/tabs';
 import {CommonModule} from '@angular/common';
-
+import {CarouselModule} from "ngx-carousel-lib";
 @NgModule({
   imports: [
     DashboardRoutingModule,
@@ -46,6 +47,8 @@ import {CommonModule} from '@angular/common';
     DxChartModule,
     DxPieChartModule,
     DxCircularGaugeModule,
+    CarouselModule,
+    DxBarGaugeModule
     
   ],
   declarations: [ DashboardComponent]

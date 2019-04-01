@@ -69,6 +69,26 @@
         </div>
       </div>
     </div>
+
+    <dx-bar-gauge id="gauge"
+    [startValue]="0"
+    [endValue]="100"
+    [values]="[47.27, 65.32, 84.59, 71.86]"
+    [backgroundColor]='brandPrimary'>
+    <!-- <dxo-background-color ="#FFFFF"></dxo-background-color> -->
+    <dxo-label
+        [indent]="30"
+        [customizeText]="customizeText"
+    ><dxo-format
+        type="fixedPoint"
+        [precision]="1"
+    ></dxo-format>
+    </dxo-label>
+    <dxo-export [enabled]="true"></dxo-export>
+    <dxo-title text="Series' Ratings">
+        <dxo-font [size]="28"></dxo-font>
+    </dxo-title>
+</dx-bar-gauge>
   <!-- </div> -->
   </div>
 
