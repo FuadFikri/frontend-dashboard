@@ -8,6 +8,7 @@ import { SysMenuComponent } from './sys-menu/sys-menu.component';
 import { VisiComponent } from './visi/visi.component';
 import { MisiComponent } from './misi/misi.component';
 import { RolemenuComponent } from './rolemenu/rolemenu.component';
+import { RoleDashboardComponent } from './role-dashboard/role-dashboard.component';
 
 const routes: Routes = [
   {
@@ -61,6 +62,13 @@ const routes: Routes = [
         component: RolemenuComponent,
         data: {
           title: 'Role Menu Auth'
+        }
+      },
+      {
+        path: 'role-dashboard',
+        component: RoleDashboardComponent,
+        data: {
+          title: 'Role Dashboard'
         }
       },
     ]
