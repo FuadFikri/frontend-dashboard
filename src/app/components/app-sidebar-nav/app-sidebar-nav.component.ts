@@ -40,7 +40,7 @@ export class AppSidebarNavComponent {
     this.authService.getMenu()
       .subscribe(resp => {
         // enable if menu data is fix
-        console.log(resp);
+        console.log("menu",resp);
         this.navigations = resp.d;
         // this.navigations = navigation;
       }, err => {
