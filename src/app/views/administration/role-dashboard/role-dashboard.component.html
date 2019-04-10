@@ -1,4 +1,4 @@
-<div class="animated fadeIn">
+<div class="animated fadeIn item-center">
   <div class="card" id="new47">
     <div class="card-header">
         <strong>Dasboard Role <span *ngIf="(isAdd || isEdit) && !isDetail">Add / Edit</span></strong>
@@ -11,6 +11,8 @@
                 keyExpr="dashboard_id"
                 [showBorders]="true"
                 (onRowInserting)="insert($event)"
+                (onRowUpdating)="update($event)"
+                (onRowRemoving)="delete($event)"
                 >
                 
                 <dxo-paging [enabled]="false"></dxo-paging>

@@ -29,6 +29,18 @@ export class RoleDashboardService {
     const username = localStorage.getItem('username');
     const token = localStorage.getItem('token');
     return this.http.post < Dashboard > (this.dashboardURL + '/insert', data);
-    // console.log('i am here', data);
   }
+
+  update(data: Dashboard): Observable<any> {
+    const username = localStorage.getItem('username');
+    const token = localStorage.getItem('token');
+   console.log("before save", data);
+    return this.http.post < any > (this.dashboardURL + '/update', data)
+  }
+
+  delete(dashboard_id: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    return this.http.get(this.dashboardURL + '/delete?token=' + token + '&dashboard_id=' + dashboard_id)
+  }
+
 }

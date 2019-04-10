@@ -41,7 +41,26 @@ export class RoleDashboardComponent implements OnInit {
   } 
   
   update(e){
-    console.log(e);
+    this.data = e.newData;
+    this.data.dashboard_id = e.oldData.dashboard_id;
+    this.roleDashboardService.update(this.data).subscribe(res=> {
+      if(res.d==1){
+        console.log("update success", this.data);
+      }else{
+        console.log("update failed ");
+      }
+    });
+  }
+
+  delete(e){
+    let dashboard_id = e.key;
+    this.roleDashboardService.delete(dashboard_id).subscribe(res=> {
+      if(res.d==1){
+        console.log("deleting success");
+      }else{
+        console.log("deleting failed ");
+      }
+    });
   }
 
   ngOnInit() {
