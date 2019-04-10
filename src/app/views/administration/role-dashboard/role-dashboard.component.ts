@@ -56,7 +56,7 @@ export class RoleDashboardComponent implements OnInit {
     let dashboard_id = e.key;
     this.roleDashboardService.delete(dashboard_id).subscribe(res=> {
       if(res.d==1){
-        console.log("deleting success");
+        console.log("deleting success on id", dashboard_id);
       }else{
         console.log("deleting failed ");
       }
