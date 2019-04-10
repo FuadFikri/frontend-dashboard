@@ -4,12 +4,18 @@
         <strong>Dasboard Role <span *ngIf="(isAdd || isEdit) && !isDetail">Add / Edit</span></strong>
     </div>
     <div class="card-body">
-        <div id="data-grid-demo">
+        <div id="data-grid-demo" style="margin-top: 20px;">
             <dx-data-grid 
                 id="gridContainer"
                 [dataSource]="gridDataSource"
                 keyExpr="dashboard_id"
+                [showRowLines]="true" 
                 [showBorders]="true"
+                [columnHidingEnabled]="false"
+                [rowAlternationEnabled]="true"
+                [columnAutoWidth]="true"
+                [wordWrapEnabled]="true"
+                        
                 (onRowInserting)="insert($event)"
                 (onRowUpdating)="update($event)"
                 (onRowRemoving)="delete($event)"
@@ -24,11 +30,11 @@
                     >
                 </dxo-editing>
                 
-                <dxi-column dataField="description" [width]="170" caption="Description"></dxi-column>
+                <dxi-column dataField="description"  caption="Description"></dxi-column>
                 <dxi-column
                     dataField="role_id"
                     caption="User Role"
-                    [width]="125">         
+                    >         
                     <dxo-lookup
                         [dataSource]="Role"
                         displayExpr="nama"
