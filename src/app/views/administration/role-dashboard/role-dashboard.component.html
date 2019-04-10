@@ -9,7 +9,9 @@
                 id="gridContainer"
                 [dataSource]="gridDataSource"
                 keyExpr="dashboard_id"
-                [showBorders]="true">
+                [showBorders]="true"
+                (onRowInserting)="insert($event)"
+                >
                 
                 <dxo-paging [enabled]="false"></dxo-paging>
                 <dxo-editing 
@@ -20,7 +22,6 @@
                     >
                 </dxo-editing>
                 
-                <dxi-column dataField="dashboard_id" [width]="100" caption="ID"></dxi-column>
                 <dxi-column dataField="description" [width]="170" caption="Description"></dxi-column>
                 <dxi-column
                     dataField="role_id"

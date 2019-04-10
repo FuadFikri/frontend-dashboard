@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { RoleDashboardService } from './role-dashboard.service';
+import { Dashboard } from "./dashboard.model";
 
 @Component({
   selector: 'app-role-dashboard',
@@ -11,6 +12,7 @@ export class RoleDashboardComponent implements OnInit {
 
   gridDataSource:any;
   Role:any;
+  data:Dashboard;
   constructor(private elementRef: ElementRef,
     @Inject(RoleDashboardService) private roleDashboardService: RoleDashboardService) { 
         this.roleDashboardService.getAll().subscribe(resp => {
@@ -26,6 +28,21 @@ export class RoleDashboardComponent implements OnInit {
           console.log(err);
         })
     }
+
+  insert(e){
+    this.data = e.data;
+    this.roleDashboardService.save(this.data).subscribe(res=> {
+      if(res.d==1){
+        console.log("insert success");
+      }else{
+        console.log("insert failed ");
+      }
+    });
+  } 
+  
+  update(e){
+    console.log(e);
+  }
 
   ngOnInit() {
   }
