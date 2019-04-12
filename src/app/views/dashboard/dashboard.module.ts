@@ -20,6 +20,7 @@ import {SharedModule} from '../shared/shared.module';
 import {TabsModule} from 'ngx-bootstrap/tabs';
 import {CommonModule} from '@angular/common';
 import {CarouselModule} from "ngx-carousel-lib";
+import { CardBoxComponent } from './card-box/card-box.component';
 @NgModule({
   imports: [
     DashboardRoutingModule,
@@ -51,6 +52,6 @@ import {CarouselModule} from "ngx-carousel-lib";
     DxBarGaugeModule
     
   ],
-  declarations: [ DashboardComponent]
+  declarations: [ DashboardComponent, CardBoxComponent]
 })
 export class DashboardModule { }
