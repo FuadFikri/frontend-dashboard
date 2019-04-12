@@ -14,8 +14,7 @@ import { AuthenticationService } from './../../service/authentication.service';
 
 export class DashboardComponent implements OnInit {
   @ViewChild('topCarousel') topCarousel: CarouselComponent;
-  cards:any;
-  cardsData:any;
+  
   circularGauge:any;
   circularGaugeData:Array<String>=[];
   
@@ -108,15 +107,6 @@ console.log("event",this.topCarousel);
             
       //   }
       // })
-
-      this.authService.getWidgets('Card-Box').subscribe(resp=>{
-        this.cards = resp.d;
-        console.log("cards",this.cards);
-      })
-      this.dashService.getCardsData().subscribe(res=>{
-        this.cardsData = res.d;
-        // console.log("data card",this.cardsData);
-      })
 
       // circular gauge
       this.authService.getWidgets('circular-gauge').subscribe(resp=>{
