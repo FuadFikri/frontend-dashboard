@@ -27,9 +27,9 @@
 }
 
 carousel-component .container{
-    width: 1309px !important;
-    height: 1000px !important;
-    max-width:1400px !important;
+    width: 1509px !important;
+    height: auto !important;
+    max-width:1509px !important;
     margin: 30px !important;
 }
 
@@ -37,9 +37,17 @@ carousel-component .container{
     border: 0px !important;
 }
 
+
 .container{
-    max-width: 1309px !important;
+    max-width: 1509px !important;
+    width: auto !important;
+    height: auto !important;
 }
 /* [_nghost-c1] .container[_ngcontent-c1] .carousel[_ngcontent-c1] .item-carousel {
     border : 0px !important;
 } */
+
+/* agar pembungkus bar gauge lebih kecil. press degan ukuran bar gauge*/
+[_nghost-c14]{
+    display: inline-block !important;
+}

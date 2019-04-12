@@ -1,7 +1,7 @@
 <!-- <div class="animated fadeIn"> -->
-    <carousel-component #topCarousel>
+    <carousel-component #topCarousel [autoPlay]=false [delayAutoPlay]="3000">
         <div class="item-carousel">
-      <!-- <div class="row"> -->
+      <div class="row">
     <div *ngFor="let card of cards; let i = index" class="col-sm-6 {{card.widget_size}}">
       <div class="card border-0 shadow-sm text-light bg-{{card.color}}">
         <div class="card-body">
@@ -29,7 +29,7 @@
         </div>
       </div>
     </div>
-  <!-- </div> -->
+  </div>
   </div>
   <!--/.row-->
 
@@ -46,7 +46,8 @@
 
           <dx-circular-gauge id="gauge" [value]="circularGaugeData[i]" #gauge>
             <dxo-size [height]="item.gauge_height"></dxo-size>
-            <dxo-margin [top]="0">
+            <dxo-margin [top]="0"
+                        [right]="0">
             </dxo-margin>
             <dxo-scale [startValue]="item.gauge_start" [endValue]="item.gauge_end" [tickInterval]="item.gauge_interval">
               <dxo-label [useRangeColors]="true"></dxo-label>
@@ -70,12 +71,20 @@
       </div>
     </div>
 
-    <dx-bar-gauge id="gauge"
+    <dx-bar-gauge 
     [startValue]="0"
     [endValue]="100"
     [values]="[47.27, 65.32, 84.59, 71.86]"
-    [backgroundColor]='brandPrimary'>
-    <!-- <dxo-background-color ="#FFFFF"></dxo-background-color> -->
+    [barSpacing]="8"
+    [backgroundColor]='brandPrimary'
+    (onTooltipShown)="tes($event)">
+    <dxo-size 
+    [width]="500">
+    </dxo-size>
+    <dxo-margin 
+    [top]="0"
+    [right]="0">
+    </dxo-margin>
     <dxo-label
         [indent]="30"
         [customizeText]="customizeText"
@@ -84,6 +93,10 @@
         [precision]="1"
     ></dxo-format>
     </dxo-label>
+    <dxo-tooltip
+    [enabled]="true"
+    [customizeTooltip]="customizeTooltipBar"
+></dxo-tooltip>
     <dxo-export [enabled]="true"></dxo-export>
     <dxo-title text="Series' Ratings">
         <dxo-font [size]="28"></dxo-font>

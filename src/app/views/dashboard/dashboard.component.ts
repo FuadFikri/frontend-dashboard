@@ -1,13 +1,11 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
 import { DashboardService } from './dashboard.service';
 import 'rxjs/add/operator/takeWhile';
 import { Observable, of, timer } from 'rxjs';
-import { DxCircularGaugeComponent } from 'devextreme-angular';
 
 import {  DxPivotGridComponent, DxChartComponent } from 'devextreme-angular';
-import PivotGridDataSource from 'devextreme/ui/pivot_grid/data_source';
 import { CarouselComponent } from 'ngx-carousel-lib';
+import { AuthenticationService } from './../../service/authentication.service';
 @Component({
   templateUrl: 'dashboard.component.html',
   styleUrls: ['dashboard.css']
@@ -28,12 +26,30 @@ export class DashboardComponent implements OnInit {
   public brandWarning = '#f8cb00';
   public brandDanger = '#f86c6b';
   alive = true;
+  x=0;
 
   @ViewChild(DxPivotGridComponent) pivotGrid: DxPivotGridComponent;
   @ViewChild(DxChartComponent) chart: DxChartComponent;
+  
+  customizeTooltipBar(arg) {
+    return {
+      html: "<a href='https://google.com'> " + (arg.index + 1) + " - " + arg.valueText + " </a>"
+    };
+}
+
+tes(e){
+    console.log(e);
+}
+
+backToFirst(e) {
+console.log("event",e);
+console.log("event",this.topCarousel);
+
+}
 
   pivotGridDataSource: any;
-  constructor(@Inject(DashboardService) private dashService: DashboardService) {
+  constructor(@Inject(DashboardService) private dashService: DashboardService,
+              private authService: AuthenticationService) {
     this.customizeTooltip = this.customizeTooltip.bind(this);
 
     this.pivotGridDataSource = {
@@ -79,27 +95,31 @@ export class DashboardComponent implements OnInit {
     Observable.timer(0,30000)
     .takeWhile(() => this.alive) // only fires when component is alive
     .subscribe(() => {
-      this.dashService.getCards().subscribe(resp=> {
-        this.cards = resp.d;
-        console.log("card",this.cards);
-        let x = resp.d;
-        this.closeable=[];
-          for (let index = 0; index < x.length; index++) {
-            if (this.cards[index].closeable == 1) {
-              this.closeable.push(true);
-            }else{
-              this.closeable.push(false);
-            }
+      // this.dashService.getCards().subscribe(resp=> {
+      //   this.cards = resp.d;
+      //   let x = resp.d;
+      //   this.closeable=[];
+      //     for (let index = 0; index < x.length; index++) {
+      //       if (this.cards[index].closeable == 1) {
+      //         this.closeable.push(true);
+      //       }else{
+      //         this.closeable.push(false);
+      //       }
             
-        }
+      //   }
+      // })
+
+      this.authService.getWidgets('Card-Box').subscribe(resp=>{
+        this.cards = resp.d;
+        console.log("cards",this.cards);
       })
       this.dashService.getCardsData().subscribe(res=>{
         this.cardsData = res.d;
-        console.log("data card",this.cardsData);
+        // console.log("data card",this.cardsData);
       })
 
       // circular gauge
-      this.dashService.getCircularGauge().subscribe(resp=>{
+      this.authService.getWidgets('circular-gauge').subscribe(resp=>{
         this.circularGauge = resp.d;
         console.log('gauge',this.circularGauge);
       })
@@ -112,7 +132,7 @@ export class DashboardComponent implements OnInit {
          this.circularGaugeData.push(x[index].employee_id);
           
         }
-        console.log("data gauge",this.circularGaugeData);
+        // console.log("data gauge",this.circularGaugeData);
       })
     }); 
     
