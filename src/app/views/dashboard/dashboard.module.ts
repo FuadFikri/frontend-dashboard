@@ -21,6 +21,7 @@ import {TabsModule} from 'ngx-bootstrap/tabs';
 import {CommonModule} from '@angular/common';
 import {CarouselModule} from "ngx-carousel-lib";
 import { CardBoxComponent } from './card-box/card-box.component';
+import { CircularGaugeComponent } from './circular-gauge/circular-gauge.component';
 @NgModule({
   imports: [
     DashboardRoutingModule,
@@ -52,6 +53,6 @@ import { CardBoxComponent } from './card-box/card-box.component';
     DxBarGaugeModule
     
   ],
-  declarations: [ DashboardComponent, CardBoxComponent]
+  declarations: [ DashboardComponent, CardBoxComponent, CircularGaugeComponent]
 })
 export class DashboardModule { }

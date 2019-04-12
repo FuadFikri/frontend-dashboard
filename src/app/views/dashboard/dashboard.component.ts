@@ -15,10 +15,6 @@ import { AuthenticationService } from './../../service/authentication.service';
 export class DashboardComponent implements OnInit {
   @ViewChild('topCarousel') topCarousel: CarouselComponent;
   
-  circularGauge:any;
-  circularGaugeData:Array<String>=[];
-  
-  closeable:Array<boolean>=[];
   public brandPrimary = '#FFFFFF';
   public brandSuccess = '#4dbd74';
   public brandInfo = '#63c2de';
@@ -91,61 +87,31 @@ console.log("event",this.topCarousel);
       this.mainChartData3.push(65);
     }
 
-    Observable.timer(0,30000)
-    .takeWhile(() => this.alive) // only fires when component is alive
-    .subscribe(() => {
-      // this.dashService.getCards().subscribe(resp=> {
-      //   this.cards = resp.d;
-      //   let x = resp.d;
-      //   this.closeable=[];
-      //     for (let index = 0; index < x.length; index++) {
-      //       if (this.cards[index].closeable == 1) {
-      //         this.closeable.push(true);
-      //       }else{
-      //         this.closeable.push(false);
-      //       }
+    // Observable.timer(0,30000)
+    // .takeWhile(() => this.alive) // only fires when component is alive
+    // .subscribe(() => {
+    //   this.dashService.getCards().subscribe(resp=> {
+    //     this.cards = resp.d;
+    //     let x = resp.d;
+    //     this.closeable=[];
+    //       for (let index = 0; index < x.length; index++) {
+    //         if (this.cards[index].closeable == 1) {
+    //           this.closeable.push(true);
+    //         }else{
+    //           this.closeable.push(false);
+    //         }
             
-      //   }
-      // })
-
-      // circular gauge
-      this.authService.getWidgets('circular-gauge').subscribe(resp=>{
-        this.circularGauge = resp.d;
-        console.log('gauge',this.circularGauge);
-      })
-
-      this.dashService.getCircularGaugeData().subscribe(res=>{
-        // this.circularGaugeData = res.d;
-        let x = res.d;
-        this.circularGaugeData = [];
-        for (let index = 0; index < x.length; index++) {
-         this.circularGaugeData.push(x[index].employee_id);
-          
-        }
-        // console.log("data gauge",this.circularGaugeData);
-      })
-    }); 
+    //     }
+    //   })
+    // }); 
     
   }
 
-  deleteGauge($event){
-    let card = $event.target.parentElement.parentElement.parentElement.parentElement;
-    console.log(card);
-    card.style.visibility="hidden";
-  }
+ 
 
-  hapus($event){
-    let card = this.getParent($event);
-    card.style.visibility="hidden";
-  }
+  
 
-  private getParent($event){
-    return $event.target.parentElement.parentElement.parentElement.parentElement.parentElement;
-  }
-
-  ngOnDestroy(){
-    this.alive = false; // switches your IntervalObservable off
-  }
+  
 
   ngAfterViewInit() {
     this.pivotGrid.instance.bindChart(this.chart.instance, {

@@ -1,0 +1,35 @@
+<div *ngFor="let item of circularGauge; let i = index" class="col-sm-6 {{item.widget_size}} ">
+  <div class="card ">
+    <div class="card-body">
+      <div class="btn-group float-right">
+        <a (click)="deleteGauge($event)" class="dx-icon-close" href="#"></a>
+      </div>
+      <h4 class="font-weight-bold text-center uk-margin-large-top">{{item.widget_title}}</h4>
+
+
+      <dx-circular-gauge id="gauge" [value]="circularGaugeData[i]" #gauge>
+        <dxo-size [height]="item.gauge_height"></dxo-size>
+        <dxo-margin [top]="0"
+                    [right]="0">
+        </dxo-margin>
+        <dxo-scale [startValue]="item.gauge_start" [endValue]="item.gauge_end" [tickInterval]="item.gauge_interval">
+          <dxo-label [useRangeColors]="true"></dxo-label>
+        </dxo-scale>
+        <dxo-range-container palette="Bright">
+          <dxi-range [startValue]="item.gauge_start" [endValue]="item.gauge_end/2"></dxi-range>
+          <dxi-range [startValue]="item.gauge_end/2" [endValue]="item.gauge_end"></dxi-range>
+        </dxo-range-container>
+        <dxo-export [enabled]="true"></dxo-export>
+        <dxo-title text="{{item.widget_label}}">
+          <dxo-font [size]="30"></dxo-font>
+        </dxo-title>
+        <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip">
+          <dxo-font color="#4007e5" [size]="50">
+          </dxo-font>
+        </dxo-tooltip>
+        <dxo-loading-indicator [show]="true"></dxo-loading-indicator>
+      </dx-circular-gauge>
+
+    </div>
+  </div>
+</div>

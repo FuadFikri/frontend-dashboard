@@ -13,6 +13,7 @@ export class CardBoxComponent implements OnInit {
   cards:any;
   cardsData:any;
   alive=true;
+  closeable:Array<boolean>=[];
   constructor(private dashService: DashboardService,
               private authService: AuthenticationService) { }
 
@@ -22,7 +23,16 @@ export class CardBoxComponent implements OnInit {
     .subscribe(() =>  {
       this.authService.getWidgets('Card-Box').subscribe(resp=>{
         this.cards = resp.d;
-        console.log("cards",this.cards);
+      let x = resp.d;
+      this.closeable=[];
+        for (let index = 0; index < x.length; index++) {
+          if (this.cards[index].closeable == 1) {
+            this.closeable.push(true);
+          }else{
+            this.closeable.push(false);
+          }
+          
+      }
       })
       this.dashService.getCardsData().subscribe(res=>{
         this.cardsData = res.d;
@@ -31,4 +41,17 @@ export class CardBoxComponent implements OnInit {
 
   }
 
+  hapus($event){
+    let card = this.getParent($event);
+    card.style.visibility="hidden";
+  }
+  
+  private getParent($event){
+    return $event.target.parentElement.parentElement.parentElement.parentElement.parentElement;
+  }
+
+  ngOnDestroy(){
+    this.alive = false; // switches your IntervalObservable off
+  }
 }
+
