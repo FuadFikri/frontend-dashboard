@@ -76,4 +76,14 @@ export class AuthenticationService {
       });
   }
 
+  getWidgets(widget_type :string) {
+    const username = localStorage.getItem('username');
+    const token = localStorage.getItem('token');
+    return this.http.post < any > (this.a.SERVER_URL + '/system/auth/getWidgets',{
+      username    : username,
+      token       : token,
+      widget_type : widget_type
+    });
+  }
+
 }
