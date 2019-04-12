@@ -26,21 +26,6 @@ export class DashboardComponent implements OnInit {
   @ViewChild(DxPivotGridComponent) pivotGrid: DxPivotGridComponent;
   @ViewChild(DxChartComponent) chart: DxChartComponent;
   
-  customizeTooltipBar(arg) {
-    return {
-      html: "<a href='https://google.com'> " + (arg.index + 1) + " - " + arg.valueText + " </a>"
-    };
-}
-
-tes(e){
-    console.log(e);
-}
-
-backToFirst(e) {
-console.log("event",e);
-console.log("event",this.topCarousel);
-
-}
 
   pivotGridDataSource: any;
   constructor(@Inject(DashboardService) private dashService: DashboardService,
