@@ -5,7 +5,9 @@ import { AppConstant } from './../app.constant';
 import 'rxjs/add/operator/map';
 import notify from 'devextreme/ui/notify';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthenticationService {
   model: any = {};
   loading = false;
