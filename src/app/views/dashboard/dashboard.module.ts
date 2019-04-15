@@ -23,6 +23,7 @@ import {CarouselModule} from "ngx-carousel-lib";
 import { CardBoxComponent } from './card-box/card-box.component';
 import { CircularGaugeComponent } from './circular-gauge/circular-gauge.component';
 import { BarGaugeComponent } from './bar-gauge/bar-gauge.component';
+import { PivotDataGridComponent } from './pivot-data-grid/pivot-data-grid.component';
 @NgModule({
   imports: [
     DashboardRoutingModule,
@@ -54,6 +55,6 @@ import { BarGaugeComponent } from './bar-gauge/bar-gauge.component';
     DxBarGaugeModule
     
   ],
-  declarations: [ DashboardComponent, CardBoxComponent, CircularGaugeComponent, BarGaugeComponent]
+  declarations: [ DashboardComponent, CardBoxComponent, CircularGaugeComponent, BarGaugeComponent, PivotDataGridComponent]
 })
 export class DashboardModule { }

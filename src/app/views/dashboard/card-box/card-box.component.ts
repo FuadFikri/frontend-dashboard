@@ -18,7 +18,7 @@ export class CardBoxComponent implements OnInit {
               private authService: AuthenticationService) { }
 
   ngOnInit() {
-    Observable.timer(0,30000)
+    Observable.timer(0,30000) //get setiap 30 detik, dimulai sejak detik ke 0
     .takeWhile(() => this.alive)
     .subscribe(() =>  {
       this.authService.getWidgets('Card-Box').subscribe(resp=>{

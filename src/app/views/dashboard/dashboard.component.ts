@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, ViewChild } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 import { DashboardService } from './dashboard.service';
 import 'rxjs/add/operator/takeWhile';
 import { Observable, of, timer } from 'rxjs';
@@ -6,6 +6,7 @@ import { Observable, of, timer } from 'rxjs';
 import {  DxPivotGridComponent, DxChartComponent } from 'devextreme-angular';
 import { CarouselComponent } from 'ngx-carousel-lib';
 import { AuthenticationService } from './../../service/authentication.service';
+
 @Component({
   templateUrl: 'dashboard.component.html',
   styleUrls: ['dashboard.css']
@@ -25,43 +26,14 @@ export class DashboardComponent implements OnInit {
 
   @ViewChild(DxPivotGridComponent) pivotGrid: DxPivotGridComponent;
   @ViewChild(DxChartComponent) chart: DxChartComponent;
-  
+ 
+
 
   pivotGridDataSource: any;
   constructor(@Inject(DashboardService) private dashService: DashboardService,
               private authService: AuthenticationService) {
-    this.customizeTooltip = this.customizeTooltip.bind(this);
 
-    this.pivotGridDataSource = {
-      fields: [{
-        caption: "Region",
-        width: 120,
-        dataField: "region",
-        area: "row",
-        sortBySummaryField: "Total"
-      }, {
-        caption: "City",
-        dataField: "city",
-        width: 150,
-        area: "row"
-      }, {
-        dataField: "date",
-        dataType: "date",
-        area: "column"
-      }, {
-        groupName: "date",
-        groupInterval: "month",
-        visible: false
-      }, {
-        caption: "Total",
-        dataField: "amount",
-        dataType: "number",
-        summaryType: "sum",
-        format: "currency",
-        area: "data"
-      }],
-      store: dashService.getSales()
-    }
+   
   }
 
   ngOnInit(): void {
@@ -71,6 +43,7 @@ export class DashboardComponent implements OnInit {
       this.mainChartData2.push(this.random(80, 100));
       this.mainChartData3.push(65);
     }
+
 
     // Observable.timer(0,30000)
     // .takeWhile(() => this.alive) // only fires when component is alive
@@ -97,26 +70,6 @@ export class DashboardComponent implements OnInit {
   
 
   
-
-  ngAfterViewInit() {
-    this.pivotGrid.instance.bindChart(this.chart.instance, {
-      dataFieldsDisplayMode: "splitPanes",
-      alternateDataFields: false
-    });
-
-    setTimeout(() => {
-        var dataSource = this.pivotGrid.instance.getDataSource();
-        dataSource.expandHeaderItem('row', ['North America']);
-        dataSource.expandHeaderItem('column', [2013]);
-    }, 0);
-  }
-
-  customizeTooltip(args) {
-    return {
-      html: args.seriesName + " | Total<div class='currency'>" + args.valueText + "</div>"
-    };
-  }
-
 
 
 
