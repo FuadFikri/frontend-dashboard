@@ -18,6 +18,13 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
+    path: 'dashboard',
+    component: SimpleLayoutComponent,
+    loadChildren: './views/dashboard/dashboard.module#DashboardModule',
+    canActivate: [AuthGuard]
+  }, 
+  
+  {
     path: '',
     component: FullLayoutComponent,
     data: {
@@ -25,10 +32,6 @@ export const routes: Routes = [
     },
     children: [
       {
-        path: 'dashboard',
-        loadChildren: './views/dashboard/dashboard.module#DashboardModule',
-        canActivate: [AuthGuard]
-      }, {
         path: 'dashboard_technical',
         loadChildren: './views/dashboard/monitoring/monitoring.module#MonitoringModule',
         canActivate: [AuthGuard]
