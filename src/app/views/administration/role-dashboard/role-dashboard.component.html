@@ -1,49 +1,50 @@
 <div class="animated fadeIn item-center">
   <div class="card" id="new47">
     <div class="card-header">
-        <strong>Dasboard Role <span *ngIf="(isAdd || isEdit) && !isDetail">Add / Edit</span></strong>
+      <strong>Dasboard Role <span *ngIf="(isAdd || isEdit) && !isDetail">Add / Edit</span></strong>
     </div>
     <div class="card-body">
-        <div id="data-grid-demo" style="margin-top: 20px;">
-            <dx-data-grid 
-                id="gridContainer"
-                [dataSource]="gridDataSource"
-                keyExpr="dashboard_id"
-                [showRowLines]="true" 
-                [showBorders]="true"
-                [columnHidingEnabled]="false"
-                [rowAlternationEnabled]="true"
-                [columnAutoWidth]="true"
-                [wordWrapEnabled]="true"
-                        
-                (onRowInserting)="insert($event)"
-                (onRowUpdating)="update($event)"
-                (onRowRemoving)="delete($event)"
-                >
+      <dx-data-grid id="gridContainer" [dataSource]="gridDataSource" [masterDetail]="{ enabled: true, template: 'detail' }"
+        keyExpr="dashboard_id" [showBorders]="true"
+        [columnHidingEnabled]="false"
+        [rowAlternationEnabled]="true"
+        [columnAutoWidth]="true"
+        [wordWrapEnabled]="true"
                 
-                <dxo-paging [enabled]="false"></dxo-paging>
-                <dxo-editing 
-                    mode="batch"
-                    [allowUpdating]="true"
-                    [allowDeleting]="true"
-                    [allowAdding]="true"
-                    >
-                </dxo-editing>
-                
-                <dxi-column dataField="description"  caption="Description"></dxi-column>
-                <dxi-column
-                    dataField="role_id"
-                    caption="User Role"
-                    >         
-                    <dxo-lookup
-                        [dataSource]="Role"
-                        displayExpr="nama"
-                        valueExpr="role_id">
-                    </dxo-lookup>
-                </dxi-column>
-            </dx-data-grid>
-        </div>    
+        (onRowInserting)="insert($event)"
+        (onRowUpdating)="update($event)"
+        (onRowRemoving)="delete($event)">
+        <dxo-editing mode="batch"
+            [allowUpdating]="true"
+            [allowDeleting]="true"
+            [allowAdding]="true">
+        </dxo-editing>
+        <dxi-column dataField="description"  caption="Description">
+            <dxi-validation-rule type="required"></dxi-validation-rule>
+        </dxi-column>
+        <dxi-column
+            dataField="role_id"
+            caption="User Role"
+            >         
+            <dxi-validation-rule type="required"></dxi-validation-rule>
+            <dxo-lookup
+                [dataSource]="Role"
+                displayExpr="nama"
+                valueExpr="role_id">
+            </dxo-lookup>
+        </dxi-column>
         
+        <div *dxTemplate="let role of 'detail'">
+          <div class="master-detail-caption">Widget List
+          </div>
+          <dx-data-grid [dataSource]="getWidgets(role.key)" [showBorders]="true" [columnAutoWidth]="true">
+            <dxi-column caption="Widget Title" dataField="widget_title"></dxi-column>
+            <dxi-column caption="Type" dataField="widget_type"></dxi-column>
+            <dxi-column caption="Description" dataField="description"></dxi-column>
+          </dx-data-grid>
+        </div>
+      </dx-data-grid>
+
     </div>
   </div>
 </div>

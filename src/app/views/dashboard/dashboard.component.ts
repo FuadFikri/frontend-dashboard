@@ -22,7 +22,8 @@ export class DashboardComponent implements OnInit {
   public brandWarning = '#f8cb00';
   public brandDanger = '#f86c6b';
   alive = true;
-  x=0;
+ 
+  
 
   @ViewChild(DxPivotGridComponent) pivotGrid: DxPivotGridComponent;
   @ViewChild(DxChartComponent) chart: DxChartComponent;

@@ -1,7 +1,10 @@
 import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { RoleDashboardService } from './role-dashboard.service';
-import { Dashboard } from "./dashboard.model";
+import { Dashboard, Widget } from "./Model";
 import notify from 'devextreme/ui/notify';
+import DataSource from 'devextreme/data/data_source';
+import ArrayStore from 'devextreme/data/array_store';
+
 @Component({
   selector: 'app-role-dashboard',
   templateUrl: './role-dashboard.component.html',
@@ -13,7 +16,8 @@ export class RoleDashboardComponent implements OnInit {
   gridDataSource:any;
   Role:any;
   data:Dashboard;
-
+  widgets:Widget[];
+  widgetDataSource:any;
   options = {
     message: '',
     closeOnOutsideClick: true,
@@ -36,7 +40,36 @@ export class RoleDashboardComponent implements OnInit {
         }, err => {
           console.log(err);
         })
+        this.roleDashboardService.getWidgets().subscribe(resp => {
+          this.widgets = resp.d;
+          console.log("new",this.widgets);
+        }, err => {
+          console.log(err);
+        })
+    
+        
+        this.widgetDataSource=[];  
     }
+
+    getWidgets(key) {
+      let item = this.widgetDataSource.find((i) => i.key === key);
+      if (!item) {
+          item = {
+              key: key,
+              dataSourceInstance: new DataSource({
+                  store: new ArrayStore({
+                      data: this.widgets,
+                      key: "did"
+                  }),
+                  filter: ["did", "=", key]
+              })
+          };
+          this.widgetDataSource.push(item)
+      }
+      return item.dataSourceInstance;
+  }
+
+
 
   insert(e){
     this.data = e.data;
