@@ -10,9 +10,9 @@ export class DashboardService {
   private dashboardURL = this.a.SERVER_URL + '/system/DashboardRole';
   private widgetURL = this.a.SERVER_URL + '/system/DashboardWidget';
 
-  widgetTypes:WidgetType[] = [
-    {"type":"CARD-BOX"},
-    {"type":"CIRCULAR-GAUGE"}
+  widgetTypes:any = [
+    [{"type":"CARD-BOX"}],
+    [{"type":"CIRCULAR-GAUGE"}]
   ];
   constructor(private http: HttpClient, private a: AppConstant) { }
 
@@ -44,7 +44,11 @@ export class DashboardService {
     const token = localStorage.getItem('token');
     return this.http.get < any > (this.widgetURL +'/keyval?widget_type=' + widget_type.toUpperCase);
   }
-  getWidgetType(){
-    return this.widgetTypes;
+  getCardBoxType(type : any){
+    if (type == 'CARD-BOX') {
+      return this.widgetTypes[0];
+    }else if (type == 'CIRCULAR-GAUGE'){
+      return this.widgetTypes[1];
+    }
   }
 }

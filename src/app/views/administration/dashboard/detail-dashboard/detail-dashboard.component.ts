@@ -10,7 +10,8 @@ import ArrayStore from 'devextreme/data/array_store';
 })
 
 export class DetailDashboardComponent implements OnInit {
-  widgetTypeSource:any;
+  cardBoxSource:any;
+  CircularSource:any;
   widgets:any;
   widgetDataStorage:any;
   @Input() selectedDashboard;
@@ -23,7 +24,10 @@ export class DetailDashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.widgetTypeSource = this.dashboardService.getWidgetType();
+    this.cardBoxSource = this.dashboardService.getCardBoxType("CARD-BOX");
+    this.CircularSource = this.dashboardService.getCardBoxType("CIRCULAR-GAUGE");
+    console.log(this.CircularSource);
+    
     console.log("selected",this.selectedDashboard);
     this.dashboardService.getWidgetWhereDID(parseInt(this.selectedDashboard)).subscribe(res => {
       this.widgets = res.d;
