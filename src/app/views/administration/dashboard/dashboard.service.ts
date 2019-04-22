@@ -58,4 +58,9 @@ export class DashboardService {
     console.log("before save", data);
     return this.http.post < any > (this.widgetURL + '/update', data)
   }
+
+  delete(widget_id: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    return this.http.get(this.widgetURL + '/delete?token=' + token + '&widget_id=' + widget_id)
+  }
 }

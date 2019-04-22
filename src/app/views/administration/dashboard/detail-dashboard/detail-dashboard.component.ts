@@ -69,7 +69,7 @@ export class DetailDashboardComponent implements OnInit {
     
     this.dashboardService.update(this.data).subscribe(res=> {
       if(res.d==1){
-        this.options.message = 'Dashboard Role Updated';
+        this.options.message = 'Widget Configuration Updated';
         notify(this.options, 'success', 3000);
         console.log("updating success",this.data);
       }else{
@@ -79,6 +79,24 @@ export class DetailDashboardComponent implements OnInit {
       }
     }, err => {
       this.options.message = 'updating Failed';
+      notify(this.options, 'error', 3000);
+    });
+  }
+  
+  delete(e){
+    let widget_id = e.key;
+    this.dashboardService.delete(widget_id).subscribe(res=> {
+      if(res.d==1){
+        this.options.message = 'Widget Deleted';
+        notify(this.options, 'success', 3000);
+        console.log("deleting success ",widget_id);
+      }else{
+        this.options.message = 'deleting Failed';
+          notify(this.options, 'error', 3000);
+        console.log("deleting failed ", res);
+      }
+    }, err => {
+      this.options.message = 'deleting Failed';
       notify(this.options, 'error', 3000);
     });
   }
