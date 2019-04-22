@@ -9,7 +9,8 @@ import { VisiComponent } from './visi/visi.component';
 import { MisiComponent } from './misi/misi.component';
 import { RolemenuComponent } from './rolemenu/rolemenu.component';
 import { RoleDashboardComponent } from './role-dashboard/role-dashboard.component';
-
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { DetailDashboardComponent } from './dashboard/detail-dashboard/detail-dashboard.component';
 const routes: Routes = [
   {
     path: '',
@@ -69,6 +70,20 @@ const routes: Routes = [
         component: RoleDashboardComponent,
         data: {
           title: 'Role Dashboard'
+        }
+      },
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+        data: {
+          title: 'Dashboard Administration'
+        }
+      },
+      {
+        path: 'detail-dashboard',
+        component: DetailDashboardComponent,
+        data: {
+          title: 'DetailDashboard Administration'
         }
       },
     ]

@@ -42,6 +42,7 @@
     "moment": "^2.22.1",
     "ng2-charts": "1.6.0",
     "ngx-bootstrap": "^2.0.4",
+    "ngx-carousel-lib": "^0.1.2",
     "rxjs": "^6.3.3",
     "rxjs-compat": "^6.3.3",
     "simple-line-icons": "^2.4.1",

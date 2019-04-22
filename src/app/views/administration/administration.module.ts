@@ -61,6 +61,8 @@ import { MisiComponent } from './misi/misi.component';
 import { RolemenuComponent } from './rolemenu/rolemenu.component';
 import { AddRolemenuComponent } from './rolemenu/add/rolemenu-add.component';
 import { RoleDashboardComponent } from './role-dashboard/role-dashboard.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { DetailDashboardComponent } from './dashboard/detail-dashboard/detail-dashboard.component';
 
 @NgModule({
   imports: [
@@ -106,6 +108,8 @@ import { RoleDashboardComponent } from './role-dashboard/role-dashboard.componen
     RolemenuComponent,
     AddRolemenuComponent,
     RoleDashboardComponent,
+    DashboardComponent,
+    DetailDashboardComponent,
   ],
   exports: [
   ],

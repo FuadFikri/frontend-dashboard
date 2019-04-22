@@ -1,0 +1,18 @@
+<dx-data-grid id="gridContainer"
+    [dataSource]="widgetTypeSource"
+    [masterDetail]="{ enabled: true, template: 'detail' }"
+    keyExpr="type"
+    [showBorders]="true">
+
+    <dxi-column dataField="type"  caption="Widget List"></dxi-column>
+
+    <div *dxTemplate="let type of 'detail'">
+        <div class="master-detail-caption">{{type.key}}</div>
+        <dx-data-grid 
+            [dataSource]="getWidgetList(type.key)"
+            [showBorders]="true"
+            [columnAutoWidth]="true">
+                <dxi-column dataField="widget_title"></dxi-column>
+        </dx-data-grid>       
+    </div>  
+</dx-data-grid>

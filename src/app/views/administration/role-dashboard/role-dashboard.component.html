@@ -19,6 +19,8 @@
             [allowDeleting]="true"
             [allowAdding]="true">
         </dxo-editing>
+        <dxo-header-filter [visible]="false"></dxo-header-filter>
+            <dxo-filter-row [visible]="true"></dxo-filter-row>
         <dxi-column dataField="description"  caption="Description">
             <dxi-validation-rule type="required"></dxi-validation-rule>
         </dxi-column>
@@ -35,7 +37,7 @@
         </dxi-column>
         
         <div *dxTemplate="let role of 'detail'">
-          <div class="master-detail-caption">Widget List
+          <div class="master-detail-caption">
           </div>
           <dx-data-grid [dataSource]="getWidgets(role.key)" [showBorders]="true" [columnAutoWidth]="true">
             <dxi-column caption="Widget Title" dataField="widget_title"></dxi-column>
