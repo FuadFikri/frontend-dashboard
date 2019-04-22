@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AppConstant } from '../../../app.constant';
 import { Observable } from 'rxjs/Observable';
-import { WidgetType } from './Model';
+import { WidgetType, Widget } from './Model';
 
 @Injectable()
 export class DashboardService {
@@ -50,5 +50,12 @@ export class DashboardService {
     }else if (type == 'CIRCULAR-GAUGE'){
       return this.widgetTypes[1];
     }
+  }
+
+  update(data: Widget): Observable<any> {
+    const username = localStorage.getItem('username');
+    const token = localStorage.getItem('token');
+    console.log("before save", data);
+    return this.http.post < any > (this.widgetURL + '/update', data)
   }
 }

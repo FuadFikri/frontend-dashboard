@@ -11,10 +11,13 @@
         <dx-data-grid 
             [dataSource]="getWidgetList(type.key)"
             [showBorders]="true"
-            [columnAutoWidth]="true">
+            [columnAutoWidth]="true"
+            (onRowUpdating)="update($event)"
+            (onRowRemoving)="delete($event)">
             <dxo-editing 
                 mode="batch"
-                [allowUpdating]="true">
+                [allowUpdating]="true"
+                [allowDeleting]="true">
             </dxo-editing>
                 <dxi-column dataField="widget_sortnumber"></dxi-column>
                 <dxi-column dataField="widget_title"></dxi-column>
@@ -28,7 +31,8 @@
     [dataSource]="CircularSource"
     [masterDetail]="{ enabled: true, template: 'detail' }"
     keyExpr="type"
-    [showBorders]="true">
+    [showBorders]="true"
+    >
     
     <dxi-column dataField="type" caption="Circular Gauge Widget"></dxi-column>
 
@@ -37,10 +41,13 @@
         <dx-data-grid 
             [dataSource]="getWidgetList(type.key)"
             [showBorders]="true"
-            [columnAutoWidth]="true">
+            [columnAutoWidth]="true"
+            (onRowUpdating)="update($event)"
+            (onRowRemoving)="delete($event)"  >
             <dxo-editing 
                 mode="batch"
-                [allowUpdating]="true">
+                [allowUpdating]="true"
+                [allowDeleting]="true">
             </dxo-editing>
                 <dxi-column dataField="widget_sortnumber"></dxi-column>
                 <dxi-column dataField="widget_title"></dxi-column>
