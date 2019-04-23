@@ -12,7 +12,8 @@ export class DashboardService {
 
   widgetTypes:any = [
     [{"type":"CARD-BOX"}],
-    [{"type":"CIRCULAR-GAUGE"}]
+    [{"type":"CIRCULAR-GAUGE"}],
+    [{"type":"BAR-GAUGE"}]
   ];
   constructor(private http: HttpClient, private a: AppConstant) { }
 
@@ -50,6 +51,9 @@ export class DashboardService {
 
   getCircularGauge(){
     return this.widgetTypes[1];
+  }
+  getBarGauge(){
+    return this.widgetTypes[2];
   }
 
   update(data: Widget): Observable<any> {

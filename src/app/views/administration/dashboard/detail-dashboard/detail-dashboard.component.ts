@@ -14,6 +14,7 @@ import { Widget } from '../Model';
 export class DetailDashboardComponent implements OnInit {
   cardBoxSource:any;
   circularSource:any;
+  barGaugeSource:any;
   widgets:any;
   widgetDataStorage:any;
   @Input() selectedDashboard;
@@ -36,7 +37,7 @@ export class DetailDashboardComponent implements OnInit {
   ngOnInit() {
     this.cardBoxSource = this.dashboardService.getCardBox();
     this.circularSource = this.dashboardService.getCircularGauge();
-    
+    this.barGaugeSource = this.dashboardService.getBarGauge();
     console.log("selected dashboard = ",this.selectedDashboard);
     this.dashboardService.getWidgetByDID(parseInt(this.selectedDashboard)).subscribe(res => {
       this.widgets = res.d.list;
