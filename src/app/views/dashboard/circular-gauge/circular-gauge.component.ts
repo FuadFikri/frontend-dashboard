@@ -26,13 +26,13 @@ export class CircularGaugeComponent implements OnInit {
         console.log('gauge',this.circularGauge);
       })
 
-      this.dashService.getCircularGaugeData().subscribe(res=>{
-        let x = res.d;
-        this.circularGaugeData = [];
-        for (let index = 0; index < x.length; index++) {
-          this.circularGaugeData.push(x[index].employee_id);
-        }
-      })
+      // this.dashService.getCircularGaugeData().subscribe(res=>{
+      //   let x = res.d;
+      //   this.circularGaugeData = [];
+      //   for (let index = 0; index < x.length; index++) {
+      //     this.circularGaugeData.push(x[index].employee_id);
+      //   }
+      // })
     })
   }
 

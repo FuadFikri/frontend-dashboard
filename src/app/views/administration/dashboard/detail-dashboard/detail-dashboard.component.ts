@@ -38,8 +38,9 @@ export class DetailDashboardComponent implements OnInit {
     this.circularSource = this.dashboardService.getCircularGauge();
     
     console.log("selected dashboard = ",this.selectedDashboard);
-    this.dashboardService.getWidgetWhereDID(parseInt(this.selectedDashboard)).subscribe(res => {
-      this.widgets = res.d;
+    this.dashboardService.getWidgetByDID(parseInt(this.selectedDashboard)).subscribe(res => {
+      this.widgets = res.d.list;
+      console.log(this.widgets);
     });
   }
 
@@ -74,11 +75,12 @@ export class DetailDashboardComponent implements OnInit {
       }else{
         this.options.message = 'updating Failed';
           notify(this.options, 'error', 3000);
-        console.log("updating failed ");
+        console.log("updating failed ", res);
       }
     }, err => {
       this.options.message = 'updating Failed';
       notify(this.options, 'error', 3000);
+      console.log("updating failed ", err);
     });
   }
   
@@ -97,6 +99,7 @@ export class DetailDashboardComponent implements OnInit {
     }, err => {
       this.options.message = 'deleting Failed';
       notify(this.options, 'error', 3000);
+      console.log("deleting failed ", err);
     });
   }
 

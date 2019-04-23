@@ -33,10 +33,10 @@ export class DashboardService {
     })
   }
 
-  getWidgetWhereDID(did:any): Observable<any> {
+  getWidgetByDID(did:any): Observable<any> {
     const username = localStorage.getItem('username');
     const token = localStorage.getItem('token');
-    return this.http.get < any > (this.widgetURL +'/getWidgetbyDashboardId' +'?did=' + did);
+    return this.http.get < any > (this.widgetURL +'/table?did=' + did);
   }
 
   getWidgetByType(widget_type:String): Observable<any> {
