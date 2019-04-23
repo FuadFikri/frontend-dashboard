@@ -13,7 +13,7 @@ import { Widget } from '../Model';
 
 export class DetailDashboardComponent implements OnInit {
   cardBoxSource:any;
-  CircularSource:any;
+  circularSource:any;
   widgets:any;
   widgetDataStorage:any;
   @Input() selectedDashboard;
@@ -34,11 +34,10 @@ export class DetailDashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.cardBoxSource = this.dashboardService.getCardBoxType("CARD-BOX");
-    this.CircularSource = this.dashboardService.getCardBoxType("CIRCULAR-GAUGE");
-    console.log(this.CircularSource);
+    this.cardBoxSource = this.dashboardService.getCardBox();
+    this.circularSource = this.dashboardService.getCircularGauge();
     
-    console.log("selected",this.selectedDashboard);
+    console.log("selected dashboard = ",this.selectedDashboard);
     this.dashboardService.getWidgetWhereDID(parseInt(this.selectedDashboard)).subscribe(res => {
       this.widgets = res.d;
     });

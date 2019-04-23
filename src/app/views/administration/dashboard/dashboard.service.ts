@@ -44,12 +44,12 @@ export class DashboardService {
     const token = localStorage.getItem('token');
     return this.http.get < any > (this.widgetURL +'/keyval?widget_type=' + widget_type.toUpperCase);
   }
-  getCardBoxType(type : any){
-    if (type == 'CARD-BOX') {
+  getCardBox(){
       return this.widgetTypes[0];
-    }else if (type == 'CIRCULAR-GAUGE'){
-      return this.widgetTypes[1];
-    }
+  }
+
+  getCircularGauge(){
+    return this.widgetTypes[1];
   }
 
   update(data: Widget): Observable<any> {
