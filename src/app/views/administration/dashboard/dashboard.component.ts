@@ -121,7 +121,7 @@ export class DashboardComponent implements OnInit {
   // }
 
   ngAfterViewInit() {
-    this.addNewButton()
+    // this.addNewButton()
   }
 
   addNewButton() {
