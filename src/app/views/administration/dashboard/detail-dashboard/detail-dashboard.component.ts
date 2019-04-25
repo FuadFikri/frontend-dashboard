@@ -12,7 +12,7 @@ import { Widget } from '../Model';
 })
 
 export class DetailDashboardComponent implements OnInit {
-  cardBoxSource:any;
+  cardBoxSource:Widget;
   circularSource:any;
   barGaugeSource:any;
   widgets:any;
@@ -30,6 +30,7 @@ export class DetailDashboardComponent implements OnInit {
     closeOnSwipe: true,
     closeOnBackButton: true,
   };
+  cardBoxSize;
   constructor(private dashboardService: DashboardService) {
     this.widgetDataStorage=[];
   }
@@ -43,6 +44,8 @@ export class DetailDashboardComponent implements OnInit {
       this.widgets = res.d.list;
       console.log(this.widgets);
     });
+    this.cardBoxSize = this.dashboardService.getCardBoxSize();
+    
   }
 
     getWidgetList(key) {

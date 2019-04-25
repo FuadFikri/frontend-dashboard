@@ -15,6 +15,12 @@ export class DashboardService {
     [{"type":"CIRCULAR-GAUGE"}],
     [{"type":"BAR-GAUGE"}]
   ];
+  cardBoxSize = [
+    {"widget_size":"col-lg-6",
+    "caption" : "Wide"},
+    {"widget_size":"col-lg-3",
+    "caption" : "Square"}
+  ];
   constructor(private http: HttpClient, private a: AppConstant) { }
 
   getAll(): Observable<any> {
@@ -47,6 +53,10 @@ export class DashboardService {
   }
   getCardBox(){
       return this.widgetTypes[0];
+  }
+
+  getCardBoxSize(){
+    return this.cardBoxSize;
   }
 
   getCircularGauge(){

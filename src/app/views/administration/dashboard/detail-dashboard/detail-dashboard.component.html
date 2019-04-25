@@ -22,7 +22,13 @@
                 <dxi-column dataField="widget_sortnumber"></dxi-column>
                 <dxi-column dataField="widget_title"></dxi-column>
                 <dxi-column dataField="widget_label"></dxi-column>
-                <dxi-column dataField="widget_size"></dxi-column>
+                <dxi-column dataField="widget_size" caption="Size">
+                    <dxo-lookup
+                        [dataSource]="cardBoxSize"
+                        displayExpr="caption"
+                        valueExpr="widget_size">
+                    </dxo-lookup>
+                </dxi-column>
         </dx-data-grid>       
     </div>  
 </dx-data-grid>

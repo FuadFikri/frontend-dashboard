@@ -56,24 +56,13 @@ export class DashboardComponent implements OnInit {
       menu: ''
     };
 
-    this.contextItems = [{
-        text: 'Edit',
-        disabled: false,
-        beginGroup: false,
-        items: false
-      },
+    this.contextItems = [ 
       {
         text: 'Detail',
         disabled: false,
         beginGroup: false,
         items: false
       },
-      {
-        text: 'Delete',
-        disabled: false,
-        beginGroup: false,
-        items: false
-      }
     ];
   }
 
