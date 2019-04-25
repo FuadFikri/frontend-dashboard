@@ -1,5 +1,7 @@
+<h2>{{testing}}</h2>
 <div *ngFor="let item of circularGauge; let i = index" class="col-sm-6 {{item.widget_size}} ">
   <div class="card ">
+   
     <div class="card-body">
       <div class="btn-group float-right">
         <a (click)="deleteGauge($event)" class="dx-icon-close" href="#"></a>

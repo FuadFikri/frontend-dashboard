@@ -3,15 +3,23 @@
         <div class="item-carousel">
           
           <app-card-box></app-card-box>
+          <div *ngIf="circularTesSlide1">
+              <app-circular-gauge [circularGauge]="circularGauge"></app-circular-gauge>
+              </div>
         </div>
 
   <div class="item-carousel">
   <!-- <div class="row"> -->
-      <app-circular-gauge></app-circular-gauge>
-      <app-bar-gauge></app-bar-gauge>
+    <div *ngIf="circularTesSlide2">
+    <app-circular-gauge [circularGauge]="circularGauge"></app-circular-gauge>
+    </div>
+      <app-bar-gauge ></app-bar-gauge>
   </div>
 
   <div class="item-carousel">
+      <div *ngIf="circularTesSlide3">
+          <app-circular-gauge [circularGauge]="circularGauge"></app-circular-gauge>
+          </div>
       <app-pivot-data-grid></app-pivot-data-grid> 
   </div>
   <!-- <div class="card">

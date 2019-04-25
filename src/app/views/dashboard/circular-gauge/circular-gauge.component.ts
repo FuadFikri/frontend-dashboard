@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import 'rxjs/add/operator/takeWhile';
 import { Observable, of, timer } from 'rxjs';
 import { DashboardService } from '../dashboard.service';
@@ -10,21 +10,22 @@ import { AuthenticationService } from 'app/service';
   styleUrls: ['./circular-gauge.component.scss']
 })
 export class CircularGaugeComponent implements OnInit {
-  circularGauge:any;
-  circularGaugeData:Array<String>=[];
-  alive: boolean=true;
+  @Input() testing;
+  @Input() circularGauge;
+  @Input() circularGaugeData:Array<String>=[];
+  @Input() alive: boolean=true;
 
   constructor(private dashService: DashboardService,
               private authService: AuthenticationService) { }
 
   ngOnInit() {
-    Observable.timer(0,30000)
-    .takeWhile(() => this.alive)
-    .subscribe(() =>  {
-      this.authService.getWidgets('circular-gauge').subscribe(resp=>{
-        this.circularGauge = resp.d;
-        console.log('gauge',this.circularGauge);
-      })
+    // Observable.timer(0,30000)
+    // .takeWhile(() => this.alive)
+    // .subscribe(() =>  {
+    //   this.authService.getWidgets('circular-gauge').subscribe(resp=>{
+    //     this.circularGauge = resp.d;
+    //     console.log('gauge',this.circularGauge);
+    //   })
 
       // this.dashService.getCircularGaugeData().subscribe(res=>{
       //   let x = res.d;
@@ -33,7 +34,7 @@ export class CircularGaugeComponent implements OnInit {
       //     this.circularGaugeData.push(x[index].employee_id);
       //   }
       // })
-    })
+    // })
   }
 
   deleteGauge($event){

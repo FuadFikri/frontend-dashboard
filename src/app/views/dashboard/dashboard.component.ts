@@ -15,14 +15,17 @@ import { AuthenticationService } from './../../service/authentication.service';
 
 export class DashboardComponent implements OnInit {
   @ViewChild('topCarousel') topCarousel: CarouselComponent;
-  
+  public pesan:any;
   public brandPrimary = '#FFFFFF';
   public brandSuccess = '#4dbd74';
   public brandInfo = '#63c2de';
   public brandWarning = '#f8cb00';
   public brandDanger = '#f86c6b';
   alive = true;
- 
+  circularGauge:any;
+  circularTesSlide1=false;
+  circularTesSlide2=false;
+  circularTesSlide3=false;
   
 
   @ViewChild(DxPivotGridComponent) pivotGrid: DxPivotGridComponent;
@@ -44,7 +47,16 @@ export class DashboardComponent implements OnInit {
       this.mainChartData2.push(this.random(80, 100));
       this.mainChartData3.push(65);
     }
-
+    Observable.timer(0,30000)
+    .takeWhile(() => this.alive)
+    .subscribe(() =>  {
+      this.authService.getWidgets('circular-gauge').subscribe(resp=>{
+        this.circularGauge = resp.d;
+        this.setSlidePosition(this.circularGauge[0]);
+        console.log('gauge',this.circularGauge);
+      })
+    })
+    
 
     // Observable.timer(0,30000)
     // .takeWhile(() => this.alive) // only fires when component is alive
@@ -71,7 +83,32 @@ export class DashboardComponent implements OnInit {
   
 
   
+  setSlidePosition(gauge:any):void {
+    switch(gauge.at_slide) { 
+      case "1": { 
+         this.circularTesSlide1=true;
+         this.circularTesSlide2=false;
+         this.circularTesSlide3=false;
+         break; 
+      } 
+      case "2": { 
+        this.circularTesSlide1=false;
+        this.circularTesSlide2=true;
+        this.circularTesSlide3=false;
+        break; 
+      } 
+      case "3": { 
+        this.circularTesSlide1=false;
+        this.circularTesSlide2=false;
+        this.circularTesSlide3=true;
+        break; 
+     }
+      default: { 
 
+         break; 
+      } 
+   } 
+  }
 
 
 
