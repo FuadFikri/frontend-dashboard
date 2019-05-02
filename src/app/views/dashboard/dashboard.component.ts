@@ -79,6 +79,9 @@ export class DashboardComponent implements OnInit {
   }
 
  
+  
+
+ 
 
   
 
@@ -108,6 +111,10 @@ export class DashboardComponent implements OnInit {
          break; 
       } 
    } 
+  }
+
+  public ngOnDestroy(): void {
+    this.alive = false; 
   }
 
 

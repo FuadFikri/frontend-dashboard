@@ -21,6 +21,12 @@ export class DashboardService {
     {"widget_size":"col-lg-3",
     "caption" : "Square"}
   ];
+  cardBoxColor = [
+    {"color":"success","caption" : "Green"},
+    {"color":"primary","caption" : "Blue"},
+    {"color":"warning","caption" : "Yellow"},
+    {"color":"danger","caption" : "Red"}
+  ];
   constructor(private http: HttpClient, private a: AppConstant) { }
 
   getAll(): Observable<any> {
@@ -57,6 +63,10 @@ export class DashboardService {
 
   getCardBoxSize(){
     return this.cardBoxSize;
+  }
+
+  getCardBoxColor() {
+    return this.cardBoxColor;
   }
 
   getCircularGauge(){

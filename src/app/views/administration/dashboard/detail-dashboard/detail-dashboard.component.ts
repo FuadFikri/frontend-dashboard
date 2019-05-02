@@ -31,6 +31,7 @@ export class DetailDashboardComponent implements OnInit {
     closeOnBackButton: true,
   };
   cardBoxSize;
+  cardBoxColor;
   constructor(private dashboardService: DashboardService) {
     this.widgetDataStorage=[];
   }
@@ -45,6 +46,7 @@ export class DetailDashboardComponent implements OnInit {
       console.log(this.widgets);
     });
     this.cardBoxSize = this.dashboardService.getCardBoxSize();
+    this.cardBoxColor = this.dashboardService.getCardBoxColor();
     
   }
 
