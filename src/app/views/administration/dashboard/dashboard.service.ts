@@ -10,11 +10,6 @@ export class DashboardService {
   private dashboardURL = this.a.SERVER_URL + '/system/DashboardRole';
   private widgetURL = this.a.SERVER_URL + '/system/DashboardWidget';
 
-  widgetTypes:any = [
-    [{"type":"CARD-BOX"}],
-    [{"type":"CIRCULAR-GAUGE"}],
-    [{"type":"BAR-GAUGE"}]
-  ];
   cardBoxSize = [
     {"widget_size":"col-lg-6",
     "caption" : "Wide"},
@@ -57,9 +52,6 @@ export class DashboardService {
     const token = localStorage.getItem('token');
     return this.http.get < any > (this.widgetURL +'/keyval?widget_type=' + widget_type.toUpperCase);
   }
-  getCardBox(){
-      return this.widgetTypes[0];
-  }
 
   getCardBoxSize(){
     return this.cardBoxSize;
@@ -67,13 +59,6 @@ export class DashboardService {
 
   getCardBoxColor() {
     return this.cardBoxColor;
-  }
-
-  getCircularGauge(){
-    return this.widgetTypes[1];
-  }
-  getBarGauge(){
-    return this.widgetTypes[2];
   }
 
   // return = widgettype dan at_slide nya
@@ -86,6 +71,13 @@ export class DashboardService {
     const token = localStorage.getItem('token');
     console.log("before save", data);
     return this.http.post < any > (this.widgetURL + '/update', data)
+  }
+
+  updateSlidePosition(data: Widget): Observable<any> {
+    const username = localStorage.getItem('username');
+    const token = localStorage.getItem('token');
+    console.log("before save", data);
+    return this.http.post < any > (this.widgetURL + '/updateSlidePosition', data)
   }
 
   delete(widget_id: any): Observable<any> {

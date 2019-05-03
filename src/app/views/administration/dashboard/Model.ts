@@ -37,4 +37,5 @@ export class Widget {
     refresh_period: number;
     gauge_interval: number;
     description: string;
+    at_slide:number;
   }

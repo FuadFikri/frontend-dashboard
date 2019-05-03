@@ -32,6 +32,11 @@ export class DetailDashboardComponent implements OnInit {
   };
   cardBoxSize;
   cardBoxColor;
+  slidePositions = [
+    {"at_slide":"1"},
+    {"at_slide":"2"},
+    {"at_slide":"3"},
+  ];
   constructor(private dashboardService: DashboardService) {
     this.widgetDataStorage=[];
   }
@@ -90,6 +95,22 @@ export class DetailDashboardComponent implements OnInit {
       notify(this.options, 'error', 3000);
       console.log("updating failed ", err);
     });
+  }
+
+  updateSlide(e){
+    this.data = e.newData;
+    this.data.widget_type = e.oldData.widget_type;
+    this.dashboardService.updateSlidePosition(this.data).subscribe(res => {
+      console.log('update success', res);
+      this.options.message = 'Widget Position Updated';
+      notify(this.options, 'success', 3000);
+      console.log("updating success",this.data);
+    }, err => {
+      this.options.message = 'updating Failed';
+      notify(this.options, 'error', 3000);
+      console.log("updating failed ", err);
+    }
+    );
   }
   
   delete(e){

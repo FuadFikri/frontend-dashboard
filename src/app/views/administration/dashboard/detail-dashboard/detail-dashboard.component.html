@@ -3,13 +3,20 @@
     [masterDetail]="{ enabled: true, template: 'detail' }"
     [showBorders]="true"
     keyExpr="widget_type"
+    (onRowUpdating)="updateSlide($event)"
     >
     <dxo-editing 
                 mode="batch"
                 [allowUpdating]="true">
             </dxo-editing>
     <dxi-column dataField="widget_type"  caption="Card Box Widget" [allowEditing]="false"></dxi-column>
-    <dxi-column dataField="at_slide"  caption="Slide Position"></dxi-column>
+    <dxi-column dataField="at_slide"  caption="Slide Position">
+        <dxo-lookup
+                        [dataSource]="slidePositions"
+                        displayExpr="at_slide"
+                        valueExpr="at_slide">
+        </dxo-lookup>
+    </dxi-column>
 
     <div *dxTemplate="let widget_type of 'detail'">
         <div class="master-detail-caption"></div>
@@ -48,15 +55,27 @@
     </div>  
 </dx-data-grid>
 <br>
+
+<!-- circular -->
 <dx-data-grid id="gridContainer"
     [dataSource]="circularSource"
     [masterDetail]="{ enabled: true, template: 'detail' }"
     keyExpr="widget_type"
     [showBorders]="true"
-    >
+    (onRowUpdating)="updateSlide($event)">
+    <dxo-editing 
+                mode="batch"
+                [allowUpdating]="true">
+    </dxo-editing>
     
     <dxi-column dataField="widget_type"  caption="Card Box Widget" [allowEditing]="false"></dxi-column>
-    <dxi-column dataField="at_slide"  caption="Slide Position"></dxi-column>
+    <dxi-column dataField="at_slide"  caption="Slide Position">
+        <dxo-lookup
+                        [dataSource]="slidePositions"
+                        displayExpr="at_slide"
+                        valueExpr="at_slide">
+        </dxo-lookup>
+    </dxi-column>
 
     <div *dxTemplate="let widget_type of 'detail'">
         <div class="master-detail-caption"></div>
@@ -75,7 +94,6 @@
                 <dxi-column dataField="widget_sortnumber"></dxi-column>
                 <dxi-column dataField="widget_title"></dxi-column>
                 <dxi-column dataField="widget_label"></dxi-column>
-                <dxi-column dataField="at_slide"></dxi-column>
                 <dxi-column dataField="widget_size"></dxi-column>
                 <dxi-column dataField="gauge_start"></dxi-column>
                 <dxi-column dataField="gauge_end"></dxi-column>
@@ -83,17 +101,31 @@
         </dx-data-grid>       
     </div>  
 </dx-data-grid>
+<!-- end  circular -->
+
 <br>
+
+<!-- bar gauge -->
 <dx-data-grid id="gridContainer"
     [dataSource]="barGaugeSource"
     [masterDetail]="{ enabled: true, template: 'detail' }"
     keyExpr="widget_type"
     [showBorders]="true"
-    >
+    (onRowUpdating)="updateSlide($event)">
+    <dxo-editing 
+                mode="batch"
+                [allowUpdating]="true">
+    </dxo-editing>
     
     
     <dxi-column dataField="widget_type"  caption="Card Box Widget" [allowEditing]="false"></dxi-column>
-    <dxi-column dataField="at_slide"  caption="Slide Position"></dxi-column>
+    <dxi-column dataField="at_slide"  caption="Slide Position">
+        <dxo-lookup
+                        [dataSource]="slidePositions"
+                        displayExpr="at_slide"
+                        valueExpr="at_slide">
+        </dxo-lookup>
+    </dxi-column>
 
     <div *dxTemplate="let widget_type of 'detail'">
         <div class="master-detail-caption"></div>
@@ -119,3 +151,5 @@
         </dx-data-grid>       
     </div>  
 </dx-data-grid>
+
+<!-- end bar gauge -->
