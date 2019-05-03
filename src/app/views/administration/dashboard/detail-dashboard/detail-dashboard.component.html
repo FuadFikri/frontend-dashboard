@@ -1,15 +1,20 @@
 <dx-data-grid id="gridContainer"
     [dataSource]="cardBoxSource"
     [masterDetail]="{ enabled: true, template: 'detail' }"
-    keyExpr="type"
-    [showBorders]="true">
-    
-    <dxi-column dataField="type"  caption="Card Box Widget"></dxi-column>
+    [showBorders]="true"
+    keyExpr="widget_type"
+    >
+    <dxo-editing 
+                mode="batch"
+                [allowUpdating]="true">
+            </dxo-editing>
+    <dxi-column dataField="widget_type"  caption="Card Box Widget" [allowEditing]="false"></dxi-column>
+    <dxi-column dataField="at_slide"  caption="Slide Position"></dxi-column>
 
-    <div *dxTemplate="let type of 'detail'">
+    <div *dxTemplate="let widget_type of 'detail'">
         <div class="master-detail-caption"></div>
         <dx-data-grid 
-            [dataSource]="getWidgetList(type.key)"
+            [dataSource]="getWidgetList(widget_type.key)"
             [showBorders]="true"
             [columnAutoWidth]="true"
             (onRowUpdating)="update($event)"
@@ -46,16 +51,17 @@
 <dx-data-grid id="gridContainer"
     [dataSource]="circularSource"
     [masterDetail]="{ enabled: true, template: 'detail' }"
-    keyExpr="type"
+    keyExpr="widget_type"
     [showBorders]="true"
     >
     
-    <dxi-column dataField="type" caption="Circular Gauge Widget"></dxi-column>
+    <dxi-column dataField="widget_type"  caption="Card Box Widget" [allowEditing]="false"></dxi-column>
+    <dxi-column dataField="at_slide"  caption="Slide Position"></dxi-column>
 
-    <div *dxTemplate="let type of 'detail'">
+    <div *dxTemplate="let widget_type of 'detail'">
         <div class="master-detail-caption"></div>
         <dx-data-grid 
-            [dataSource]="getWidgetList(type.key)"
+            [dataSource]="getWidgetList(widget_type.key)"
             [showBorders]="true"
             [columnAutoWidth]="true"
             (onRowUpdating)="update($event)"
@@ -81,16 +87,18 @@
 <dx-data-grid id="gridContainer"
     [dataSource]="barGaugeSource"
     [masterDetail]="{ enabled: true, template: 'detail' }"
-    keyExpr="type"
+    keyExpr="widget_type"
     [showBorders]="true"
     >
     
-    <dxi-column dataField="type" caption="Bar Gauge Widget"></dxi-column>
+    
+    <dxi-column dataField="widget_type"  caption="Card Box Widget" [allowEditing]="false"></dxi-column>
+    <dxi-column dataField="at_slide"  caption="Slide Position"></dxi-column>
 
-    <div *dxTemplate="let type of 'detail'">
+    <div *dxTemplate="let widget_type of 'detail'">
         <div class="master-detail-caption"></div>
         <dx-data-grid 
-            [dataSource]="getWidgetList(type.key)"
+            [dataSource]="getWidgetList(widget_type.key)"
             [showBorders]="true"
             [columnAutoWidth]="true"
             (onRowUpdating)="update($event)"

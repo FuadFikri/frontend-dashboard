@@ -76,6 +76,11 @@ export class DashboardService {
     return this.widgetTypes[2];
   }
 
+  // return = widgettype dan at_slide nya
+  getWidgetType(){
+    return this.http.get < any > (this.widgetURL +'/getWidgetType');
+  }
+
   update(data: Widget): Observable<any> {
     const username = localStorage.getItem('username');
     const token = localStorage.getItem('token');
