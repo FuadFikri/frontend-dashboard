@@ -23,9 +23,9 @@ export class DashboardComponent implements OnInit {
   public brandDanger = '#f86c6b';
   alive = true;
   circularGauge:any;
-  circularTesSlide1=false;
-  circularTesSlide2=false;
-  circularTesSlide3=false;
+  circularAtSlide1=false;
+  circularAtSlide2=false;
+  circularAtSlide3=false;
   
 
   @ViewChild(DxPivotGridComponent) pivotGrid: DxPivotGridComponent;
@@ -52,29 +52,15 @@ export class DashboardComponent implements OnInit {
     .subscribe(() =>  {
       this.authService.getWidgets('circular-gauge').subscribe(resp=>{
         this.circularGauge = resp.d;
-        this.setSlidePosition(this.circularGauge[0]);
+        this.circularGauge.forEach(element => {
+           this.setSlidePosition(element) ;
+        });
+        // this.setSlidePosition(this.circularGauge[0]);
         console.log('gauge',this.circularGauge);
       })
     })
     
 
-    // Observable.timer(0,30000)
-    // .takeWhile(() => this.alive) // only fires when component is alive
-    // .subscribe(() => {
-    //   this.dashService.getCards().subscribe(resp=> {
-    //     this.cards = resp.d;
-    //     let x = resp.d;
-    //     this.closeable=[];
-    //       for (let index = 0; index < x.length; index++) {
-    //         if (this.cards[index].closeable == 1) {
-    //           this.closeable.push(true);
-    //         }else{
-    //           this.closeable.push(false);
-    //         }
-            
-    //     }
-    //   })
-    // }); 
     
   }
 
@@ -86,26 +72,26 @@ export class DashboardComponent implements OnInit {
   
 
   
-  setSlidePosition(gauge:any):void {
-    switch(gauge.at_slide) { 
+  setSlidePosition(widget:any):void {
+    switch(widget.at_slide) { 
       case "1": { 
-         this.circularTesSlide1=true;
-         this.circularTesSlide2=false;
-         this.circularTesSlide3=false;
-         break; 
+        this.circularAtSlide1=true;
+        this.circularAtSlide2=false;
+        this.circularAtSlide3=false;
+        break; 
       } 
       case "2": { 
-        this.circularTesSlide1=false;
-        this.circularTesSlide2=true;
-        this.circularTesSlide3=false;
+        this.circularAtSlide1=false;
+        this.circularAtSlide2=true;
+        this.circularAtSlide3=false;
         break; 
       } 
       case "3": { 
-        this.circularTesSlide1=false;
-        this.circularTesSlide2=false;
-        this.circularTesSlide3=true;
+        this.circularAtSlide1=false;
+        this.circularAtSlide2=false;
+        this.circularAtSlide3=true;
         break; 
-     }
+      }
       default: { 
 
          break; 
