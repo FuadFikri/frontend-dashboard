@@ -1,16 +1,9 @@
 <div class="row">
   <div *ngFor="let card of cards; let i = index" class="col-sm-6 {{card.widget_size}}">
-    <div class="card border-0 shadow-sm text-light bg-{{card.color}}">
+    <div class="card border-0 shadow-sm text-light bg-{{card.color}}" *ngIf="card.visible">
       <div class="card-body">
         <div class="btn-group float-right" dropdown>
-          <button type="button" class="btn btn-transparent dropdown-toggle p-0" dropdownToggle>
-            <i class="icon-settings"></i>
-          </button>
-          <div class="dropdown-menu dropdown-menu-right" *dropdownMenu>
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" (click)="getWidgetData()">Another action</a>
-            <a class="dropdown-item hapus" *ngIf="closeable[i]" (click)="hapus($event)">close</a>
-          </div>
+          <a (click)="hapus(card)" *ngIf="closeable[i]" id="hapus" href="#">X</a>
         </div>
         <div class="text-left myCard-title">{{card.widget_title}}</div>
         <div class="chart-wrapper px-3" style="height:140px;">

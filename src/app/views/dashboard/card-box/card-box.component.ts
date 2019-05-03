@@ -3,6 +3,7 @@ import 'rxjs/add/operator/takeWhile';
 import { Observable, of, timer } from 'rxjs';
 import { DashboardService } from '../dashboard.service';
 import { AuthenticationService } from 'app/service';
+import { Widget } from './Model';
 
 @Component({
   selector: 'app-card-box',
@@ -10,7 +11,7 @@ import { AuthenticationService } from 'app/service';
   styleUrls: ['./card-box.component.scss']
 })
 export class CardBoxComponent implements OnInit {
-  cards:any;
+  cards:Widget[];
   cardsData:any;
   alive=true;
   closeable:Array<boolean>=[];
@@ -23,6 +24,10 @@ export class CardBoxComponent implements OnInit {
     .subscribe(() =>  {
       this.authService.getWidgets('Card-Box').subscribe(resp=>{
         this.cards = resp.d;
+        this.cards.map((value) => {
+          value.visible = true;
+        });
+        
       let x = resp.d;
       this.closeable=[];
         for (let index = 0; index < x.length; index++) {
@@ -39,11 +44,14 @@ export class CardBoxComponent implements OnInit {
       })
     })
 
+    
+
   }
 
-  hapus($event){
-    let card = this.getParent($event);
-    card.style.visibility="hidden";
+  hapus(card : Widget) : void{
+    card.visible = false;
+    // let card = this.getParent($event);
+    // card.style.visibility="hidden";
   }
   
   private getParent($event){
