@@ -1,6 +1,6 @@
-<div class="row">
-  <div *ngFor="let card of cards; let i = index" class="col-sm-6 {{card.widget_size}}">
-    <div class="card border-0 shadow-sm text-light bg-{{card.color}}" *ngIf="card.visible">
+<div class="row" *ngIf="_cards">
+  <div *ngFor="let card of _cards; let i = index" class="col-sm-6 {{card.widget_size}}">
+    <div class="card border-0 shadow-sm text-light bg-{{card.color}}" >
       <div class="card-body">
         <div class="btn-group float-right" dropdown>
           <a (click)="hapus(card)" *ngIf="closeable[i]" id="hapus" href="#">X</a>
@@ -13,11 +13,12 @@
           </h4>
         </div>
         <p class="font-weight-italic myCard-label">{{card.widget_label}}</p>
-        <!-- <canvas baseChart class="chart" [datasets]="lineChart1Data" [labels]="lineChart1Labels"
-          [options]="lineChart1Options" [colors]="lineChart1Colours" [legend]="lineChart1Legend"
-          [chartType]="lineChart1Type" (chartHover)="chartHovered($event)"
-          (chartClick)="chartClicked($event)"></canvas> -->
       </div>
     </div>
   </div>
 </div>
+
+<!-- <canvas baseChart class="chart" [datasets]="lineChart1Data" [labels]="lineChart1Labels"
+  [options]="lineChart1Options" [colors]="lineChart1Colours" [legend]="lineChart1Legend"
+  [chartType]="lineChart1Type" (chartHover)="chartHovered($event)"
+  (chartClick)="chartClicked($event)"></canvas> -->

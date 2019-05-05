@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import 'rxjs/add/operator/takeWhile';
 import { Observable, of, timer } from 'rxjs';
 import { DashboardService } from '../dashboard.service';
@@ -6,12 +6,12 @@ import { AuthenticationService } from 'app/service';
 import { Widget } from './Model';
 
 @Component({
-  selector: 'app-card-box',
+  selector: 'card-box',
   templateUrl: './card-box.component.html',
   styleUrls: ['./card-box.component.scss']
 })
 export class CardBoxComponent implements OnInit {
-  cards:Widget[];
+  private _cards:any;
   cardsData:any;
   alive=true;
   closeable:Array<boolean>=[];
@@ -19,33 +19,39 @@ export class CardBoxComponent implements OnInit {
               private authService: AuthenticationService) { }
 
   ngOnInit() {
-    Observable.timer(0,30000) //get setiap 30 detik, dimulai sejak detik ke 0
-    .takeWhile(() => this.alive)
-    .subscribe(() =>  {
-      this.authService.getWidgets('Card-Box').subscribe(resp=>{
-        this.cards = resp.d;
-        this.cards.map((value) => {
-          value.visible = true;
-        });
+    // Observable.timer(0,30000) //get setiap 30 detik, dimulai sejak detik ke 0
+    // .takeWhile(() => this.alive)
+    // .subscribe(() =>  {
+    //   this.authService.getWidgets('Card-Box').subscribe(resp=>{
+    //     this.cards = resp.d;
+    //     this.cards.map((value) => {
+    //       value.visible = true;
+    //     });
         
-      let x = resp.d;
-      this.closeable=[];
-        for (let index = 0; index < x.length; index++) {
-          if (this.cards[index].closeable == 1) {
-            this.closeable.push(true);
-          }else{
-            this.closeable.push(false);
-          }
+    //   let x = resp.d;
+    //   this.closeable=[];
+    //     for (let index = 0; index < x.length; index++) {
+    //       if (this.cards[index].closeable == 1) {
+    //         this.closeable.push(true);
+    //       }else{
+    //         this.closeable.push(false);
+    //       }
           
-      }
-      })
-      this.dashService.getCardsData().subscribe(res=>{
-        this.cardsData = res.d;
-      })
-    })
+    //   }
+    //   })
+    //   this.dashService.getCardsData().subscribe(res=>{
+    //     this.cardsData = res.d;
+    //   })
+    // })
 
     
+    
+  }
 
+  @Input()
+  set cards(value: any){
+    this._cards = value;
+    console.log("cjild", this._cards);
   }
 
   hapus(card : Widget) : void{

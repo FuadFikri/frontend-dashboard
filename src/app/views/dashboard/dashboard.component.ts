@@ -23,6 +23,10 @@ export class DashboardComponent implements OnInit {
   public brandDanger = '#f86c6b';
   alive = true;
   circularGauge:any;
+  cards:any;
+  cardAtSlide1=false;
+  cardAtSlide2=true;
+  cardAtSlide3=false;
   circularAtSlide1=false;
   circularAtSlide2=false;
   circularAtSlide3=false;
@@ -57,6 +61,14 @@ export class DashboardComponent implements OnInit {
         });
         // this.setSlidePosition(this.circularGauge[0]);
         console.log('gauge',this.circularGauge);
+      })
+    })
+    Observable.timer(0,30000)
+    .takeWhile(() => this.alive)
+    .subscribe(() =>  {
+      this.authService.getWidgets('CARD-BOX').subscribe(res=>{
+        this.cards = res.d;
+        console.log('cards parent',this.circularGauge);
       })
     })
     

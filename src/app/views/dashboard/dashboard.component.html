@@ -1,8 +1,9 @@
 <!-- <div class="animated fadeIn"> -->
     <carousel-component #topCarousel [autoPlay]=false [delayAutoPlay]="3000">
         <div class="item-carousel">
-          
-          <app-card-box></app-card-box>
+          <div *ngIf="cardAtSlide1"> 
+            <card-box [cards]="cards"></card-box>
+          </div>
           <div *ngIf="circularAtSlide1">
               <app-circular-gauge [circularGauge]="circularGauge"></app-circular-gauge>
               </div>
@@ -10,6 +11,9 @@
 
   <div class="item-carousel">
   <!-- <div class="row"> -->
+      <div *ngIf="cardAtSlide2"> 
+          <card-box [cards]="cards"></card-box>
+        </div>
     <div *ngIf="circularAtSlide2">
     <app-circular-gauge [circularGauge]="circularGauge"></app-circular-gauge>
     </div>
@@ -17,6 +21,9 @@
   </div>
 
   <div class="item-carousel">
+      <div *ngIf="cardAtSlide3"> 
+          <card-box [cards]="cards"></card-box>
+        </div>
       <div *ngIf="circularAtSlide3">
           <app-circular-gauge [circularGauge]="circularGauge"></app-circular-gauge>
           </div>
