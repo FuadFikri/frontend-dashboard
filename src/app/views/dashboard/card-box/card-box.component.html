@@ -1,5 +1,5 @@
-<div class="row" *ngIf="_cards">
-  <div *ngFor="let card of _cards; let i = index" class="col-sm-6 {{card.widget_size}}">
+<div class="row" *ngIf="cards">
+  <div *ngFor="let card of cards; let i = index" class="col-sm-6 {{card.widget_size}}">
     <div class="card border-0 shadow-sm text-light bg-{{card.color}}" >
       <div class="card-body">
         <div class="btn-group float-right" dropdown>

@@ -11,7 +11,7 @@ import { Widget } from './Model';
   styleUrls: ['./card-box.component.scss']
 })
 export class CardBoxComponent implements OnInit {
-  private _cards:any;
+  @Input() cards:any;
   cardsData:any;
   alive=true;
   closeable:Array<boolean>=[];
@@ -48,11 +48,7 @@ export class CardBoxComponent implements OnInit {
     
   }
 
-  @Input()
-  set cards(value: any){
-    this._cards = value;
-    console.log("cjild", this._cards);
-  }
+  
 
   hapus(card : Widget) : void{
     card.visible = false;
