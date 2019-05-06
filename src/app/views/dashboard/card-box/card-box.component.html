@@ -1,12 +1,12 @@
 <div class="row" *ngIf="cards">
   <div *ngFor="let card of cards; let i = index" class="col-sm-6 {{card.widget_size}}">
-    <div class="card border-0 shadow-sm text-light bg-{{card.color}}" >
+    <div class="card border-0 shadow-sm text-light bg-{{card.color}}" *ngIf="card.visible">
       <div class="card-body">
         <div class="btn-group float-right" dropdown>
           <a (click)="hapus(card)" *ngIf="closeable[i]" id="hapus" href="#">X</a>
         </div>
         <div class="text-left myCard-title">{{card.widget_title}}</div>
-        <div class="chart-wrapper px-3" style="height:140px;">
+        <div class="chart-wrapper px-3" style="height:130px;">
 
           <h4 class="font-weight-bold text-center uk-margin-large-top myCard-value" *ngIf="cardsData">
             {{cardsData[i].salary}}

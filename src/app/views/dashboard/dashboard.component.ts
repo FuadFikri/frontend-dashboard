@@ -6,6 +6,7 @@ import { Observable, of, timer } from 'rxjs';
 import {  DxPivotGridComponent, DxChartComponent } from 'devextreme-angular';
 import { CarouselComponent } from 'ngx-carousel-lib';
 import { AuthenticationService } from './../../service/authentication.service';
+import { Widget } from './card-box/Model';
 
 @Component({
   templateUrl: 'dashboard.component.html',
@@ -23,9 +24,9 @@ export class DashboardComponent implements OnInit {
   public brandDanger = '#f86c6b';
   alive = true;
   circularGauge:any;
-  cards:any;
-  cardAtSlide1=false;
-  cardAtSlide2=true;
+  cards:Widget[];
+  cardAtSlide1=true;
+  cardAtSlide2=false;
   cardAtSlide3=false;
   circularAtSlide1=false;
   circularAtSlide2=false;
@@ -38,6 +39,7 @@ export class DashboardComponent implements OnInit {
 
 
   pivotGridDataSource: any;
+  closeableCards: Array<boolean>=[];
   constructor(@Inject(DashboardService) private dashService: DashboardService,
               private authService: AuthenticationService) {
 
@@ -51,7 +53,7 @@ export class DashboardComponent implements OnInit {
       this.mainChartData2.push(this.random(80, 100));
       this.mainChartData3.push(65);
     }
-    Observable.timer(0,30000)
+    Observable.timer(0,30000) //get setiap 30s setelah detik ke 0
     .takeWhile(() => this.alive)
     .subscribe(() =>  {
       this.authService.getWidgets('circular-gauge').subscribe(resp=>{
@@ -59,18 +61,36 @@ export class DashboardComponent implements OnInit {
         this.circularGauge.forEach(element => {
            this.setSlidePosition(element) ;
         });
-        // this.setSlidePosition(this.circularGauge[0]);
         console.log('gauge',this.circularGauge);
       })
     })
-    Observable.timer(0,30000)
-    .takeWhile(() => this.alive)
-    .subscribe(() =>  {
-      this.authService.getWidgets('CARD-BOX').subscribe(res=>{
-        this.cards = res.d;
-        console.log('cards parent',this.circularGauge);
+    
+    Observable.timer(0, 30000)
+      .takeWhile(() => this.alive)
+      .subscribe(() => {
+        this.authService.getWidgets('CARD-BOX').subscribe(res => {
+          this.cards = res.d;
+          this.cards.map((value) => {
+            value.visible = true;
+          });
+          console.log('cards parent', this.cards);
+          this.cards.forEach(element => {
+            this.setSlidePosition(element);
+          });
+
+          let x = res.d;
+          this.closeableCards = [];
+          for (let index = 0; index < x.length; index++) {
+            if (this.cards[index].closeable == 1) {
+              this.closeableCards.push(true);
+            } else {
+              this.closeableCards.push(false);
+            }
+          }
+
+        })
       })
-    })
+    
     
 
     
@@ -84,31 +104,48 @@ export class DashboardComponent implements OnInit {
   
 
   
-  setSlidePosition(widget:any):void {
-    switch(widget.at_slide) { 
-      case "1": { 
-        this.circularAtSlide1=true;
-        this.circularAtSlide2=false;
-        this.circularAtSlide3=false;
-        break; 
-      } 
-      case "2": { 
-        this.circularAtSlide1=false;
-        this.circularAtSlide2=true;
-        this.circularAtSlide3=false;
-        break; 
-      } 
-      case "3": { 
-        this.circularAtSlide1=false;
-        this.circularAtSlide2=false;
-        this.circularAtSlide3=true;
-        break; 
+  setSlidePosition(widget: any): void {
+    switch (widget.at_slide) {
+      case "1": {
+        if (widget.widget_type == "CIRCULAR-GAUGE") {
+          this.circularAtSlide1 = true;
+          this.circularAtSlide2 = false;
+          this.circularAtSlide3 = false;
+        } else if (widget.widget_type == "CARD-BOX") {
+          this.cardAtSlide1 = true;
+          this.cardAtSlide2 = false;
+          this.cardAtSlide3 = false;
+        }
+        break;
       }
-      default: { 
-
-         break; 
-      } 
-   } 
+      case "2": {
+        if (widget.widget_type == "CIRCULAR-GAUGE") {
+          this.circularAtSlide1 = false;
+          this.circularAtSlide2 = true;
+          this.circularAtSlide3 = false;
+        } else if (widget.widget_type == "CARD-BOX") {
+          this.cardAtSlide1 = false;
+          this.cardAtSlide2 = true;
+          this.cardAtSlide3 = false;
+        }
+        break;
+      }
+      case "3": {
+        if (widget.widget_type == "CIRCULAR-GAUGE") {
+          this.circularAtSlide1 = false;
+          this.circularAtSlide2 = false;
+          this.circularAtSlide3 = true;
+        } else if (widget.widget_type == "CARD-BOX") {
+          this.cardAtSlide1 = false;
+          this.cardAtSlide2 = false;
+          this.cardAtSlide3 = true;
+        }
+        break;
+      }
+      default: {
+        break;
+      }
+    }
   }
 
   public ngOnDestroy(): void {

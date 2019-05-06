@@ -12,39 +12,13 @@ import { Widget } from './Model';
 })
 export class CardBoxComponent implements OnInit {
   @Input() cards:any;
+  @Input() closeable:Array<boolean>;
   cardsData:any;
   alive=true;
-  closeable:Array<boolean>=[];
   constructor(private dashService: DashboardService,
               private authService: AuthenticationService) { }
 
   ngOnInit() {
-    // Observable.timer(0,30000) //get setiap 30 detik, dimulai sejak detik ke 0
-    // .takeWhile(() => this.alive)
-    // .subscribe(() =>  {
-    //   this.authService.getWidgets('Card-Box').subscribe(resp=>{
-    //     this.cards = resp.d;
-    //     this.cards.map((value) => {
-    //       value.visible = true;
-    //     });
-        
-    //   let x = resp.d;
-    //   this.closeable=[];
-    //     for (let index = 0; index < x.length; index++) {
-    //       if (this.cards[index].closeable == 1) {
-    //         this.closeable.push(true);
-    //       }else{
-    //         this.closeable.push(false);
-    //       }
-          
-    //   }
-    //   })
-    //   this.dashService.getCardsData().subscribe(res=>{
-    //     this.cardsData = res.d;
-    //   })
-    // })
-
-    
     
   }
 
