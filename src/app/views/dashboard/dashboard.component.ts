@@ -152,6 +152,17 @@ export class DashboardComponent implements OnInit {
     this.alive = false; 
   }
 
+  loop(e) {
+    if (e.activeIndex === 2) {
+      window.setTimeout(() => {
+        this.topCarousel.slideTo(0);
+      }, 10000);
+      window.clearTimeout();
+    }
+    console.log("here", e.activeIndex);
+  }
+
+
 
 
   // dropdown buttons

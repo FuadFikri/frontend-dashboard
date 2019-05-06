@@ -1,5 +1,7 @@
-    <carousel-component #topCarousel >
+    <carousel-component #topCarousel [autoPlay]="true" [delayAutoPlay]="7000" (onReachEnd)="loop($event)">
+      
       <div class="item-carousel">
+          <button (click)="tes($event)">TES</button>
         <div *ngIf="cardAtSlide1">
           <div class="animated fadeIn">
             <card-box [cards]="cards" [closeable]="closeableCards"></card-box>
@@ -23,6 +25,7 @@
       </div>
 
       <div class="item-carousel">
+          <button (click)="tes($event)">TES</button>
         <div *ngIf="cardAtSlide3">
           <card-box [cards]="cards" [closeable]="closeableCards"></card-box>
         </div>
