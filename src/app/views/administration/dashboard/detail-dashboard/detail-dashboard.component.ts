@@ -32,6 +32,7 @@ export class DetailDashboardComponent implements OnInit {
   };
   cardBoxSize;
   cardBoxColor;
+  cardBoxCloseable;
   slidePositions = [
     {"at_slide":"1"},
     {"at_slide":"2"},
@@ -52,9 +53,9 @@ export class DetailDashboardComponent implements OnInit {
       this.widgets = res.d.list;
       console.log(this.widgets);
     });
-    this.cardBoxSize = this.dashboardService.getCardBoxSize();
+    this.cardBoxSize  = this.dashboardService.getCardBoxSize();
     this.cardBoxColor = this.dashboardService.getCardBoxColor();
-    
+    this.cardBoxCloseable = this.dashboardService.getCardBoxCloseable();
   }
 
     getWidgetList(key) {

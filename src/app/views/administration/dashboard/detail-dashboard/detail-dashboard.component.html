@@ -31,12 +31,18 @@
                 [allowUpdating]="true"
                 [allowDeleting]="true">
             </dxo-editing>
-                <dxi-column dataField="widget_sortnumber" sortOrder="asc" width=75 caption="Number">
+                <dxi-column dataField="widget_sortnumber" sortOrder="asc" width=85 caption="Number">
                     
                 </dxi-column>
                 <dxi-column dataField="widget_title"></dxi-column>
                 <dxi-column dataField="widget_label"></dxi-column>
-                <dxi-column dataField="closeable"></dxi-column>
+                <dxi-column dataField="closeable">
+                    <dxo-lookup
+                        [dataSource]="cardBoxCloseable"
+                        displayExpr="caption"
+                        valueExpr="value">
+                    </dxo-lookup>
+                </dxi-column>
                 <dxi-column dataField="color">
                     <dxo-lookup
                         [dataSource]="cardBoxColor"

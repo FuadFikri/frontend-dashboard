@@ -22,6 +22,10 @@ export class DashboardService {
     {"color":"warning","caption" : "Yellow"},
     {"color":"danger","caption" : "Red"}
   ];
+  cardBoxCloseable = [
+    {"value":"1","caption":"True"},
+    {"value":"0","caption":"False"}
+  ];
   constructor(private http: HttpClient, private a: AppConstant) { }
 
   getAll(): Observable<any> {
@@ -59,6 +63,10 @@ export class DashboardService {
 
   getCardBoxColor() {
     return this.cardBoxColor;
+  }
+  
+  getCardBoxCloseable(){
+    return this.cardBoxCloseable;
   }
 
   // return = widgettype dan at_slide nya
