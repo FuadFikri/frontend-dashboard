@@ -1,4 +1,4 @@
-    <carousel-component #topCarousel [autoPlay]="true" [delayAutoPlay]="7000" (onReachEnd)="loop($event)">
+    <carousel-component #topCarousel [autoPlay]="true" [delayAutoPlay]="7000" (onReachEnd)="loop($event)" [margin]="50">
       
       <div class="item-carousel">
           <button (click)="tes($event)">TES</button>
@@ -12,6 +12,7 @@
             <app-circular-gauge [circularGauge]="circularGauge"></app-circular-gauge>
           </div>
         </div>
+        <app-bar-gauge></app-bar-gauge>
       </div>
 
       <div class="item-carousel">
@@ -21,7 +22,7 @@
         <div *ngIf="circularAtSlide2">
           <app-circular-gauge [circularGauge]="circularGauge"></app-circular-gauge>
         </div>
-        <app-bar-gauge></app-bar-gauge>
+        
       </div>
 
       <div class="item-carousel">
