@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Widget } from '../card-box/Model';
 
 @Component({
   selector: 'app-bar-gauge',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./bar-gauge.component.scss']
 })
 export class BarGaugeComponent implements OnInit {
-  
+  @Input() widgets: Widget[];
   public background = '#FFFFFF';
   constructor() { }
 

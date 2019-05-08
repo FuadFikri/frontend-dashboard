@@ -22,14 +22,18 @@ export class DashboardComponent implements OnInit {
   public brandWarning = '#f8cb00';
   public brandDanger = '#f86c6b';
   alive = true;
-  circularGauge:any;
+  circularGauge:Widget[];
   cards:Widget[];
+  barGauges:Widget[];
   cardAtSlide1=true;
   cardAtSlide2=false;
   cardAtSlide3=false;
   circularAtSlide1=false;
   circularAtSlide2=false;
   circularAtSlide3=false;
+  barGaugeAtSlide1=false;
+  barGaugeAtSlide2=false;
+  barGaugeAtSlide3=false;
   
 
   @ViewChild(DxPivotGridComponent) pivotGrid: DxPivotGridComponent;
@@ -52,6 +56,8 @@ export class DashboardComponent implements OnInit {
       this.mainChartData2.push(this.random(80, 100));
       this.mainChartData3.push(65);
     }
+
+    // Circular gauge
     Observable.timer(0,30000) //get setiap 30s setelah detik ke 0
     .takeWhile(() => this.alive)
     .subscribe(() =>  {
@@ -63,7 +69,9 @@ export class DashboardComponent implements OnInit {
         console.log('gauge',this.circularGauge);
       })
     })
+    // end Circular gauge 
     
+    // card box
     Observable.timer(0, 30000)
       .takeWhile(() => this.alive)
       .subscribe(() => {
@@ -86,10 +94,22 @@ export class DashboardComponent implements OnInit {
               this.closeableCards.push(false);
             }
           }
-
         })
       })
+      // END card box
     
+      Observable.timer(0,30000)
+      .takeWhile(()=> this.alive)
+      .subscribe(() => {
+        this.authService.getWidgets('BAR-GAUGE').subscribe(resp => {
+          this.barGauges = resp.d;
+          this.barGauges.forEach((widget) => {
+            this.setSlidePosition(widget);
+          })
+          console.log("bar",this.barGauges);
+          
+        })
+      });
     
 
     
@@ -105,6 +125,11 @@ export class DashboardComponent implements OnInit {
     this.circularAtSlide2 = slide2;
     this.circularAtSlide3 = slide3;
   }
+  private setBarGaugePosition(slide1: boolean,slide2: boolean,slide3: boolean) {
+    this.barGaugeAtSlide1 = slide1;
+    this.barGaugeAtSlide2 = slide2;
+    this.barGaugeAtSlide3 = slide3;
+  }
 
   setSlidePosition(widget: any): void {
     switch (widget.at_slide) {
@@ -113,6 +138,8 @@ export class DashboardComponent implements OnInit {
           this.setCircularPosition(true,false,false);
         } else if (widget.widget_type == "CARD-BOX") {
           this.setCardBoxPosition(true,false,false);
+        } else if (widget.widget_type == "BAR-GAUGE") {
+          this.setBarGaugePosition(true, false, false);
         }
         break;
       }
@@ -121,6 +148,8 @@ export class DashboardComponent implements OnInit {
           this.setCircularPosition(false,true,false);
         } else if (widget.widget_type == "CARD-BOX") {
           this.setCardBoxPosition(false,true,false);
+        } else if (widget.widget_type == "BAR-GAUGE") {
+          this.setBarGaugePosition(false, true, false);
         }
         break;
       }
@@ -129,6 +158,8 @@ export class DashboardComponent implements OnInit {
           this.setCircularPosition(false,false,true);
         } else if (widget.widget_type == "CARD-BOX") {
           this.setCardBoxPosition(false,false,true);
+        } else if (widget.widget_type == "BAR-GAUGE") {
+          this.setBarGaugePosition(false,false,true);
         }
         break;
       }
