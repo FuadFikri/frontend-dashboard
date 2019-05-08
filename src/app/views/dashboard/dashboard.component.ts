@@ -16,7 +16,6 @@ import { Widget } from './card-box/Model';
 
 export class DashboardComponent implements OnInit {
   @ViewChild('topCarousel') topCarousel: CarouselComponent;
-  public pesan:any;
   public brandPrimary = '#FFFFFF';
   public brandSuccess = '#4dbd74';
   public brandInfo = '#63c2de';
@@ -96,49 +95,40 @@ export class DashboardComponent implements OnInit {
     
   }
 
- 
-  
+  private setCardBoxPosition(slide1: boolean,slide2: boolean,slide3: boolean) {
+    this.cardAtSlide1 = slide1;
+    this.cardAtSlide2 = slide2;
+    this.cardAtSlide3 = slide3;
+  }
+  private setCircularPosition(slide1: boolean,slide2: boolean,slide3: boolean) {
+    this.circularAtSlide1 = slide1;
+    this.circularAtSlide2 = slide2;
+    this.circularAtSlide3 = slide3;
+  }
 
- 
-
-  
-
-  
   setSlidePosition(widget: any): void {
     switch (widget.at_slide) {
       case "1": {
         if (widget.widget_type == "CIRCULAR-GAUGE") {
-          this.circularAtSlide1 = true;
-          this.circularAtSlide2 = false;
-          this.circularAtSlide3 = false;
+          this.setCircularPosition(true,false,false);
         } else if (widget.widget_type == "CARD-BOX") {
-          this.cardAtSlide1 = true;
-          this.cardAtSlide2 = false;
-          this.cardAtSlide3 = false;
+          this.setCardBoxPosition(true,false,false);
         }
         break;
       }
       case "2": {
         if (widget.widget_type == "CIRCULAR-GAUGE") {
-          this.circularAtSlide1 = false;
-          this.circularAtSlide2 = true;
-          this.circularAtSlide3 = false;
+          this.setCircularPosition(false,true,false);
         } else if (widget.widget_type == "CARD-BOX") {
-          this.cardAtSlide1 = false;
-          this.cardAtSlide2 = true;
-          this.cardAtSlide3 = false;
+          this.setCardBoxPosition(false,true,false);
         }
         break;
       }
       case "3": {
         if (widget.widget_type == "CIRCULAR-GAUGE") {
-          this.circularAtSlide1 = false;
-          this.circularAtSlide2 = false;
-          this.circularAtSlide3 = true;
+          this.setCircularPosition(false,false,true);
         } else if (widget.widget_type == "CARD-BOX") {
-          this.cardAtSlide1 = false;
-          this.cardAtSlide2 = false;
-          this.cardAtSlide3 = true;
+          this.setCardBoxPosition(false,false,true);
         }
         break;
       }
