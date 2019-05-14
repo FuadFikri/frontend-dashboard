@@ -1,7 +1,6 @@
-    <carousel-component #topCarousel [autoPlay]="true" [delayAutoPlay]="10000" (onReachEnd)="loop($event)" [margin]="50">
+    <carousel-component #topCarousel [autoPlay]="true" [delayAutoPlay]="10000" (onSlideChange)="loop($event)"  [margin]="50">
       
       <div class="item-carousel">
-          <button (click)="tes($event)">TES</button>
         <div *ngIf="cardAtSlide1">
           <div class="animated fadeIn">
             <card-box [cards]="cards" [closeable]="closeableCards"></card-box>
@@ -32,7 +31,6 @@
       </div>
 
       <div class="item-carousel">
-          <button (click)="tes($event)">TES</button>
           <div *ngIf="barGaugeAtSlide3">
               <app-bar-gauge [widgets]="barGauges"></app-bar-gauge>
           </div>
@@ -42,6 +40,6 @@
         <div *ngIf="circularAtSlide3">
           <app-circular-gauge [circularGauge]="circularGauge"></app-circular-gauge>
         </div>
-        <app-pivot-data-grid></app-pivot-data-grid>
+        <!-- <app-pivot-data-grid></app-pivot-data-grid> -->
       </div>
     </carousel-component>

@@ -177,10 +177,12 @@ export class DashboardComponent implements OnInit {
     if (e.activeIndex === 2) {
       window.setTimeout(() => {
         this.topCarousel.slideTo(0);
-      }, 10000);
+      }, 6000);
       window.clearTimeout();
+      console.log("to slide 0 = ", e.activeIndex);
     }
-    console.log("here", e.activeIndex);
+    window.clearTimeout();
+    console.log("active index = ", e.activeIndex);
   }
 
 
