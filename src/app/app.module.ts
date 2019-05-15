@@ -78,6 +78,7 @@ import { TranslateModule, TranslateLoader, MissingTranslationHandler, TranslateS
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppConstant } from './app.constant';
 import { DxButtonModule } from 'devextreme-angular';
+import { BalancedScorecardModule } from './views/balanced-scorecard/balanced-scorecard.module';
 
 //import { PaginationModule } from 'ngx-bootstrap';
 
@@ -108,6 +109,7 @@ export function HttpLoaderFactory(http) {
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     ChartsModule,
+    BalancedScorecardModule
   ],
   declarations: [
     AppComponent,

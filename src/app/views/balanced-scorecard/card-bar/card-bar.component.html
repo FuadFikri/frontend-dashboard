@@ -1,0 +1,29 @@
+<div class="card text-white bg-{{color}}" style="height:90px;">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-4">
+        Success
+      </div>
+      <div class="col-md-8" (mouseover)="hover=true" (mouseleave)="hover=false">
+        <div class="row">
+          <span [ngStyle]="{visibility: hover==true  ? 'visible' : 'hidden' }">40</span>
+          <div class="col-md-9">
+            <div class="progress progress-white progress-xs mt-3" >
+              <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="25" class="progress-bar" role="progressbar"
+                [style.width.%]="40"></div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+            <span [ngStyle]="{visibility: hover==true  ? 'visible' : 'hidden' }">80</span>
+          <div class="col-md-9">
+            <div class="progress progress-white progress-xs mt-3">
+              <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="25" class="progress-bar" role="progressbar"
+                [style.width.%]="80"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -9,8 +9,15 @@ import {
 } from './containers';
 import { ExecutiveComponent } from 'app/views/dashboard/executive/executive.component';
 import { MonitoringComponent } from 'app/views/dashboard/monitoring/monitoring.component';
+import { BalancedScorecardModule } from './views/balanced-scorecard/balanced-scorecard.module';
 
 export const routes: Routes = [
+  {
+    path: 'balanced-scorecard',
+    redirectTo: 'balanced-scorecard',
+    pathMatch: 'full',
+    // loadChildren: './views/balanced-scorecard/balanced-scorecard.module#BalancedScorecardModule'
+  },
   {
     path: '',
     canActivate: [AuthGuard],
@@ -135,7 +142,7 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
+  imports: [ RouterModule.forRoot(routes), BalancedScorecardModule ],
   exports: [ RouterModule ]
 })
 export class AppRoutingModule {}
