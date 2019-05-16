@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { DxFormComponent } from 'devextreme-angular';
 
 @Component({
   selector: 'card-bar',
@@ -8,6 +9,14 @@ import { Component, OnInit, Input } from '@angular/core';
 export class CardBarComponent implements OnInit {
   @Input() color;
   hovered:boolean=false;
+  popupVisible=false;
+
+  buttonOptions: any = {
+    text: "Save",
+    type: "success",
+    useSubmitBehavior: true
+  }
+
   constructor() { }
 
   ngOnInit() {
@@ -21,6 +30,12 @@ export class CardBarComponent implements OnInit {
       this.hovered = true;
     }
   }
+
+  openModal() {
+    this.popupVisible = true;
+}
+
+
   
 
 }
