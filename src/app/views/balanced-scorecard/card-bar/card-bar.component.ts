@@ -10,11 +10,11 @@ export class CardBarComponent implements OnInit {
   @Input() color;
   hovered:boolean=false;
   popupVisible=false;
-
+  realisasi:any;
   buttonOptions: any = {
     text: "Save",
     type: "success",
-    useSubmitBehavior: true
+    useSubmitBehavior: false
   }
 
   constructor() { }
@@ -33,7 +33,14 @@ export class CardBarComponent implements OnInit {
 
   openModal() {
     this.popupVisible = true;
-}
+  }
+  onFormSubmit(e) {
+    console.log(e);
+  }
+
+  save(e) {
+    console.log(this.realisasi);
+  }
 
 
   

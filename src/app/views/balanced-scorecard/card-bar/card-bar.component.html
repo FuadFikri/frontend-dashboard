@@ -41,15 +41,22 @@
   [closeOnOutsideClick]="true" [(visible)]="popupVisible">
   <div *dxTemplate="let data of 'content'">
     <div class='popup-property-details'>
+        <div class="form-group">
+          <input type="number" [(ngModel)]="realisasi" name="realisasi"class="form-control" id="" required>
+        </div>
+        <div class="form-group ">
+              <button type="submit" class="form-control btn btn-success" (click)="save($event)">Save</button>
+        </div>
+      
       <!-- <div class='large-text'>aaa</div> -->
       <!-- <div class='opacity'>sasasa</div> -->
-      <form action="your-action" (submit)="onFormSubmit($event)">
+      <!-- <form  (submit)="onFormSubmit($event)">
         <dx-form id="form" [formData]="customer" [readOnly]="false" [showColonAfterLabel]="true"
           [showValidationSummary]="true" validationGroup="customerData">
 
           <dxi-item dataField="Realisasi">
-            <dxi-validation-rule type="required" type="numeric" message="Input must a number">
-            </dxi-validation-rule>
+            <dxi-validation-rule type="required" message="required"></dxi-validation-rule>
+            <dxi-validation-rule type="numeric" message="Input must a number"></dxi-validation-rule>
           </dxi-item>
           <dxi-item 
             itemType="button"
@@ -59,7 +66,7 @@
           
         </dx-form>
       
-      </form>
+      </form> -->
       <!-- <div class='images'>
         <img src="" />
         <img src="" />
