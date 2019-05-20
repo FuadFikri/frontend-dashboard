@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CardBarComponent implements OnInit {
   @Input() color;
+  @Input()wide : boolean;
   hovered:boolean=false;
   popupVisible=false;
   realisasi:any;
@@ -15,6 +16,7 @@ export class CardBarComponent implements OnInit {
     type: "success",
     useSubmitBehavior: false
   }
+  
 
   constructor() { }
 

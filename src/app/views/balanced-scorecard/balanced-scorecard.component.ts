@@ -12,7 +12,10 @@ export class BalancedScorecardComponent implements OnInit {
   secondary = "secondary";
   warning = "warning";
   danger = "danger";
-  success = "success"
+  success = "success";
+  wide:boolean=true;
+  small:boolean=false;
+
   constructor() { }
 
   ngOnInit() {
