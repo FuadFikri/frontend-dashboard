@@ -1,10 +1,14 @@
-<div class="card text-white bg-{{color}}" style="height:120px;">
+<div class="card text-white bg-{{color}}" style="height:140px;">
   <div class="card-body">
     <div class="row">
       <div class="col-md-4">
-        <small (click)="openModal()">sukses</small>
+        <small >sukses</small>
       </div>
       <div class="col-md-8" (mouseover)="hover=true" (mouseleave)="hover=false">
+        <div class="row">
+            <div class="col-md-9"></div>
+            <div class="col-md-3" id="pencil"><i class="icon-pencil"  (click)="openModal()"></i></div>
+        </div>
         <div class="row">
           <span [ngStyle]="{visibility: hover==true  ? 'visible' : 'hidden' }">40</span>
           <div class="col-md-10">
@@ -47,30 +51,6 @@
         <div class="form-group ">
               <button type="submit" class="form-control btn btn-success" (click)="save($event)">Save</button>
         </div>
-      
-      <!-- <div class='large-text'>aaa</div> -->
-      <!-- <div class='opacity'>sasasa</div> -->
-      <!-- <form  (submit)="onFormSubmit($event)">
-        <dx-form id="form" [formData]="customer" [readOnly]="false" [showColonAfterLabel]="true"
-          [showValidationSummary]="true" validationGroup="customerData">
-
-          <dxi-item dataField="Realisasi">
-            <dxi-validation-rule type="required" message="required"></dxi-validation-rule>
-            <dxi-validation-rule type="numeric" message="Input must a number"></dxi-validation-rule>
-          </dxi-item>
-          <dxi-item 
-            itemType="button"
-            horizontalAlignment="right"
-            [buttonOptions]="buttonOptions">
-        </dxi-item>
-          
-        </dx-form>
-      
-      </form> -->
-      <!-- <div class='images'>
-        <img src="" />
-        <img src="" />
-      </div> -->
     </div>
   </div>
 </dx-popup>

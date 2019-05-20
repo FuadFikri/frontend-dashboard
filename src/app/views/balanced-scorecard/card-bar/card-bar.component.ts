@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DxFormComponent } from 'devextreme-angular';
 
 @Component({
   selector: 'card-bar',

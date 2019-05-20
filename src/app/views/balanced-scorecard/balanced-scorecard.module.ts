@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BalancedScorecardComponent } from './balanced-scorecard.component';
 import { Routes, RouterModule } from '@angular/router';
 import { CardBarComponent } from './card-bar/card-bar.component';
-import { DxPopupModule,DxButtonModule, DxNumberBoxModule,DxFormModule, DxAutocompleteModule } from 'devextreme-angular';
+import { DxPopupModule,DxButtonModule, DxNumberBoxModule } from 'devextreme-angular';
 import { FormsModule } from '@angular/forms';
 
 const routingBalancedScoreCard: Routes=[
@@ -18,8 +18,6 @@ const routingBalancedScoreCard: Routes=[
     DxPopupModule,
     DxButtonModule,
     DxNumberBoxModule,
-    DxFormModule,
-    DxAutocompleteModule,
     FormsModule
   ]
 })
