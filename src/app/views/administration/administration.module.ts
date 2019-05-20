@@ -63,6 +63,7 @@ import { AddRolemenuComponent } from './rolemenu/add/rolemenu-add.component';
 import { RoleDashboardComponent } from './role-dashboard/role-dashboard.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DetailDashboardComponent } from './dashboard/detail-dashboard/detail-dashboard.component';
+import { BalancedScorecardSettingComponent } from './balanced-scorecard-setting/balanced-scorecard-setting.component';
 
 @NgModule({
   imports: [
@@ -110,6 +111,7 @@ import { DetailDashboardComponent } from './dashboard/detail-dashboard/detail-da
     RoleDashboardComponent,
     DashboardComponent,
     DetailDashboardComponent,
+    BalancedScorecardSettingComponent,
   ],
   exports: [
   ],
