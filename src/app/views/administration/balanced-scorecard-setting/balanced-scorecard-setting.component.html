@@ -1,3 +1,47 @@
-<p>
-  balanced-scorecard-setting works!
-</p>
+<div class="animated fadeIn item-center">
+    <div class="card" id="new47">
+      <div class="card-header">
+        <strong>Balanced Scorecard Administration<span *ngIf="(isAdd || isEdit) && !isDetail">Add / Edit</span></strong>
+      </div>
+      <div class="card-body">
+        <dx-data-grid id="gridContainer" [dataSource]="perspektif" [masterDetail]="{ enabled: true, template: 'detail' }"
+          keyExpr="id" [showBorders]="true"
+          [columnHidingEnabled]="false"
+          [rowAlternationEnabled]="true"
+          [columnAutoWidth]="true"
+          [wordWrapEnabled]="true"
+          (onRowInserting)="insert($event)"
+          (onRowUpdating)="update($event)"
+          (onRowRemoving)="delete($event)">
+          <dxo-editing mode="batch"
+              [allowUpdating]="true">
+          </dxo-editing>
+          <!-- <dxo-header-filter [visible]="false"></dxo-header-filter>
+              <dxo-filter-row [visible]="true"></dxo-filter-row> -->
+          <dxi-column dataField="id"  caption="No" width="auto" [allowEditing]="false">
+              <dxi-validation-rule type="required"></dxi-validation-rule>
+          </dxi-column>
+          <dxi-column
+              dataField="nama_perspektif"
+              caption="Perspektif">         
+              <dxi-validation-rule type="required"></dxi-validation-rule>
+          </dxi-column>
+          
+          <div *dxTemplate="let perspektif of 'detail'">
+            <div class="master-detail-caption">
+            </div>
+            <dx-data-grid [dataSource]="getCardBar(perspektif.key)" [showBorders]="true" [columnAutoWidth]="true">
+              <dxo-editing mode="batch" [allowUpdating]="true">
+              </dxo-editing>
+              <dxi-column caption="Title" dataField="title"></dxi-column>
+              <dxi-column dataField="target_tahunan" dataType="number"></dxi-column>
+              <dxi-column dataField="target_bulanan" dataType="number"></dxi-column>
+              <dxi-column caption="realisasi" dataField="realisasi" dataType="number"></dxi-column>
+            </dx-data-grid>
+          </div>
+        </dx-data-grid>
+  
+      </div>
+    </div>
+  </div>
+  
