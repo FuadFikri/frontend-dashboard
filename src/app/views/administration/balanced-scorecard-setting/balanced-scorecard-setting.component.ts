@@ -90,4 +90,27 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
     });
   }
 
+  
+  updateCardBar(e) {
+    this.cardBar = e.newData;
+    this.cardBar.id = e.key;
+    console.log("cardBar",this.cardBar);
+    this.service.updateCardBar(this.cardBar).subscribe(res => {
+      if(res.d==1){
+        this.options.message = 'Success Updated';
+        notify(this.options, 'success', 3000);
+        console.log("updating success",this.cardBar);
+      }else{
+        this.options.message = 'updating Failed';
+          notify(this.options, 'error', 3000);
+        console.log("updating failed ", res);
+      }
+    }, err => {
+      this.options.message = 'updating Failed';
+      notify(this.options, 'error', 3000);
+      console.log("updating failed ", err);
+    
+    });
+  }
+
 }

@@ -29,8 +29,13 @@
           <div *dxTemplate="let perspektif of 'detail'">
             <div class="master-detail-caption">
             </div>
-            <dx-data-grid [dataSource]="getCardBar(perspektif.key)" [showBorders]="true" [columnAutoWidth]="true">
-              <dxo-editing mode="batch" [allowUpdating]="true">
+            <dx-data-grid [dataSource]="getCardBar(perspektif.key)" [showBorders]="true" [columnAutoWidth]="true"
+                (onRowUpdating)="updateCardBar($event)">
+              
+              <dxo-editing mode="batch"
+                        [allowUpdating]="true"
+                        [allowDeleting]="true"
+                        [allowAdding]="true">
               </dxo-editing>
               <dxi-column caption="Title" dataField="title"></dxi-column>
               <dxi-column dataField="target_tahunan" dataType="number"></dxi-column>

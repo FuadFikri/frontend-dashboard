@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AppConstant } from '../../../app.constant';
 import { Observable } from 'rxjs/Observable';
-import { Perspektif } from './Model';
+import { Perspektif, CardBar } from './Model';
 @Injectable()
 export class BalancedScorecardService {
 
@@ -31,5 +31,8 @@ export class BalancedScorecardService {
 
   updatePerspektif(data:Perspektif) {
     return this.http.post <any> (this._urlPerspektif + '/update',data)
+  }
+  updateCardBar(data:CardBar) {
+    return this.http.post <any> (this._urlCardBar + '/update',data)
   }
 }
