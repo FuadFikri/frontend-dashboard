@@ -4,21 +4,20 @@
         <strong>Balanced Scorecard Administration<span *ngIf="(isAdd || isEdit) && !isDetail">Add / Edit</span></strong>
       </div>
       <div class="card-body">
-        <dx-data-grid id="gridContainer" [dataSource]="perspektif" [masterDetail]="{ enabled: true, template: 'detail' }"
+        <dx-data-grid id="gridContainer" [dataSource]="perspektifSource" [masterDetail]="{ enabled: true, template: 'detail' }"
           keyExpr="id" [showBorders]="true"
           [columnHidingEnabled]="false"
           [rowAlternationEnabled]="true"
           [columnAutoWidth]="true"
           [wordWrapEnabled]="true"
           (onRowInserting)="insert($event)"
-          (onRowUpdating)="update($event)"
+          (onRowUpdating)="updatePerspektif($event)"
           (onRowRemoving)="delete($event)">
           <dxo-editing mode="batch"
               [allowUpdating]="true">
           </dxo-editing>
-          <!-- <dxo-header-filter [visible]="false"></dxo-header-filter>
-              <dxo-filter-row [visible]="true"></dxo-filter-row> -->
-          <dxi-column dataField="id"  caption="No" width="auto" [allowEditing]="false">
+           
+          <dxi-column dataField="id"  caption="No" width="35" [allowEditing]="false">
               <dxi-validation-rule type="required"></dxi-validation-rule>
           </dxi-column>
           <dxi-column

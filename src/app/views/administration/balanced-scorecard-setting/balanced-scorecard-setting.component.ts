@@ -3,7 +3,8 @@ import { BalancedScorecardService } from './balanced-scorecard.service';
 import { Subscription } from 'rxjs';
 import DataSource from 'devextreme/data/data_source';
 import ArrayStore from 'devextreme/data/array_store';
-
+import { Perspektif, CardBar } from './Model';
+import notify from 'devextreme/ui/notify';
 @Component({
   selector: 'app-balanced-scorecard-setting',
   templateUrl: './balanced-scorecard-setting.component.html',
@@ -11,25 +12,36 @@ import ArrayStore from 'devextreme/data/array_store';
   providers: [BalancedScorecardService]
 })
 export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
-  perspektif:any;
-  cardBar:any;
+  perspektifSource:Perspektif;
+  cardBars:any;
   cardBarSource:any;
-  resultArray:any[];
+  
+  perspektif:Perspektif;
+  cardBar:CardBar;
+  options = {
+    message: '',
+    closeOnOutsideClick: true,
+    closeOnClick: true,
+    closeOnSwipe: true,
+    closeOnBackButton: true,
+  };
+
   constructor(private service: BalancedScorecardService) { 
     this.cardBarSource= [];
   }
   subscription :Subscription;
   ngOnInit() {
     this.subscription = this.service.getPerspektifs().subscribe(resp =>{
-      this.perspektif = resp.d;
+      this.perspektifSource = resp.d;
     })
 
     this.service.getCardBarWithData().subscribe( resp => {
-      this.cardBar = Object.keys(resp.d).map(function(index){
+      // object to array
+      this.cardBars = Object.keys(resp.d).map(function(index){
         let card = resp.d[index];
         return card;
     });
-      console.log("card",this.cardBar);
+      console.log("cards",this.cardBars);
     });
     
   }
@@ -41,7 +53,7 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
             key: key,
             dataSourceInstance: new DataSource({
                 store: new ArrayStore({
-                    data: this.cardBar,
+                    data: this.cardBars,
                     key: "perspektif_id"
                 }),
                 filter: ["perspektif_id", "=", key]
@@ -54,6 +66,28 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  updatePerspektif(e) {
+    this.perspektif = e.newData;
+    this.perspektif.id = e.key;
+    console.log("pers",this.perspektif);
+    this.service.updatePerspektif(this.perspektif).subscribe(res => {
+      if(res.d==1){
+        this.options.message = 'Success Updated';
+        notify(this.options, 'success', 3000);
+        console.log("updating success",this.perspektif);
+      }else{
+        this.options.message = 'updating Failed';
+          notify(this.options, 'error', 3000);
+        console.log("updating failed ", res);
+      }
+    }, err => {
+      this.options.message = 'updating Failed';
+      notify(this.options, 'error', 3000);
+      console.log("updating failed ", err);
+    
+    });
   }
 
 }
