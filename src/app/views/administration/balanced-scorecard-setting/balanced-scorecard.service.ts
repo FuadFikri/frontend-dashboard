@@ -6,9 +6,28 @@ import { Perspektif, CardBar } from './Model';
 @Injectable()
 export class BalancedScorecardService {
 
+  bulanSource = [
+    {"bulan" : "Januari"},
+    {"bulan" : "Februari"},
+    {"bulan" : "Maret"},
+    {"bulan" : "April"},
+    {"bulan" : "Mei"},
+    {"bulan" : "Juni"},
+    {"bulan" : "Juli"},
+    {"bulan" : "Agustus"},
+    {"bulan" : "September"},
+    {"bulan" : "Oktober"},
+    {"bulan" : "November"},
+    {"bulan" : "Desember"},
+    
+  ];
+
+
   private _urlPerspektif = this.a.SERVER_URL + '/system/BalancedScorecard/Perspektif';
   private _urlCardBar = this.a.SERVER_URL + '/system/BalancedScorecard/CardBar';
   constructor(private http: HttpClient, private a: AppConstant) { }
+
+  
 
   getPerspektifs(): Observable<any> {
     const username = localStorage.getItem('username');
@@ -34,5 +53,13 @@ export class BalancedScorecardService {
   }
   updateCardBar(data:CardBar) {
     return this.http.post <any> (this._urlCardBar + '/update',data)
+  }
+
+  insertCardBar(data:CardBar) {
+    return this.http.post <any> (this._urlCardBar + '/insert', data);
+  }
+
+  getBulanDropDown() {
+    return this.bulanSource;
   }
 }

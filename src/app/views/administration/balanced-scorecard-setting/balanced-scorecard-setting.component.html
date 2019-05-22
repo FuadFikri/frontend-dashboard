@@ -10,7 +10,6 @@
           [rowAlternationEnabled]="true"
           [columnAutoWidth]="true"
           [wordWrapEnabled]="true"
-          (onRowInserting)="insert($event)"
           (onRowUpdating)="updatePerspektif($event)"
           (onRowRemoving)="delete($event)">
           <dxo-editing mode="batch"
@@ -30,7 +29,9 @@
             <div class="master-detail-caption">
             </div>
             <dx-data-grid [dataSource]="getCardBar(perspektif.key)" [showBorders]="true" [columnAutoWidth]="true"
-                (onRowUpdating)="updateCardBar($event)">
+                (onRowUpdating)="updateCardBar($event)"
+                (onRowInserting)="insertCardBar($event,perspektif.key)"
+                keyExpr="id">
               
               <dxo-editing mode="batch"
                         [allowUpdating]="true"
@@ -40,7 +41,15 @@
               <dxi-column caption="Title" dataField="title"></dxi-column>
               <dxi-column dataField="target_tahunan" dataType="number"></dxi-column>
               <dxi-column dataField="target_bulanan" dataType="number"></dxi-column>
-              <dxi-column caption="realisasi" dataField="realisasi" dataType="number"></dxi-column>
+              <dxi-column  dataField="realisasi" [allowResizing]="true" dataType="number"></dxi-column>
+              <dxi-column dataField="bulan" [allowResizing]="true">
+                <dxo-lookup
+                        [dataSource]="bulanDropDown"
+                        displayExpr="bulan"
+                        valueExpr="bulan">
+                    </dxo-lookup>
+              </dxi-column>
+              <dxi-column dataField="tahun" dataType="number"> </dxi-column>
             </dx-data-grid>
           </div>
         </dx-data-grid>

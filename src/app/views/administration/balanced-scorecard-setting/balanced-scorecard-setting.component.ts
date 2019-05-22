@@ -18,6 +18,8 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
   
   perspektif:Perspektif;
   cardBar:CardBar;
+
+  bulanDropDown;
   options = {
     message: '',
     closeOnOutsideClick: true,
@@ -31,6 +33,7 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
   }
   subscription :Subscription;
   ngOnInit() {
+    this.bulanDropDown = this.service.getBulanDropDown(); 
     this.subscription = this.service.getPerspektifs().subscribe(resp =>{
       this.perspektifSource = resp.d;
     })
@@ -54,7 +57,7 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
             dataSourceInstance: new DataSource({
                 store: new ArrayStore({
                     data: this.cardBars,
-                    key: "perspektif_id"
+                    key: "id"
                 }),
                 filter: ["perspektif_id", "=", key]
             })
@@ -107,6 +110,27 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
       }
     }, err => {
       this.options.message = 'updating Failed';
+      notify(this.options, 'error', 3000);
+      console.log("updating failed ", err);
+    
+    });
+  }
+
+  insertCardBar(e, perspektif_id) {
+    this.cardBar = e.data;
+    this.cardBar.perspektif_id = perspektif_id;
+    this.service.insertCardBar(this.cardBar).subscribe(res => {
+      if(res.d==1){
+        this.options.message = 'New Card Created';
+        notify(this.options, 'success', 3000);
+        console.log("updating success",this.cardBar);
+      }else{
+        this.options.message = 'Creating Failed';
+          notify(this.options, 'error', 3000);
+        console.log("updating failed ", res);
+      }
+    }, err => {
+      this.options.message = 'Creating Failed';
       notify(this.options, 'error', 3000);
       console.log("updating failed ", err);
     
