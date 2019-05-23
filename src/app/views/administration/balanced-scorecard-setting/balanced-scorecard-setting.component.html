@@ -4,6 +4,27 @@
         <strong>Balanced Scorecard Administration<span *ngIf="(isAdd || isEdit) && !isDetail">Add / Edit</span></strong>
       </div>
       <div class="card-body">
+              <div class="row">
+                <div class="col-md-3">
+                  <dx-select-box
+                  [items]="simpleProducts"
+                  placeholder="Select Month"
+                  [showClearButton]="true"
+                  ></dx-select-box>
+                </div>
+                <div class="col-md-3">
+                  <dx-select-box
+                  [items]="simpleProducts"
+                  placeholder="Select Year"
+                  [showClearButton]="true"
+                  ></dx-select-box>
+                </div>
+                <div class="col-md-2">
+                  <dx-button icon="search" text="Set" (onClick)="searching()"></dx-button>
+                </div>
+              </div>
+                 
+                      
         <dx-data-grid id="gridContainer" [dataSource]="perspektifSource" [masterDetail]="{ enabled: true, template: 'detail' }"
           keyExpr="id" [showBorders]="true"
           [columnHidingEnabled]="false"
@@ -30,8 +51,7 @@
             </div>
             <dx-data-grid [dataSource]="getCardBar(perspektif.key)" [showBorders]="true" [columnAutoWidth]="true"
                 (onRowUpdating)="updateCardBar($event)"
-                (onRowInserting)="insertCardBar($event,perspektif.key)"
-                keyExpr="id">
+                (onRowInserting)="insertCardBar($event,perspektif.key)">
               
               <dxo-editing mode="batch"
                         [allowUpdating]="true"

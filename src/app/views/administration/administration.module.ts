@@ -27,7 +27,8 @@ import {
   DxLoadIndicatorModule,
   DxRadioGroupModule,
   DxValidatorModule,
-  DxValidationSummaryModule
+  DxValidationSummaryModule,
+  DxTextBoxModule,
 } from 'devextreme-angular';
 
 import {
@@ -86,7 +87,8 @@ import { BalancedScorecardSettingComponent } from './balanced-scorecard-setting/
     DxFileUploaderModule,
     DxLoadIndicatorModule,
     DxValidatorModule,
-    DxValidationSummaryModule
+    DxValidationSummaryModule,
+    DxTextBoxModule
     ],
   declarations: [
     MasterAssetComponent,
@@ -116,7 +118,7 @@ import { BalancedScorecardSettingComponent } from './balanced-scorecard-setting/
   exports: [
   ],
   bootstrap: [
-    AddRoleComponent,
+    AddRoleComponent
   ]
 })
 export class AdministrationModule { }
