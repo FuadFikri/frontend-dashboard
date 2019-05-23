@@ -62,7 +62,7 @@
               <dxi-column dataField="target_tahunan" dataType="number"></dxi-column>
               <dxi-column dataField="target_bulanan" dataType="number"></dxi-column>
               <dxi-column  dataField="realisasi" [allowResizing]="true" dataType="number"></dxi-column>
-              <dxi-column dataField="bulan" [allowResizing]="true">
+              <dxi-column dataField="bulan" [allowResizing]="true" [allowEditing]="false">
                 <dxo-lookup
                         [dataSource]="bulanDropDown"
                         displayExpr="bulan"
