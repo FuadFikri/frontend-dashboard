@@ -20,6 +20,8 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
   cardBar:CardBar;
 
   bulanDropDown;
+  now:any;
+  
   options = {
     message: '',
     closeOnOutsideClick: true,
@@ -30,6 +32,7 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
 
   constructor(private service: BalancedScorecardService) { 
     this.cardBarSource= [];
+    this.now = new Date();
   }
   subscription :Subscription;
   ngOnInit() {
@@ -37,8 +40,11 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
     this.subscription = this.service.getPerspektifs().subscribe(resp =>{
       this.perspektifSource = resp.d;
     })
+    let bulan = this.bulanDropDown[this.now.getMonth()].bulan;
+    let tahun = this.now.getFullYear().toString();
 
-    this.service.getCardBarWithData().subscribe( resp => {
+    console.log(bulan,tahun);
+    this.service.getCardBarWithData(tahun, bulan).subscribe( resp => {
       // object to array
       this.cardBars = Object.keys(resp.d).map(function(index){
         let card = resp.d[index];

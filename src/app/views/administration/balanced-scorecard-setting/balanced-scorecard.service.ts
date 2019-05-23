@@ -38,11 +38,11 @@ export class BalancedScorecardService {
     })
   }
 
-  getCardBarWithData(): Observable<any> {
+  getCardBarWithData(tahun:String, bulan : String): Observable<any> {
     const username  = localStorage.getItem('username');
     const token     = localStorage.getItem('token');
-    const tahun     = "2019";
-    return this.http.post <any> (this._urlCardBar + '/keyval?tahun='+tahun,{
+    
+    return this.http.post <any> (this._urlCardBar + '/keyval?tahun='+tahun +'&bulan='+bulan,{
       username : username,
       token : token,
     } )
