@@ -29,6 +29,7 @@ import {
   DxValidatorModule,
   DxValidationSummaryModule,
   DxTextBoxModule,
+  DxNumberBoxModule,
 } from 'devextreme-angular';
 
 import {
@@ -65,6 +66,7 @@ import { RoleDashboardComponent } from './role-dashboard/role-dashboard.componen
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DetailDashboardComponent } from './dashboard/detail-dashboard/detail-dashboard.component';
 import { BalancedScorecardSettingComponent } from './balanced-scorecard-setting/balanced-scorecard-setting.component';
+import { AddComponent } from './balanced-scorecard-setting/add/add.component';
 
 @NgModule({
   imports: [
@@ -88,7 +90,9 @@ import { BalancedScorecardSettingComponent } from './balanced-scorecard-setting/
     DxLoadIndicatorModule,
     DxValidatorModule,
     DxValidationSummaryModule,
-    DxTextBoxModule
+    DxTextBoxModule,
+    DxNumberBoxModule,
+    DxButtonModule
     ],
   declarations: [
     MasterAssetComponent,
@@ -114,6 +118,7 @@ import { BalancedScorecardSettingComponent } from './balanced-scorecard-setting/
     DashboardComponent,
     DetailDashboardComponent,
     BalancedScorecardSettingComponent,
+    AddComponent,
   ],
   exports: [
   ],

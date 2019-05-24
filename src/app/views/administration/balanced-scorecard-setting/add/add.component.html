@@ -1,0 +1,52 @@
+<div class="animated fadeIn item-center">
+    <div class="card" id="new47">
+      <div class="card-header">
+        <strong>Add<span *ngIf="(isAdd || isEdit) && !isDetail">Add / Edit</span></strong>
+      </div>
+      <div class="card-body">
+          <div class="dx-fieldset">
+              <div class="dx-field">
+                  <div class="dx-field-label">Perspektif</div>
+                  <div class="dx-field-value">
+                      <dx-select-box [items]="simpleProducts"></dx-select-box>
+                  </div>
+              </div>
+              <div class="dx-field">
+                  <div class="dx-field-label">Tahun</div>
+                  <div class="dx-field-value">
+                      <dx-number-box></dx-number-box>
+                  </div>
+              </div>
+              <div class="dx-field">
+                  <div class="dx-field-label">Title</div>
+                  <div class="dx-field-value">
+                      <dx-text-box ></dx-text-box>
+                  </div>
+              </div>
+              <div class="dx-field">
+                  <div class="dx-field-label">Target</div>
+                  <div class="dx-field-value">
+                      <dx-number-box></dx-number-box>
+                  </div>
+              </div>
+              <div class="dx-field">
+                  <div class="dx-field-label">Target Bulanan</div>
+                  <div class="dx-field-value">
+                      <dx-number-box></dx-number-box>
+                  </div>
+              </div>
+              <div class="dx-field">
+                  <div class="dx-field-label">Realisasi</div>
+                  <div class="dx-field-value">
+                      <dx-number-box></dx-number-box>
+                  </div>
+              </div>
+              <div class="buttons pull-right">
+                  <dx-button  [width]="90" text="Save"></dx-button>
+                  </div>  
+            </div>
+        </div>
+      </div>
+    </div>
+
+  

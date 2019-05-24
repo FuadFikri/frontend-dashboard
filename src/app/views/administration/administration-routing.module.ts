@@ -12,6 +12,7 @@ import { RoleDashboardComponent } from './role-dashboard/role-dashboard.componen
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DetailDashboardComponent } from './dashboard/detail-dashboard/detail-dashboard.component';
 import { BalancedScorecardSettingComponent } from './balanced-scorecard-setting/balanced-scorecard-setting.component';
+import { AddComponent } from './balanced-scorecard-setting/add/add.component';
 const routes: Routes = [
   {
     path: '',
@@ -89,11 +90,27 @@ const routes: Routes = [
       },
       {
         path: 'balanced-scorecard',
-        component: BalancedScorecardSettingComponent,
         data: {
-          title: 'Balanced Scorecard Administration'
-        }
+          title: 'Balanced Scorecard '
+        },
+        children: [
+          {
+            path: '',
+            component: BalancedScorecardSettingComponent,
+            data: {
+              title: 'Balanced Scorecard '
+            }
+          },
+          {
+            path: 'add',
+            component: AddComponent,
+            data: {
+              title: 'Add '
+            }
+          }
+        ]
       }
+      
     ]
   }
 ];
