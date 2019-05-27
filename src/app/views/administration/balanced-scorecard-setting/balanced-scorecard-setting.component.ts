@@ -126,7 +126,7 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
     this.cardBar = e.data;
     this.cardBar.perspektif_id = perspektif_id;
     this.service.insertCardBar(this.cardBar).subscribe(res => {
-      if(res.d==1){
+      if(res.d==null){
         this.options.message = 'New Card Created';
         notify(this.options, 'success', 3000);
         console.log("updating success",this.cardBar);
