@@ -11,6 +11,6 @@ export class CardBar {
     target_tahunan:number;
     target_bulanan:number;
     realisasi:number;
-    bulan:number;
-    tahun:number;
+    bulan:string;
+    tahun:string;
 }
