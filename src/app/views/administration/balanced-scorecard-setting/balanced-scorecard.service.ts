@@ -47,6 +47,15 @@ export class BalancedScorecardService {
       token : token,
     } )
   }
+  getCardBar(): Observable<any> {
+    const username  = localStorage.getItem('username');
+    const token     = localStorage.getItem('token');
+    
+    return this.http.post <any> (this._urlCardBar + '/list',{
+      username : username,
+      token : token,
+    } )
+  }
 
   updatePerspektif(data:Perspektif) {
     return this.http.post <any> (this._urlPerspektif + '/update',data)

@@ -5,20 +5,15 @@
       </div>
       <div class="card-body">
         <div class="row">
-          <div class="col-md-4">
-              <a routerLink="/administration/balanced-scorecard/add">
-                <dx-button icon="plus" text="Add New Card" ></dx-button>
-              </a>
-              &nbsp;
-              <a routerLink="/administration/balanced-scorecard/data">
-                <dx-button icon="fa fa-database" text="Show All Data" ></dx-button>
-              </a>
+          <div class="col-md-3">
+            <a routerLink="/administration/balanced-scorecard">
+              <dx-button icon="back" text="Back" ></dx-button>
+            </a>
           </div>
         </div>
-             
-
+        <br>
               
-          <br>       
+                
              
             <dx-data-grid id="gridContainer" [dataSource]="perspektifSource" [masterDetail]="{ enabled: true, template: 'detail' }"
               keyExpr="id" [showBorders]="true"
@@ -28,9 +23,13 @@
               [wordWrapEnabled]="true"
               (onRowUpdating)="updatePerspektif($event)"
               (onRowRemoving)="delete($event)">
-              <dxo-editing mode="batch"
+              <!-- <dxo-editing mode="batch"
                   [allowUpdating]="true">
-              </dxo-editing>
+              </dxo-editing> -->
+              <dxo-master-detail
+                [autoExpandAll]="false"  
+              ></dxo-master-detail>
+              
                
               <dxi-column dataField="id"  caption="No" width="35" [allowEditing]="false">
                   <dxi-validation-rule type="required"></dxi-validation-rule>
@@ -46,12 +45,15 @@
                 </div>
                 <dx-data-grid [dataSource]="getCardBar(perspektif.key)" [showBorders]="true" [columnAutoWidth]="true"
                     (onRowUpdating)="updateCardBar($event)"
-                    (onRowInserting)="insertCardBar($event,perspektif.key)">
-                  
-                  <dxo-editing mode="batch"
+                    (onRowInserting)="insertCardBar($event,perspektif.key)"
+                  >
+                    <dxo-filter-row 
+                    [visible]="true" 
+                    [applyFilter]="auto"></dxo-filter-row>
+                  <!-- <dxo-editing mode="batch"
                             [allowUpdating]="true"
-                            [allowDeleting]="true">
-                  </dxo-editing>
+                            [allowDeleting]="true"> -->
+                  <!-- </dxo-editing> -->
                   <dxi-column caption="Title" dataField="title"></dxi-column>
                   <dxi-column dataField="target_tahunan" dataType="number"></dxi-column>
                   <dxi-column dataField="target_bulanan" dataType="number"></dxi-column>

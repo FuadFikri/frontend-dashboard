@@ -67,6 +67,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { DetailDashboardComponent } from './dashboard/detail-dashboard/detail-dashboard.component';
 import { BalancedScorecardSettingComponent } from './balanced-scorecard-setting/balanced-scorecard-setting.component';
 import { AddComponent } from './balanced-scorecard-setting/add/add.component';
+import { DataComponent } from './balanced-scorecard-setting/data/data.component';
 
 @NgModule({
   imports: [
@@ -119,6 +120,7 @@ import { AddComponent } from './balanced-scorecard-setting/add/add.component';
     DetailDashboardComponent,
     BalancedScorecardSettingComponent,
     AddComponent,
+    DataComponent,
   ],
   exports: [
   ],

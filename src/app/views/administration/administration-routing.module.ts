@@ -13,6 +13,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { DetailDashboardComponent } from './dashboard/detail-dashboard/detail-dashboard.component';
 import { BalancedScorecardSettingComponent } from './balanced-scorecard-setting/balanced-scorecard-setting.component';
 import { AddComponent } from './balanced-scorecard-setting/add/add.component';
+import { DataComponent } from './balanced-scorecard-setting/data/data.component';
 const routes: Routes = [
   {
     path: '',
@@ -106,6 +107,13 @@ const routes: Routes = [
             component: AddComponent,
             data: {
               title: 'Add '
+            }
+          },
+          {
+            path: 'data',
+            component: DataComponent,
+            data: {
+              title: 'data '
             }
           }
         ]
