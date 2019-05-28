@@ -45,8 +45,11 @@
                   </div>
               </div>
               <div class="buttons pull-right">
-                  <dx-button  [width]="90" text="Save" (click)="insert()"></dx-button>
-                  </div>  
+                <a routerLink="/administration/balanced-scorecard">
+                  <dx-button [width]="90" text="Back"></dx-button>
+                </a>
+                <dx-button [width]="90" text="Save" (click)="insert()"></dx-button>
+                </div>
             </div>
         </div>
       </div>
