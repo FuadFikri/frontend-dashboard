@@ -56,6 +56,7 @@ export class BalancedScorecardService {
   }
 
   insertCardBar(data:CardBar) {
+    console.log("before save",data);
     return this.http.post <any> (this._urlCardBar + '/insertAll', data);
   }
 

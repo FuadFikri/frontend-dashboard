@@ -5,12 +5,23 @@ export class Perspektif{
 }
 
 export class CardBar {
-    id:number;
-    title:string;
-    perspektif_id:number;
-    target_tahunan:number;
-    target_bulanan:number;
-    realisasi:number;
-    bulan:string;
-    tahun:string;
+    id:any;
+    title:any;
+    perspektif_id:any;
+    target_tahunan:any;
+    target_bulanan:any;
+    realisasi:any;
+    bulan:any;
+    tahun:any;
+
+    constructor(id:any,
+        title:any,
+        perspektif_id:any,
+        target_tahunan:any,
+        target_bulanan:any,
+        realisasi:any,
+        bulan:any,
+        tahun:any) {
+            
+        }
 }

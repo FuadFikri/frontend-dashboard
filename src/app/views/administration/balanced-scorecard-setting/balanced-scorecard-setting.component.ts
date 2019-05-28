@@ -124,12 +124,18 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
 
   insertCardBar(e, perspektif_id) {
     this.cardBar = e.data;
-    this.cardBar.perspektif_id = perspektif_id;
+    this.cardBar.perspektif_id = perspektif_id.toString();
+    this.cardBar.tahun = this.cardBar.tahun.toString();
+    this.cardBar.target_tahunan = this.cardBar.target_tahunan.toString();
+    this.cardBar.target_bulanan = this.cardBar.target_bulanan.toString();
+    this.cardBar.realisasi = this.cardBar.realisasi.toString();
+    this.cardBar.title = this.cardBar.title.toString();
+
     this.service.insertCardBar(this.cardBar).subscribe(res => {
-      if(res.d==null){
+      if(res.d==null && res.s == 200){
         this.options.message = 'New Card Created';
         notify(this.options, 'success', 3000);
-        console.log("updating success",this.cardBar);
+        console.log("updating success",res);
       }else{
         this.options.message = 'Creating Failed';
           notify(this.options, 'error', 3000);
@@ -142,5 +148,7 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
     
     });
   }
+
+  
 
 }

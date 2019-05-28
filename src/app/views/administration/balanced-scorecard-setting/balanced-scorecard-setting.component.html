@@ -22,6 +22,11 @@
                 <div class="col-md-2">
                   <dx-button icon="search" text="Set" (onClick)="searching()"></dx-button>
                 </div>
+                <div class="col-md-2">
+                  <a routerLink="/administration/balanced-scorecard/add">
+                    <dx-button icon="plus" text="Add New Card" ></dx-button>
+                  </a>
+                </div>
               </div>
                  
                       
@@ -55,8 +60,7 @@
               
               <dxo-editing mode="batch"
                         [allowUpdating]="true"
-                        [allowDeleting]="true"
-                        [allowAdding]="true">
+                        [allowDeleting]="true">
               </dxo-editing>
               <dxi-column caption="Title" dataField="title"></dxi-column>
               <dxi-column dataField="target_tahunan" dataType="number"></dxi-column>

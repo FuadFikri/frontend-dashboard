@@ -8,41 +8,44 @@
               <div class="dx-field">
                   <div class="dx-field-label">Perspektif</div>
                   <div class="dx-field-value">
-                      <dx-select-box [items]="simpleProducts"></dx-select-box>
+                      <dx-select-box [dataSource]="perspektifDropDown"
+                                     [(value)]="cardBar.perspektif_id"
+                                     displayExpr="nama_perspektif"
+                                    valueExpr="id"   ></dx-select-box>
                   </div>
               </div>
               <div class="dx-field">
                   <div class="dx-field-label">Tahun</div>
                   <div class="dx-field-value">
-                      <dx-number-box></dx-number-box>
+                      <dx-number-box [(value)]="cardBar.tahun"></dx-number-box>
                   </div>
               </div>
               <div class="dx-field">
                   <div class="dx-field-label">Title</div>
                   <div class="dx-field-value">
-                      <dx-text-box ></dx-text-box>
+                      <dx-text-box [(value)]="cardBar.title" ></dx-text-box>
                   </div>
               </div>
               <div class="dx-field">
                   <div class="dx-field-label">Target</div>
                   <div class="dx-field-value">
-                      <dx-number-box></dx-number-box>
+                      <dx-number-box [(value)]="cardBar.target_tahunan"></dx-number-box>
                   </div>
               </div>
               <div class="dx-field">
                   <div class="dx-field-label">Target Bulanan</div>
                   <div class="dx-field-value">
-                      <dx-number-box></dx-number-box>
+                      <dx-number-box [(value)]="cardBar.target_bulanan"></dx-number-box>
                   </div>
               </div>
               <div class="dx-field">
                   <div class="dx-field-label">Realisasi</div>
                   <div class="dx-field-value">
-                      <dx-number-box></dx-number-box>
+                      <dx-number-box [(value)]="cardBar.realisasi"></dx-number-box>
                   </div>
               </div>
               <div class="buttons pull-right">
-                  <dx-button  [width]="90" text="Save"></dx-button>
+                  <dx-button  [width]="90" text="Save" (click)="insert()"></dx-button>
                   </div>  
             </div>
         </div>
