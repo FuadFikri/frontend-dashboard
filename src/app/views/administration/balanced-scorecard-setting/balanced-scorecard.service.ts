@@ -7,18 +7,18 @@ import { Perspektif, CardBar } from './Model';
 export class BalancedScorecardService {
 
   bulanSource = [
-    {"bulan" : "Januari"},
-    {"bulan" : "Februari"},
-    {"bulan" : "Maret"},
-    {"bulan" : "April"},
-    {"bulan" : "Mei"},
-    {"bulan" : "Juni"},
-    {"bulan" : "Juli"},
-    {"bulan" : "Agustus"},
-    {"bulan" : "September"},
-    {"bulan" : "Oktober"},
-    {"bulan" : "November"},
-    {"bulan" : "Desember"},
+    { "bulan": "JANUARI","id":"1"},
+    {"bulan" : "FEBRUARI","id":"2"},
+    {"bulan" : "MARET","id":"3"},
+    {"bulan" : "APRIL","id":"4"},
+    {"bulan" : "MEI","id":"5"},
+    {"bulan" : "JUNI","id":"6"},
+    {"bulan" : "JULI","id":"7"},
+    {"bulan" : "AGUSTUS","id":"8"},
+    {"bulan" : "SEPTEMBER","id":"9"},
+    {"bulan" : "OKTOBER","id":"10"},
+    {"bulan" : "NOVEMBER","id":"11"},
+    {"bulan" : "DESEMBER","id":"12"},
     
   ];
 
