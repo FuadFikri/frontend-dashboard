@@ -28,7 +28,7 @@ export class AddComponent implements OnInit {
       this.perspektifDropDown = res.d;
     });
 
-    this.cardBar = new CardBar(undefined, "","","","","","","");
+    this.cardBar = new CardBar(undefined, "","","","","","","","","","","","");
    }
 
   ngOnInit() {
@@ -37,10 +37,15 @@ export class AddComponent implements OnInit {
   insert() {
     this.cardBar.perspektif_id = this.cardBar.perspektif_id.toString();
     this.cardBar.tahun = this.cardBar.tahun.toString();
-    this.cardBar.target_tahunan = this.cardBar.target_tahunan.toString();
+    this.cardBar.target_rkap = this.cardBar.target_rkap.toString();
     this.cardBar.target_bulanan = this.cardBar.target_bulanan.toString();
     this.cardBar.realisasi = this.cardBar.realisasi.toString();
-    this.cardBar.title = this.cardBar.title.toString();
+    this.cardBar.nama_kpi = this.cardBar.nama_kpi.toString();
+    this.cardBar.formula = this.cardBar.formula.toString();
+    this.cardBar.bobot = this.cardBar.bobot.toString();
+    this.cardBar.satuan = this.cardBar.satuan.toString();
+    // this.cardBar.persentase = this.cardBar.persentase.toString();
+    // this.cardBar.nilai = this.cardBar.nilai.toString();
 
     this._service.insertCardBar(this.cardBar).subscribe(res => {
       if(res.d==null && res.s == 200){
