@@ -45,7 +45,7 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
     let tahun = this.now.getFullYear().toString();
 
     console.log(this.bulan,tahun);
-    this.service.getCardBarWithData(tahun, this.bulan).subscribe( resp => {
+    this.service.getCardBarWithData(tahun, this.bulanDropDown[this.now.getMonth()].id).subscribe( resp => {
       // object to array
       this.cardBars = Object.keys(resp.d).map(function(index){
         let card = resp.d[index];
