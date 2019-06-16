@@ -54,17 +54,22 @@
                             [allowUpdating]="true"
                             [allowDeleting]="true"> -->
                   <!-- </dxo-editing> -->
-                  <dxi-column caption="Title" dataField="title"></dxi-column>
-                  <dxi-column dataField="target_tahunan" dataType="number"></dxi-column>
-                  <dxi-column dataField="target_bulanan" dataType="number"></dxi-column>
-                  <dxi-column  dataField="realisasi" [allowResizing]="true" dataType="number"></dxi-column>
-                  <dxi-column dataField="bulan" [allowResizing]="true" [allowEditing]="false">
+                  <dxi-column caption="INDIKATOR" dataField="nama_kpi"></dxi-column>
+                  <dxi-column caption="FORMULA" dataField="formula"></dxi-column>
+                  <dxi-column caption="SATUAN" dataField="satuan"></dxi-column>
+                  <dxi-column caption="BOBOT" dataField="bobot"></dxi-column>
+                  <dxi-column dataField="target_rkap" caption="TARGET RKAP" dataType="number"></dxi-column>
+                  <dxi-column dataField="target_bulanan"  caption="TARGET" dataType="number"></dxi-column>
+                  <dxi-column  dataField="realisasi" caption="REALISASI" [allowResizing]="true" dataType="number"></dxi-column>
+                  <dxi-column dataField="bulan" [allowResizing]="true"  [allowEditing]="false">
                     <dxo-lookup
                             [dataSource]="bulanDropDown"
                             displayExpr="bulan"
-                            valueExpr="bulan">
+                            valueExpr="id">
                         </dxo-lookup>
                   </dxi-column>
+                  <dxi-column dataField="persentase" caption="PERSENTASE" > </dxi-column>
+                  <dxi-column dataField="nilai" caption="NILAI" dataType="number" > </dxi-column>
                   <dxi-column dataField="tahun" dataType="number"> </dxi-column>
                 </dx-data-grid>
               </div>
