@@ -21,6 +21,7 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
 
   bulanDropDown;
   now:any;
+  bulan:string;
   
   options = {
     message: '',
@@ -40,11 +41,11 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
     this.subscription = this.service.getPerspektifs().subscribe(resp =>{
       this.perspektifSource = resp.d;
     })
-    let bulan = this.bulanDropDown[this.now.getMonth()].bulan;
+    this.bulan = this.bulanDropDown[this.now.getMonth()].bulan;
     let tahun = this.now.getFullYear().toString();
 
-    console.log(bulan,tahun);
-    this.service.getCardBarWithData(tahun, bulan).subscribe( resp => {
+    console.log(this.bulan,tahun);
+    this.service.getCardBarWithData(tahun, this.bulan).subscribe( resp => {
       // object to array
       this.cardBars = Object.keys(resp.d).map(function(index){
         let card = resp.d[index];
@@ -126,10 +127,10 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
     this.cardBar = e.data;
     this.cardBar.perspektif_id = perspektif_id.toString();
     this.cardBar.tahun = this.cardBar.tahun.toString();
-    this.cardBar.target_tahunan = this.cardBar.target_tahunan.toString();
+    this.cardBar.target_rkap = this.cardBar.target_rkap.toString();
     this.cardBar.target_bulanan = this.cardBar.target_bulanan.toString();
     this.cardBar.realisasi = this.cardBar.realisasi.toString();
-    this.cardBar.title = this.cardBar.title.toString();
+    this.cardBar.nama_kpi = this.cardBar.nama_kpi.toString();
 
     this.service.insertCardBar(this.cardBar).subscribe(res => {
       if(res.d==null && res.s == 200){
