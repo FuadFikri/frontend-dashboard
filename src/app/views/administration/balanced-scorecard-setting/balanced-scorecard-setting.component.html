@@ -1,7 +1,7 @@
 <div class="animated fadeIn item-center">
     <div class="card" id="new47">
       <div class="card-header">
-        <strong>Balanced Scorecard Administration<span *ngIf="(isAdd || isEdit) && !isDetail">Add / Edit</span></strong>
+        <strong>Balanced Scorecard {{bulan}} {{now.getFullYear()}}<span *ngIf="(isAdd || isEdit) && !isDetail">Add / Edit</span></strong>
       </div>
       <div class="card-body">
         <div class="row">
@@ -10,7 +10,8 @@
                 <dx-button icon="plus" text="Add New Card" ></dx-button>
               </a>
               &nbsp;
-              <a routerLink="/administration/balanced-scorecard/data">
+              <a [routerLink]="['/administration/balanced-scorecard/data']" 
+              [queryParams]="{ tahun: '2019'}">
                 <dx-button icon="fa fa-database" text="Show All Data" ></dx-button>
               </a>
           </div>
