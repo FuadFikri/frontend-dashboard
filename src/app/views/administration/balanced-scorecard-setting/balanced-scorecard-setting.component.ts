@@ -39,6 +39,7 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
   constructor(private service: BalancedScorecardService) { 
     this.cardBarSource= [];
     this.now = new Date();
+    this.queryParams.tahun = this.now.getFullYear().toString();
   }
   subscription :Subscription;
   ngOnInit() {
