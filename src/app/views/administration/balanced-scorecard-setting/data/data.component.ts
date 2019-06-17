@@ -29,7 +29,7 @@ export class DataComponent implements OnInit, OnDestroy {
     this.route.queryParams.filter(params => params.tahun)
     .subscribe(params => {
       
-      this.subscription1 = this.service.getCardBarByTahun(params.tahun).subscribe( resp => {
+      this.subscription1 = this.service.getCardBarByTahunDanBulan(params.tahun, params.bulan).subscribe( resp => {
         // object to array
         this.cardBars = Object.keys(resp.d).map(function(index){
           let card = resp.d[index];

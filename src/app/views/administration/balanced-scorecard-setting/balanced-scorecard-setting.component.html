@@ -5,24 +5,33 @@
       </div>
       <div class="card-body">
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-3">
               <a routerLink="/administration/balanced-scorecard/add">
-                <dx-button icon="plus" text="Add New Card" ></dx-button>
+                <dx-button icon="plus" text="Buat KPI" ></dx-button>
+                
               </a>
           </div>
-          <div class="col-md-5">
+          <div class="col-md-3">
               <dx-select-box
               [dataSource]="tahunSelectBoxSource"
               displayExpr="tahun"
               placeholder="Pilih Tahun"
               valueExpr="tahun"
-              [(value)]="queryParams.tahun"
-          ></dx-select-box>
-        </div>
+              [(value)]="queryParams.tahun"></dx-select-box>
+              &nbsp;
+          </div>
+          <div class="col-md-3">
+            <dx-select-box
+            [dataSource]="bulanDropDown"
+            displayExpr="bulan"
+            placeholder="Pilih Bulan"
+            valueExpr="id"
+            [(value)]="queryParams.bulan"></dx-select-box>
+          </div>
           <div class="col-md-3">
             <a [routerLink]="['/administration/balanced-scorecard/data']" 
             [queryParams]="queryParams">
-              <dx-button icon="fa fa-database" text="Show All Data" ></dx-button>
+              <dx-button icon="fa fa-database" text="Lihat Data" ></dx-button>
             </a>
           </div>
           
@@ -37,12 +46,14 @@
               [columnAutoWidth]="true"
               [wordWrapEnabled]="true"
               (onRowUpdating)="updatePerspektif($event)"
-              (onRowRemoving)="delete($event)">
+              (onRowRemoving)="delete($event)"
+              (onRowInserting)="insertPerspektif($event)">
               <dxo-editing mode="batch"
-                  [allowUpdating]="true">
+                  [allowUpdating]="true"
+                  [allowAdding]="true">
               </dxo-editing>
                
-              <dxi-column dataField="id"  caption="No" width="35" [allowEditing]="false">
+              <dxi-column dataField="sortnumber"  caption="No" width="35" >
                   <dxi-validation-rule type="required"></dxi-validation-rule>
               </dxi-column>
               <dxi-column
@@ -52,11 +63,11 @@
               </dxi-column>
                             
               <div *dxTemplate="let perspektif of 'detail'">
-                <div class="master-detail-caption">
-                </div>
+                <!-- <div class="master-detail-caption">detail  {{perspektif.data.nama_perspektif}}        </div> -->
                 <dx-data-grid [dataSource]="getCardBar(perspektif.key)" [showBorders]="true" [columnAutoWidth]="true"
                     (onRowUpdating)="updateCardBar($event)"
                     (onRowInserting)="insertCardBar($event,perspektif.key)">
+                    
                   
                   <dxo-editing mode="batch"
                             [allowUpdating]="true">
