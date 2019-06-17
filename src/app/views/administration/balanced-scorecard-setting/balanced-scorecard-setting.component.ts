@@ -159,6 +159,12 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
     });
   }
 
+  customizeBobot(data) {
+    return "Bobot : " + data.value;
+  }
+  customizeNilai(data) {
+    return "Nilai : " + data.value;
+  }
   
 
 }

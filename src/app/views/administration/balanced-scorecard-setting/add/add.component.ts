@@ -38,8 +38,8 @@ export class AddComponent implements OnInit {
     this.cardBar.perspektif_id = this.cardBar.perspektif_id.toString();
     this.cardBar.tahun = this.cardBar.tahun.toString();
     this.cardBar.target_rkap = this.cardBar.target_rkap.toString();
-    this.cardBar.target_bulanan = this.cardBar.target_bulanan.toString();
-    this.cardBar.realisasi = this.cardBar.realisasi.toString();
+    this.cardBar.target_bulanan = "0";
+    this.cardBar.realisasi = "0";
     this.cardBar.nama_kpi = this.cardBar.nama_kpi.toString();
     this.cardBar.formula = this.cardBar.formula.toString();
     this.cardBar.bobot = this.cardBar.bobot.toString();

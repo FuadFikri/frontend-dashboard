@@ -50,7 +50,7 @@
                   caption="Perspektif">         
                   <dxi-validation-rule type="required"></dxi-validation-rule>
               </dxi-column>
-              
+                            
               <div *dxTemplate="let perspektif of 'detail'">
                 <div class="master-detail-caption">
                 </div>
@@ -61,10 +61,10 @@
                   <dxo-editing mode="batch"
                             [allowUpdating]="true">
                   </dxo-editing>
-                  <dxi-column caption="INDIKATOR " dataField="nama_kpi"></dxi-column>
-                  <dxi-column caption="FORMULA" dataField="formula"></dxi-column>
-                  <dxi-column caption="SATUAN" dataField="satuan"></dxi-column>
-                  <dxi-column caption="BOBOT" dataField="bobot"></dxi-column>
+                  <dxi-column caption="INDIKATOR " dataField="nama_kpi" [allowEditing]="false"></dxi-column>
+                  <dxi-column caption="FORMULA" dataField="formula" [allowEditing]="false"></dxi-column>
+                  <dxi-column caption="SATUAN" dataField="satuan" [allowEditing]="false"></dxi-column>
+                  <dxi-column caption="BOBOT" dataField="bobot" [allowEditing]="false"></dxi-column>
                   <dxi-column dataField="target_rkap" caption="TARGET RKAP" dataType="number"></dxi-column>
                   <dxi-column dataField="target_bulanan" dataType="number" caption="TARGET {{ bulan }}"></dxi-column>
                   <dxi-column  dataField="realisasi" caption="REALISASI" dataType="number" ></dxi-column>
@@ -78,8 +78,22 @@
                   <!-- <dxi-column dataField="tahun" dataType="number"> </dxi-column> -->
                   <dxi-column dataField="persentase" caption="%"> </dxi-column>
                   <dxi-column dataField="nilai" caption="NILAI"> </dxi-column>
+
+                  <dxo-summary>
+                      <dxi-total-item
+                          column="bobot"
+                          summaryType="sum"
+                          [customizeText]="customizeBobot">
+                      </dxi-total-item>
+                      <dxi-total-item
+                          column="nilai"
+                          summaryType="sum"
+                          [customizeText]="customizeNilai">
+                      </dxi-total-item>
+                  </dxo-summary>
                 </dx-data-grid>
               </div>
+              <dxi-sort-by-group-summary-info summaryItem="count"></dxi-sort-by-group-summary-info>
             </dx-data-grid>
 
          
