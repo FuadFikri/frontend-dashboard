@@ -25,7 +25,8 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
 
   tahunSelectBoxSource;
   queryParams = {
-    tahun: ""
+    tahun: "",
+    bulan:""
   };
   
   options = {
@@ -107,6 +108,17 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
       console.log("updating failed ", err);
     
     });
+  }
+
+  insertPerspektif(e) {
+    console.log(e.data)
+    this.perspektif = new Perspektif();
+    this.perspektif.nama_perspektif = e.data.nama_perspektif;
+    this.perspektif.sortnumber = e.data.sortnumber;
+    this.service.insertPerspektif(this.perspektif).subscribe(res => {
+      console.log(res);
+    })
+    console.log(this.perspektif)
   }
 
   

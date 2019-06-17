@@ -38,6 +38,12 @@ export class BalancedScorecardService {
     })
   }
 
+  insertPerspektif(perspektif:Perspektif) {
+    const username = localStorage.getItem('username');
+    const token = localStorage.getItem('token');
+    return this.http.post<any> (this._urlPerspektif + '/insert', perspektif )
+  }
+
   getCardBarWithData(tahun:String, bulan : String): Observable<any> {
     const username  = localStorage.getItem('username');
     const token     = localStorage.getItem('token');
@@ -47,11 +53,11 @@ export class BalancedScorecardService {
       token : token,
     } )
   }
-  getCardBarByTahun(tahun:String): Observable<any> {
+  getCardBarByTahunDanBulan(tahun:String, bulan:String): Observable<any> {
     const username  = localStorage.getItem('username');
     const token     = localStorage.getItem('token');
     
-    return this.http.post <any> (this._urlCardBar + '/keyval?tahun='+tahun,{
+    return this.http.post <any> (this._urlCardBar + '/keyval?tahun='+tahun +'&bulan='+bulan,{
       username : username,
       token : token,
     } )
