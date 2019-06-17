@@ -81,4 +81,8 @@ export class BalancedScorecardService {
   getBulanDropDown() {
     return this.bulanSource;
   }
+
+  getTahun() {
+    return this.http.get <any> (this._urlCardBar + '/getTahun');
+  }
 }

@@ -22,6 +22,11 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
   bulanDropDown;
   now:any;
   bulan:string;
+
+  tahunSelectBoxSource;
+  queryParams = {
+    tahun: ""
+  };
   
   options = {
     message: '',
@@ -37,6 +42,9 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
   }
   subscription :Subscription;
   ngOnInit() {
+    this.service.getTahun().subscribe(res => {
+      this.tahunSelectBoxSource = res.d;
+    })
     this.bulanDropDown = this.service.getBulanDropDown(); 
     this.subscription = this.service.getPerspektifs().subscribe(resp =>{
       this.perspektifSource = resp.d;

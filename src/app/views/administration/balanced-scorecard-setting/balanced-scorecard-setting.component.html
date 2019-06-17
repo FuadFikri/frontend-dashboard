@@ -9,16 +9,25 @@
               <a routerLink="/administration/balanced-scorecard/add">
                 <dx-button icon="plus" text="Add New Card" ></dx-button>
               </a>
-              &nbsp;
-              <a [routerLink]="['/administration/balanced-scorecard/data']" 
-              [queryParams]="{ tahun: '2019'}">
-                <dx-button icon="fa fa-database" text="Show All Data" ></dx-button>
-              </a>
           </div>
+          <div class="col-md-5">
+              <dx-select-box
+              [dataSource]="tahunSelectBoxSource"
+              displayExpr="tahun"
+              placeholder="Pilih Tahun"
+              valueExpr="tahun"
+              [(value)]="queryParams.tahun"
+          ></dx-select-box>
+        </div>
+          <div class="col-md-3">
+            <a [routerLink]="['/administration/balanced-scorecard/data']" 
+            [queryParams]="queryParams">
+              <dx-button icon="fa fa-database" text="Show All Data" ></dx-button>
+            </a>
+          </div>
+          
         </div>
              
-
-              
           <br>       
              
             <dx-data-grid id="gridContainer" [dataSource]="perspektifSource" [masterDetail]="{ enabled: true, template: 'detail' }"

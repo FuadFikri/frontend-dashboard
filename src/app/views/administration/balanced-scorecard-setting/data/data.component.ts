@@ -19,7 +19,7 @@ export class DataComponent implements OnInit, OnDestroy {
   subscription2:Subscription;
   perspektifSource;
   bulanDropDown;
-
+  tahun;
   constructor(private service: BalancedScorecardService, private route: ActivatedRoute) {
     this.cardBarSource= [];
   }
@@ -37,6 +37,7 @@ export class DataComponent implements OnInit, OnDestroy {
       });
         console.log("cards",this.cardBars);
       });
+      this.tahun = params.tahun;
     });
     this.bulanDropDown = this.service.getBulanDropDown(); 
     
