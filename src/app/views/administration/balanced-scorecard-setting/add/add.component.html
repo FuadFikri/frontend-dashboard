@@ -4,69 +4,101 @@
       <strong>Add<span *ngIf="(isAdd || isEdit) && !isDetail">Add / Edit</span></strong>
     </div>
     <div class="card-body">
-      <div class="dx-fieldset">
-        <div class="dx-field">
-          <div class="dx-field-label">Perspektif</div>
-          <div class="dx-field-value">
-            <dx-select-box [dataSource]="perspektifDropDown" [(value)]="cardBar.perspektif_id"
-              displayExpr="nama_perspektif" valueExpr="id"></dx-select-box>
+      <form action="your-action" (submit)="onFormSubmit($event)">
+        <div class="dx-fieldset">
+          <div class="dx-field">
+            <div class="dx-field-label">Perspektif</div>
+            <div class="dx-field-value">
+              <dx-select-box [dataSource]="perspektifDropDown" [(value)]="cardBar.perspektif_id"
+                displayExpr="nama_perspektif" valueExpr="id">
+                <dx-validator>
+                  <dxi-validation-rule type="required" message="Perspektif harus diisi"></dxi-validation-rule>
+                </dx-validator>
+              </dx-select-box>
+            </div>
+          </div>
+          <div class="dx-field">
+            <div class="dx-field-label">Tahun</div>
+            <div class="dx-field-value">
+              <dx-number-box [(value)]="cardBar.tahun">
+                <dx-validator>
+                  <dxi-validation-rule type="required" message="Tahun harus diisi"></dxi-validation-rule>
+                </dx-validator>
+              </dx-number-box>
+            </div>
+          </div>
+          <div class="dx-field">
+            <div class="dx-field-label">Indikator</div>
+            <div class="dx-field-value">
+              <dx-text-box [(value)]="cardBar.nama_kpi">
+                <dx-validator>
+                  <dxi-validation-rule type="required" message="Indikator harus diisi"></dxi-validation-rule>
+                </dx-validator>
+              </dx-text-box>
+            </div>
+          </div>
+          <div class="dx-field">
+            <div class="dx-field-label">Formula</div>
+            <div class="dx-field-value">
+              <dx-text-box [(value)]="cardBar.formula">
+                <dx-validator>
+                  <dxi-validation-rule type="required" message="Formula harus diisi"></dxi-validation-rule>
+                </dx-validator>
+              </dx-text-box>
+            </div>
+          </div>
+          <div class="dx-field">
+            <div class="dx-field-label">Satuan</div>
+            <div class="dx-field-value">
+              <dx-text-box [(value)]="cardBar.satuan">
+                <dx-validator>
+                  <dxi-validation-rule type="required" message="Satuan harus diisi"></dxi-validation-rule>
+                </dx-validator>
+              </dx-text-box>
+            </div>
+          </div>
+          <div class="dx-field">
+            <div class="dx-field-label">Bobot</div>
+            <div class="dx-field-value">
+              <dx-text-box [(value)]="cardBar.bobot">
+                <dx-validator>
+                  <dxi-validation-rule type="required" message="Bobot harus diisi"></dxi-validation-rule>
+                </dx-validator>
+              </dx-text-box>
+            </div>
+          </div>
+          <div class="dx-field">
+            <div class="dx-field-label">Target</div>
+            <div class="dx-field-value">
+              <dx-number-box [(value)]="cardBar.target_rkap">
+                <dx-validator>
+                  <dxi-validation-rule type="required" message="Target harus diisi"></dxi-validation-rule>
+                </dx-validator>
+              </dx-number-box>
+            </div>
+          </div>
+          <div class="dx-field">
+            <div class="dx-field-label">Ukuran Card Bar</div>
+            <div class="dx-field-value">
+              <dx-select-box [dataSource]="ukuranCardBar" [(value)]="cardBar.ukuran" displayExpr="display"
+                valueExpr="ukuran">
+                <dx-validator>
+                  <dxi-validation-rule type="required" message="Ukuran harus diisi"></dxi-validation-rule>
+                </dx-validator>
+              </dx-select-box>
+            </div>
+          </div>
+          <div class="dx-fieldset">
+            <dx-validation-summary id="summary"></dx-validation-summary>
+            <div class="buttons pull-right">
+              <a routerLink="/administration/balanced-scorecard">
+                <dx-button [width]="90" text="Back"></dx-button>
+              </a>
+              <dx-button [width]="90" text="Save" type="success" [useSubmitBehavior]="true" (click)="insert()">
+              </dx-button>
+            </div>
           </div>
         </div>
-        <div class="dx-field">
-          <div class="dx-field-label">Tahun</div>
-          <div class="dx-field-value">
-            <dx-number-box [(value)]="cardBar.tahun"></dx-number-box>
-          </div>
-        </div>
-        <div class="dx-field">
-          <div class="dx-field-label">Indikator</div>
-          <div class="dx-field-value">
-            <dx-text-box [(value)]="cardBar.nama_kpi"></dx-text-box>
-          </div>
-        </div>
-        <div class="dx-field">
-          <div class="dx-field-label">Formula</div>
-          <div class="dx-field-value">
-            <dx-text-box [(value)]="cardBar.formula"></dx-text-box>
-          </div>
-        </div>
-        <div class="dx-field">
-          <div class="dx-field-label">Satuan</div>
-          <div class="dx-field-value">
-            <dx-text-box [(value)]="cardBar.satuan"></dx-text-box>
-          </div>
-        </div>
-        <div class="dx-field">
-          <div class="dx-field-label">Bobot</div>
-          <div class="dx-field-value">
-            <dx-text-box [(value)]="cardBar.bobot"></dx-text-box>
-          </div>
-        </div>
-        <div class="dx-field">
-          <div class="dx-field-label">Target</div>
-          <div class="dx-field-value">
-            <dx-number-box [(value)]="cardBar.target_rkap"></dx-number-box>
-          </div>
-        </div>
-        <!-- <div class="dx-field">
-          <div class="dx-field-label">Target Bulanan</div>
-          <div class="dx-field-value">
-            <dx-number-box [(value)]="cardBar.target_bulanan"></dx-number-box>
-          </div>
-        </div>
-        <div class="dx-field">
-          <div class="dx-field-label">Realisasi</div>
-          <div class="dx-field-value">
-            <dx-number-box [(value)]="cardBar.realisasi"></dx-number-box>
-          </div>
-        </div> -->
-        <div class="buttons pull-right">
-          <a routerLink="/administration/balanced-scorecard">
-            <dx-button [width]="90" text="Back"></dx-button>
-          </a>
-          <dx-button [width]="90" text="Save" (click)="insert()"></dx-button>
-        </div>
-      </div>
+      </form>
     </div>
   </div>
-</div>

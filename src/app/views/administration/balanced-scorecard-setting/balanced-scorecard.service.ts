@@ -21,6 +21,11 @@ export class BalancedScorecardService {
     {"bulan" : "DESEMBER","id":"12"},
     
   ];
+  ukuranCardBar = [
+    {"ukuran":"6","display":"Besar"},
+    {"ukuran":"4","display":"Sedang"},
+    {"ukuran":"3","display":"Kecil"},
+  ]
 
 
   private _urlPerspektif = this.a.SERVER_URL + '/system/BalancedScorecard/Perspektif';
@@ -86,6 +91,9 @@ export class BalancedScorecardService {
 
   getBulanDropDown() {
     return this.bulanSource;
+  }
+  getUkuranCardBar() {
+    return this.ukuranCardBar;
   }
 
   getTahun() {

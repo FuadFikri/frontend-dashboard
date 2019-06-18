@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class AddComponent implements OnInit {
 
   perspektifDropDown:any;
+  ukuranCardBar:any;
   cardBar;
 
   options = {
@@ -28,7 +29,8 @@ export class AddComponent implements OnInit {
       this.perspektifDropDown = res.d;
     });
 
-    this.cardBar = new CardBar(undefined, "","","","","","","","","","","","");
+    this.ukuranCardBar = this._service.getUkuranCardBar();
+    this.cardBar = new CardBar(undefined, "","","","","","","","","","","","","");
    }
 
   ngOnInit() {
@@ -44,9 +46,10 @@ export class AddComponent implements OnInit {
     this.cardBar.formula = this.cardBar.formula.toString();
     this.cardBar.bobot = this.cardBar.bobot.toString();
     this.cardBar.satuan = this.cardBar.satuan.toString();
+    this.cardBar.ukuran = this.cardBar.ukuran.toString();
     // this.cardBar.persentase = this.cardBar.persentase.toString();
     // this.cardBar.nilai = this.cardBar.nilai.toString();
-
+    console.log("here")
     this._service.insertCardBar(this.cardBar).subscribe(res => {
       if(res.d==null && res.s == 200){
         this.options.message = 'New Card Created';
