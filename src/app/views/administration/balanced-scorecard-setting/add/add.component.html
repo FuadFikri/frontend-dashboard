@@ -4,7 +4,7 @@
       <strong>Add<span *ngIf="(isAdd || isEdit) && !isDetail">Add / Edit</span></strong>
     </div>
     <div class="card-body">
-      <form action="your-action" (submit)="onFormSubmit($event)">
+      <form  (submit)="insert($event)">
         <div class="dx-fieldset">
           <div class="dx-field">
             <div class="dx-field-label">Perspektif</div>
@@ -94,7 +94,7 @@
               <a routerLink="/administration/balanced-scorecard">
                 <dx-button [width]="90" text="Back"></dx-button>
               </a>
-              <dx-button [width]="90" text="Save" type="success" [useSubmitBehavior]="true" (click)="insert()">
+              <dx-button [width]="90" text="Save" type="success" [useSubmitBehavior]="true" >
               </dx-button>
             </div>
           </div>

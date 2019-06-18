@@ -36,7 +36,9 @@ export class AddComponent implements OnInit {
   ngOnInit() {
   }
 
-  insert() {
+  insert(e) {
+    e.preventDefault();
+    
     this.cardBar.perspektif_id = this.cardBar.perspektif_id.toString();
     this.cardBar.tahun = this.cardBar.tahun.toString();
     this.cardBar.target_rkap = this.cardBar.target_rkap.toString();
@@ -49,7 +51,7 @@ export class AddComponent implements OnInit {
     this.cardBar.ukuran = this.cardBar.ukuran.toString();
     // this.cardBar.persentase = this.cardBar.persentase.toString();
     // this.cardBar.nilai = this.cardBar.nilai.toString();
-    console.log("here")
+    // console.log(this.cardBar)
     this._service.insertCardBar(this.cardBar).subscribe(res => {
       if(res.d==null && res.s == 200){
         this.options.message = 'New Card Created';
