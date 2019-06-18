@@ -1,9 +1,10 @@
-<ng-container *ngIf="wide; else small">
-    <div class="card text-white bg-{{color}}" style="height:auto;" >
+<!-- <ng-container *ngIf="wide; else small"> -->
+  <div class="col-md-4" *ngFor="let item of data; let j=index">
+    <div class="card text-white bg-{{color}}" style="height:auto; width:auto" >
         <div class="card-body">
           <div class="row">
             <div class="col-md-4">
-              <small >Peningkatan kepercayaan pelanggan</small>
+              <small >{{item.nama_kpi}}</small>
             </div>
             <div class="col-md-8" (mouseover)="hover=true" (mouseleave)="hover=false">
               <div class="row">
@@ -41,8 +42,9 @@
           </div>
         </div>
       </div>
-</ng-container>
-<ng-template #small>
+    </div>
+<!-- </ng-container> -->
+<!-- <ng-template #small>
     <div #elseBlock>
         <div class="card text-white bg-{{color}}" style="height: auto;">
             <div class="card-body">
@@ -87,7 +89,7 @@
             </div>
           </div>
     </div>
-</ng-template>
+</ng-template> -->
 
 
 

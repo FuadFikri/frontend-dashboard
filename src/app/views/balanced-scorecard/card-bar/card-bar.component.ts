@@ -8,6 +8,8 @@ import { Component, OnInit, Input } from '@angular/core';
 export class CardBarComponent implements OnInit {
   @Input() color;
   @Input()wide : boolean;
+  @Input() nama_kpi;
+  @Input() data;
   hovered:boolean=false;
   popupVisible=false;
   realisasi:any;

@@ -1,176 +1,36 @@
 <div class="head">
-    <div class="row">
-        <div class="col-md-6">
-          <img src="assets/img/logoIcon.png" alt="" srcset="" class="logo">
-        </div>
-        <div class="col-md-6">
-        </div>
-      </div>
+  <div class="row">
+    <div class="col-md-6">
+      <img src="assets/img/logoIcon.png" alt="" srcset="" class="logo">
     </div>
-
+    <div class="col-md-6">
+    </div>
+  </div>
+</div>
 <div class="container">
-  
   <div class="row">
     <div class="col-md-12">
-
-      <div id="kotak">
+      <div id="kotak" *ngFor="let p of daftarPerspektif; let i = index">
         <div class="row">
-          <!-- kanan -->
-          <div class="col-md-2">
-              <button type="button" class="btn btn-warning align-middle">
-                  Perspektif Finansial 
-                </button>
-          </div>
-          <!-- end kanan -->
-
           <!-- kiri -->
-          <div class="col-md-10">
-            <!-- atas -->
-            <div class="row">
-              <div class="col-md-4">
-              </div>
-              <div class="col-md-4">
-                <card-bar [color]="primary" [wide]="wide"></card-bar>
-              </div>
-              <div class="col-md-4">
-              </div>
-            </div>
-            <!-- end atas -->
-
-            <!-- bawah -->
-            <div class="row">
-                <div class="col-md-4">
-                    <card-bar [color]="secondary" [wide]="wide"></card-bar>
-                </div>
-                <div class="col-md-4">
-
-                </div>
-
-                <div class="col-md-4">
-                    <card-bar [color]="secondary" [wide]="wide"></card-bar>
-                </div>
-              </div>
-            <!-- end bawah -->
-          </div>
-          <!-- end kiri -->
-
-
-        </div>
-
-        
-      </div>
-      <div id="kotak">
-        <div class="row">
           <div class="col-md-2">
-              <button type="button" class="btn btn-warning align-middle">
-                  Perspektif Pelanggan 
-                </button>
-          </div>
-          <div class="col-md-10">
-            <div class="row">
-              <div class="col-md-4">
-                <card-bar [color]="secondary" [wide]="wide"></card-bar>
-              </div>
-              <div class="col-md-4"></div>
-              <div class="col-md-4">
-                <card-bar [color]="secondary" [wide]="wide"></card-bar>
-              </div>
-
-            </div>
+            <button type="button" class="btn btn-warning align-middle">
+              {{p.nama_perspektif}}
+            </button>
           </div>
         </div>
-      </div>
-
-      <div id="kotak">
+        <!-- end kiri -->
+        <br>
         <div class="row">
-          <div class="col-md-2">
-              <button type="button" class="btn btn-warning align-middle">
-                  Perspektif Proses Bisnis 
-                </button>
-          </div>
           <div class="col-md-10">
-            <div class="row">
-              <div class="col-md-2">
-                <card-bar [color]="primary" [wide]="small"></card-bar>
-              </div>
-              <div class="col-md-2">
-                <card-bar [color]="primary" [wide]="small"></card-bar>
-              </div>
-              <div class="col-md-2">
-                <card-bar [color]="primary" [wide]="small"></card-bar>
-              </div>
-              <div class="col-md-2">
-                <card-bar [color]="primary" [wide]="small"></card-bar>
-              </div>
-              <div class="col-md-2">
-                <card-bar [color]="primary" [wide]="small"></card-bar>
-              </div>
-              <div class="col-md-2">
-                <card-bar [color]="primary" [wide]="small"></card-bar>
+            <div class="row" *ngIf="daftarCardBarFiltered[i]">
+              <div class="col-md-12">
+                <card-bar [color]="primary" [data]="daftarCardBarFiltered[i]"></card-bar>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div id="kotak">
-        <div class="row">
-          <div class="col-md-2">
-              <button type="button" class="btn btn-warning align-middle">
-                  Perspektif Pembelajaran 
-                </button>
-          </div>
-          <div class="col-md-10">
-            <div class="row">
-              <div class="col-md-4"></div>
-              <div class="col-md-4">
-                <card-bar [color]="secondary" [wide]="wide"></card-bar>
-              </div>
-              <div class="col-md-4"></div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <card-bar [color]="info" [wide]="wide"></card-bar>
-                </div>
-                <div class="col-md-4">
-                    <card-bar [color]="info" [wide]="wide"></card-bar>
-                </div>
-                <div class="col-md-4">
-                    <card-bar [color]="info" [wide]="wide"></card-bar>
-                </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="kotak">
-        <div class="row">
-          <div class="col-md-2">
-              <button type="button" class="btn btn-warning align-middle">
-                  Perspektif Baru 
-                </button>
-          </div>
-          <div class="col-md-10">
-            <div class="row">
-              <div class="col-md-4"></div>
-              <div class="col-md-4">
-                <card-bar [color]="secondary" [wide]="wide"></card-bar>
-              </div>
-              <div class="col-md-4"></div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <card-bar [color]="info" [wide]="wide"></card-bar>
-                </div>
-                <div class="col-md-4">
-                    <card-bar [color]="info" [wide]="wide"></card-bar>
-                </div>
-                <div class="col-md-4">
-                    <card-bar [color]="info" [wide]="wide"></card-bar>
-                </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
     </div>
   </div>
 </div>
