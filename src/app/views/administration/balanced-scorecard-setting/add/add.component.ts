@@ -30,7 +30,7 @@ export class AddComponent implements OnInit {
     });
 
     this.ukuranCardBar = this._service.getUkuranCardBar();
-    this.cardBar = new CardBar(undefined, "","","","","","","","","","","","","");
+    this.cardBar = new CardBar(undefined, "","","","","","","","","","","","","","");
    }
 
   ngOnInit() {
