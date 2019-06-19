@@ -121,10 +121,35 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
     console.log(this.perspektif)
   }
 
-  
+  /*
+  1. target bulanan
+      e.oldData.realisasi/this.cardBar.target_bulanan
+
+  2. realisasi
+      this.cardBar.realisasi/e.oldData.target_bulanan
+
+  3. target bulanan dan realisasi
+      this.cardBar.realisasi/this.cardBar.target_bulanan;
+
+  */
   updateCardBar(e) {
     this.cardBar = e.newData;
     this.cardBar.id = e.key;
+    this.cardBar.persentase = this.cardBar.realisasi/this.cardBar.target_bulanan;
+    let hasil
+    if (this.cardBar.realisasi || this.cardBar.target_bulanan) {
+      if (this.cardBar.target_bulanan && this.cardBar.realisasi) {
+        hasil = (this.cardBar.realisasi/this.cardBar.target_bulanan)*100;
+      } else if (this.cardBar.target_bulanan){
+        hasil = (e.oldData.realisasi/this.cardBar.target_bulanan)*100
+      } else if (this.cardBar.realisasi){
+        hasil = (this.cardBar.realisasi/e.oldData.target_bulanan)*100;
+      }
+      console.log("hasil",hasil);
+      this.cardBar.persentase = hasil.toFixed();
+      this.cardBar.persentase = this.cardBar.persentase.toString();
+    } 
+    
     console.log("cardBar",this.cardBar);
     this.service.updateCardBar(this.cardBar).subscribe(res => {
       if(res.d==1){
@@ -178,5 +203,10 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
     return "Nilai : " + data.value;
   }
   
+  persen(cellInfo) {
+    if (cellInfo.value) {
+      return cellInfo.value + "%"
+    }
+  }
 
 }
