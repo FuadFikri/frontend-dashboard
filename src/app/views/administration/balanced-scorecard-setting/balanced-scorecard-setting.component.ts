@@ -147,7 +147,13 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
       }
       console.log("hasil",hasil);
       this.cardBar.persentase = hasil.toFixed();
+      if(hasil >= e.oldData.bobot){
+        this.cardBar.nilai = e.oldData.bobot;
+      }else {
+        this.cardBar.nilai = e.oldData.bobot * this.cardBar.persentase;
+      }
       this.cardBar.persentase = this.cardBar.persentase.toString();
+      this.cardBar.nilai = this.cardBar.nilai.toString();
     } 
     
     console.log("cardBar",this.cardBar);
