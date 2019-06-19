@@ -26,6 +26,10 @@ export class BalancedScorecardService {
     {"ukuran":"4","display":"Sedang"},
     {"ukuran":"3","display":"Kecil"},
   ]
+  polarisasi = [
+    {"display":"POSITIF","value":"fa-long-arrow-up"},
+    {"display":"NEGATIF","value":"fa-long-arrow-down"}
+  ]
 
 
   private _urlPerspektif = this.a.SERVER_URL + '/system/BalancedScorecard/Perspektif';
@@ -94,6 +98,9 @@ export class BalancedScorecardService {
   }
   getUkuranCardBar() {
     return this.ukuranCardBar;
+  }
+  getPolarisasi() {
+    return this.polarisasi;
   }
 
   getTahun() {

@@ -14,6 +14,7 @@ export class AddComponent implements OnInit {
 
   perspektifDropDown:any;
   ukuranCardBar:any;
+  polarisasiDropDown:any;
   cardBar;
 
   options = {
@@ -30,10 +31,11 @@ export class AddComponent implements OnInit {
     });
 
     this.ukuranCardBar = this._service.getUkuranCardBar();
-    this.cardBar = new CardBar(undefined, "","","","","","","","","","","","","","");
+    this.cardBar = new CardBar(undefined, "","","","","","","","","","","","","","","");
    }
 
   ngOnInit() {
+    this.polarisasiDropDown = this._service.getPolarisasi();
   }
 
   insert(e) {
@@ -49,6 +51,7 @@ export class AddComponent implements OnInit {
     this.cardBar.bobot = this.cardBar.bobot.toString();
     this.cardBar.satuan = this.cardBar.satuan.toString();
     this.cardBar.ukuran = this.cardBar.ukuran.toString();
+    this.cardBar.polarisasi = this.cardBar.polarisasi.toString();
     // this.cardBar.persentase = this.cardBar.persentase.toString();
     // this.cardBar.nilai = this.cardBar.nilai.toString();
     // console.log(this.cardBar)

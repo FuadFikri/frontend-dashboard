@@ -20,6 +20,7 @@ export class CardBar {
     nilai:any;
     ukuran:any
     keterangan:any;
+    polarisasi:any;
 
 
     constructor(id:any,
@@ -36,7 +37,8 @@ export class CardBar {
         persentase:any,
         nilai:any,
         ukuran:any,
-        keterangan:any) {
+        keterangan:any,
+        polarisasi:any) {
             
         }
 }

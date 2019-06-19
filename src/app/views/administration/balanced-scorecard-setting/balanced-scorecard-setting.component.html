@@ -76,6 +76,7 @@
                   <dxi-column caption="FORMULA" dataField="formula" ></dxi-column>
                   <dxi-column caption="SATUAN" dataField="satuan" ></dxi-column>
                   <dxi-column caption="BOBOT" dataField="bobot" ></dxi-column>
+                  <dxi-column dataField="polarisasi" caption=""  [allowEditing]="false" cellTemplate="cellTemplate"> </dxi-column>
                   <dxi-column dataField="target_rkap" caption="TARGET RKAP" dataType="number"></dxi-column>
                   <dxi-column dataField="target_bulanan" dataType="number" caption="TARGET {{ bulan }}"></dxi-column>
                   <dxi-column  dataField="realisasi" caption="REALISASI" dataType="number" ></dxi-column>
@@ -83,6 +84,12 @@
                   <dxi-column dataField="persentase" caption="%"  [allowEditing]="false" [customizeText]="persen"> </dxi-column>
                   <dxi-column dataField="nilai" caption="NILAI"  [allowEditing]="false"> </dxi-column>
                   <dxi-column dataField="keterangan" caption="Ket"  [allowEditing]="false"> </dxi-column>
+                  
+                  <div *dxTemplate="let data of 'cellTemplate'">
+                    <div (click)="showMenu(data.value)" class="text-center">
+                      <i class="fa {{data.value}}" id="btn{{data.value}}"></i>
+                    </div>
+                  </div>
 
                   <dxo-summary>
                       <dxi-total-item
