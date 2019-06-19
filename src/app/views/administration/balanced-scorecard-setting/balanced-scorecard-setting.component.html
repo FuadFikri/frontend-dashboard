@@ -83,13 +83,18 @@
                  
                   <dxi-column dataField="persentase" caption="%"  [allowEditing]="false" [customizeText]="persen"> </dxi-column>
                   <dxi-column dataField="nilai" caption="NILAI"  [allowEditing]="false"> </dxi-column>
-                  <dxi-column dataField="keterangan" caption="Ket"  [allowEditing]="false"> </dxi-column>
+                  <dxi-column dataField="keterangan" caption="Ket"  [allowEditing]="false" cellTemplate="keteranganTemplate"> </dxi-column>
                   
                   <div *dxTemplate="let data of 'cellTemplate'">
                     <div (click)="showMenu(data.value)" class="text-center">
                       <i class="fa {{data.value}}" id="btn{{data.value}}"></i>
                     </div>
                   </div>
+
+                  <div *dxTemplate="let cell of 'keteranganTemplate'">
+                    <div *ngIf="cell.text=='Masalah'" style="color:rgb(255, 0, 0)">{{cell.text}}</div>
+                    <div *ngIf="cell.text=='Baik'" style="color:rgb(0, 212, 0)">{{cell.text}}</div>
+                </div>
 
                   <dxo-summary>
                       <dxi-total-item
