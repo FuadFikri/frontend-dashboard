@@ -139,13 +139,15 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
   }
 
   hitungNilai(e,persentase) {
-    let nilai
+    let nilai:any;
     if(persentase >= 100){
       nilai = new Number(e.oldData.bobot);
+      console.log("nilaiBaik",nilai);
       this.cardBar.keterangan = "Baik"
     }else {
-      nilai = e.oldData.bobot * this.cardBar.persentase;
+      nilai = e.oldData.bobot * this.cardBar.persentase/100;
       this.cardBar.keterangan = "Masalah"
+      console.log("nilaiMasalah",nilai);
     }
 
     return nilai;
@@ -212,7 +214,9 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
     });
   }
 
+  totalBobot=0;
   customizeBobot(data) {
+    this.totalBobot += data.value;
     return "Bobot : " + data.value;
   }
   customizeNilai(data) {
