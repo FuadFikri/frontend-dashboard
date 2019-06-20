@@ -58,6 +58,12 @@
                   <dxi-column caption="INDIKATOR" dataField="nama_kpi"></dxi-column>
                   <dxi-column caption="FORMULA" dataField="formula"></dxi-column>
                   <dxi-column caption="SATUAN" dataField="satuan"></dxi-column>
+                  <dxi-column dataField="polarisasi" caption=""  [allowEditing]="false" cellTemplate="cellTemplate"> </dxi-column>
+                  <div *dxTemplate="let data of 'cellTemplate'">
+                      <div  class="text-center">
+                        <i class="fa {{data.value}}" id="btn{{data.value}}"></i>
+                      </div>
+                    </div>
                   <dxi-column caption="BOBOT" dataField="bobot"></dxi-column>
                   <dxi-column dataField="target_rkap" caption="TARGET RKAP" dataType="number"></dxi-column>
                   <dxi-column dataField="target_bulanan"  caption="TARGET" dataType="number"></dxi-column>
