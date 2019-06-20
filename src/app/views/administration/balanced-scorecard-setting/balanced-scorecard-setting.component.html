@@ -84,7 +84,14 @@
                   <dxi-column dataField="persentase" caption="%"  [allowEditing]="false" [customizeText]="persen"> </dxi-column>
                   <dxi-column dataField="nilai" caption="NILAI"  [allowEditing]="false"> </dxi-column>
                   <dxi-column dataField="keterangan" caption="Ket"  [allowEditing]="false" cellTemplate="keteranganTemplate"> </dxi-column>
-                  
+            
+                  <dxi-column dataField="ukuran" [allowResizing]="true" >
+                    <dxo-lookup
+                            [dataSource]="ukuranCardBar"
+                            displayExpr="display"
+                            valueExpr="ukuran">
+                        </dxo-lookup>
+                  </dxi-column>
                   <div *dxTemplate="let data of 'cellTemplate'">
                     <div (click)="showMenu(data.value)" class="text-center">
                       <i class="fa {{data.value}}" id="btn{{data.value}}"></i>

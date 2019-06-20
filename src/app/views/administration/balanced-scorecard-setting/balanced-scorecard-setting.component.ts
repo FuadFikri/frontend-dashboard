@@ -15,6 +15,7 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
   perspektifSource:Perspektif;
   cardBars:any;
   cardBarSource:any;
+  ukuranCardBar:any;
   
   perspektif:Perspektif;
   cardBar:CardBar;
@@ -48,6 +49,7 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
       this.tahunSelectBoxSource = res.d;
     })
     this.bulanDropDown = this.service.getBulanDropDown(); 
+    this.ukuranCardBar = this.service.getUkuranCardBar(); 
     this.subscription = this.service.getPerspektifs().subscribe(resp =>{
       this.perspektifSource = resp.d;
     })
