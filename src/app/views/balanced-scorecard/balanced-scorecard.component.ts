@@ -22,7 +22,7 @@ export class BalancedScorecardComponent implements OnInit {
   daftarPerspektif;
   perspektif_id;
   daftarCardBar;
-  satu;
+  cardBarFiltered;
   daftarCardBarFiltered:CardBar[];
 
   now;
@@ -47,8 +47,8 @@ export class BalancedScorecardComponent implements OnInit {
         });
           console.log(this.daftarCardBar)
           for (let index = 0; index < this.perspektif_id.length; index++) {
-            this.satu = this.daftarCardBar.filter(cardbar => cardbar.perspektif_id==this.perspektif_id[index])
-            this.daftarCardBarFiltered.push(this.satu);
+            this.cardBarFiltered = this.daftarCardBar.filter(cardbar => cardbar.perspektif_id==this.perspektif_id[index])
+            this.daftarCardBarFiltered.push(this.cardBarFiltered);
           }
           console.log(this.daftarCardBarFiltered)
       })
