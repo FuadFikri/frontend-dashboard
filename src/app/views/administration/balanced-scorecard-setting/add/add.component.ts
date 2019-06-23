@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BalancedScorecardService } from '../balanced-scorecard.service';
-import { CardBar } from '../Model';
+import { CardBar,KPI, Nilai } from '../Model';
 import notify from 'devextreme/ui/notify';
 import { Router } from '@angular/router';
 
@@ -16,6 +16,8 @@ export class AddComponent implements OnInit {
   ukuranCardBar:any;
   polarisasiDropDown:any;
   cardBar;
+  KPI;
+  nilai;
 
   options = {
     message: '',
@@ -32,6 +34,8 @@ export class AddComponent implements OnInit {
 
     this.ukuranCardBar = this._service.getUkuranCardBar();
     this.cardBar = new CardBar(undefined, "","","","","","","","","","","","","","","");
+    this.KPI = new KPI(undefined,"","","","","","","","","");
+    this.nilai = new Nilai(undefined, "0","0","0","0","","","");
    }
 
   ngOnInit() {
@@ -41,36 +45,41 @@ export class AddComponent implements OnInit {
   insert(e) {
     e.preventDefault();
     
-    this.cardBar.perspektif_id = this.cardBar.perspektif_id.toString();
-    this.cardBar.tahun = this.cardBar.tahun.toString();
-    this.cardBar.target_rkap = this.cardBar.target_rkap.toString();
-    this.cardBar.target_bulanan = "0";
-    this.cardBar.realisasi = "0";
-    this.cardBar.nama_kpi = this.cardBar.nama_kpi.toString();
-    this.cardBar.formula = this.cardBar.formula.toString();
-    this.cardBar.bobot = this.cardBar.bobot.toString();
-    this.cardBar.satuan = this.cardBar.satuan.toString();
-    this.cardBar.ukuran = this.cardBar.ukuran.toString();
-    this.cardBar.polarisasi = this.cardBar.polarisasi.toString();
-    // this.cardBar.persentase = this.cardBar.persentase.toString();
-    // this.cardBar.nilai = this.cardBar.nilai.toString();
-    // console.log(this.cardBar)
-    this._service.insertCardBar(this.cardBar).subscribe(res => {
-      if(res.d==null && res.s == 200){
+    this.KPI.perspektif_id = this.KPI.perspektif_id.toString();
+    this.KPI.tahun = this.KPI.tahun.toString();
+    this.KPI.target_rkap = this.KPI.target_rkap.toString();
+    this.KPI.nama_kpi = this.KPI.nama_kpi.toString();
+    this.KPI.formula = this.KPI.formula.toString();
+    this.KPI.bobot = this.KPI.bobot.toString();
+    this.KPI.satuan = this.KPI.satuan.toString();
+    this.KPI.ukuran_id = this.KPI.ukuran_id.toString();
+    this.KPI.polarisasi_id = this.KPI.polarisasi_id.toString();
+    console.log(this.KPI)
+    this._service.insertKPI(this.KPI).subscribe(res => {
+      let kpi_id = res.d[0].id;
+      this.nilai.kpi_id = kpi_id;
+      console.log("respon kpi",res)
+        this.insertNilai12Bulan(this.nilai);
+      });
+
+  }
+
+  insertNilai12Bulan(nilai:Nilai) {
+    this._service.insertAllNilai(nilai).subscribe(resp => {
+      if(resp.d==null && resp.s == 200){
         this.options.message = 'New Card Created';
         notify(this.options, 'success', 3000);
-        console.log("insert success",res);
+        console.log("insert success",resp);
         this._router.navigate(['/administration/balanced-scorecard']);
       }else{
         this.options.message = 'Creating Failed';
           notify(this.options, 'error', 3000);
-        console.log("updating failed ", res);
+        console.log("updating failed ", resp);
       }
     }, err => {
       this.options.message = 'Creating Failed';
       notify(this.options, 'error', 3000);
       console.log("updating failed ", err);
-    
     });
   }
 }

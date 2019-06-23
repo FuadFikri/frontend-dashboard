@@ -85,11 +85,11 @@
                   <dxi-column dataField="nilai" caption="NILAI"  [allowEditing]="false"> </dxi-column>
                   <dxi-column dataField="keterangan" caption="Ket"  [allowEditing]="false" cellTemplate="keteranganTemplate"> </dxi-column>
             
-                  <dxi-column dataField="panjang_kolom"  caption="ukuran" [allowResizing]="true" >
+                  <dxi-column dataField="ukuran_id"  caption="ukuran" [allowResizing]="true" >
                     <dxo-lookup
                             [dataSource]="ukuranCardBar"
                             displayExpr="ukuran"
-                            valueExpr="panjang_kolom">
+                            valueExpr="id">
                         </dxo-lookup>
                   </dxi-column>
                   <div *dxTemplate="let data of 'cellTemplate'">

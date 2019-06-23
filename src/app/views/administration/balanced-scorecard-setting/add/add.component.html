@@ -9,7 +9,7 @@
           <div class="dx-field">
             <div class="dx-field-label">Perspektif</div>
             <div class="dx-field-value">
-              <dx-select-box [dataSource]="perspektifDropDown" [(value)]="cardBar.perspektif_id"
+              <dx-select-box [dataSource]="perspektifDropDown" [(value)]="KPI.perspektif_id"
                 displayExpr="nama_perspektif" valueExpr="id">
                 <dx-validator>
                   <dxi-validation-rule type="required" message="Perspektif harus diisi"></dxi-validation-rule>
@@ -20,7 +20,7 @@
           <div class="dx-field">
             <div class="dx-field-label">Tahun</div>
             <div class="dx-field-value">
-              <dx-number-box [(value)]="cardBar.tahun">
+              <dx-number-box [(value)]="KPI.tahun">
                 <dx-validator>
                   <dxi-validation-rule type="required" message="Tahun harus diisi"></dxi-validation-rule>
                 </dx-validator>
@@ -30,7 +30,7 @@
           <div class="dx-field">
             <div class="dx-field-label">Indikator</div>
             <div class="dx-field-value">
-              <dx-text-box [(value)]="cardBar.nama_kpi">
+              <dx-text-box [(value)]="KPI.nama_kpi">
                 <dx-validator>
                   <dxi-validation-rule type="required" message="Indikator harus diisi"></dxi-validation-rule>
                 </dx-validator>
@@ -40,7 +40,7 @@
           <div class="dx-field">
             <div class="dx-field-label">Formula</div>
             <div class="dx-field-value">
-              <dx-text-box [(value)]="cardBar.formula">
+              <dx-text-box [(value)]="KPI.formula">
                 <dx-validator>
                   <dxi-validation-rule type="required" message="Formula harus diisi"></dxi-validation-rule>
                 </dx-validator>
@@ -50,7 +50,7 @@
           <div class="dx-field">
             <div class="dx-field-label">Satuan</div>
             <div class="dx-field-value">
-              <dx-text-box [(value)]="cardBar.satuan">
+              <dx-text-box [(value)]="KPI.satuan">
                 <dx-validator>
                   <dxi-validation-rule type="required" message="Satuan harus diisi"></dxi-validation-rule>
                 </dx-validator>
@@ -60,7 +60,7 @@
           <div class="dx-field">
             <div class="dx-field-label">Bobot</div>
             <div class="dx-field-value">
-              <dx-text-box [(value)]="cardBar.bobot">
+              <dx-text-box [(value)]="KPI.bobot">
                 <dx-validator>
                   <dxi-validation-rule type="required" message="Bobot harus diisi"></dxi-validation-rule>
                 </dx-validator>
@@ -70,7 +70,7 @@
           <div class="dx-field">
             <div class="dx-field-label">Target</div>
             <div class="dx-field-value">
-              <dx-number-box [(value)]="cardBar.target_rkap">
+              <dx-number-box [(value)]="KPI.target_rkap">
                 <dx-validator>
                   <dxi-validation-rule type="required" message="Target harus diisi"></dxi-validation-rule>
                 </dx-validator>
@@ -80,8 +80,8 @@
           <div class="dx-field">
             <div class="dx-field-label">Ukuran Card Bar</div>
             <div class="dx-field-value">
-              <dx-select-box [dataSource]="ukuranCardBar" [(value)]="cardBar.ukuran" displayExpr="display"
-                valueExpr="ukuran">
+              <dx-select-box [dataSource]="ukuranCardBar" [(value)]="KPI.ukuran_id" displayExpr="ukuran"
+                valueExpr="id">
                 <dx-validator>
                   <dxi-validation-rule type="required" message="Ukuran harus diisi"></dxi-validation-rule>
                 </dx-validator>
@@ -91,8 +91,8 @@
           <div class="dx-field">
             <div class="dx-field-label">Polarisasi</div>
             <div class="dx-field-value">
-              <dx-select-box [dataSource]="polarisasiDropDown" [(value)]="cardBar.polarisasi" displayExpr="display"
-                valueExpr="value">
+              <dx-select-box [dataSource]="polarisasiDropDown" [(value)]="KPI.polarisasi_id" displayExpr="display"
+                valueExpr="id">
                 <dx-validator>
                   <dxi-validation-rule type="required" message="Polarisasi harus diisi"></dxi-validation-rule>
                 </dx-validator>

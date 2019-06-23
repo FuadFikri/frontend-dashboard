@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AppConstant } from '../../../app.constant';
 import { Observable } from 'rxjs/Observable';
-import { Perspektif, CardBar } from './Model';
+import { Perspektif, CardBar, KPI, Nilai } from './Model';
 @Injectable()
 export class BalancedScorecardService {
 
@@ -22,18 +22,20 @@ export class BalancedScorecardService {
     
   ];
   ukuranCardBar = [
-    {"ukuran":"Besar","panjang_kolom":"6"},
-    {"ukuran":"Sedang","panjang_kolom":"4"},
-    {"ukuran":"Kecil","panjang_kolom":"3"},
+    {"ukuran":"Besar","panjang_kolom":"6","id":"1"},
+    {"ukuran":"Sedang","panjang_kolom":"4","id":"2"},
+    {"ukuran":"Kecil","panjang_kolom":"3","id":"3"},
   ]
   polarisasi = [
-    {"display":"POSITIF","value":"fa-long-arrow-up"},
-    {"display":"NEGATIF","value":"fa-long-arrow-down"}
+    {"display":"POSITIF","value":"fa-long-arrow-up","id":"1"},
+    {"display":"NEGATIF","value":"fa-long-arrow-down","id":"1"}
   ]
 
 
   private _urlPerspektif = this.a.SERVER_URL + '/system/BalancedScorecard/Perspektif';
   private _urlCardBar = this.a.SERVER_URL + '/system/BalancedScorecard/CardBar';
+  private _urlKPI = this.a.SERVER_URL + '/system/BalancedScorecard/KPI';
+  private _urlNilai = this.a.SERVER_URL + '/system/BalancedScorecard/Nilai';
   constructor(private http: HttpClient, private a: AppConstant) { }
 
   
@@ -91,6 +93,14 @@ export class BalancedScorecardService {
   insertCardBar(data:CardBar) {
     console.log("before save",data);
     return this.http.post <any> (this._urlCardBar + '/insertAll', data);
+  }
+  insertKPI(data:KPI) {
+    console.log("before save",data);
+    return this.http.post <any> (this._urlKPI + '/insert', data);
+  }
+  insertAllNilai(data:Nilai) {
+    console.log("before save",data)
+    return this.http.post <any> (this._urlNilai+ '/insertAll',data);
   }
 
   getBulanDropDown() {
