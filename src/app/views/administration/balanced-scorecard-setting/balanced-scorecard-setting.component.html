@@ -72,12 +72,12 @@
                   <dxo-editing mode="batch"
                             [allowUpdating]="true">
                   </dxo-editing>
-                  <dxi-column caption="INDIKATOR " dataField="nama_kpi" ></dxi-column>
-                  <dxi-column caption="FORMULA" dataField="formula" ></dxi-column>
-                  <dxi-column caption="SATUAN" dataField="satuan" ></dxi-column>
-                  <dxi-column caption="BOBOT" dataField="bobot" ></dxi-column>
+                  <dxi-column caption="INDIKATOR " dataField="nama_kpi" [allowEditing]="false" ></dxi-column>
+                  <dxi-column caption="FORMULA" dataField="formula" [allowEditing]="false"></dxi-column>
+                  <dxi-column caption="SATUAN" dataField="satuan" [allowEditing]="false"></dxi-column>
+                  <dxi-column caption="BOBOT" dataField="bobot" [allowEditing]="false"></dxi-column>
                   <dxi-column dataField="icon_polarisasi" caption=""  [allowEditing]="false" cellTemplate="cellTemplate"> </dxi-column>
-                  <dxi-column dataField="target_rkap" caption="TARGET RKAP" dataType="number"></dxi-column>
+                  <dxi-column dataField="target_rkap" caption="TARGET RKAP" dataType="number" [allowEditing]="false"></dxi-column>
                   <dxi-column dataField="target_bulanan" dataType="number" caption="TARGET {{ bulan }}"></dxi-column>
                   <dxi-column  dataField="realisasi" caption="REALISASI" dataType="number" ></dxi-column>
                  
