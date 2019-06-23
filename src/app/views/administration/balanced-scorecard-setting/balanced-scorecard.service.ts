@@ -22,9 +22,9 @@ export class BalancedScorecardService {
     
   ];
   ukuranCardBar = [
-    {"ukuran":"6","display":"Besar"},
-    {"ukuran":"4","display":"Sedang"},
-    {"ukuran":"3","display":"Kecil"},
+    {"ukuran":"Besar","panjang_kolom":"6"},
+    {"ukuran":"Sedang","panjang_kolom":"4"},
+    {"ukuran":"Kecil","panjang_kolom":"3"},
   ]
   polarisasi = [
     {"display":"POSITIF","value":"fa-long-arrow-up"},
