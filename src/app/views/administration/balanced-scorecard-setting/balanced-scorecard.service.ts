@@ -114,6 +114,11 @@ export class BalancedScorecardService {
     const token = localStorage.getItem('token');
     return this.http.get <any> (this._urlKPI + '/delete?id=' + id);
   }
+  deletePerspektif(id: String) {
+    console.log('before delete',id);
+    const token = localStorage.getItem('token');
+    return this.http.get <any> (this._urlPerspektif + '/delete?id=' + id);
+  }
 
   getBulanDropDown() {
     return this.bulanSource;

@@ -11,12 +11,12 @@
               [columnAutoWidth]="true"
               [wordWrapEnabled]="true"
               (onRowUpdating)="updatePerspektif($event)"
-              (onRowRemoving)="delete($event)"
+              (onRowRemoving)="deletePerspektif($event)"
               (onRowInserting)="insertPerspektif($event)">
               <dxo-editing mode="batch"
                   [allowUpdating]="true"
                   [allowAdding]="true"
-                 
+                 [allowDeleting]="true"
                   >
               </dxo-editing>
                

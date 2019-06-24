@@ -106,6 +106,26 @@ export class KpiComponent implements OnInit {
     console.log(this.perspektif)
   }
 
+  deletePerspektif(e) {
+    let id = e.key;
+    this._service.deletePerspektif(id).subscribe(resp => {
+
+      if (resp.d == 1 && resp.s == 200) {
+        this.options.message = 'Success Deleted';
+        notify(this.options, 'success', 3000);
+        console.log('Deleting success', resp);
+      } else {
+        this.options.message = 'Deleting Failed';
+        notify(this.options, 'error', 3000);
+        console.log('Deleting failed ', resp);
+      }
+    }, err => {
+      this.options.message = 'Deleting Failed';
+      notify(this.options, 'error', 3000);
+      console.log('Deleting failed ', err);
+    })
+  }
+
 
   updateKPI(e) {
     this.kpi = e.newData;
