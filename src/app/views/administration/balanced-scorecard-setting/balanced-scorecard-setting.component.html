@@ -49,11 +49,11 @@
               (onRowRemoving)="delete($event)"
               (onRowInserting)="insertPerspektif($event)">
               <dxo-editing mode="batch"
-                  [allowUpdating]="true"
-                  [allowAdding]="true">
+                  [allowUpdating]="false"
+                  [allowAdding]="false">
               </dxo-editing>
                
-              <dxi-column dataField="sortnumber"  caption="No" width="35" >
+              <dxi-column dataField="sortnumber"  caption="No" width="55" >
                   <dxi-validation-rule type="required"></dxi-validation-rule>
               </dxi-column>
               <dxi-column
@@ -72,12 +72,12 @@
                   <dxo-editing mode="batch"
                             [allowUpdating]="true">
                   </dxo-editing>
-                  <dxi-column caption="INDIKATOR " dataField="nama_kpi" ></dxi-column>
-                  <dxi-column caption="FORMULA" dataField="formula" ></dxi-column>
-                  <dxi-column caption="SATUAN" dataField="satuan" ></dxi-column>
-                  <dxi-column caption="BOBOT" dataField="bobot" ></dxi-column>
-                  <dxi-column dataField="polarisasi" caption=""  [allowEditing]="false" cellTemplate="cellTemplate"> </dxi-column>
-                  <dxi-column dataField="target_rkap" caption="TARGET RKAP" dataType="number"></dxi-column>
+                  <dxi-column caption="INDIKATOR " dataField="nama_kpi" [allowEditing]="false" ></dxi-column>
+                  <dxi-column caption="FORMULA" dataField="formula" [allowEditing]="false"></dxi-column>
+                  <dxi-column caption="SATUAN" dataField="satuan" [allowEditing]="false"></dxi-column>
+                  <dxi-column caption="BOBOT" dataField="bobot" [allowEditing]="false"></dxi-column>
+                  <dxi-column dataField="icon_polarisasi" caption=""  [allowEditing]="false" cellTemplate="cellTemplate"> </dxi-column>
+                  <dxi-column dataField="target_rkap" caption="TARGET RKAP" dataType="number" [allowEditing]="false"></dxi-column>
                   <dxi-column dataField="target_bulanan" dataType="number" caption="TARGET {{ bulan }}"></dxi-column>
                   <dxi-column  dataField="realisasi" caption="REALISASI" dataType="number" ></dxi-column>
                  
@@ -85,15 +85,15 @@
                   <dxi-column dataField="nilai" caption="NILAI"  [allowEditing]="false"> </dxi-column>
                   <dxi-column dataField="keterangan" caption="Ket"  [allowEditing]="false" cellTemplate="keteranganTemplate"> </dxi-column>
             
-                  <dxi-column dataField="ukuran" [allowResizing]="true" >
+                  <dxi-column dataField="ukuran_id"  caption="ukuran" [allowResizing]="true" >
                     <dxo-lookup
                             [dataSource]="ukuranCardBar"
-                            displayExpr="display"
-                            valueExpr="ukuran">
+                            displayExpr="ukuran"
+                            valueExpr="id">
                         </dxo-lookup>
                   </dxi-column>
                   <div *dxTemplate="let data of 'cellTemplate'">
-                    <div (click)="showMenu(data.value)" class="text-center">
+                    <div class="text-center">
                       <i class="fa {{data.value}}" id="btn{{data.value}}"></i>
                     </div>
                   </div>
