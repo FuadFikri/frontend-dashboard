@@ -105,38 +105,9 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  updatePerspektif(e) {
-    this.perspektif = e.newData;
-    this.perspektif.id = e.key;
-    console.log('pers', this.perspektif);
-    this.service.updatePerspektif(this.perspektif).subscribe(res => {
-      if (res.d == 1) {
-        this.options.message = 'Success Updated';
-        notify(this.options, 'success', 3000);
-        console.log('updating success', this.perspektif);
-      } else {
-        this.options.message = 'updating Failed';
-        notify(this.options, 'error', 3000);
-        console.log('updating failed ', res);
-      }
-    }, err => {
-      this.options.message = 'updating Failed';
-      notify(this.options, 'error', 3000);
-      console.log('updating failed ', err);
+  
 
-    });
-  }
-
-  insertPerspektif(e) {
-    console.log(e.data)
-    this.perspektif = new Perspektif();
-    this.perspektif.nama_perspektif = e.data.nama_perspektif;
-    this.perspektif.sortnumber = e.data.sortnumber;
-    this.service.insertPerspektif(this.perspektif).subscribe(res => {
-      console.log(res);
-    })
-    console.log(this.perspektif)
-  }
+  
 
 
   hitungPersentase(e) {

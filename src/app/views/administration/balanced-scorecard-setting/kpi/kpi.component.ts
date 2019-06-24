@@ -7,7 +7,10 @@ import {
 } from '../balanced-scorecard.service';
 import DataSource from 'devextreme/data/data_source';
 import ArrayStore from 'devextreme/data/array_store';
-import { KPI } from '../Model';
+import {
+  KPI,
+  Perspektif
+} from '../Model';
 import notify from 'devextreme/ui/notify';
 @Component({
   selector: 'app-kpi',
@@ -17,7 +20,7 @@ import notify from 'devextreme/ui/notify';
 })
 export class KpiComponent implements OnInit {
 
-  kpi:KPI;
+  kpi: KPI;
   polarisasiSource;
   ukuranCardBar;
   perspektifSource;
@@ -33,6 +36,7 @@ export class KpiComponent implements OnInit {
     closeOnSwipe: true,
     closeOnBackButton: true,
   };
+  perspektif: any;
   constructor(private _service: BalancedScorecardService) {
     this.cardBarSource = [];
     this.now = new Date();
@@ -78,11 +82,36 @@ export class KpiComponent implements OnInit {
     return item.dataSourceInstance;
   }
 
+
+  insertPerspektif(e) {
+    console.log(e.data)
+    this.perspektif = new Perspektif();
+    this.perspektif.nama_perspektif = e.data.nama_perspektif;
+    this.perspektif.sortnumber = e.data.sortnumber;
+    this._service.insertPerspektif(this.perspektif).subscribe(resp => {
+      if (resp.d == 1 && resp.s == 200) {
+        this.options.message = 'Success Created';
+        notify(this.options, 'success', 3000);
+        console.log('Created success', resp);
+      } else {
+        this.options.message = 'Creating Failed';
+        notify(this.options, 'error', 3000);
+        console.log('Created failed ', resp);
+      }
+    }, err => {
+      this.options.message = 'Created Failed';
+      notify(this.options, 'error', 3000);
+      console.log('Created failed ', err);
+    })
+    console.log(this.perspektif)
+  }
+
+
   updateKPI(e) {
     this.kpi = e.newData;
     this.kpi.id = e.key;
     this._service.updateKPI(this.kpi).subscribe(resp => {
-      if (resp.d == 1 && resp.s==200) {
+      if (resp.d == 1 && resp.s == 200) {
         this.options.message = 'Success Updated';
         notify(this.options, 'success', 3000);
         console.log('updating success', this.kpi);
@@ -96,15 +125,15 @@ export class KpiComponent implements OnInit {
       notify(this.options, 'error', 3000);
       console.log('updating failed ', err);
 
-    
+
     })
   }
 
   deleteKPI(e) {
     let id = e.key;
     this._service.deleteKPI(id).subscribe(resp => {
-   
-        if (resp.d == 1 && resp.s==200) {
+
+      if (resp.d == 1 && resp.s == 200) {
         this.options.message = 'Success Deleted';
         notify(this.options, 'success', 3000);
         console.log('Deleting success', resp);
@@ -119,5 +148,6 @@ export class KpiComponent implements OnInit {
       console.log('Deleting failed ', err);
     })
   }
+
 
 }

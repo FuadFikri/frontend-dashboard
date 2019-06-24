@@ -49,8 +49,8 @@
               (onRowRemoving)="delete($event)"
               (onRowInserting)="insertPerspektif($event)">
               <dxo-editing mode="batch"
-                  [allowUpdating]="true"
-                  [allowAdding]="true">
+                  [allowUpdating]="false"
+                  [allowAdding]="false">
               </dxo-editing>
                
               <dxi-column dataField="sortnumber"  caption="No" width="55" >
