@@ -43,7 +43,7 @@ export class BalancedScorecardService {
   getPerspektifs(): Observable<any> {
     const username = localStorage.getItem('username');
     const token = localStorage.getItem('token');
-    return this.http.post < any > (this._urlPerspektif + '/list', {
+    return this.http.post < any > (this._urlPerspektif + '/sortedList', {
       username : username,
       token : token
     })
