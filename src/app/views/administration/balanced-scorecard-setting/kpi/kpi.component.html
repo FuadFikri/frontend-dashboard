@@ -4,6 +4,14 @@
       <strong>Daftar KPI<span *ngIf="(isAdd || isEdit) && !isDetail">Add / Edit</span></strong>
     </div>
     <div class="card-body">
+      <div class="row">
+          <div class="col-md-3">
+              <a routerLink="/administration/balanced-scorecard/add">
+                <dx-button icon="plus" text="Buat KPI" ></dx-button>
+                
+              </a>
+          </div>
+      </div>
       <dx-data-grid id="gridContainer" [dataSource]="perspektifSource" [masterDetail]="{ enabled: true, template: 'detail' }"
               keyExpr="id" [showBorders]="true"
               [columnHidingEnabled]="false"

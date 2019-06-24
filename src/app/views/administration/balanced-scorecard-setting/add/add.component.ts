@@ -70,7 +70,7 @@ export class AddComponent implements OnInit {
         this.options.message = 'New Card Created';
         notify(this.options, 'success', 3000);
         console.log("insert success",resp);
-        this._router.navigate(['/administration/balanced-scorecard']);
+        this._router.navigate(['/administration/balanced-scorecard/kpi']);
       }else{
         this.options.message = 'Creating Failed';
           notify(this.options, 'error', 3000);
