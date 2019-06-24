@@ -28,7 +28,7 @@ export class BalancedScorecardService {
   ]
   polarisasi = [
     {'display': 'POSITIF', 'value': 'fa-long-arrow-up', 'id': '1'},
-    {'display': 'NEGATIF', 'value': 'fa-long-arrow-down', 'id': '1'}
+    {'display': 'NEGATIF', 'value': 'fa-long-arrow-down', 'id': '2'}
   ]
 
 
@@ -55,11 +55,11 @@ export class BalancedScorecardService {
     return this.http.post<any> (this._urlPerspektif + '/insert', perspektif )
   }
 
-  getCardBarWithData(tahun: String, bulan: String): Observable<any> {
+  getKPI(tahun: String): Observable<any> {
     const username  = localStorage.getItem('username');
     const token     = localStorage.getItem('token');
 
-    return this.http.post <any> (this._urlCardBar + '/keyval?tahun=' + tahun + '&bulan=' + bulan, {
+    return this.http.post <any> (this._urlKPI + '/keyval?tahun=' + tahun, {
       username : username,
       token : token,
     } )
@@ -91,6 +91,9 @@ export class BalancedScorecardService {
   }
   updateNilai(data: Nilai) {
     return this.http.post <any> (this._urlNilai + '/update', data)
+  }
+  updateKPI(data: KPI) {
+    return this.http.post <any> (this._urlKPI + '/update', data)
   }
 
   insertCardBar(data: CardBar) {

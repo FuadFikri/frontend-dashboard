@@ -1,9 +1,21 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { BalancedScorecardService } from './balanced-scorecard.service';
-import { Subscription } from 'rxjs';
+import {
+  Component,
+  OnInit,
+  OnDestroy
+} from '@angular/core';
+import {
+  BalancedScorecardService
+} from './balanced-scorecard.service';
+import {
+  Subscription
+} from 'rxjs';
 import DataSource from 'devextreme/data/data_source';
 import ArrayStore from 'devextreme/data/array_store';
-import { Perspektif, CardBar, Nilai } from './Model';
+import {
+  Perspektif,
+  CardBar,
+  Nilai
+} from './Model';
 import notify from 'devextreme/ui/notify';
 @Component({
   selector: 'app-balanced-scorecard-setting',
@@ -28,7 +40,7 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
   tahunSelectBoxSource;
   queryParams = {
     tahun: '',
-    bulan:''
+    bulan: ''
   };
 
   options = {
@@ -60,12 +72,12 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
     const tahun = this.now.getFullYear().toString();
 
     console.log(this.bulan, tahun);
-    this.service.getCardBarWithData(tahun, this.bulanDropDown[this.now.getMonth()].id).subscribe( resp => {
+    this.service.getCardBarByTahunDanBulan(tahun, this.bulanDropDown[this.now.getMonth()].id).subscribe(resp => {
       // object to array
-      this.cardBars = Object.keys(resp.d).map(function(index) {
+      this.cardBars = Object.keys(resp.d).map(function (index) {
         const card = resp.d[index];
         return card;
-    });
+      });
       console.log('cards', this.cardBars);
     });
 
@@ -74,20 +86,20 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
   getCardBar(key) {
     let item = this.cardBarSource.find((i) => i.key === key);
     if (!item) {
-        item = {
-            key: key,
-            dataSourceInstance: new DataSource({
-                store: new ArrayStore({
-                    data: this.cardBars,
-                    key: 'id'
-                }),
-                filter: ['perspektif_id', '=', key]
-            })
-        };
-        this.cardBarSource.push(item)
+      item = {
+        key: key,
+        dataSourceInstance: new DataSource({
+          store: new ArrayStore({
+            data: this.cardBars,
+            key: 'id'
+          }),
+          filter: ['perspektif_id', '=', key]
+        })
+      };
+      this.cardBarSource.push(item)
     }
     return item.dataSourceInstance;
-}
+  }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
@@ -104,7 +116,7 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
         console.log('updating success', this.perspektif);
       } else {
         this.options.message = 'updating Failed';
-          notify(this.options, 'error', 3000);
+        notify(this.options, 'error', 3000);
         console.log('updating failed ', res);
       }
     }, err => {
@@ -181,7 +193,7 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
         console.log('updating success', this.nilai);
       } else {
         this.options.message = 'updating Failed';
-          notify(this.options, 'error', 3000);
+        notify(this.options, 'error', 3000);
         console.log('updating failed ', res);
       }
     }, err => {
@@ -208,7 +220,7 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
         console.log('updating success', res);
       } else {
         this.options.message = 'Creating Failed';
-          notify(this.options, 'error', 3000);
+        notify(this.options, 'error', 3000);
         console.log('updating failed ', res);
       }
     }, err => {
