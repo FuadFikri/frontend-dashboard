@@ -107,7 +107,7 @@ export class KpiComponent implements OnInit {
   }
 
   deletePerspektif(e) {
-    let id = e.key;
+    const id = e.key;
     this._service.deletePerspektif(id).subscribe(resp => {
 
       if (resp.d == 1 && resp.s == 200) {
@@ -124,6 +124,28 @@ export class KpiComponent implements OnInit {
       notify(this.options, 'error', 3000);
       console.log('Deleting failed ', err);
     })
+  }
+
+  updatePerspektif(e) {
+    this.perspektif = e.newData;
+    this.perspektif.id = e.key;
+    console.log('pers', this.perspektif);
+    this._service.updatePerspektif(this.perspektif).subscribe(res => {
+      if (res.d == 1) {
+        this.options.message = 'Success Updated';
+        notify(this.options, 'success', 3000);
+        console.log('updating success', this.perspektif);
+      } else {
+        this.options.message = 'updating Failed';
+          notify(this.options, 'error', 3000);
+        console.log('updating failed ', res);
+      }
+    }, err => {
+      this.options.message = 'updating Failed';
+      notify(this.options, 'error', 3000);
+      console.log('updating failed ', err);
+
+    });
   }
 
 
@@ -150,7 +172,7 @@ export class KpiComponent implements OnInit {
   }
 
   deleteKPI(e) {
-    let id = e.key;
+    const id = e.key;
     this._service.deleteKPI(id).subscribe(resp => {
 
       if (resp.d == 1 && resp.s == 200) {
