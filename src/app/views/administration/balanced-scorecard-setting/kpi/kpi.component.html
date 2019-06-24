@@ -32,7 +32,7 @@
                 <div class="master-detail-caption"> </div>
                 <dx-data-grid [dataSource]="getCardBar(perspektif.key)" [showBorders]="true" [columnAutoWidth]="true"
                     (onRowUpdating)="updateKPI($event)"
-                    (onRowDeleting)="deleteKPI($event)" >
+                    (onRowRemoving)="deleteKPI($event)" >
                     
                   
                   <dxo-editing mode="batch"

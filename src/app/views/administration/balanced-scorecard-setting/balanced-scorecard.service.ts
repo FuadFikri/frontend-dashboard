@@ -109,6 +109,12 @@ export class BalancedScorecardService {
     return this.http.post <any> (this._urlNilai + '/insertAll', data);
   }
 
+  deleteKPI(id: String) {
+    console.log('before delete',id);
+    const token = localStorage.getItem('token');
+    return this.http.get <any> (this._urlKPI + '/delete?id=' + id);
+  }
+
   getBulanDropDown() {
     return this.bulanSource;
   }
