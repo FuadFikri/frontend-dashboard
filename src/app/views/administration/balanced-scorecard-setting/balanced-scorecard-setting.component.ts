@@ -151,7 +151,11 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
 
       this.nilai.persentase = this.nilai.persentase.toString();
       this.nilai.realisasi = this.nilai.realisasi.toString();
-      this.nilai.target_bulanan = this.nilai.target_bulanan.toString();
+      try {
+        this.nilai.target_bulanan = this.nilai.target_bulanan.toString();
+      } catch (error) {
+        this.nilai.target_bulanan = e.oldData.target_bulanan.toString();
+      }
       this.nilai.nilai = nilai.toPrecision(2);
       this.nilai.nilai = this.nilai.nilai.toString();
     }
