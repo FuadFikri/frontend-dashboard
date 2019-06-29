@@ -115,9 +115,30 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
     if (this.nilai.target_bulanan && this.nilai.realisasi) {
       hasil = (this.nilai.realisasi / this.nilai.target_bulanan) * 100;
     } else if (this.nilai.target_bulanan) {
-      hasil = (e.oldData.realisasi / this.nilai.target_bulanan) * 100
+      if (!e.oldData.realisasi) {
+        hasil = 0;
+      }else {
+        hasil = (e.oldData.realisasi / this.nilai.target_bulanan) * 100
+      }
     } else if (this.nilai.realisasi) {
       hasil = (this.nilai.realisasi / e.oldData.target_bulanan) * 100;
+    }
+    console.log('hasil', hasil);
+    this.nilai.persentase = hasil.toFixed();
+    return hasil;
+  }
+  hitungPersentasePolarisasiNegatif(e) {
+    let hasil;
+    if (this.nilai.target_bulanan && this.nilai.realisasi) {
+      hasil = (2-(this.nilai.realisasi / this.nilai.target_bulanan)) * 100;
+    } else if (this.nilai.target_bulanan) {
+      if (!e.oldData.realisasi) {
+        hasil = 0;
+      }else {
+        hasil = (2-(e.oldData.realisasi / this.nilai.target_bulanan)) * 100;
+      }
+    } else if (this.nilai.realisasi) {
+      hasil = (2-(this.nilai.realisasi / e.oldData.target_bulanan)) * 100;
     }
     console.log('hasil', hasil);
     this.nilai.persentase = hasil.toFixed();
@@ -145,16 +166,18 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
 
     if (this.nilai.realisasi || this.nilai.target_bulanan) {
 
-      const persentase = this.hitungPersentase(e);
+      const persentase = this.hitungPersentasePolarisasiNegatif(e);
 
       const nilai = this.hitungNilai(e, persentase);
 
       this.nilai.persentase = this.nilai.persentase.toString();
-      this.nilai.realisasi = this.nilai.realisasi.toString();
-      try {
-        this.nilai.target_bulanan = this.nilai.target_bulanan.toString();
-      } catch (error) {
+      if (this.nilai.realisasi) {
+        this.nilai.realisasi = this.nilai.realisasi.toString();
+      }
+      if (!this.nilai.target_bulanan) {
         this.nilai.target_bulanan = e.oldData.target_bulanan.toString();
+      } else {
+        this.nilai.target_bulanan = this.nilai.target_bulanan;
       }
       this.nilai.nilai = nilai.toPrecision(2);
       this.nilai.nilai = this.nilai.nilai.toString();
