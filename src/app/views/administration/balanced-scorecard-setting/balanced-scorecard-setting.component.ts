@@ -140,8 +140,13 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
     } else if (this.nilai.realisasi) {
       hasil = (2-(this.nilai.realisasi / e.oldData.target_bulanan)) * 100;
     }
-    console.log('hasil', hasil);
-    this.nilai.persentase = hasil.toFixed();
+    console.log('persentase', hasil);
+    if(hasil < 0){
+      hasil = '0';
+      this.nilai.persentase = hasil;
+    } else {
+      this.nilai.persentase = hasil.toFixed();
+    }
     return hasil;
   }
 
@@ -166,7 +171,12 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
 
     if (this.nilai.realisasi || this.nilai.target_bulanan) {
 
-      const persentase = this.hitungPersentasePolarisasiNegatif(e);
+      let persentase;
+      if (e.oldData.polarisasi_id=="1") {
+        persentase = this.hitungPersentase(e);
+      } else {
+        persentase = this.hitungPersentasePolarisasiNegatif(e);
+      }
 
       const nilai = this.hitungNilai(e, persentase);
 
@@ -177,7 +187,7 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
       if (!this.nilai.target_bulanan) {
         this.nilai.target_bulanan = e.oldData.target_bulanan.toString();
       } else {
-        this.nilai.target_bulanan = this.nilai.target_bulanan;
+        this.nilai.target_bulanan = this.nilai.target_bulanan.toString();
       }
       this.nilai.nilai = nilai.toPrecision(2);
       this.nilai.nilai = this.nilai.nilai.toString();
