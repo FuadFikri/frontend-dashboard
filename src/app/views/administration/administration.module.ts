@@ -70,6 +70,12 @@ import { AddComponent } from './balanced-scorecard-setting/add/add.component';
 import { DataComponent } from './balanced-scorecard-setting/data/data.component';
 import { KpiComponent } from './balanced-scorecard-setting/kpi/kpi.component';
 import { SatuanComponent } from './data-master/satuan/satuan.component';
+import { BalancedScorecardSbuComponent } from './balanced-scorecard-sbu/balanced-scorecard-sbu.component';
+import { AddSbuComponent } from './balanced-scorecard-sbu/add-sbu/add-sbu.component';
+import { DataSbuComponent } from './balanced-scorecard-sbu/data-sbu/data-sbu.component';
+import { KpiSbuComponent } from './balanced-scorecard-sbu/kpi-sbu/kpi-sbu.component';
+
+
 
 @NgModule({
   imports: [
@@ -125,6 +131,11 @@ import { SatuanComponent } from './data-master/satuan/satuan.component';
     DataComponent,
     KpiComponent,
     SatuanComponent,
+    BalancedScorecardSbuComponent,
+    AddSbuComponent,
+    DataSbuComponent,
+    KpiSbuComponent,
+    
   ],
   exports: [
   ],

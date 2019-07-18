@@ -16,6 +16,11 @@ import { AddComponent } from './balanced-scorecard-setting/add/add.component';
 import { DataComponent } from './balanced-scorecard-setting/data/data.component';
 import { KpiComponent } from './balanced-scorecard-setting/kpi/kpi.component';
 import { SatuanComponent } from './data-master/satuan/satuan.component';
+import { BalancedScorecardSbuComponent } from './balanced-scorecard-sbu/balanced-scorecard-sbu.component';
+import { AddSbuComponent } from './balanced-scorecard-sbu/add-sbu/add-sbu.component';
+import { DataSbuComponent } from './balanced-scorecard-sbu/data-sbu/data-sbu.component';
+import { KpiSbuComponent } from './balanced-scorecard-sbu/kpi-sbu/kpi-sbu.component';
+
 
 const routes: Routes = [
   {
@@ -101,30 +106,34 @@ const routes: Routes = [
           {
             path: '',
             component: BalancedScorecardSettingComponent,
-            data: {
-              title: 'Balanced Scorecard '
-            }
+          },
+          {
+            path: 'sbu',
+            component: BalancedScorecardSbuComponent,
           },
           {
             path: 'add',
             component: AddComponent,
-            data: {
-              title: 'Add '
-            }
+          },
+          {
+            path: 'add-sbu',
+            component: AddSbuComponent,
           },
           {
             path: 'data',
             component: DataComponent,
-            data: {
-              title: 'data '
-            }
+          },
+          {
+            path: 'data-sbu',
+            component: DataSbuComponent,
           },
           {
             path: 'kpi',
             component: KpiComponent,
-            data: {
-              title: 'daftar KPI '
-            }
+          },
+          {
+            path: 'kpi-sbu',
+            component: KpiSbuComponent,
           }
         ]
       },

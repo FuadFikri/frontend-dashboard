@@ -1,0 +1,65 @@
+<div class="animated fadeIn item-center">
+  <div class="card" id="new47">
+    <div class="card-header">
+      <strong>Daftar KPI<span *ngIf="(isAdd || isEdit) && !isDetail">Add / Edit</span></strong>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-3">
+          <a routerLink="/administration/balanced-scorecard/add-sbu">
+            <dx-button icon="plus" text="Buat KPI"></dx-button>
+
+          </a>
+        </div>
+      </div>
+      <dx-data-grid id="gridContainer" [dataSource]="perspektifSource"
+        [masterDetail]="{ enabled: true, template: 'detail' }" keyExpr="id" [showBorders]="true"
+        [columnHidingEnabled]="false" [rowAlternationEnabled]="true" [columnAutoWidth]="true" [wordWrapEnabled]="true"
+        (onRowUpdating)="updatePerspektif($event)" (onRowRemoving)="deletePerspektif($event)"
+        (onRowInserting)="insertPerspektif($event)">
+        <dxo-editing mode="batch" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+        </dxo-editing>
+
+        <dxi-column dataField="sortnumber" caption="No" width="55">
+          <dxi-validation-rule type="required"></dxi-validation-rule>
+        </dxi-column>
+        <dxi-column dataField="nama_perspektif" caption="Perspektif">
+          <dxi-validation-rule type="required"></dxi-validation-rule>
+        </dxi-column>
+
+        <div *dxTemplate="let perspektif of 'detail'">
+          <div class="master-detail-caption"> </div>
+          <dx-data-grid [dataSource]="getCardBar(perspektif.key)" [showBorders]="true" [columnAutoWidth]="true"
+            (onRowUpdating)="updateKPI($event)" (onRowRemoving)="deleteKPI($event)">
+
+
+            <dxo-editing mode="batch" [allowUpdating]="true" [allowDeleting]="true">
+            </dxo-editing>
+            <dxi-column caption="INDIKATOR " dataField="nama_kpi"></dxi-column>
+            <dxi-column caption="FORMULA" dataField="formula"></dxi-column>
+            <dxi-column caption="SATUAN" dataField="satuan"></dxi-column>
+            <dxi-column caption="BOBOT" dataField="bobot"></dxi-column>
+            <dxi-column dataField="polarisasi_id" caption="POLARISASI">
+              <dxo-lookup [dataSource]="polarisasiSource" displayExpr="display" valueExpr="id">
+              </dxo-lookup>
+            </dxi-column>
+            <dxi-column dataField="target_rkap" caption="TARGET RKAP" dataType="number"></dxi-column>
+
+            <dxi-column dataField="ukuran_id" caption="UKURAN" [allowResizing]="true">
+              <dxo-lookup [dataSource]="ukuranCardBar" displayExpr="ukuran" valueExpr="id">
+              </dxo-lookup>
+            </dxi-column>
+
+            <div *dxTemplate="let cell of 'keteranganTemplate'">
+              <div *ngIf="cell.text=='Masalah'" style="color:rgb(255, 0, 0)">{{cell.text}}</div>
+              <div *ngIf="cell.text=='Baik'" style="color:rgb(0, 212, 0)">{{cell.text}}</div>
+            </div>
+
+
+          </dx-data-grid>
+        </div>
+        <!-- <dxi-sort-by-group-summary-info summaryItem="count"></dxi-sort-by-group-summary-info> -->
+      </dx-data-grid>
+    </div>
+  </div>
+</div>

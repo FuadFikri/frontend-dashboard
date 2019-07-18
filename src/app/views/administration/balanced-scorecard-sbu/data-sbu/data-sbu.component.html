@@ -1,0 +1,73 @@
+<div class="animated fadeIn item-center">
+  <div class="card" id="new47">
+    <div class="card-header">
+      <strong>Balanced Scorecard SBU Administration {{tahun}}<span *ngIf="(isAdd || isEdit) && !isDetail">Add /
+          Edit</span></strong>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-3">
+          <a routerLink="/administration/balanced-scorecard/sbu">
+            <dx-button icon="back" text="Back"></dx-button>
+          </a>
+          &nbsp;
+        </div>
+      </div>
+      <br>
+
+      <dx-data-grid id="gridContainer" [dataSource]="perspektifSource"
+        [masterDetail]="{ enabled: true, template: 'detail' }" keyExpr="id" [showBorders]="true"
+        [columnHidingEnabled]="false" [rowAlternationEnabled]="true" [columnAutoWidth]="true" [wordWrapEnabled]="true"
+        (onRowUpdating)="updatePerspektif($event)" (onRowRemoving)="delete($event)">
+        <!-- <dxo-editing mode="batch"
+                [allowUpdating]="true">
+            </dxo-editing> -->
+        <dxo-master-detail [autoExpandAll]="false"></dxo-master-detail>
+
+
+        <dxi-column dataField="id" caption="No" width="35" [allowEditing]="false">
+          <dxi-validation-rule type="required"></dxi-validation-rule>
+        </dxi-column>
+        <dxi-column dataField="nama_perspektif" caption="Perspektif">
+          <dxi-validation-rule type="required"></dxi-validation-rule>
+        </dxi-column>
+
+        <div *dxTemplate="let perspektif of 'detail'">
+          <div class="master-detail-caption">
+          </div>
+          <dx-data-grid [dataSource]="getCardBar(perspektif.key)" [showBorders]="true" [columnAutoWidth]="true"
+            (onRowUpdating)="updateCardBar($event)" (onRowInserting)="insertCardBar($event,perspektif.key)">
+            <dxo-filter-row [visible]="true" [applyFilter]="auto"></dxo-filter-row>
+            <!-- <dxo-editing mode="batch"
+                          [allowUpdating]="true"
+                          [allowDeleting]="true"> -->
+            <!-- </dxo-editing> -->
+            <dxi-column caption="INDIKATOR" dataField="nama_kpi"></dxi-column>
+            <dxi-column caption="FORMULA" dataField="formula"></dxi-column>
+            <dxi-column caption="SATUAN" dataField="satuan"></dxi-column>
+            <dxi-column dataField="polarisasi" caption="" [allowEditing]="false" cellTemplate="cellTemplate">
+            </dxi-column>
+            <div *dxTemplate="let data of 'cellTemplate'">
+              <div class="text-center">
+                <i class="fa {{data.value}}" id="btn{{data.value}}"></i>
+              </div>
+            </div>
+            <dxi-column caption="BOBOT" dataField="bobot"></dxi-column>
+            <dxi-column dataField="target_rkap" caption="TARGET RKAP" dataType="number"></dxi-column>
+            <dxi-column dataField="target_bulanan" caption="TARGET" dataType="number"></dxi-column>
+            <dxi-column dataField="realisasi" caption="REALISASI" [allowResizing]="true" dataType="number"></dxi-column>
+            <dxi-column dataField="bulan" [allowResizing]="true" [allowEditing]="false">
+              <dxo-lookup [dataSource]="bulanDropDown" displayExpr="bulan" valueExpr="id">
+              </dxo-lookup>
+            </dxi-column>
+            <dxi-column dataField="persentase" caption="%"> </dxi-column>
+            <dxi-column dataField="nilai" caption="NILAI" dataType="number"> </dxi-column>
+          </dx-data-grid>
+        </div>
+      </dx-data-grid>
+
+
+
+    </div>
+  </div>
+</div>
