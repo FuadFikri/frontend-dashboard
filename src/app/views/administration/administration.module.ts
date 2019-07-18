@@ -69,6 +69,7 @@ import { BalancedScorecardSettingComponent } from './balanced-scorecard-setting/
 import { AddComponent } from './balanced-scorecard-setting/add/add.component';
 import { DataComponent } from './balanced-scorecard-setting/data/data.component';
 import { KpiComponent } from './balanced-scorecard-setting/kpi/kpi.component';
+import { SatuanComponent } from './data-master/satuan/satuan.component';
 
 @NgModule({
   imports: [
@@ -123,6 +124,7 @@ import { KpiComponent } from './balanced-scorecard-setting/kpi/kpi.component';
     AddComponent,
     DataComponent,
     KpiComponent,
+    SatuanComponent,
   ],
   exports: [
   ],
