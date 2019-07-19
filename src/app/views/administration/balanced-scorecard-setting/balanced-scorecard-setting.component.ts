@@ -203,7 +203,7 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
       } else {
         this.nilai.target_bulanan = this.nilai.target_bulanan.toString();
       }
-      this.nilai.nilai = nilai.toPrecision(2);
+      this.nilai.nilai = nilai.toPrecision(3);
       this.nilai.nilai = this.nilai.nilai.toString();
     }
 
