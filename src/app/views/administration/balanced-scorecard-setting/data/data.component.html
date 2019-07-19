@@ -1,89 +1,131 @@
 <div class="animated fadeIn item-center">
-    <div class="card" id="new47">
-      <div class="card-header">
-        <strong>Balanced Scorecard Administration {{tahun}}<span *ngIf="(isAdd || isEdit) && !isDetail">Add / Edit</span></strong>
-      </div>
-      <div class="card-body">
-        <div class="row">
-          <div class="col-md-3">
-            <a routerLink="/administration/balanced-scorecard">
-              <dx-button icon="back" text="Back" ></dx-button>
-            </a>
-            &nbsp;
-          </div>
+  <div class="card" id="new47">
+    <div class="card-header">
+      <strong>Balanced Scorecard Administration {{tahun}}<span *ngIf="(isAdd || isEdit) && !isDetail">Add /
+          Edit</span></strong>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-3">
+          <a routerLink="/administration/balanced-scorecard">
+            <dx-button icon="back" text="Back"></dx-button>
+          </a>
+          &nbsp;
         </div>
-        <br>
-              
-                
-             
-            <dx-data-grid id="gridContainer" [dataSource]="perspektifSource" [masterDetail]="{ enabled: true, template: 'detail' }"
-              keyExpr="id" [showBorders]="true"
-              [columnHidingEnabled]="false"
-              [rowAlternationEnabled]="true"
-              [columnAutoWidth]="true"
-              [wordWrapEnabled]="true"
-              (onRowUpdating)="updatePerspektif($event)"
-              (onRowRemoving)="delete($event)">
-              <!-- <dxo-editing mode="batch"
-                  [allowUpdating]="true">
-              </dxo-editing> -->
-              <dxo-master-detail
-                [autoExpandAll]="false"  
-              ></dxo-master-detail>
-              
-               
-              <dxi-column dataField="id"  caption="No" width="35" [allowEditing]="false">
-                  <dxi-validation-rule type="required"></dxi-validation-rule>
-              </dxi-column>
-              <dxi-column
-                  dataField="nama_perspektif"
-                  caption="Perspektif">         
-                  <dxi-validation-rule type="required"></dxi-validation-rule>
-              </dxi-column>
-              
-              <div *dxTemplate="let perspektif of 'detail'">
-                <div class="master-detail-caption">
-                </div>
-                <dx-data-grid [dataSource]="getCardBar(perspektif.key)" [showBorders]="true" [columnAutoWidth]="true"
-                    (onRowUpdating)="updateCardBar($event)"
-                    (onRowInserting)="insertCardBar($event,perspektif.key)"
-                  >
-                    <dxo-filter-row 
-                    [visible]="true" 
-                    [applyFilter]="auto"></dxo-filter-row>
-                  <!-- <dxo-editing mode="batch"
-                            [allowUpdating]="true"
-                            [allowDeleting]="true"> -->
-                  <!-- </dxo-editing> -->
-                  <dxi-column caption="INDIKATOR" dataField="nama_kpi"></dxi-column>
-                  <dxi-column caption="FORMULA" dataField="formula"></dxi-column>
-                  <dxi-column caption="SATUAN" dataField="satuan"></dxi-column>
-                  <dxi-column dataField="polarisasi" caption=""  [allowEditing]="false" cellTemplate="cellTemplate"> </dxi-column>
-                  <div *dxTemplate="let data of 'cellTemplate'">
-                      <div  class="text-center">
-                        <i class="fa {{data.value}}" id="btn{{data.value}}"></i>
-                      </div>
-                    </div>
-                  <dxi-column caption="BOBOT" dataField="bobot"></dxi-column>
-                  <dxi-column dataField="target_rkap" caption="TARGET RKAP" dataType="number"></dxi-column>
-                  <dxi-column dataField="target_bulanan"  caption="TARGET" dataType="number"></dxi-column>
-                  <dxi-column  dataField="realisasi" caption="REALISASI" [allowResizing]="true" dataType="number"></dxi-column>
-                  <dxi-column dataField="bulan" [allowResizing]="true"  [allowEditing]="false">
-                    <dxo-lookup
-                            [dataSource]="bulanDropDown"
-                            displayExpr="bulan"
-                            valueExpr="id">
-                        </dxo-lookup>
-                  </dxi-column>
-                  <dxi-column dataField="persentase" caption="%" > </dxi-column>
-                  <dxi-column dataField="nilai" caption="NILAI" dataType="number" > </dxi-column>
-                </dx-data-grid>
-              </div>
-            </dx-data-grid>
-
-         
-  
       </div>
+      <br>
+
+
+
+      <dx-data-grid id="gridContainer" [dataSource]="perspektifSource"
+        [masterDetail]="{ enabled: true, template: 'detail' }" keyExpr="id" [showBorders]="true"
+        [columnHidingEnabled]="false" [rowAlternationEnabled]="true" [columnAutoWidth]="true" [wordWrapEnabled]="true"
+        (onRowUpdating)="updatePerspektif($event)" (onRowRemoving)="delete($event)"
+        (onRowInserting)="insertPerspektif($event)">
+        <dxo-editing mode="batch" [allowUpdating]="false" [allowAdding]="false">
+        </dxo-editing>
+
+        <dxi-column dataField="sortnumber" caption="No" width="55">
+          <dxi-validation-rule type="required"></dxi-validation-rule>
+        </dxi-column>
+        <dxi-column dataField="nama_perspektif" caption="Perspektif">
+          <dxi-validation-rule type="required"></dxi-validation-rule>
+        </dxi-column>
+
+        <div *dxTemplate="let perspektif of 'detail'">
+          <div class="master-detail-caption"> </div>
+          <dx-data-grid [dataSource]="getCardBar(perspektif.key)" [showBorders]="true" [columnAutoWidth]="true"
+            (onRowUpdating)="updateCardBar($event)" (onRowInserting)="insertCardBar($event,perspektif.key)">
+            <dxo-filter-row [visible]="true" [applyFilter]="auto"></dxo-filter-row>
+
+
+            <dxo-editing mode="batch" [allowUpdating]="true">
+            </dxo-editing>
+            <dxi-column caption="INDIKATOR " dataField="nama_kpi" [allowEditing]="false"></dxi-column>
+            <dxi-column caption="FORMULA" dataField="formula" [allowEditing]="false"></dxi-column>
+            <dxi-column caption="SATUAN" dataField="satuan" [allowEditing]="false"></dxi-column>
+            <dxi-column caption="BOBOT" dataField="bobot" [allowEditing]="false"></dxi-column>
+            <dxi-column dataField="icon_polarisasi" caption="" [allowEditing]="false" cellTemplate="cellTemplate">
+            </dxi-column>
+            <dxi-column dataField="target_rkap" caption="TARGET RKAP" dataType="number" [allowEditing]="false">
+            </dxi-column>
+            <dxi-column dataField="target_bulanan" dataType="number" caption="TARGET {{ bulan }}"></dxi-column>
+            <dxi-column dataField="realisasi" caption="REALISASI" dataType="number"></dxi-column>
+
+            <dxi-column dataField="persentase" caption="%" [allowEditing]="false" [customizeText]="persen">
+            </dxi-column>
+            <dxi-column dataField="nilai" caption="NILAI" [allowEditing]="false"> </dxi-column>
+            <dxi-column dataField="keterangan" caption="Ket" [allowEditing]="false" cellTemplate="keteranganTemplate">
+            </dxi-column>
+            <dxi-column dataField="bulan" [allowResizing]="true" [allowEditing]="false">
+              <dxo-lookup [dataSource]="bulanDropDown" displayExpr="bulan" valueExpr="id">
+              </dxo-lookup>
+            </dxi-column>
+            <dxi-column dataField="link" caption="FILE" [allowEditing]="false" cellTemplate="downloadTemplate">
+            </dxi-column>
+            <dxi-column dataField="id_nilai" caption="UPLOAD" [allowEditing]="true" cellTemplate="fileTemplate">
+            </dxi-column>
+
+            <!-- <dxi-column dataField="ukuran_id" caption="UKURAN" [allowResizing]="true">
+              <dxo-lookup [dataSource]="ukuranCardBar" displayExpr="ukuran" valueExpr="id">
+              </dxo-lookup>
+            </dxi-column> -->
+            <div *dxTemplate="let data of 'cellTemplate'">
+              <div class="text-center">
+                <i class="fa {{data.value}}" id="btn{{data.value}}"></i>
+              </div>
+            </div>
+
+            <div *dxTemplate="let cell of 'keteranganTemplate'">
+              <div *ngIf="cell.text=='Masalah'" style="color:rgb(255, 0, 0)">{{cell.text}}</div>
+              <div *ngIf="cell.text=='Baik'" style="color:rgb(0, 212, 0)">{{cell.text}}</div>
+            </div>
+
+            <div *dxTemplate="let cell of 'fileTemplate'">
+              <dx-button id="button" [stylingMode]="buttonMode" icon="upload" text="" type="default" [width]="50"
+                (onClick)="openModal(cell)">
+              </dx-button>
+            </div>
+            <div *dxTemplate="let cell of 'downloadTemplate'">
+              <a (click)="openInNewTab(cell.data.link)" target="_blank"
+                style="color: blue; text-decoration: underline; cursor: pointer;"> {{cell.data.nama_file}}</a>
+
+            </div>
+
+            <dxo-summary>
+              <dxi-total-item column="bobot" summaryType="sum" [customizeText]="customizeBobot">
+              </dxi-total-item>
+              <dxi-total-item column="nilai" summaryType="sum" [customizeText]="customizeNilai">
+              </dxi-total-item>
+            </dxo-summary>
+          </dx-data-grid>
+        </div>
+        <!-- <dxi-sort-by-group-summary-info summaryItem="count"></dxi-sort-by-group-summary-info> -->
+      </dx-data-grid>
+
+
+
     </div>
   </div>
-  
+</div>
+
+<dx-popup [width]="320" [height]="290" [showTitle]="true" [title]="judulPopup" [dragEnabled]="false"
+  [closeOnOutsideClick]="true" [(visible)]="popupVisible">
+  <div *dxTemplate="let data of 'content'">
+    <div class='popup-property-details'>
+      <form id="form" (submit)="uploadFile($event)" enctype="multipart/form-data">
+
+        <div id="fileuploader-container">
+          <dx-file-uploader selectButtonText="Pilih File" labelText="" accept="*" uploadMode="useForm"
+            (change)="selectFile($event)">
+          </dx-file-uploader>
+        </div>
+
+        <br>
+
+        <dx-button (click)="uploadFile($event)" type="success" text="Upload"></dx-button>
+
+      </form>
+    </div>
+  </div>
+</dx-popup>
