@@ -65,8 +65,8 @@
             <dxi-column dataField="nilai" caption="NILAI" [allowEditing]="false"> </dxi-column>
             <dxi-column dataField="keterangan" caption="Ket" [allowEditing]="false" cellTemplate="keteranganTemplate">
             </dxi-column>
-            <dxi-column dataField="file"  caption="FILE" [allowEditing]="true"> </dxi-column>
-            <dxi-column  caption="UPLOAD" [allowEditing]="true" cellTemplate="fileTemplate">
+            <dxi-column dataField="file" caption="FILE" [allowEditing]="true"> </dxi-column>
+            <dxi-column dataField="id_nilai" caption="UPLOAD" [allowEditing]="true" cellTemplate="fileTemplate">
             </dxi-column>
 
             <dxi-column dataField="ukuran_id" caption="UKURAN" [allowResizing]="true">
@@ -85,7 +85,8 @@
             </div>
 
             <div *dxTemplate="let cell of 'fileTemplate'">
-              <dx-button id="button" [stylingMode]="outlined" icon="upload" text="" type="success" [width]="60" (onClick)="updateClick()">
+              <dx-button id="button" [stylingMode]="buttonMode" icon="upload" text="" type="success" [width]="60"
+                (onClick)="openModal(cell)">
               </dx-button>
             </div>
 
@@ -105,3 +106,23 @@
     </div>
   </div>
 </div>
+
+<dx-popup [width]="320" [height]="290" [showTitle]="true" [title]="judulPopup" [dragEnabled]="false"
+  [closeOnOutsideClick]="true" [(visible)]="popupVisible">
+  <div *dxTemplate="let data of 'content'">
+    <div class='popup-property-details'>
+      <form id="form" (submit)="uploadFile($event)" enctype="multipart/form-data">
+        
+            <div id="fileuploader-container">
+              <dx-file-uploader selectButtonText="Pilih File" labelText="" accept="*" uploadMode="useForm"  (change)="selectFile($event)">
+              </dx-file-uploader>
+            </div>
+         
+            <br>
+
+            <dx-button  (click)="uploadFile($event)" type="success" text="Upload"></dx-button>
+         
+      </form>
+    </div>
+  </div>
+</dx-popup>

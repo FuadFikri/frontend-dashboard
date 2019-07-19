@@ -17,6 +17,8 @@ import {
   Nilai
 } from './Model';
 import notify from 'devextreme/ui/notify';
+import { HttpRequest, HttpClient, HttpEventType } from '@angular/common/http';
+import { AppConstant } from 'app/app.constant';
 @Component({
   selector: 'app-balanced-scorecard-setting',
   templateUrl: './balanced-scorecard-setting.component.html',
@@ -43,6 +45,11 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
     bulan: ''
   };
 
+  buttonMode:string="outlined";
+  id_nilai; //untuk input hidden ketika upload
+  file:any;
+  popupVisible:boolean=false;
+
   options = {
     message: '',
     closeOnOutsideClick: true,
@@ -53,8 +60,9 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
   totalBobot = 0;
+  formData: FormData;
 
-  constructor(private service: BalancedScorecardService) {
+  constructor(private service: BalancedScorecardService, private a: AppConstant,private httpClient: HttpClient) {
     this.cardBarSource = [];
     this.now = new Date();
     this.queryParams.tahun = this.now.getFullYear().toString();
@@ -252,4 +260,44 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
     }
   }
 
+  judulPopup="Upload File";
+  openModal(cell) {
+    this.popupVisible = true;
+    this.id_nilai = cell.value;
+  }
+
+  uploadFile(e) {
+    e.preventDefault;
+    console.log(e);
+    this.popupVisible = false;
+
+    
+    this.formData = new FormData();
+    this.formData.append("id_nilai",this.id_nilai);
+    this.formData.append("file",this.file);
+
+
+    this.service.upload(this.formData).subscribe(res => {
+      if (res.d == 1 && res.s == 200) {
+        this.popupVisible = false;
+        this.formData = new FormData();
+        this.options.message = 'Upload Berhasil';
+        notify(this.options, 'success', 3000);
+        console.log('updating success', res);
+      } else {
+        this.options.message = 'Upload Gagal';
+        notify(this.options, 'error', 3000);
+        console.log('updating failed ', res);
+      }
+    }, err => {
+      this.options.message = 'Creating Failed';
+      notify(this.options, 'server error', 3000);
+      console.log('server error ', err);
+    });
+  }
+
+  selectFile(e) {
+    console.log(e.target.files)
+    this.file = e.target.files[0]
+  }
 }

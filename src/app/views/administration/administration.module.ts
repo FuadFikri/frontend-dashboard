@@ -11,7 +11,7 @@ import {
 import {
   TranslateModule
 } from '@ngx-translate/core';
-
+import { FormsModule } from '@angular/forms';
 import {
   DxButtonModule,
   DxDataGridModule,
@@ -30,6 +30,7 @@ import {
   DxValidationSummaryModule,
   DxTextBoxModule,
   DxNumberBoxModule,
+  DxPopupModule,
 } from 'devextreme-angular';
 
 import {
@@ -101,7 +102,9 @@ import { KpiSbuComponent } from './balanced-scorecard-sbu/kpi-sbu/kpi-sbu.compon
     DxValidationSummaryModule,
     DxTextBoxModule,
     DxNumberBoxModule,
-    DxButtonModule
+    DxButtonModule,
+    DxPopupModule,
+    FormsModule
     ],
   declarations: [
     MasterAssetComponent,

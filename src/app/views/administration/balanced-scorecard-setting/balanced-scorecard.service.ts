@@ -133,4 +133,9 @@ export class BalancedScorecardService {
   getTahun() {
     return this.http.get <any> (this._urlCardBar + '/getTahun');
   }
+
+
+  upload(data:any){
+    return this.http.post <any> (this._urlNilai + "/uploadFile",data);
+  }
 }
