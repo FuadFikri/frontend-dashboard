@@ -34,8 +34,8 @@ export class AddComponent implements OnInit {
 
     this.ukuranCardBar = this._service.getUkuranCardBar();
     this.cardBar = new CardBar(undefined, "","","","","","","","","","","","","","","");
-    this.KPI = new KPI(undefined,"","","","","","","","","");
-    this.nilai = new Nilai(undefined, "0","0","0","0","","","");
+    this.KPI = new KPI(undefined,"","","","","","","","","","");
+    this.nilai = new Nilai(undefined, "0","0","0","0","","","",null);
    }
 
   ngOnInit() {
