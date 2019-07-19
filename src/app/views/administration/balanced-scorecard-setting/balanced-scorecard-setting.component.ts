@@ -1,7 +1,8 @@
 import {
   Component,
   OnInit,
-  OnDestroy
+  OnDestroy,
+  ViewChild
 } from '@angular/core';
 import {
   BalancedScorecardService
@@ -19,6 +20,7 @@ import {
 import notify from 'devextreme/ui/notify';
 import { HttpRequest, HttpClient, HttpEventType } from '@angular/common/http';
 import { AppConstant } from 'app/app.constant';
+import { DxDataGridComponent } from 'devextreme-angular';
 @Component({
   selector: 'app-balanced-scorecard-setting',
   templateUrl: './balanced-scorecard-setting.component.html',
@@ -26,6 +28,7 @@ import { AppConstant } from 'app/app.constant';
   providers: [BalancedScorecardService]
 })
 export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
+  @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
   resourceUrlRole ;
   perspektifSource: Perspektif;
   cardBars: any;
@@ -94,6 +97,7 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
   }
 
   getCardBar(key) {
+    // this.refresh()
     let item = this.cardBarSource.find((i) => i.key === key);
     if (!item) {
       item = {
@@ -283,6 +287,8 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
       if (res.d == 1 && res.s == 200) {
         this.popupVisible = false;
         this.formData = new FormData();
+        this.dataGrid.instance.collapseAll(-1);
+        this.refresh();
         this.options.message = 'Upload Berhasil';
         notify(this.options, 'success', 3000);
         console.log('updating success', res);
@@ -309,5 +315,20 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
     const newTab = window.open(fullUrl, '_blank')
     // set opener to null so that no one can references it
     newTab.opener = null
+}
+
+refresh() {
+  this.bulan = this.bulanDropDown[this.now.getMonth()].bulan;
+    const tahun = this.now.getFullYear().toString();
+    this.cardBarSource = [];
+  this.service.getCardBarByTahunDanBulan(tahun, this.bulanDropDown[this.now.getMonth()].id).subscribe(resp => {
+    // object to array
+    this.cardBars = Object.keys(resp.d).map(function (index) {
+      const card = resp.d[index];
+      return card;
+    });
+    console.log('cards', this.cardBars);
+  });
+  this.dataGrid.instance.refresh();
 }
 }
