@@ -82,7 +82,7 @@ export class Nilai {
   keterangan: any;
   kpi_id: any;
   bulan: any;
-  file: any;
+  
 
   constructor(
     id_nilai: any,
@@ -93,7 +93,7 @@ export class Nilai {
     keterangan: any,
     kpi_id: any,
     bulan: any,
-    file: any
+    
   ) {
 
   }
