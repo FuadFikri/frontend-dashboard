@@ -65,7 +65,8 @@
             <dxi-column dataField="nilai" caption="NILAI" [allowEditing]="false"> </dxi-column>
             <dxi-column dataField="keterangan" caption="Ket" [allowEditing]="false" cellTemplate="keteranganTemplate">
             </dxi-column>
-            <dxi-column dataField="file" caption="FILE" [allowEditing]="true"> </dxi-column>
+            <dxi-column dataField="link" caption="FILE" [allowEditing]="false" cellTemplate="downloadTemplate">
+            </dxi-column>
             <dxi-column dataField="id_nilai" caption="UPLOAD" [allowEditing]="true" cellTemplate="fileTemplate">
             </dxi-column>
 
@@ -88,6 +89,11 @@
               <dx-button id="button" [stylingMode]="buttonMode" icon="upload" text="" type="success" [width]="60"
                 (onClick)="openModal(cell)">
               </dx-button>
+            </div>
+            <div *dxTemplate="let cell of 'downloadTemplate'">
+              <a (click)="openInNewTab(cell.data.link)" target="_blank"
+                style="color: blue; text-decoration: underline; cursor: pointer;"> {{cell.data.nama_file}}</a>
+
             </div>
 
             <dxo-summary>
@@ -112,16 +118,17 @@
   <div *dxTemplate="let data of 'content'">
     <div class='popup-property-details'>
       <form id="form" (submit)="uploadFile($event)" enctype="multipart/form-data">
-        
-            <div id="fileuploader-container">
-              <dx-file-uploader selectButtonText="Pilih File" labelText="" accept="*" uploadMode="useForm"  (change)="selectFile($event)">
-              </dx-file-uploader>
-            </div>
-         
-            <br>
 
-            <dx-button  (click)="uploadFile($event)" type="success" text="Upload"></dx-button>
-         
+        <div id="fileuploader-container">
+          <dx-file-uploader selectButtonText="Pilih File" labelText="" accept="*" uploadMode="useForm"
+            (change)="selectFile($event)">
+          </dx-file-uploader>
+        </div>
+
+        <br>
+
+        <dx-button (click)="uploadFile($event)" type="success" text="Upload"></dx-button>
+
       </form>
     </div>
   </div>

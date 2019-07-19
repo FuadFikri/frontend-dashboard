@@ -26,6 +26,7 @@ import { AppConstant } from 'app/app.constant';
   providers: [BalancedScorecardService]
 })
 export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
+  resourceUrlRole ;
   perspektifSource: Perspektif;
   cardBars: any;
   cardBarSource: any;
@@ -66,6 +67,7 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
     this.cardBarSource = [];
     this.now = new Date();
     this.queryParams.tahun = this.now.getFullYear().toString();
+    this.resourceUrlRole= a.SERVER_URL;
   }
   ngOnInit() {
     this.service.getTahun().subscribe(res => {
@@ -300,4 +302,12 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
     console.log(e.target.files)
     this.file = e.target.files[0]
   }
+
+  openInNewTab(url:any) {
+    // open link in new tab
+    let fullUrl= this.resourceUrlRole+ "/"+url;
+    const newTab = window.open(fullUrl, '_blank')
+    // set opener to null so that no one can references it
+    newTab.opener = null
+}
 }
