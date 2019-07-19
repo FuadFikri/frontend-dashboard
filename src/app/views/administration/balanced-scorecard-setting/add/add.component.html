@@ -28,7 +28,7 @@
             </div>
           </div>
           <div class="dx-field">
-            <div class="dx-field-label">Indikator</div>
+            <div class="dx-field-label">Indikator Kinerja Kunci</div>
             <div class="dx-field-value">
               <dx-text-box [(value)]="KPI.nama_kpi">
                 <dx-validator>
@@ -50,11 +50,12 @@
           <div class="dx-field">
             <div class="dx-field-label">Satuan</div>
             <div class="dx-field-value">
-              <dx-text-box [(value)]="KPI.satuan">
+              <dx-select-box [dataSource]="satuanDropDown" [(value)]="KPI.satuan" displayExpr="satuan"
+                valueExpr="satuan">
                 <dx-validator>
                   <dxi-validation-rule type="required" message="Satuan harus diisi"></dxi-validation-rule>
                 </dx-validator>
-              </dx-text-box>
+              </dx-select-box>
             </div>
           </div>
           <div class="dx-field">

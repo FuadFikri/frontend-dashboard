@@ -3,18 +3,20 @@ import { BalancedScorecardService } from '../balanced-scorecard.service';
 import { CardBar,KPI, Nilai } from '../Model';
 import notify from 'devextreme/ui/notify';
 import { Router } from '@angular/router';
+import { SatuanService } from '../../data-master/satuan/satuan.service';
 
 @Component({
   selector: 'app-add',
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.scss'],
-  providers: [BalancedScorecardService]
+  providers: [BalancedScorecardService,SatuanService]
 })
 export class AddComponent implements OnInit {
 
   perspektifDropDown:any;
   ukuranCardBar:any;
   polarisasiDropDown:any;
+  satuanDropDown:any;
   cardBar;
   KPI;
   nilai;
@@ -27,7 +29,7 @@ export class AddComponent implements OnInit {
     closeOnBackButton: true,
   };
 
-  constructor(private _service: BalancedScorecardService, private _router : Router) {
+  constructor(private _service: BalancedScorecardService, private _router : Router, private satuanService: SatuanService) {
     this._service.getPerspektifs().subscribe( res => {
       this.perspektifDropDown = res.d;
     });
@@ -40,6 +42,10 @@ export class AddComponent implements OnInit {
 
   ngOnInit() {
     this.polarisasiDropDown = this._service.getPolarisasi();
+    
+    this.satuanService.getSatuans().subscribe(res => {
+      this.satuanDropDown = res.d;
+    })
   }
 
   insert(e) {
