@@ -257,7 +257,7 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
     return 'Bobot : ' + data.value;
   }
   customizeNilai(data) {
-    return 'Nilai : ' + data.value;
+    return 'Nilai : ' + data.value.toPrecision(3);
   }
 
   persen(cellInfo) {
