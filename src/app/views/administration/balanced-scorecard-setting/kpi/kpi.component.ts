@@ -12,16 +12,18 @@ import {
   Perspektif
 } from '../Model';
 import notify from 'devextreme/ui/notify';
+import { SatuanService } from '../../data-master/satuan/satuan.service';
 @Component({
   selector: 'app-kpi',
   templateUrl: './kpi.component.html',
   styleUrls: ['./kpi.component.scss'],
-  providers: [BalancedScorecardService]
+  providers: [BalancedScorecardService,SatuanService]
 })
 export class KpiComponent implements OnInit {
 
   kpi: KPI;
   polarisasiSource;
+  satuanDropDown;
   ukuranCardBar;
   perspektifSource;
   cardBarSource: any;
@@ -37,12 +39,15 @@ export class KpiComponent implements OnInit {
     closeOnBackButton: true,
   };
   perspektif: any;
-  constructor(private _service: BalancedScorecardService) {
+  constructor(private _service: BalancedScorecardService, private satuanService: SatuanService) {
     this.cardBarSource = [];
     this.now = new Date();
   }
 
   ngOnInit() {
+    this.satuanService.getSatuans().subscribe(res => {
+      this.satuanDropDown = res.d;
+    })
     this.polarisasiSource = this._service.getPolarisasi();
     this.ukuranCardBar = this._service.getUkuranCardBar();
     this._service.getTahun().subscribe(res => {

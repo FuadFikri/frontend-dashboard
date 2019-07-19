@@ -50,7 +50,13 @@
                   </dxo-editing>
                   <dxi-column caption="INDIKATOR KINERJA KUNCI " dataField="nama_kpi"  ></dxi-column>
                   <dxi-column caption="FORMULA" dataField="formula" ></dxi-column>
-                  <dxi-column caption="SATUAN" dataField="satuan"></dxi-column>
+                  <dxi-column caption="SATUAN" dataField="satuan">
+                    <dxo-lookup
+                            [dataSource]="satuanDropDown"
+                            displayExpr="satuan"
+                            valueExpr="satuan">
+                        </dxo-lookup>
+                  </dxi-column>
                   <dxi-column caption="BOBOT" dataField="bobot" ></dxi-column>
                   <dxi-column dataField="polarisasi_id" caption="POLARISASI"  >
                       <dxo-lookup
