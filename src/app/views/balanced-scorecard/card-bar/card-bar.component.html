@@ -5,15 +5,57 @@
     <div class="card text-white bg-{{color}}" style="height:auto; width:auto">
       <div class="card-body">
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-6">
             <small>{{item.nama_kpi}}</small>
           </div>
-          <div class="col-md-8" (mouseover)="hover=true" (mouseleave)="hover=false">
-            <div class="row">
+          <div class="col-md-6" (mouseover)="hover=true" (mouseleave)="hover=false">
+            <table id="tabel">
+              
+
+                <tr>
+                  <td width="20px" style="margin-right: 2px;">
+                    <h2>{{item.target_rkap}}</h2>
+                  </td>
+                  <td width="5px"></td>
+                  <td>
+                    <div class="progress progress-white progress-xs mt-3">
+                      <div aria-valuemax="max" aria-valuemin="0" aria-valuenow="25" class="progress-bar"
+                        role="progressbar" [style.width.%]="item.target_rkap"></div>
+                    </div>
+  
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <h2>{{item.target_bulanan}}</h2>
+                  </td>
+                  <td width="5px"></td>
+                  <td>
+                    <div class="progress progress-white progress-xs mt-3">
+                      <div aria-valuemax="item.target_bulanan" aria-valuemin="0" aria-valuenow="25" class="progress-bar"
+                        role="progressbar" [style.width.%]="item.target_bulanan"></div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <h2>{{item.realisasi}}</h2>
+                  </td>
+                  <td width="5px"></td>
+                  <td>
+                    <div class="progress progress-white progress-xs mt-3">
+                      <div aria-valuemax="item.target_bulanan" aria-valuemin="0" aria-valuenow="25" class="progress-bar"
+                        role="progressbar" [style.width.%]="item.realisasi"></div>
+                    </div>
+                  </td>
+                </tr>
+              
+            </table>
+            <!-- <div class="row">
               <div class="col-md-4">
                 <span>{{item.target_rkap}}</span>
               </div>
-              <div class="col-md-8">
+              <div class="col-md-12">
                 <div class="progress progress-white progress-xs mt-3">
                   <div aria-valuemax="item.target_rkap" aria-valuemin="0" aria-valuenow="25" class="progress-bar"
                     role="progressbar" [style.width.%]="item.target_rkap"></div>
@@ -41,7 +83,7 @@
                     [style.width.%]="item.realisasi"></div>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
