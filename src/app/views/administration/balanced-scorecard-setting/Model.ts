@@ -55,6 +55,7 @@ export class KPI {
   ukuran_id: any
   polarisasi_id: any;
   sumber: any;
+  kpi_subdir: any;
 
   constructor(
     id: any,
@@ -67,7 +68,8 @@ export class KPI {
     bobot: any,
     ukuran_id: any,
     polarisasi_id: any,
-    sumber: any
+    sumber: any,
+    kpi_subdir: any
   ) {
 
   }
