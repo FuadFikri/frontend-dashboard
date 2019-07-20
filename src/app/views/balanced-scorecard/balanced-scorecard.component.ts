@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BalancedScorecardService } from '../administration/balanced-scorecard-setting/balanced-scorecard.service';
 import { CardBar } from '../administration/balanced-scorecard-setting/Model';
-
+import { CarouselComponent } from 'ngx-carousel-lib';
 @Component({
   selector: 'app-balanced-scorecard',
   templateUrl: './balanced-scorecard.component.html',
@@ -9,7 +9,7 @@ import { CardBar } from '../administration/balanced-scorecard-setting/Model';
   providers: [BalancedScorecardService]
 })
 export class BalancedScorecardComponent implements OnInit {
-
+  @ViewChild('topCarousel') topCarousel: CarouselComponent;
   primary = "primary";
   info = "info";
   secondary = "secondary";
@@ -56,6 +56,23 @@ export class BalancedScorecardComponent implements OnInit {
           console.log(this.daftarCardBarFiltered)
       })
     })
+  }
+
+  loop(e) {
+    let lastIndex = this.daftarCardBarFiltered.length;
+    
+    if (e.activeIndex === lastIndex-1) {
+      
+      window.setTimeout(() => {
+        this.topCarousel.slideTo(0);
+        
+      }, 5000);
+      window.clearTimeout();
+      console.log("to slide 0 = ", e.activeIndex);
+      console.log("delay= ", this.topCarousel.delayAutoPlay);
+    }
+    window.clearTimeout();
+    console.log("active index = ", e.activeIndex);
   }
 
 }
