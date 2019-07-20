@@ -34,7 +34,10 @@ export class BalancedScorecardComponent implements OnInit {
 
   ngOnInit() {
     let tahun = this.now.getFullYear().toString();
-    let bulan = this.now.getMonth()+1
+    let bulan = this.now.getMonth() // getMonth mulai dari 0
+    if(bulan == 0){
+      bulan = 12;
+    }
     console.log(bulan,tahun)
     this._service.getPerspektifs().subscribe(res => {
       this.daftarPerspektif = res.d
