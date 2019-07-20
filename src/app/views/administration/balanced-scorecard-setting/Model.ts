@@ -13,7 +13,7 @@ export class CardBar {
   realisasi: any;
   bulan: any;
   tahun: any;
-  formula: any;
+  kpi_measurement: any;
   satuan: any;
   bobot: any;
   persentase: any;
@@ -31,7 +31,7 @@ export class CardBar {
     realisasi: any,
     bulan: any,
     tahun: any,
-    formula: any,
+    kpi_measurement: any,
     satuan: any,
     bobot: any,
     persentase: any,
@@ -49,7 +49,7 @@ export class KPI {
   perspektif_id: any;
   target_rkap: any;
   tahun: any;
-  formula: any;
+  kpi_measurement: any;
   satuan: any;
   bobot: any;
   ukuran_id: any
@@ -62,7 +62,7 @@ export class KPI {
     perspektif_id: any,
     target_rkap: any,
     tahun: any,
-    formula: any,
+    kpi_measurement: any,
     satuan: any,
     bobot: any,
     ukuran_id: any,
