@@ -21,7 +21,9 @@ import {
 import notify from 'devextreme/ui/notify';
 import { HttpRequest, HttpClient, HttpEventType } from '@angular/common/http';
 import { AppConstant } from 'app/app.constant';
-import { DxDataGridComponent } from 'devextreme-angular';
+import { DxDataGridComponent, DxFileUploaderComponent } from 'devextreme-angular';
+
+
 @Component({
   selector: 'app-balanced-scorecard-setting',
   templateUrl: './balanced-scorecard-setting.component.html',
@@ -30,6 +32,7 @@ import { DxDataGridComponent } from 'devextreme-angular';
 })
 export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
   @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
+  @ViewChild(DxFileUploaderComponent) fileUploader: DxFileUploaderComponent;
   resourceUrlRole ;
   perspektifSource: Perspektif;
   cardBars: any;
@@ -317,6 +320,7 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
       if (res.d == 1 && res.s == 200) {
         this.popupVisible = false;
         this.formData = new FormData();
+        this.fileUploader.instance.dispose();
         this.dataGrid.instance.collapseAll(-1);
         this.refresh();
         this.options.message = 'Upload Berhasil';
