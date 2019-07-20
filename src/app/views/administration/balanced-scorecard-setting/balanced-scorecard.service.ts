@@ -68,10 +68,14 @@ export class BalancedScorecardService {
     const username  = localStorage.getItem('username');
     const token     = localStorage.getItem('token');
 
-    return this.http.post <any> (this._urlCardBar + '/keyval?tahun=' + tahun + '&bulan=' + bulan, {
+    return this.http.post <any> (this._urlCardBar + '/getCardBar?tahun='+tahun+'&bulan='+bulan, {
       username : username,
       token : token,
     } )
+    // return this.http.post <any> (this._urlCardBar + '/keyval?tahun=' + tahun + '&bulan=' + bulan, {
+    //   username : username,
+    //   token : token,
+    // } )
   }
   getCardBar(): Observable<any> {
     const username  = localStorage.getItem('username');
@@ -137,5 +141,9 @@ export class BalancedScorecardService {
 
   upload(data:any){
     return this.http.post <any> (this._urlNilai + "/uploadFile",data);
+  }
+
+  getTotalNilai(tahun:string, bulan:string) {
+    return this.http.get <any> (this._urlCardBar + '/totalNilai?tahun='+tahun + '&bulan='+bulan);
   }
 }

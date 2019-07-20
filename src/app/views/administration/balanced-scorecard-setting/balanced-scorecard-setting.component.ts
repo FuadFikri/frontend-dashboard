@@ -15,7 +15,8 @@ import ArrayStore from 'devextreme/data/array_store';
 import {
   Perspektif,
   CardBar,
-  Nilai
+  Nilai,
+  TotalNilai
 } from './Model';
 import notify from 'devextreme/ui/notify';
 import { HttpRequest, HttpClient, HttpEventType } from '@angular/common/http';
@@ -63,7 +64,9 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
   };
   subscription: Subscription;
 
-  totalBobot = 0;
+  bobots:any=[];
+  totalBobot=0;
+  totalNilai:TotalNilai;
   formData: FormData;
 
   constructor(private service: BalancedScorecardService, private a: AppConstant,private httpClient: HttpClient) {
@@ -71,6 +74,7 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
     this.now = new Date();
     this.queryParams.tahun = this.now.getFullYear().toString();
     this.resourceUrlRole= a.SERVER_URL;
+    this.totalNilai = new TotalNilai(0);
   }
   ngOnInit() {
     this.service.getTahun().subscribe(res => {
@@ -92,12 +96,37 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
         return card;
       });
       console.log('cards', this.cardBars);
+      
+      
+      // hitung total bobot
+      this.bobots = Object.keys(resp.d).map(function (index) {
+        const bobot = resp.d[index].bobot;
+        return bobot;
+      });
+      
+      this.bobots.forEach(element => {
+        this.totalBobot += parseInt(element);
+      });
     });
 
+    this.getTotalNilai()
+  }
+
+  // total nilai keseluruhan bulan ini /=>paling bawah 
+  getTotalNilai() {
+    const tahun = this.now.getFullYear().toString();
+    this.service.getTotalNilai(tahun, this.bulanDropDown[(this.now.getMonth())-1].id)
+      .subscribe(res => {
+        let total = new Number(res.d[0].sum);
+        console.log("total",total);
+        console.log("res",res);
+        
+        this.totalNilai.total = total.toPrecision(3);
+        console.log("final",this.totalNilai);
+      })
   }
 
   getCardBar(key) {
-    // this.refresh()
     let item = this.cardBarSource.find((i) => i.key === key);
     if (!item) {
       item = {
@@ -210,6 +239,7 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
     console.log('nilai', this.nilai);
     this.service.updateNilai(this.nilai).subscribe(res => {
       if (res.d == 1) {
+        this.getTotalNilai();
         this.options.message = 'Success Updated';
         notify(this.options, 'success', 3000);
         console.log('updating success', this.nilai);
