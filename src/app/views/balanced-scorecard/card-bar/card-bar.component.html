@@ -6,7 +6,9 @@
       <div class="card-body">
         <div class="row">
           <div class="col-md-6">
-            <small>{{item.nama_kpi}}</small>
+            <p class="my-title">
+              {{item.nama_kpi}}
+            </p>
           </div>
           <div class="col-md-6" (mouseover)="hover=true" (mouseleave)="hover=false">
             <table id="tabel">
@@ -14,7 +16,7 @@
 
                 <tr>
                   <td width="20px" style="margin-right: 2px;">
-                    <h2>{{item.target_rkap}}</h2>
+                    <p>{{item.target_rkap}}</p>
                   </td>
                   <td width="5px"></td>
                   <td>
@@ -27,7 +29,7 @@
                 </tr>
                 <tr>
                   <td>
-                    <h2>{{item.target_bulanan}}</h2>
+                    <p>{{item.target_bulanan}}</p>
                   </td>
                   <td width="5px"></td>
                   <td>
@@ -39,7 +41,7 @@
                 </tr>
                 <tr>
                   <td>
-                    <h2>{{item.realisasi}}</h2>
+                    <p>{{item.realisasi}}</p>
                   </td>
                   <td width="5px"></td>
                   <td>
