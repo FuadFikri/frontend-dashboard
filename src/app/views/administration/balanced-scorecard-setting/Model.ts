@@ -100,3 +100,9 @@ export class Nilai {
 
   }
 }
+
+export class TotalNilai{
+  total:any;
+
+  constructor(total:any) { }
+}
