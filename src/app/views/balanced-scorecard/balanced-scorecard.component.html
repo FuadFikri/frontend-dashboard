@@ -15,7 +15,7 @@
     <div id="kotak" >
       <div class="row">
         <div class="col-md-2">
-          <button type="button" class="btn btn-warning align-middle" >
+          <button type="button" class="btn btn-warning align-middle" *ngIf="daftarPerspektif">
             {{daftarPerspektif[0].nama_perspektif}}
           </button>
         </div>
@@ -36,7 +36,7 @@
     <div id="kotak" >
       <div class="row">
         <div class="col-md-2">
-          <button type="button" class="btn btn-warning align-middle">
+          <button type="button" class="btn btn-warning align-middle" *ngIf="daftarPerspektif[1]">
             {{daftarPerspektif[1].nama_perspektif}}
           </button>
         </div>
