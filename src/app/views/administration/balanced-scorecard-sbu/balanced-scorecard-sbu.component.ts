@@ -87,11 +87,11 @@ export class BalancedScorecardSbuComponent implements OnInit, OnDestroy {
     this.subscription = this.service.getPerspektifs().subscribe(resp => {
       this.perspektifSource = resp.d;
     })
-    this.bulan = this.bulanDropDown[this.now.getMonth()].bulan;
+    this.bulan = this.bulanDropDown[(this.now.getMonth())-1].bulan;
     const tahun = this.now.getFullYear().toString();
 
     console.log(this.bulan, tahun);
-    this.service.getCardBarByTahunDanBulanLevelSatu(tahun, this.bulanDropDown[this.now.getMonth()].id,daerah).subscribe(resp => {
+    this.service.getCardBarByTahunDanBulanLevelSatu(tahun, this.bulanDropDown[(this.now.getMonth())-1].id,daerah).subscribe(resp => {
       // object to array
       this.cardBars = Object.keys(resp.d).map(function (index) {
         const card = resp.d[index];
