@@ -6,17 +6,21 @@
     </div>
     <div class="card-body">
       <div class="row">
-
-        <div class="col-md-3">
+          <div class="col-md-6">
+              <a routerLink="/administration/balanced-scorecard/sbu">
+                <dx-button icon="back" text="Back"></dx-button>
+              </a>
+            </div>
+        <div class="col-md-2">
           <dx-select-box [dataSource]="tahunSelectBoxSource" displayExpr="tahun" placeholder="Pilih Tahun"
             valueExpr="tahun" [(value)]="queryParams.tahun"></dx-select-box>
           &nbsp;
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
           <dx-select-box [dataSource]="bulanDropDown" displayExpr="bulan" placeholder="Pilih Bulan" valueExpr="id"
             [(value)]="queryParams.bulan"></dx-select-box>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
           <a [routerLink]="url" [queryParams]="queryParams">
             <dx-button icon="fa fa-database" text="Lihat Data"></dx-button>
           </a>

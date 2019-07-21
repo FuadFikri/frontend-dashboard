@@ -49,8 +49,12 @@
             </dxi-column>
             <dxi-column dataField="target_rkap" caption="TARGET RKAP" dataType="number" [allowEditing]="false">
             </dxi-column>
-            <dxi-column dataField="target_bulanan" dataType="number" caption="TARGET {{ bulan }}"></dxi-column>
-            <dxi-column dataField="realisasi" caption="REALISASI" dataType="number"></dxi-column>
+            <dxi-column dataField="target_bulanan" dataType="number" caption="TARGET {{ bulan }}">
+              <dxi-validation-rule type="required" message="Harus Diisi"></dxi-validation-rule>
+            </dxi-column>
+            <dxi-column dataField="realisasi" caption="REALISASI" dataType="number">
+              <dxi-validation-rule type="required" message="Harus Diisi"></dxi-validation-rule>
+            </dxi-column>
 
             <dxi-column dataField="persentase" caption="%" [allowEditing]="false" [customizeText]="persen">
             </dxi-column>
@@ -82,9 +86,8 @@
             </div>
 
             <div *dxTemplate="let cell of 'fileTemplate'">
-              <dx-button id="button" [stylingMode]="buttonMode" icon="upload" text="" type="default" [width]="50"
-                (onClick)="openModal(cell)">
-              </dx-button>
+              <a (click)="openModal(cell)" style="color: blue; text-decoration: underline; cursor: pointer;"> Upload
+              </a>
             </div>
             <div *dxTemplate="let cell of 'downloadTemplate'">
               <a (click)="openInNewTab(cell.data.link)" target="_blank"
