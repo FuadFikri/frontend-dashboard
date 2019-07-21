@@ -1,16 +1,17 @@
 <div class="animated fadeIn item-center">
   <div class="card" id="new47">
     <div class="card-header">
-      <strong>Balanced Scorecard SBU {{daerah}}  {{bulan}} {{now.getFullYear()}}<span *ngIf="(isAdd || isEdit) && !isDetail">Add /
+      <strong>Balanced Scorecard SBU {{daerah}} {{bulan}} {{now.getFullYear()}}<span
+          *ngIf="(isAdd || isEdit) && !isDetail">Add /
           Edit</span></strong>
     </div>
     <div class="card-body">
       <div class="row">
-          <div class="col-md-6">
-              <a routerLink="/administration/balanced-scorecard/sbu">
-                <dx-button icon="back" text="Back"></dx-button>
-              </a>
-            </div>
+        <div class="col-md-6">
+          <a routerLink="/administration/balanced-scorecard/sbu">
+            <dx-button icon="back" text="Back"></dx-button>
+          </a>
+        </div>
         <div class="col-md-2">
           <dx-select-box [dataSource]="tahunSelectBoxSource" displayExpr="tahun" placeholder="Pilih Tahun"
             valueExpr="tahun" [(value)]="queryParams.tahun"></dx-select-box>
@@ -75,7 +76,7 @@
             </dxi-column>
             <dxi-column dataField="link" caption="FILE" [allowEditing]="false" cellTemplate="downloadTemplate">
             </dxi-column>
-            <dxi-column dataField="id_nilai" caption="UPLOAD" [allowEditing]="true" cellTemplate="fileTemplate">
+            <dxi-column dataField="id_nilai" caption="UPLOAD" [allowEditing]="false" cellTemplate="fileTemplate">
             </dxi-column>
 
             <dxi-column dataField="ukuran_id" caption="UKURAN" [allowResizing]="true">
@@ -94,7 +95,8 @@
             </div>
 
             <div *dxTemplate="let cell of 'fileTemplate'">
-              <a (click)="openModal(cell)" style="color: blue; text-decoration: underline; cursor: pointer;" > Upload </a>
+              <a (click)="openModal(cell)" style="color: blue; text-decoration: underline; cursor: pointer;"> Upload
+              </a>
             </div>
             <div *dxTemplate="let cell of 'downloadTemplate'">
               <a (click)="openInNewTab(cell.data.link)" target="_blank"
@@ -109,7 +111,7 @@
             </dxo-summary>
           </dx-data-grid>
         </div>
-        
+
       </dx-data-grid>
 
       <!-- <div class="row">
@@ -120,30 +122,30 @@
           <div class="offset-7">Total Nilai : <b> {{totalNilai.total}} </b></div>
         </div>
       </div> -->
-
-
-
     </div>
   </div>
 </div>
 
-<dx-popup [width]="320" [height]="290" [showTitle]="true" [title]="judulPopup" [dragEnabled]="false"
+<dx-popup [width]="550" [height]="360" [showTitle]="true" [title]="judulPopup" [dragEnabled]="false"
   [closeOnOutsideClick]="true" [(visible)]="popupVisible" (onHidden)="close($event)">
   <div *dxTemplate="let data of 'content'">
     <div class='popup-property-details'>
       <form id="form" (submit)="uploadFile($event)" enctype="multipart/form-data">
-
         <div id="fileuploader-container">
-          <dx-file-uploader selectButtonText="Pilih File"  labelText="" accept="*" uploadMode="useForm"
-            (change)="selectFile($event)"  [maxFileSize]="20000000">
+          <dx-file-uploader selectButtonText="Pilih File" labelText="" accept="*" uploadMode="useForm"
+            (change)="selectFile($event)" [maxFileSize]="20000000">
             <dxi-validation-rule type="required"></dxi-validation-rule>
           </dx-file-uploader>
         </div>
         <dx-validation-summary id="summary"></dx-validation-summary>
-        <div class="col-md-5 offset-7">
-        <dx-button [disabled]="disableBtUpload" [useSubmitBehavior]="true" type="success" text="Upload"></dx-button>
-      </div>
+        <div class="col-md-3 offset-9">
+          <dx-button [disabled]="disableBtUpload" [useSubmitBehavior]="true" type="success" text="Upload"></dx-button>
+        </div>
+
       </form>
+
     </div>
+    <p>Max : <strong>20Mb</strong></p>
+    <p>Jika menimpa file yang sudah ada, maka file lama akan terhapus</p>
   </div>
 </dx-popup>

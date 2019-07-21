@@ -348,6 +348,8 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
         this.formData = new FormData();
         this.fileUploader.instance.reset();
         
+        this.disableBtUpload = true;
+        
         this.dataGrid.instance.collapseAll(-1);
         this.refresh();
         this.options.message = 'Upload Berhasil';
