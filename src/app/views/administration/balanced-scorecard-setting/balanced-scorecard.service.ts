@@ -68,14 +68,17 @@ export class BalancedScorecardService {
     const username  = localStorage.getItem('username');
     const token     = localStorage.getItem('token');
 
-    return this.http.post <any> (this._urlCardBar + '/getCardBar?tahun='+tahun+'&bulan='+bulan, {
-      username : username,
-      token : token,
-    } )
-    // return this.http.post <any> (this._urlCardBar + '/keyval?tahun=' + tahun + '&bulan=' + bulan, {
-    //   username : username,
-    //   token : token,
-    // } )
+    if (bulan) {
+      return this.http.post <any> (this._urlCardBar + '/getCardBar?tahun='+tahun+'&bulan='+bulan, {
+        username : username,
+        token : token,
+      } )
+    } else {
+      return this.http.post <any> (this._urlCardBar + '/keyval?tahun=' + tahun + '&bulan=' + bulan, {
+        username : username,
+        token : token,
+      } )
+    }
   }
   getCardBar(): Observable<any> {
     const username  = localStorage.getItem('username');
