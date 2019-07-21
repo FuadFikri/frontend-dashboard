@@ -186,6 +186,11 @@ export class DataComponent implements OnInit, OnDestroy {
     this.nilai = e.newData;
     this.nilai.id_nilai = e.oldData.id_nilai;
     console.log(this.nilai);
+    if (this.nilai.realisasi===0 || this.nilai.target_bulanan ===0) {
+      this.nilai.realisasi = this.nilai.realisasi.toString();
+      this.nilai.target_bulanan = this.nilai.target_bulanan.toString();
+    }
+    
     if (this.nilai.realisasi || this.nilai.target_bulanan) {
 
       let persentase;
