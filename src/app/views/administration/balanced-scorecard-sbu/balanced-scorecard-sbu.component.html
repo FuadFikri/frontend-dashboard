@@ -49,7 +49,7 @@
 
             <dxo-editing mode="batch" [allowUpdating]="true">
             </dxo-editing>
-            <dxi-column caption="INDIKATOR " dataField="nama_kpi" [allowEditing]="false"></dxi-column>
+            <dxi-column caption="INDIKATOR KINERJA KUNCI " dataField="nama_kpi" [allowEditing]="false"></dxi-column>
             <dxi-column caption="KPI MEASUREMENT" dataField="kpi_measurement" [allowEditing]="false"></dxi-column>
             <dxi-column caption="SATUAN" dataField="satuan" [allowEditing]="false"></dxi-column>
             <dxi-column caption="BOBOT" dataField="bobot" [allowEditing]="false"></dxi-column>
@@ -57,16 +57,24 @@
             </dxi-column>
             <dxi-column dataField="target_rkap" caption="TARGET RKAP" dataType="number" [allowEditing]="false">
             </dxi-column>
-            <dxi-column dataField="target_bulanan" dataType="number" caption="TARGET {{ bulan }}"></dxi-column>
-            <dxi-column dataField="realisasi" caption="REALISASI" dataType="number"></dxi-column>
+            <dxi-column dataField="target_bulanan" dataType="number" caption="TARGET {{ bulan }}">
+              <dxi-validation-rule type="required" message="Harus Diisi"></dxi-validation-rule>
+            </dxi-column>
+            <dxi-column dataField="realisasi" caption="REALISASI" dataType="number">
+              <dxi-validation-rule type="required" message="Harus Diisi"></dxi-validation-rule>
+            </dxi-column>
 
             <dxi-column dataField="persentase" caption="%" [allowEditing]="false" [customizeText]="persen">
             </dxi-column>
             <dxi-column dataField="nilai" caption="NILAI" [allowEditing]="false"> </dxi-column>
             <dxi-column dataField="keterangan" caption="Ket" [allowEditing]="false" cellTemplate="keteranganTemplate">
             </dxi-column>
+            <dxi-column dataField="link" caption="FILE" [allowEditing]="false" cellTemplate="downloadTemplate">
+            </dxi-column>
+            <dxi-column dataField="id_nilai" caption="UPLOAD" [allowEditing]="true" cellTemplate="fileTemplate">
+            </dxi-column>
 
-            <dxi-column dataField="ukuran_id" caption="ukuran" [allowResizing]="true">
+            <dxi-column dataField="ukuran_id" caption="UKURAN" [allowResizing]="true">
               <dxo-lookup [dataSource]="ukuranCardBar" displayExpr="ukuran" valueExpr="id">
               </dxo-lookup>
             </dxi-column>
@@ -81,6 +89,14 @@
               <div *ngIf="cell.text=='Baik'" style="color:rgb(0, 212, 0)">{{cell.text}}</div>
             </div>
 
+            <div *dxTemplate="let cell of 'fileTemplate'">
+              <a (click)="openModal(cell)" style="color: blue; text-decoration: underline; cursor: pointer;" > Upload </a>
+            </div>
+            <div *dxTemplate="let cell of 'downloadTemplate'">
+              <a (click)="openInNewTab(cell.data.link)" target="_blank"
+                style="color: blue; text-decoration: underline; cursor: pointer;"> {{cell.data.nama_file}}</a>
+            </div>
+
             <dxo-summary>
               <dxi-total-item column="bobot" summaryType="sum" [customizeText]="customizeBobot">
               </dxi-total-item>
@@ -89,11 +105,41 @@
             </dxo-summary>
           </dx-data-grid>
         </div>
-        <!-- <dxi-sort-by-group-summary-info summaryItem="count"></dxi-sort-by-group-summary-info> -->
+        
       </dx-data-grid>
+
+      <!-- <div class="row">
+        <div class="col-md-6">
+          <div class="offset-9">Total Bobot : <b> {{totalBobot}}</b></div>
+        </div>
+        <div class="col-md-6">
+          <div class="offset-7">Total Nilai : <b> {{totalNilai.total}} </b></div>
+        </div>
+      </div> -->
 
 
 
     </div>
   </div>
 </div>
+
+<dx-popup [width]="320" [height]="290" [showTitle]="true" [title]="judulPopup" [dragEnabled]="false"
+  [closeOnOutsideClick]="true" [(visible)]="popupVisible" (onHidden)="close($event)">
+  <div *dxTemplate="let data of 'content'">
+    <div class='popup-property-details'>
+      <form id="form" (submit)="uploadFile($event)" enctype="multipart/form-data">
+
+        <div id="fileuploader-container">
+          <dx-file-uploader selectButtonText="Pilih File"  labelText="" accept="*" uploadMode="useForm"
+            (change)="selectFile($event)"  [maxFileSize]="20000000">
+            <dxi-validation-rule type="required"></dxi-validation-rule>
+          </dx-file-uploader>
+        </div>
+        <dx-validation-summary id="summary"></dx-validation-summary>
+        <div class="col-md-5 offset-7">
+        <dx-button [disabled]="disableBtUpload" [useSubmitBehavior]="true" type="success" text="Upload"></dx-button>
+      </div>
+      </form>
+    </div>
+  </div>
+</dx-popup>
