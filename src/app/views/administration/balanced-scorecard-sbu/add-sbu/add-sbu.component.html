@@ -18,6 +18,16 @@
             </div>
           </div>
           <div class="dx-field">
+              <div class="dx-field-label">Sumber</div>
+              <div class="dx-field-value">
+                <dx-text-box [(value)]="KPI.sumber">
+                  <dx-validator>
+                    <dxi-validation-rule type="required" message="Sumber harus diisi"></dxi-validation-rule>
+                  </dx-validator>
+                </dx-text-box>
+              </div>
+            </div>
+          <div class="dx-field">
             <div class="dx-field-label">Tahun</div>
             <div class="dx-field-value">
               <dx-number-box [(value)]="KPI.tahun">
@@ -28,11 +38,11 @@
             </div>
           </div>
           <div class="dx-field">
-            <div class="dx-field-label">Indikator</div>
+            <div class="dx-field-label">KPI Subdir</div>
             <div class="dx-field-value">
-              <dx-text-box [(value)]="KPI.nama_kpi">
+              <dx-text-box [(value)]="KPI.kpi_subdir">
                 <dx-validator>
-                  <dxi-validation-rule type="required" message="Indikator harus diisi"></dxi-validation-rule>
+                  <dxi-validation-rule type="required" message="KPI Subdir harus diisi"></dxi-validation-rule>
                 </dx-validator>
               </dx-text-box>
             </div>
@@ -48,15 +58,17 @@
             </div>
           </div>
           <div class="dx-field">
-            <div class="dx-field-label">Satuan</div>
-            <div class="dx-field-value">
-              <dx-text-box [(value)]="KPI.satuan">
-                <dx-validator>
-                  <dxi-validation-rule type="required" message="Satuan harus diisi"></dxi-validation-rule>
-                </dx-validator>
-              </dx-text-box>
+              <div class="dx-field-label">Satuan</div>
+              <div class="dx-field-value">
+                <dx-select-box [dataSource]="satuanDropDown" [(value)]="KPI.satuan" displayExpr="satuan"
+                  valueExpr="satuan">
+                  <dx-validator>
+                    <dxi-validation-rule type="required" message="Satuan harus diisi"></dxi-validation-rule>
+                  </dx-validator>
+                </dx-select-box>
+              </div>
             </div>
-          </div>
+          
           <div class="dx-field">
             <div class="dx-field-label">Bobot</div>
             <div class="dx-field-value">

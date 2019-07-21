@@ -121,7 +121,7 @@ const routes: Routes = [
             component: AddComponent,
           },
           {
-            path: 'add-sbu',
+            path: 'add-sbu/:daerah',
             component: AddSbuComponent,
           },
           {
@@ -138,7 +138,7 @@ const routes: Routes = [
             component: KpiComponent,
           },
           {
-            path: 'kpi-sbu',
+            path: 'kpi-sbu/:daerah',
             component: KpiSbuComponent,
           }
         ]
