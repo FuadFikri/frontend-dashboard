@@ -215,7 +215,8 @@ export class DataComponent implements OnInit, OnDestroy {
     console.log('nilai', this.nilai);
     this.service.updateNilai(this.nilai).subscribe(res => {
       if (res.d == 1) {
-        
+        this.dataGrid.instance.collapseAll(-1);
+        this.refresh();
         this.options.message = 'Success Updated';
         notify(this.options, 'success', 3000);
         console.log('updating success', this.nilai);
