@@ -115,6 +115,10 @@ export class DataComponent implements OnInit, OnDestroy {
     this.subscription1.unsubscribe();
     this.subscription2.unsubscribe();
   }
+
+
+
+
   hitungPersentase(e) {
     let hasil;
     if (this.nilai.target_bulanan && this.nilai.realisasi) {
@@ -122,11 +126,15 @@ export class DataComponent implements OnInit, OnDestroy {
     } else if (this.nilai.target_bulanan) {
       if (!e.oldData.realisasi) {
         hasil = 0;
-      } else {
+      }else {
         hasil = (e.oldData.realisasi / this.nilai.target_bulanan) * 100
       }
     } else if (this.nilai.realisasi) {
-      hasil = (this.nilai.realisasi / e.oldData.target_bulanan) * 100;
+      if (!e.oldData.target_bulanan) {
+        hasil = 0;
+      }else {
+        hasil = (this.nilai.realisasi / e.oldData.target_bulanan) * 100;
+      }
     }
     console.log('hasil', hasil);
     this.nilai.persentase = hasil.toFixed();
@@ -135,18 +143,22 @@ export class DataComponent implements OnInit, OnDestroy {
   hitungPersentasePolarisasiNegatif(e) {
     let hasil;
     if (this.nilai.target_bulanan && this.nilai.realisasi) {
-      hasil = (2 - (this.nilai.realisasi / this.nilai.target_bulanan)) * 100;
+      hasil = (2-(this.nilai.realisasi / this.nilai.target_bulanan)) * 100;
     } else if (this.nilai.target_bulanan) {
       if (!e.oldData.realisasi) {
         hasil = 0;
-      } else {
-        hasil = (2 - (e.oldData.realisasi / this.nilai.target_bulanan)) * 100;
+      }else {
+        hasil = (2-(e.oldData.realisasi / this.nilai.target_bulanan)) * 100;
       }
-    } else if (this.nilai.realisasi) {
-      hasil = (2 - (this.nilai.realisasi / e.oldData.target_bulanan)) * 100;
+    } else if (this.nilai.realisasi ) {
+      if (!e.oldData.target_bulanan) {
+        hasil = 0;
+      }else {
+        hasil = (2-(this.nilai.realisasi / e.oldData.target_bulanan)) * 100;
+      }
     }
     console.log('persentase', hasil);
-    if (hasil < 0) {
+    if(hasil < 0){
       hasil = '0';
       this.nilai.persentase = hasil;
     } else {
@@ -173,11 +185,11 @@ export class DataComponent implements OnInit, OnDestroy {
   updateCardBar(e) {
     this.nilai = e.newData;
     this.nilai.id_nilai = e.oldData.id_nilai;
-
+    console.log(this.nilai);
     if (this.nilai.realisasi || this.nilai.target_bulanan) {
 
       let persentase;
-      if (e.oldData.polarisasi_id == "1") {
+      if (e.oldData.polarisasi_id=="1") {
         persentase = this.hitungPersentase(e);
       } else {
         persentase = this.hitungPersentasePolarisasiNegatif(e);
@@ -190,17 +202,20 @@ export class DataComponent implements OnInit, OnDestroy {
         this.nilai.realisasi = this.nilai.realisasi.toString();
       }
       if (!this.nilai.target_bulanan) {
-        this.nilai.target_bulanan = e.oldData.target_bulanan.toString();
+        if (e.oldData.target_bulanan) {
+          this.nilai.target_bulanan = e.oldData.target_bulanan.toString();
+        }
       } else {
         this.nilai.target_bulanan = this.nilai.target_bulanan.toString();
       }
-      this.nilai.nilai = nilai.toPrecision(2);
+      this.nilai.nilai = nilai.toPrecision(3);
       this.nilai.nilai = this.nilai.nilai.toString();
     }
 
     console.log('nilai', this.nilai);
     this.service.updateNilai(this.nilai).subscribe(res => {
       if (res.d == 1) {
+        
         this.options.message = 'Success Updated';
         notify(this.options, 'success', 3000);
         console.log('updating success', this.nilai);
@@ -314,6 +329,10 @@ export class DataComponent implements OnInit, OnDestroy {
       console.log('cards', this.cardBars);
     });
     this.dataGrid.instance.refresh();
+  }
+
+  cek(e) {
+    console.log(e)
   }
 
 
