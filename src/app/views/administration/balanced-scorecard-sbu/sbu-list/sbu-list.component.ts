@@ -33,8 +33,10 @@ export class SbuListComponent implements OnInit {
 
   }
   openKPI(cell) {
-    console.log(cell);
-
+    let daerah = cell.data.daerah;
+    this.route.navigate(['/administration/balanced-scorecard/kpi-sbu/'+daerah]).catch( (reason => {
+      console.log(reason);
+    }) )
   }
 
 }
