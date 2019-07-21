@@ -56,11 +56,13 @@ export class AddSbuComponent implements OnInit {
     // mencari id_sbu dari parameter daerah dari url
     this.sbuService.getSbu().subscribe(res => {
       this.SbuDropDown = res.d;
-      this.SbuDropDown.find( (el => {
-        if (el.daerah == this.daerah) {
-          this.sbu_id = el.id_sbu
+      this.SbuDropDown.map((e) => {
+        if (e.daerah == this.daerah) {
+          this.sbu_id = e.id_sbu;
         }
-      }))
+      })
+
+      console.log(this.sbu_id)
     })
   }
 
