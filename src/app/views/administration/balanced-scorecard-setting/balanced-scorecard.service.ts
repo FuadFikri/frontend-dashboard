@@ -69,12 +69,32 @@ export class BalancedScorecardService {
     const token     = localStorage.getItem('token');
 
     if (bulan) {
+      // pake =
       return this.http.post <any> (this._urlCardBar + '/getCardBarLevelNol?tahun='+tahun+'&bulan='+bulan, {
         username : username,
         token : token,
       } )
     } else {
+      // pake like
       return this.http.post <any> (this._urlCardBar + '/getCardBarLevelNolByTahunandBulan?tahun=' + tahun + '&bulan=' + bulan, {
+        username : username,
+        token : token,
+      } )
+    }
+  }
+  getCardBarByTahunDanBulanLevelSatu(tahun: String, bulan: String,daerah:String): Observable<any> {
+    const username  = localStorage.getItem('username');
+    const token     = localStorage.getItem('token');
+
+    if (bulan) {
+      // pakai =
+      return this.http.post <any> (this._urlCardBar + '/getCardBarLevelSatu?tahun='+tahun+'&bulan='+bulan+'&daerah='+daerah, {
+        username : username,
+        token : token,
+      } )
+    } else {
+      // pakai like
+      return this.http.post <any> (this._urlCardBar + '/getCardBarLevelSatuByTahunandBulan?tahun=' + tahun + '&bulan=' + bulan + '&daerah='+daerah, {
         username : username,
         token : token,
       } )

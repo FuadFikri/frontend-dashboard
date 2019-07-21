@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SbuService } from '../../data-master/sbu/sbu.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sbu-list',
@@ -11,7 +12,7 @@ export class SbuListComponent implements OnInit {
 
   sbuSource;
 
-  constructor(private sbuService: SbuService) { }
+  constructor(private sbuService: SbuService, private route:Router) { }
 
   ngOnInit() {
     this.sbuService.getSbu().subscribe(res => {
@@ -20,7 +21,10 @@ export class SbuListComponent implements OnInit {
   }
 
   openAdministration(cell) {
-    console.log(cell);
+    let daerah = cell.data.daerah;
+    this.route.navigate(['/administration/balanced-scorecard/sbu/'+daerah]).catch( (reason => {
+      console.log(reason);
+    }) )
     
   }
   

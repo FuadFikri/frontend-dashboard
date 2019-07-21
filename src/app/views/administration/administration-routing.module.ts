@@ -128,8 +128,9 @@ const routes: Routes = [
             path: 'data',
             component: DataComponent,
           },
+          
           {
-            path: 'data-sbu',
+            path: 'data-sbu/:daerah',
             component: DataSbuComponent,
           },
           {

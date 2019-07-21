@@ -1,13 +1,13 @@
 <div class="animated fadeIn item-center">
   <div class="card" id="new47">
     <div class="card-header">
-      <strong>Balanced Scorecard SBU Administration {{tahun}}<span *ngIf="(isAdd || isEdit) && !isDetail">Add /
+      <strong>Balanced Scorecard SBU {{daerah}} Administration {{tahun}}<span *ngIf="(isAdd || isEdit) && !isDetail">Add /
           Edit</span></strong>
     </div>
     <div class="card-body">
       <div class="row">
         <div class="col-md-3">
-          <a routerLink="/administration/balanced-scorecard/sbu">
+          <a routerLink="/administration/balanced-scorecard/sbu/{{daerah}}">
             <dx-button icon="back" text="Back"></dx-button>
           </a>
           &nbsp;

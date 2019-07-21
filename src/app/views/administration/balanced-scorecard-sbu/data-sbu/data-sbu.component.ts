@@ -31,16 +31,19 @@ export class DataSbuComponent implements OnInit {
   perspektifSource;
   bulanDropDown;
   tahun;
+  daerah;
   constructor(private service: BalancedScorecardService, private route: ActivatedRoute) {
     this.cardBarSource = [];
   }
 
 
   ngOnInit() {
+    let daerah = this.route.snapshot.paramMap.get("daerah");
+    this.daerah = daerah;
     this.route.queryParams.filter(params => params.tahun)
       .subscribe(params => {
 
-        this.subscription1 = this.service.getCardBarByTahunDanBulanLevelNol(params.tahun, params.bulan).subscribe(resp => {
+        this.subscription1 = this.service.getCardBarByTahunDanBulanLevelSatu(params.tahun, params.bulan, daerah).subscribe(resp => {
           // object to array
           this.cardBars = Object.keys(resp.d).map(function (index) {
             let card = resp.d[index];

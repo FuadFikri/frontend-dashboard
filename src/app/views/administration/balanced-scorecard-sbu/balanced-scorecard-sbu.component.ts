@@ -48,9 +48,9 @@ export class BalancedScorecardSbuComponent implements OnInit, OnDestroy {
     closeOnBackButton: true,
   };
   subscription: Subscription;
-
+  url=['/administration/balanced-scorecard/data-sbu/'];
   totalBobot = 0;
-
+  daerah:String;
   constructor(private service: BalancedScorecardService, private _route: ActivatedRoute) {
     this.cardBarSource = [];
     this.now = new Date();
@@ -58,7 +58,8 @@ export class BalancedScorecardSbuComponent implements OnInit, OnDestroy {
   }
   ngOnInit() {
     let daerah = this._route.snapshot.paramMap.get("daerah");
-    console.log(daerah);
+    this.url[0] += daerah;
+    this.daerah = daerah;
     this.service.getTahun().subscribe(res => {
       this.tahunSelectBoxSource = res.d;
     })
@@ -71,7 +72,7 @@ export class BalancedScorecardSbuComponent implements OnInit, OnDestroy {
     const tahun = this.now.getFullYear().toString();
 
     console.log(this.bulan, tahun);
-    this.service.getCardBarByTahunDanBulanLevelNol(tahun, this.bulanDropDown[this.now.getMonth()].id).subscribe(resp => {
+    this.service.getCardBarByTahunDanBulanLevelSatu(tahun, this.bulanDropDown[this.now.getMonth()].id,daerah).subscribe(resp => {
       // object to array
       this.cardBars = Object.keys(resp.d).map(function (index) {
         const card = resp.d[index];

@@ -1,7 +1,7 @@
 <div class="animated fadeIn item-center">
   <div class="card" id="new47">
     <div class="card-header">
-      <strong>Balanced Scorecard SBU {{bulan}} {{now.getFullYear()}}<span *ngIf="(isAdd || isEdit) && !isDetail">Add /
+      <strong>Balanced Scorecard SBU {{daerah}}  {{bulan}} {{now.getFullYear()}}<span *ngIf="(isAdd || isEdit) && !isDetail">Add /
           Edit</span></strong>
     </div>
     <div class="card-body">
@@ -17,7 +17,7 @@
             [(value)]="queryParams.bulan"></dx-select-box>
         </div>
         <div class="col-md-3">
-          <a [routerLink]="['/administration/balanced-scorecard/data-sbu']" [queryParams]="queryParams">
+          <a [routerLink]="url" [queryParams]="queryParams">
             <dx-button icon="fa fa-database" text="Lihat Data"></dx-button>
           </a>
         </div>
