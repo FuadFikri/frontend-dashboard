@@ -20,6 +20,7 @@ import { BalancedScorecardSbuComponent } from './balanced-scorecard-sbu/balanced
 import { AddSbuComponent } from './balanced-scorecard-sbu/add-sbu/add-sbu.component';
 import { DataSbuComponent } from './balanced-scorecard-sbu/data-sbu/data-sbu.component';
 import { KpiSbuComponent } from './balanced-scorecard-sbu/kpi-sbu/kpi-sbu.component';
+import { SbuListComponent } from './balanced-scorecard-sbu/sbu-list/sbu-list.component';
 
 
 const routes: Routes = [
@@ -109,6 +110,10 @@ const routes: Routes = [
           },
           {
             path: 'sbu',
+            component: SbuListComponent,
+          },
+          {
+            path: 'sbu/:daerah',
             component: BalancedScorecardSbuComponent,
           },
           {
