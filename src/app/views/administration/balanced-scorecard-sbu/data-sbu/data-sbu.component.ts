@@ -40,7 +40,7 @@ export class DataSbuComponent implements OnInit {
     this.route.queryParams.filter(params => params.tahun)
       .subscribe(params => {
 
-        this.subscription1 = this.service.getCardBarByTahunDanBulan(params.tahun, params.bulan).subscribe(resp => {
+        this.subscription1 = this.service.getCardBarByTahunDanBulanLevelNol(params.tahun, params.bulan).subscribe(resp => {
           // object to array
           this.cardBars = Object.keys(resp.d).map(function (index) {
             let card = resp.d[index];

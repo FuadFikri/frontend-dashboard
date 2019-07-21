@@ -64,17 +64,17 @@ export class BalancedScorecardService {
       token : token,
     } )
   }
-  getCardBarByTahunDanBulan(tahun: String, bulan: String): Observable<any> {
+  getCardBarByTahunDanBulanLevelNol(tahun: String, bulan: String): Observable<any> {
     const username  = localStorage.getItem('username');
     const token     = localStorage.getItem('token');
 
     if (bulan) {
-      return this.http.post <any> (this._urlCardBar + '/getCardBar?tahun='+tahun+'&bulan='+bulan, {
+      return this.http.post <any> (this._urlCardBar + '/getCardBarLevelNol?tahun='+tahun+'&bulan='+bulan, {
         username : username,
         token : token,
       } )
     } else {
-      return this.http.post <any> (this._urlCardBar + '/keyval?tahun=' + tahun + '&bulan=' + bulan, {
+      return this.http.post <any> (this._urlCardBar + '/getCardBarLevelNolByTahunandBulan?tahun=' + tahun + '&bulan=' + bulan, {
         username : username,
         token : token,
       } )

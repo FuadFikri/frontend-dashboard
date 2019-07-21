@@ -36,7 +36,7 @@ export class AddComponent implements OnInit {
 
     this.ukuranCardBar = this._service.getUkuranCardBar();
     this.cardBar = new CardBar(undefined, "","","","","","","","","","","","","","","");
-    this.KPI = new KPI(undefined,"","","","","","","","","","","");
+    this.KPI = new KPI(undefined,"","","","","","","","","","","","");
     this.nilai = new Nilai(undefined, "0","0","0","0","","","");
    }
 
@@ -60,6 +60,7 @@ export class AddComponent implements OnInit {
     this.KPI.satuan = this.KPI.satuan.toString();
     this.KPI.ukuran_id = this.KPI.ukuran_id.toString();
     this.KPI.polarisasi_id = this.KPI.polarisasi_id.toString();
+    this.KPI.sbu_id = "0";
     console.log(this.KPI)
     this._service.insertKPI(this.KPI).subscribe(res => {
       let kpi_id = res.d[0].id;

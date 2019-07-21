@@ -43,7 +43,7 @@ export class BalancedScorecardComponent implements OnInit {
       this.daftarPerspektif = res.d
       this.perspektif_id = res.d.map(perspektif => perspektif.id)
       
-        this._service.getCardBarByTahunDanBulan(tahun,bulan.toString()).subscribe(res => {
+        this._service.getCardBarByTahunDanBulanLevelNol(tahun,bulan.toString()).subscribe(res => {
           this.daftarCardBar = Object.keys(res.d).map(function(index){
             let card = res.d[index];
             return card;

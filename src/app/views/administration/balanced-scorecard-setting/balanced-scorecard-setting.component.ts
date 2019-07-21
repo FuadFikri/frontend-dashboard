@@ -94,7 +94,7 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
     const tahun = this.now.getFullYear().toString();
 
     console.log(this.bulan, tahun);
-    this.service.getCardBarByTahunDanBulan(tahun, this.bulanDropDown[(this.now.getMonth())-1].id).subscribe(resp => {
+    this.service.getCardBarByTahunDanBulanLevelNol(tahun, this.bulanDropDown[(this.now.getMonth())-1].id).subscribe(resp => {
       // object to array
       this.cardBars = Object.keys(resp.d).map(function (index) {
         const card = resp.d[index];
@@ -384,7 +384,7 @@ refresh() {
   this.bulan = this.bulanDropDown[(this.now.getMonth())-1].bulan;
     const tahun = this.now.getFullYear().toString();
     this.cardBarSource = [];
-  this.service.getCardBarByTahunDanBulan(tahun, this.bulanDropDown[(this.now.getMonth())-1].id).subscribe(resp => {
+  this.service.getCardBarByTahunDanBulanLevelNol(tahun, this.bulanDropDown[(this.now.getMonth())-1].id).subscribe(resp => {
     // object to array
     this.cardBars = Object.keys(resp.d).map(function (index) {
       const card = resp.d[index];

@@ -74,7 +74,7 @@ export class DataComponent implements OnInit, OnDestroy {
       .subscribe(params => {
         this.bulanParams = params.bulan;
         this.tahunParams = params.tahun;
-        this.subscription1 = this.service.getCardBarByTahunDanBulan(params.tahun, params.bulan).subscribe(resp => {
+        this.subscription1 = this.service.getCardBarByTahunDanBulanLevelNol(params.tahun, params.bulan).subscribe(resp => {
           // object to array
           this.cardBars = Object.keys(resp.d).map(function (index) {
             let card = resp.d[index];
@@ -321,7 +321,7 @@ export class DataComponent implements OnInit, OnDestroy {
       const tahun = this.now.getFullYear().toString();
       this.cardBarSource = [];
     
-    this.service.getCardBarByTahunDanBulan(this.tahunParams, this.bulanParams).subscribe(resp => {
+    this.service.getCardBarByTahunDanBulanLevelNol(this.tahunParams, this.bulanParams).subscribe(resp => {
       // object to array
       this.cardBars = Object.keys(resp.d).map(function (index) {
         const card = resp.d[index];
