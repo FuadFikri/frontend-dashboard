@@ -21,7 +21,7 @@ import {
 import notify from 'devextreme/ui/notify';
 import { HttpRequest, HttpClient, HttpEventType } from '@angular/common/http';
 import { AppConstant } from 'app/app.constant';
-import { DxDataGridComponent, DxFileUploaderComponent } from 'devextreme-angular';
+import { DxDataGridComponent, DxFileUploaderComponent, DxPopupComponent } from 'devextreme-angular';
 
 
 @Component({
@@ -33,6 +33,7 @@ import { DxDataGridComponent, DxFileUploaderComponent } from 'devextreme-angular
 export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
   @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
   @ViewChild(DxFileUploaderComponent) fileUploader: DxFileUploaderComponent;
+  @ViewChild(DxPopupComponent) popUpComponent: DxPopupComponent;
   resourceUrlRole ;
   perspektifSource: Perspektif;
   cardBars: any;
@@ -71,6 +72,7 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
   totalBobot=0;
   totalNilai:TotalNilai;
   formData: FormData;
+  disableBtUpload: boolean=true;
 
   constructor(private service: BalancedScorecardService, private a: AppConstant,private httpClient: HttpClient) {
     this.cardBarSource = [];
@@ -305,7 +307,16 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
     this.id_nilai = cell.value;
   }
 
+  // ketika modal diclose maka uploader di reset
+  close(e) {
+    this.fileUploader.instance.reset();
+  }
+  
+  
+  
+
   uploadFile(e) {
+    
     e.preventDefault;
     console.log(e);
     this.popupVisible = false;
@@ -320,7 +331,8 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
       if (res.d == 1 && res.s == 200) {
         this.popupVisible = false;
         this.formData = new FormData();
-        this.fileUploader.instance.dispose();
+        this.fileUploader.instance.reset();
+        
         this.dataGrid.instance.collapseAll(-1);
         this.refresh();
         this.options.message = 'Upload Berhasil';
@@ -341,6 +353,13 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
   selectFile(e) {
     console.log(e.target.files)
     this.file = e.target.files[0]
+    if((this.file.size/1048576)>20){
+      console.log("file size", this.file.size/1024);
+      this.disableBtUpload = true;
+    }else{
+      console.log("file size", this.file.size/1048576);
+      this.disableBtUpload = false;
+    }
   }
 
   openInNewTab(url:any) {
