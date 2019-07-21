@@ -13,6 +13,7 @@ import ArrayStore from 'devextreme/data/array_store';
 import notify from 'devextreme/ui/notify';
 import { BalancedScorecardService } from '../balanced-scorecard-setting/balanced-scorecard.service';
 import { Perspektif, CardBar, Nilai } from '../balanced-scorecard-setting/Model';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-balanced-scorecard-sbu',
   templateUrl: './balanced-scorecard-sbu.component.html',
@@ -50,12 +51,14 @@ export class BalancedScorecardSbuComponent implements OnInit, OnDestroy {
 
   totalBobot = 0;
 
-  constructor(private service: BalancedScorecardService) {
+  constructor(private service: BalancedScorecardService, private _route: ActivatedRoute) {
     this.cardBarSource = [];
     this.now = new Date();
     this.queryParams.tahun = this.now.getFullYear().toString();
   }
   ngOnInit() {
+    let daerah = this._route.snapshot.paramMap.get("daerah");
+    console.log(daerah);
     this.service.getTahun().subscribe(res => {
       this.tahunSelectBoxSource = res.d;
     })
