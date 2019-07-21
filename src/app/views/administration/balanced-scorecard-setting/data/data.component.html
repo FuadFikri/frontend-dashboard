@@ -117,14 +117,14 @@
 
         <div id="fileuploader-container">
           <dx-file-uploader selectButtonText="Pilih File" labelText="" accept="*" uploadMode="useForm"
-            (change)="selectFile($event)">
+            (change)="selectFile($event)" [maxFileSize]="20000000">
+            <dxi-validation-rule type="required"></dxi-validation-rule>
           </dx-file-uploader>
         </div>
-
-        <br>
-
-        <dx-button (click)="uploadFile($event)" type="success" text="Upload"></dx-button>
-
+        <dx-validation-summary id="summary"></dx-validation-summary>
+        <div class="col-md-5 offset-7">
+          <dx-button [disabled]="disableBtUpload" [useSubmitBehavior]="true" type="success" text="Upload"></dx-button>
+        </div>
       </form>
     </div>
   </div>

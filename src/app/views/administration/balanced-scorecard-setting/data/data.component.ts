@@ -1,7 +1,8 @@
 import {
   Component,
   OnInit,
-  OnDestroy
+  OnDestroy,
+  ViewChild
 } from '@angular/core';
 import {
   BalancedScorecardService
@@ -19,6 +20,8 @@ import {
   Nilai
 } from '../Model';
 import notify from 'devextreme/ui/notify';
+import { DxFileUploaderComponent, DxDataGridComponent } from 'devextreme-angular';
+import { AppConstant } from 'app/app.constant';
 
 @Component({
   selector: 'app-data',
@@ -27,6 +30,8 @@ import notify from 'devextreme/ui/notify';
   providers: [BalancedScorecardService]
 })
 export class DataComponent implements OnInit, OnDestroy {
+  @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
+  @ViewChild(DxFileUploaderComponent) fileUploader: DxFileUploaderComponent;
   nilai: Nilai;
   cardBarSource;
   cardBars;
@@ -35,8 +40,11 @@ export class DataComponent implements OnInit, OnDestroy {
   perspektifSource;
   bulanDropDown;
   tahun;
-
+  popupVisible:boolean=false;
   buttonMode="outlined"
+  formData: FormData;
+  file:any;
+  bulan: string;
 
   options = {
     message: '',
@@ -46,16 +54,26 @@ export class DataComponent implements OnInit, OnDestroy {
     closeOnBackButton: true,
   };
   totalBobot: any;
+  id_nilai: any;
+  disableBtUpload: boolean=true;
+  resourceUrlRole: string;
+  now: Date;
 
-  constructor(private service: BalancedScorecardService, private route: ActivatedRoute) {
+  bulanParams:any;
+  tahunParams:any;
+
+  constructor(private service: BalancedScorecardService, private route: ActivatedRoute,private a: AppConstant) {
     this.cardBarSource = [];
+    this.resourceUrlRole= a.SERVER_URL;
+    this.now = new Date();
   }
 
 
   ngOnInit() {
     this.route.queryParams.filter(params => params.tahun)
       .subscribe(params => {
-
+        this.bulanParams = params.bulan;
+        this.tahunParams = params.tahun;
         this.subscription1 = this.service.getCardBarByTahunDanBulan(params.tahun, params.bulan).subscribe(resp => {
           // object to array
           this.cardBars = Object.keys(resp.d).map(function (index) {
@@ -212,6 +230,90 @@ export class DataComponent implements OnInit, OnDestroy {
     if (cellInfo.value) {
       return cellInfo.value + '%'
     }
+  }
+
+  judulPopup="Upload File";
+  openModal(cell) {
+    this.popupVisible = true;
+    this.id_nilai = cell.value;
+  }
+
+    // ketika modal diclose maka uploader di reset
+    close(e) {
+      this.fileUploader.instance.reset();
+    }
+    
+    
+    
+  
+    uploadFile(e) {
+      
+      e.preventDefault;
+      console.log(e);
+      this.popupVisible = false;
+  
+      
+      this.formData = new FormData();
+      this.formData.append("id_nilai",this.id_nilai);
+      this.formData.append("file",this.file);
+  
+  
+      this.service.upload(this.formData).subscribe(res => {
+        if (res.d == 1 && res.s == 200) {
+          this.popupVisible = false;
+          this.formData = new FormData();
+          this.fileUploader.instance.reset();
+          
+          this.dataGrid.instance.collapseAll(-1);
+          this.refresh();
+          this.options.message = 'Upload Berhasil';
+          notify(this.options, 'success', 3000);
+          console.log('updating success', res);
+        } else {
+          this.options.message = 'Upload Gagal';
+          notify(this.options, 'error', 3000);
+          console.log('updating failed ', res);
+        }
+      }, err => {
+        this.options.message = 'Creating Failed';
+        notify(this.options, 'server error', 3000);
+        console.log('server error ', err);
+      });
+    }
+  
+    selectFile(e) {
+      console.log(e.target.files)
+      this.file = e.target.files[0]
+      if((this.file.size/1048576)>20){
+        console.log("file size", this.file.size/1024);
+        this.disableBtUpload = true;
+      }else{
+        console.log("file size", this.file.size/1048576);
+        this.disableBtUpload = false;
+      }
+    }
+    openInNewTab(url:any) {
+      // open link in new tab
+      let fullUrl= this.resourceUrlRole+ "/"+url;
+      const newTab = window.open(fullUrl, '_blank')
+      // set opener to null so that no one can references it
+      newTab.opener = null
+  }
+  
+  refresh() {
+    this.bulan = this.bulanDropDown[(this.now.getMonth())-1].bulan;
+      const tahun = this.now.getFullYear().toString();
+      this.cardBarSource = [];
+    
+    this.service.getCardBarByTahunDanBulan(this.tahunParams, this.bulanParams).subscribe(resp => {
+      // object to array
+      this.cardBars = Object.keys(resp.d).map(function (index) {
+        const card = resp.d[index];
+        return card;
+      });
+      console.log('cards', this.cardBars);
+    });
+    this.dataGrid.instance.refresh();
   }
 
 
