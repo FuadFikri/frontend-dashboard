@@ -55,11 +55,20 @@ export class BalancedScorecardService {
     return this.http.post<any> (this._urlPerspektif + '/insert', perspektif )
   }
 
-  getKPI(tahun: String): Observable<any> {
+  getKpiPusat(tahun: String): Observable<any> {
     const username  = localStorage.getItem('username');
     const token     = localStorage.getItem('token');
 
-    return this.http.post <any> (this._urlKPI + '/keyval?tahun=' + tahun, {
+    return this.http.post <any> (this._urlKPI + '/getKpiPusat?tahun=' + tahun, {
+      username : username,
+      token : token,
+    } )
+  }
+  getKpiSbu(tahun: String,sbu_id:String): Observable<any> {
+    const username  = localStorage.getItem('username');
+    const token     = localStorage.getItem('token');
+
+    return this.http.post <any> (this._urlKPI + '/getKpiSbu?tahun=' + tahun +'&sbu_id='+sbu_id, {
       username : username,
       token : token,
     } )

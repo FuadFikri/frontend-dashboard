@@ -59,7 +59,7 @@ export class KpiComponent implements OnInit {
     })
 
     const tahun = this.now.getFullYear().toString();
-    this._service.getKPI(tahun).subscribe(resp => {
+    this._service.getKpiPusat(tahun).subscribe(resp => {
       // object to array
       this.cardBars = Object.keys(resp.d).map(function (index) {
         const card = resp.d[index];

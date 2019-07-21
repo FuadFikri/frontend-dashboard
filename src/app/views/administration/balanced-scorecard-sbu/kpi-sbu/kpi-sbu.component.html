@@ -1,7 +1,7 @@
 <div class="animated fadeIn item-center">
   <div class="card" id="new47">
     <div class="card-header">
-      <strong>Daftar KPI<span *ngIf="(isAdd || isEdit) && !isDetail">Add / Edit</span></strong>
+      <strong>Daftar KPI SBU {{daerah}}<span *ngIf="(isAdd || isEdit) && !isDetail">Add / Edit</span></strong>
     </div>
     <div class="card-body">
       <div class="row">
@@ -35,15 +35,16 @@
 
             <dxo-editing mode="batch" [allowUpdating]="true" [allowDeleting]="true">
             </dxo-editing>
-            <dxi-column caption="INDIKATOR " dataField="nama_kpi"></dxi-column>
+            <dxi-column caption="SUMBER " dataField="sumber"></dxi-column>
+            <dxi-column caption="KPI SUBDIR" dataField="kpi_subdir"></dxi-column>
             <dxi-column caption="KPI MEASUREMENT" dataField="kpi_measurement"></dxi-column>
-            <dxi-column caption="SATUAN" dataField="satuan"></dxi-column>
             <dxi-column caption="BOBOT" dataField="bobot"></dxi-column>
             <dxi-column dataField="polarisasi_id" caption="POLARISASI">
               <dxo-lookup [dataSource]="polarisasiSource" displayExpr="display" valueExpr="id">
               </dxo-lookup>
             </dxi-column>
             <dxi-column dataField="target_rkap" caption="TARGET RKAP" dataType="number"></dxi-column>
+            <dxi-column caption="SATUAN" dataField="satuan"></dxi-column>
 
             <dxi-column dataField="ukuran_id" caption="UKURAN" [allowResizing]="true">
               <dxo-lookup [dataSource]="ukuranCardBar" displayExpr="ukuran" valueExpr="id">

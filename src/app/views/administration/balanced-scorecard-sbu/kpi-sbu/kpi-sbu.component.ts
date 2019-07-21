@@ -9,15 +9,18 @@ import ArrayStore from 'devextreme/data/array_store';
 import notify from 'devextreme/ui/notify';
 import { BalancedScorecardService } from '../../balanced-scorecard-setting/balanced-scorecard.service';
 import { KPI, Perspektif } from '../../balanced-scorecard-setting/Model';
+import { ActivatedRoute } from '@angular/router';
+import { SbuService } from '../../data-master/sbu/sbu.service';
 @Component({
   selector: 'app-kpi-sbu',
   templateUrl: './kpi-sbu.component.html',
   styleUrls: ['./kpi-sbu.component.scss'],
-  providers: [BalancedScorecardService]
+  providers: [BalancedScorecardService,SbuService]
 })
 export class KpiSbuComponent implements OnInit {
 
   kpi: KPI;
+  SbuDropDown:any[];
   polarisasiSource;
   ukuranCardBar;
   perspektifSource;
@@ -34,12 +37,17 @@ export class KpiSbuComponent implements OnInit {
     closeOnBackButton: true,
   };
   perspektif: any;
-  constructor(private _service: BalancedScorecardService) {
+  daerah: any;
+  sbu_id: any;
+  constructor(private _service: BalancedScorecardService, private router: ActivatedRoute,private sbuService: SbuService) {
     this.cardBarSource = [];
     this.now = new Date();
   }
 
   ngOnInit() {
+    let daerah = this.router.snapshot.paramMap.get("daerah");
+    this.daerah = daerah;
+    console.log(this.daerah);
     this.polarisasiSource = this._service.getPolarisasi();
     this.ukuranCardBar = this._service.getUkuranCardBar();
     this._service.getTahun().subscribe(res => {
@@ -51,7 +59,16 @@ export class KpiSbuComponent implements OnInit {
     })
 
     const tahun = this.now.getFullYear().toString();
-    this._service.getKPI(tahun).subscribe(resp => {
+    // mencari id_sbu dari parameter daerah dari url
+    this.sbuService.getSbu().subscribe(res => {
+      this.SbuDropDown = res.d;
+      this.SbuDropDown.map((e) => {
+        if (e.daerah == this.daerah) {
+          this.sbu_id = e.id_sbu;
+        }
+      })
+
+    this._service.getKpiSbu(tahun,this.sbu_id).subscribe(resp => {
       // object to array
       this.cardBars = Object.keys(resp.d).map(function (index) {
         const card = resp.d[index];
@@ -59,6 +76,11 @@ export class KpiSbuComponent implements OnInit {
       });
       console.log('cards', this.cardBars);
     });
+
+    
+
+      console.log(this.sbu_id)
+    })
   }
 
   getCardBar(key) {
