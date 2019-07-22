@@ -1,59 +1,72 @@
-/* ::ng-deep #gauge {
-    height: 300px;
-    width: 100%;
-} */
+/* final dashboard */
 
-.myCard-value{
-    font-size: 30pt !important;
+.logo {
+  height: 40px;
+  width: auto;
+  margin-left: 15px;
 }
-.myCard-title{
-    font-size: 20pt !important;
+
+.head {
+  background-color: #FFFFFF;
+  height: 60px;
+  border-bottom: 3px solid black;
+  margin-bottom: 4px;
 }
-.myCard-label{
-    font-size: 10pt !important;
+
+
+
+
+/* old */
+
+.myCard-value {
+  font-size: 30pt !important;
+}
+
+.myCard-title {
+  font-size: 14pt !important;
+  font-weight: 400;
+}
+
+.myCard-label {
+  font-size: 20pt !important;
 
 }
+/* 
 ::ng-deep #pivotgrid {
-    margin-top: 20px;
+  margin-top: 20px;
 }
+
 ::ng-deep .currency {
-    text-align: center;
+  text-align: center;
 }
 
-
-
-.carousel{
-    border: 0pt !important;
+.carousel {
+  border: 0pt !important;
 }
 
-carousel-component .container{
-    /* width: 1509px !important; */
-    height: auto !important;
-    /* max-width:1509px !important; */
-    margin: 30px !important;
+carousel-component .container {
+  height: auto !important;
+  margin: 30px !important;
 }
 
 .item-carousel {
-    border: 0px !important;
+  border: 0px !important;
 }
 
 
-.container{
-    /* max-width: 1509px !important; */
-    width: 70% !important;
-    height: auto !important;
-    margin-top: 30px;
+.container {
+  width: 70% !important;
+  height: auto !important;
+  margin-top: 30px;
 }
-/* [_nghost-c1] .container[_ngcontent-c1] .carousel[_ngcontent-c1] .item-carousel {
-    border : 0px !important;
-} */
+
 
 /* agar pembungkus bar gauge lebih kecil. press degan ukuran bar gauge*/
-[_nghost-c14]{
-    display: inline-block !important;
+/* [_nghost-c14] {
+  display: inline-block !important;
 }
 
-.myPivot{
-    width:900px;
-    height: auto;
-}
+.myPivot {
+  width: 900px;
+  height: auto;
+}  */

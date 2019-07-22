@@ -15,7 +15,6 @@ import { Widget } from './card-box/Model';
 
 
 export class DashboardComponent implements OnInit {
-  array=[1,2,3,4,5]
   @ViewChild('topCarousel') topCarousel: CarouselComponent;
   public brandPrimary = '#FFFFFF';
   public brandSuccess = '#4dbd74';

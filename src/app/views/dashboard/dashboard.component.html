@@ -1,45 +1,37 @@
-    <carousel-component #topCarousel [autoPlay]="true" [delayAutoPlay]="10000" (onSlideChange)="loop($event)"  [margin]="50">
-      
-      <div class="item-carousel">
-        <div *ngIf="cardAtSlide1">
-          <div class="animated fadeIn">
-            <card-box [cards]="cards" [closeable]="closeableCards"></card-box>
-          </div>
-        </div>
-        <div *ngIf="circularAtSlide1">
-          <div class="animated fadeIn">
-            <app-circular-gauge [circularGauge]="circularGauge"></app-circular-gauge>
-          </div>
-        </div>
-        <div *ngIf="barGaugeAtSlide1">
-            <app-bar-gauge [widgets]="barGauges"></app-bar-gauge>
-        </div>
-      </div>
+<div class="head">
+  <div class="row">
+    <div class="col-md-6">
+      <img src="assets/img/logoIcon.png" alt="" srcset="" class="logo">
+    </div>
+    <div class="col-md-6">
+    </div>
+  </div>
+</div>
 
-      <div class="item-carousel">
-          <div *ngIf="cardAtSlide2">
-            <card-box [cards]="cards" [closeable]="closeableCards"></card-box>
-          </div>
-          <div *ngIf="barGaugeAtSlide2">
-              <app-bar-gauge [widgets]="barGauges"></app-bar-gauge>
-          </div>
-          <div *ngIf="circularAtSlide2">
-            <app-circular-gauge [circularGauge]="circularGauge"></app-circular-gauge>
-          </div>
-        
-        
-      </div>
+<div class="container">
 
-      <div class="item-carousel">
-          <div *ngIf="barGaugeAtSlide3">
-              <app-bar-gauge [widgets]="barGauges"></app-bar-gauge>
+  <div class="row">
+    <div class="col-sm-6 col-md-3" *ngFor="let item of array">
+      <div class="card border-0 shadow-sm text-light bg-primary">
+        <div class="card-header">
+          <div class="myCard-title text-center">
+            Pendapatan Desember 
           </div>
-        <div *ngIf="cardAtSlide3">
-          <card-box [cards]="cards" [closeable]="closeableCards"></card-box>
         </div>
-        <div *ngIf="circularAtSlide3">
-          <app-circular-gauge [circularGauge]="circularGauge"></app-circular-gauge>
+        <div class="card-body">
+          <div class="btn-group float-right" dropdown>
+            <a (click)="hapus(card)" id="hapus" href="#">X</a>
+          </div>
+          <div class="chart-wrapper px-3" style="height:100px;">
+              
+              <h4 class="font-weight-bold text-center uk-margin-large-top myCard-value">
+                123456789
+              </h4>
+            </div>
+            <div class="text-center myCard-label">100% RKAP NOV</div>
         </div>
-        <!-- <app-pivot-data-grid></app-pivot-data-grid> -->
       </div>
-    </carousel-component>
+    </div>
+  </div>
+
+</div>

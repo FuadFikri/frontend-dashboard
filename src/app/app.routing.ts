@@ -20,7 +20,7 @@ export const routes: Routes = [
   },
   {
     path: '',
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     redirectTo: 'dashboard',
     pathMatch: 'full',
   },
@@ -28,7 +28,7 @@ export const routes: Routes = [
     path: 'dashboard',
     component: SimpleLayoutComponent,
     loadChildren: './views/dashboard/dashboard.module#DashboardModule',
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   }, 
   
   {
