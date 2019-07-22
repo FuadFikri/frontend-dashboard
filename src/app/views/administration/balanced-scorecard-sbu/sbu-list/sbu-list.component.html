@@ -5,43 +5,37 @@
           Edit</span></strong>
     </div>
     <div class="card-body">
-            <br>
+      <br>
 
-      <dx-data-grid id="gridContainer" [dataSource]="sbuSource"
-        keyExpr="id_sbu" [showBorders]="true"
+      <dx-data-grid id="gridContainer" [dataSource]="sbuSource" keyExpr="id_sbu" [showBorders]="true"
         [columnHidingEnabled]="false" [rowAlternationEnabled]="true" [columnAutoWidth]="true" [wordWrapEnabled]="true"
         (onRowUpdating)="updatePerspektif($event)" (onRowRemoving)="delete($event)"
         (onRowInserting)="insertPerspektif($event)">
         <dxo-editing mode="batch" [allowUpdating]="false" [allowAdding]="false">
         </dxo-editing>
 
-        <dxi-column dataField="daerah" caption="SBU" >
+        <dxi-column dataField="daerah" caption="SBU">
         </dxi-column>
         <dxi-column dataField="daerah" caption=" " cellTemplate="buttonKPI" width="60"></dxi-column>
         <dxi-column dataField="daerah" caption=" " cellTemplate="buttonAdmin" width="60"></dxi-column>
         <dxi-column dataField="daerah" caption=" " cellTemplate="buttonDashboard" width="60"></dxi-column>
 
-
         <div *dxTemplate="let cell of 'buttonKPI'">
-          <dx-button id="button" [stylingMode]="buttonMode"  text="KPI" type="secondary" [width]="120"
+          <dx-button id="button" [stylingMode]="buttonMode" text="KPI" type="secondary" [width]="120"
             (onClick)="openKPI(cell)">
           </dx-button>
         </div>
         <div *dxTemplate="let cell of 'buttonAdmin'">
-          <dx-button id="button" [stylingMode]="buttonMode"  text="Administrasi" type="default" [width]="120"
+          <dx-button id="button" [stylingMode]="buttonMode" text="Administrasi" type="default" [width]="120"
             (onClick)="openAdministration(cell)">
           </dx-button>
         </div>
         <div *dxTemplate="let cell of 'buttonDashboard'">
-          <dx-button id="button" [stylingMode]="buttonMode"  text="Dashboard" type="success" [width]="120"
+          <dx-button id="button" [stylingMode]="buttonMode" text="Dashboard" type="success" [width]="120"
             (onClick)="openDashboard(cell)">
           </dx-button>
         </div>
-        
       </dx-data-grid>
-
-
-
     </div>
   </div>
 </div>

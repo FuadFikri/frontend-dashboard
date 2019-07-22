@@ -1,15 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  OnDestroy
-} from '@angular/core';
-import {
-  BalancedScorecardService
-} from '../administration/balanced-scorecard-setting/balanced-scorecard.service';
-import {
-  CardBar
-} from '../administration/balanced-scorecard-setting/Model';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import {
   CarouselComponent
 } from 'ngx-carousel-lib';
@@ -18,14 +7,16 @@ import 'rxjs/add/observable/timer';
 import {
   Observable
 } from 'rxjs';
+import { CardBar } from 'app/views/administration/balanced-scorecard-setting/Model';
+import { BalancedScorecardService } from 'app/views/administration/balanced-scorecard-setting/balanced-scorecard.service';
+import { ActivatedRoute } from '@angular/router';
 @Component({
-  selector: 'app-balanced-scorecard',
-  templateUrl: './balanced-scorecard.component.html',
-  styleUrls: ['./balanced-scorecard.component.scss'],
+  selector: 'app-balanced-scorecard-sbu',
+  templateUrl: './balanced-scorecard-sbu.component.html',
+  styleUrls: ['./balanced-scorecard-sbu.component.scss'],
   providers: [BalancedScorecardService]
 })
-export class BalancedScorecardComponent implements OnInit, OnDestroy {
-  
+export class BalancedScorecardSbuComponent implements OnInit, OnDestroy {
   @ViewChild('topCarousel') topCarousel: CarouselComponent;
   primary = "primary";
   info = "info";
@@ -44,13 +35,16 @@ export class BalancedScorecardComponent implements OnInit, OnDestroy {
 
   now;
   alive = true;
+  daerah;
 
-  constructor(private _service: BalancedScorecardService) {
+  constructor(private _service: BalancedScorecardService, private _route: ActivatedRoute) {
     this.daftarCardBarFiltered = [];
     this.now = new Date()
   }
 
   ngOnInit() {
+    let daerah = this._route.snapshot.paramMap.get("daerah");
+    this.daerah = daerah;
     let tahun = this.now.getFullYear().toString();
     let bulan = this.now.getMonth() // getMonth mulai dari 0
     if (bulan == 0) {
@@ -65,7 +59,7 @@ export class BalancedScorecardComponent implements OnInit, OnDestroy {
           this.daftarPerspektif = res.d
           this.perspektif_id = res.d.map(perspektif => perspektif.id)
 
-          this._service.getCardBarByTahunDanBulanLevelNol(tahun, bulan.toString()).subscribe(res => {
+          this._service.getCardBarByTahunDanBulanLevelSatu(tahun, bulan.toString(),this.daerah).subscribe(res => {
             this.daftarCardBar = Object.keys(res.d).map(function (index) {
               let card = res.d[index];
               return card;
@@ -78,21 +72,14 @@ export class BalancedScorecardComponent implements OnInit, OnDestroy {
             console.log(this.daftarCardBarFiltered)
           })
         })
-
       });
-
-
-
   }
 
   loop(e) {
     // let lastIndex = this.daftarCardBarFiltered.length;
-
     if (e.activeIndex === 4) {
-
       window.setTimeout(() => {
         this.topCarousel.slideTo(0);
-
       }, 5000);
       window.clearTimeout();
       console.log("to slide 0 = ", e.activeIndex);
@@ -105,5 +92,4 @@ export class BalancedScorecardComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.alive=false;
   }
-
 }

@@ -1,0 +1,171 @@
+<div class="head">
+  <div class="row">
+    <div class="col-md-6">
+      <img src="assets/img/logoIcon.png" alt="" srcset="" class="logo">
+    </div>
+    <div class="col-md-6">
+      <div class="h4">{{daerah}}</div>
+    </div>
+  </div>
+</div>
+
+<carousel-component #topCarousel [autoPlay]="true" [delayAutoPlay]="10000" (onSlideChange)="loop($event)"  [margin]="50">
+      
+  
+  <div class="item-carousel">
+    <div id="kotak" >
+      <div class="row">
+        <div class="col-md-2">
+          <button type="button" class="btn btn-warning align-middle" *ngIf="daftarPerspektif">
+            {{daftarPerspektif[0].nama_perspektif}}
+          </button>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row" *ngIf="daftarCardBarFiltered[0]">
+            <div class="col-md-12">
+              <card-bar [color]="primary" [data]="daftarCardBarFiltered[0]"></card-bar>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="item-carousel">
+    <div id="kotak" >
+      <div class="row">
+        <div class="col-md-2">
+          <button type="button" class="btn btn-warning align-middle" *ngIf="daftarPerspektif[1]">
+            {{daftarPerspektif[1].nama_perspektif}}
+          </button>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row" *ngIf="daftarCardBarFiltered[1]">
+            <div class="col-md-12">
+              <card-bar [color]="primary" [data]="daftarCardBarFiltered[1]"></card-bar>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="item-carousel">
+    <div id="kotak" >
+      <div class="row">
+        <div class="col-md-2">
+          <button type="button" class="btn btn-warning align-middle">
+            {{daftarPerspektif[2].nama_perspektif}}
+          </button>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row" *ngIf="daftarCardBarFiltered[2]">
+            <div class="col-md-12">
+              <card-bar [color]="primary" [data]="daftarCardBarFiltered[2]"></card-bar>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="item-carousel">
+    <div id="kotak" >
+      <div class="row">
+        <div class="col-md-2">
+          <button type="button" class="btn btn-warning align-middle">
+            {{daftarPerspektif[3].nama_perspektif}}
+          </button>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row" *ngIf="daftarCardBarFiltered[3]">
+            <div class="col-md-12">
+              <card-bar [color]="primary" [data]="daftarCardBarFiltered[3]"></card-bar>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="item-carousel">
+    <div id="kotak" >
+      <div class="row">
+        <div class="col-md-2">
+          <button type="button" class="btn btn-warning align-middle">
+            {{daftarPerspektif[4].nama_perspektif}}
+          </button>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row" *ngIf="daftarCardBarFiltered[4]">
+            <div class="col-md-12">
+              <card-bar [color]="primary" [data]="daftarCardBarFiltered[4]"></card-bar>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+    <!-- <div  *ngFor="let p of daftarPerspektif; let i = index" class="item-carousel">
+        
+              <div id="kotak" >
+                <div class="row">
+                  <div class="col-md-2">
+                    <button type="button" class="btn btn-warning align-middle">
+                      {{p.nama_perspektif}}
+                    </button>
+                  </div>
+                </div>
+                <br>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="row" *ngIf="daftarCardBarFiltered[i]">
+                      <div class="col-md-12">
+                        <card-bar [color]="primary" [data]="daftarCardBarFiltered[i]"></card-bar>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+    </div> -->
+
+   
+  </carousel-component>
+<!-- <div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div id="kotak" *ngFor="let p of daftarPerspektif; let i = index">
+        <div class="row">
+          <div class="col-md-2">
+            <button type="button" class="btn btn-warning align-middle">
+              {{p.nama_perspektif}}
+            </button>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="row" *ngIf="daftarCardBarFiltered[i]">
+              <div class="col-md-12">
+                <card-bar [color]="primary" [data]="daftarCardBarFiltered[i]"></card-bar>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
