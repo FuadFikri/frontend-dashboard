@@ -19,9 +19,11 @@ export class AddSbuComponent implements OnInit {
   perspektifDropDown:any;
   ukuranCardBar:any;
   polarisasiDropDown:any;
+  tahunDropDown:any;
   cardBar;
   KPI;
   nilai;
+  now;
   daerah:String;
   sbu_id:String;
   options = {
@@ -41,6 +43,8 @@ export class AddSbuComponent implements OnInit {
     this.cardBar = new CardBar(undefined, "","","","","","","","","","","","","","","");
     this.KPI = new KPI(undefined,"","","","","","","","","","","","");
     this.nilai = new Nilai(undefined, "0","0","0","0","","","");
+    this.tahunDropDown=[];
+    this.now = new Date();
    }
 
   ngOnInit() {
@@ -64,6 +68,12 @@ export class AddSbuComponent implements OnInit {
 
       console.log(this.sbu_id)
     })
+
+    let tahun = this.now.getFullYear();
+    let batas = tahun + 5;
+    for (let tahunSekarang = tahun; tahunSekarang < batas; tahunSekarang++) {
+      this.tahunDropDown.push(tahunSekarang);
+    }
   }
 
   insert(e) {
@@ -78,6 +88,8 @@ export class AddSbuComponent implements OnInit {
     this.KPI.satuan = this.KPI.satuan.toString();
     this.KPI.ukuran_id = this.KPI.ukuran_id.toString();
     this.KPI.polarisasi_id = this.KPI.polarisasi_id.toString();
+    this.KPI.sumber = this.KPI.sumber.toString();
+    this.KPI.kpi_subdir = this.KPI.kpi_subdir.toString();
     this.KPI.sbu_id = this.sbu_id.toString();
     console.log(this.KPI)
     this._service.insertKPI(this.KPI).subscribe(res => {
@@ -95,7 +107,7 @@ export class AddSbuComponent implements OnInit {
         this.options.message = 'New Card Created';
         notify(this.options, 'success', 3000);
         console.log("insert success",resp);
-        this._router.navigate(['/administration/balanced-scorecard/kpi']);
+        this._router.navigate(['/administration/balanced-scorecard/kpi-sbu/'+this.daerah]);
       }else{
         this.options.message = 'Creating Failed';
           notify(this.options, 'error', 3000);

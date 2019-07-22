@@ -1,25 +1,40 @@
-import { Component, OnInit } from '@angular/core';
-import { BalancedScorecardService } from '../balanced-scorecard.service';
-import { CardBar,KPI, Nilai } from '../Model';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import {
+  BalancedScorecardService
+} from '../balanced-scorecard.service';
+import {
+  CardBar,
+  KPI,
+  Nilai
+} from '../Model';
 import notify from 'devextreme/ui/notify';
-import { Router } from '@angular/router';
-import { SatuanService } from '../../data-master/satuan/satuan.service';
+import {
+  Router
+} from '@angular/router';
+import {
+  SatuanService
+} from '../../data-master/satuan/satuan.service';
 
 @Component({
   selector: 'app-add',
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.scss'],
-  providers: [BalancedScorecardService,SatuanService]
+  providers: [BalancedScorecardService, SatuanService]
 })
 export class AddComponent implements OnInit {
 
-  perspektifDropDown:any;
-  ukuranCardBar:any;
-  polarisasiDropDown:any;
-  satuanDropDown:any;
+  perspektifDropDown: any;
+  ukuranCardBar: any;
+  polarisasiDropDown: any;
+  satuanDropDown: any;
+  tahunDropDown: any[];
   cardBar;
   KPI;
   nilai;
+  now;
 
   options = {
     message: '',
@@ -29,28 +44,38 @@ export class AddComponent implements OnInit {
     closeOnBackButton: true,
   };
 
-  constructor(private _service: BalancedScorecardService, private _router : Router, private satuanService: SatuanService) {
-    this._service.getPerspektifs().subscribe( res => {
+  constructor(private _service: BalancedScorecardService, private _router: Router, private satuanService: SatuanService) {
+    this._service.getPerspektifs().subscribe(res => {
       this.perspektifDropDown = res.d;
     });
 
+    this.now = new Date();
     this.ukuranCardBar = this._service.getUkuranCardBar();
-    this.cardBar = new CardBar(undefined, "","","","","","","","","","","","","","","");
-    this.KPI = new KPI(undefined,"","","","","","","","","","","","");
-    this.nilai = new Nilai(undefined, "0","0","0","0","","","");
-   }
+    this.cardBar = new CardBar(undefined, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+    this.KPI = new KPI(undefined, "", "", "", "", "", "", "", "", "", "", "", "");
+    this.nilai = new Nilai(undefined, "0", "0", "0", "0", "", "", "");
+    this.tahunDropDown = [];
+  }
 
   ngOnInit() {
     this.polarisasiDropDown = this._service.getPolarisasi();
-    
+
     this.satuanService.getSatuans().subscribe(res => {
       this.satuanDropDown = res.d;
     })
+
+
+    let tahun = this.now.getFullYear();
+    let batas = tahun + 5;
+    for (let tahunSekarang = tahun; tahunSekarang < batas; tahunSekarang++) {
+      this.tahunDropDown.push(tahunSekarang);
+    }
+
   }
 
   insert(e) {
     e.preventDefault();
-    
+
     this.KPI.perspektif_id = this.KPI.perspektif_id.toString();
     this.KPI.tahun = this.KPI.tahun.toString();
     this.KPI.target_rkap = this.KPI.target_rkap.toString();
@@ -65,22 +90,22 @@ export class AddComponent implements OnInit {
     this._service.insertKPI(this.KPI).subscribe(res => {
       let kpi_id = res.d[0].id;
       this.nilai.kpi_id = kpi_id;
-      console.log("respon kpi",res)
-        this.insertNilai12Bulan(this.nilai);
-      });
+      console.log("respon kpi", res)
+      this.insertNilai12Bulan(this.nilai);
+    });
 
   }
 
-  insertNilai12Bulan(nilai:Nilai) {
+  insertNilai12Bulan(nilai: Nilai) {
     this._service.insertAllNilai(nilai).subscribe(resp => {
-      if(resp.d==null && resp.s == 200){
+      if (resp.d == null && resp.s == 200) {
         this.options.message = 'New Card Created';
         notify(this.options, 'success', 3000);
-        console.log("insert success",resp);
+        console.log("insert success", resp);
         this._router.navigate(['/administration/balanced-scorecard/kpi']);
-      }else{
+      } else {
         this.options.message = 'Creating Failed';
-          notify(this.options, 'error', 3000);
+        notify(this.options, 'error', 3000);
         console.log("updating failed ", resp);
       }
     }, err => {

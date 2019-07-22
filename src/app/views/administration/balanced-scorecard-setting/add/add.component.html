@@ -4,7 +4,7 @@
       <strong>Add<span *ngIf="(isAdd || isEdit) && !isDetail">Add / Edit</span></strong>
     </div>
     <div class="card-body">
-      <form  (submit)="insert($event)">
+      <form (submit)="insert($event)">
         <div class="dx-fieldset">
           <div class="dx-field">
             <div class="dx-field-label">Perspektif</div>
@@ -20,11 +20,11 @@
           <div class="dx-field">
             <div class="dx-field-label">Tahun</div>
             <div class="dx-field-value">
-              <dx-number-box [(value)]="KPI.tahun">
+              <dx-select-box [dataSource]="tahunDropDown" [(value)]="KPI.tahun" >
                 <dx-validator>
                   <dxi-validation-rule type="required" message="Tahun harus diisi"></dxi-validation-rule>
                 </dx-validator>
-              </dx-number-box>
+              </dx-select-box>
             </div>
           </div>
           <div class="dx-field">
@@ -74,6 +74,8 @@
               <dx-number-box [(value)]="KPI.target_rkap">
                 <dx-validator>
                   <dxi-validation-rule type="required" message="Target harus diisi"></dxi-validation-rule>
+                  <dxi-validation-rule type="range" [min]="0" message="Target bulanan tidak boleh bernilai negatif">
+                  </dxi-validation-rule>
                 </dx-validator>
               </dx-number-box>
             </div>
@@ -81,8 +83,7 @@
           <div class="dx-field">
             <div class="dx-field-label">Ukuran Card Bar</div>
             <div class="dx-field-value">
-              <dx-select-box [dataSource]="ukuranCardBar" [(value)]="KPI.ukuran_id" displayExpr="ukuran"
-                valueExpr="id">
+              <dx-select-box [dataSource]="ukuranCardBar" [(value)]="KPI.ukuran_id" displayExpr="ukuran" valueExpr="id">
                 <dx-validator>
                   <dxi-validation-rule type="required" message="Ukuran harus diisi"></dxi-validation-rule>
                 </dx-validator>
@@ -106,7 +107,7 @@
               <a routerLink="/administration/balanced-scorecard">
                 <dx-button [width]="90" text="Back"></dx-button>
               </a>
-              <dx-button [width]="90" text="Save" type="success" [useSubmitBehavior]="true" >
+              <dx-button [width]="90" text="Save" type="success" [useSubmitBehavior]="true">
               </dx-button>
             </div>
           </div>
