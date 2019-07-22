@@ -76,10 +76,10 @@
             <dxi-column dataField="id_nilai" caption="UPLOAD" [allowEditing]="false" cellTemplate="fileTemplate">
             </dxi-column>
 
-            <dxi-column dataField="ukuran_id" caption="UKURAN" [allowResizing]="true">
+            <!-- <dxi-column dataField="ukuran_id" caption="UKURAN" [allowResizing]="true">
               <dxo-lookup [dataSource]="ukuranCardBar" displayExpr="ukuran" valueExpr="id">
               </dxo-lookup>
-            </dxi-column>
+            </dxi-column> -->
             <div *dxTemplate="let data of 'cellTemplate'">
               <div class="text-center">
                 <i class="fa {{data.value}}" id="btn{{data.value}}"></i>
