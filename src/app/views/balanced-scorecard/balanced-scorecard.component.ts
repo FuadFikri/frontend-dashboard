@@ -1,7 +1,22 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { BalancedScorecardService } from '../administration/balanced-scorecard-setting/balanced-scorecard.service';
-import { CardBar } from '../administration/balanced-scorecard-setting/Model';
-import { CarouselComponent } from 'ngx-carousel-lib';
+import {
+  Component,
+  OnInit,
+  ViewChild
+} from '@angular/core';
+import {
+  BalancedScorecardService
+} from '../administration/balanced-scorecard-setting/balanced-scorecard.service';
+import {
+  CardBar
+} from '../administration/balanced-scorecard-setting/Model';
+import {
+  CarouselComponent
+} from 'ngx-carousel-lib';
+import 'rxjs/add/operator/takeWhile';
+import 'rxjs/add/observable/timer';
+import {
+  Observable
+} from 'rxjs';
 @Component({
   selector: 'app-balanced-scorecard',
   templateUrl: './balanced-scorecard.component.html',
@@ -16,18 +31,19 @@ export class BalancedScorecardComponent implements OnInit {
   warning = "warning";
   danger = "danger";
   success = "success";
-  wide:boolean=true;
-  small:boolean=false;
+  wide: boolean = true;
+  small: boolean = false;
 
   daftarPerspektif;
   perspektif_id;
   daftarCardBar;
   cardBarFiltered;
-  daftarCardBarFiltered:CardBar[];
+  daftarCardBarFiltered: CardBar[];
 
   now;
+  alive = true;
 
-  constructor(private _service : BalancedScorecardService) { 
+  constructor(private _service: BalancedScorecardService) {
     this.daftarCardBarFiltered = [];
     this.now = new Date()
   }
@@ -35,37 +51,46 @@ export class BalancedScorecardComponent implements OnInit {
   ngOnInit() {
     let tahun = this.now.getFullYear().toString();
     let bulan = this.now.getMonth() // getMonth mulai dari 0
-    if(bulan == 0){
+    if (bulan == 0) {
       bulan = 12;
     }
-    console.log(bulan,tahun)
-    this._service.getPerspektifs().subscribe(res => {
-      this.daftarPerspektif = res.d
-      this.perspektif_id = res.d.map(perspektif => perspektif.id)
-      
-        this._service.getCardBarByTahunDanBulanLevelNol(tahun,bulan.toString()).subscribe(res => {
-          this.daftarCardBar = Object.keys(res.d).map(function(index){
-            let card = res.d[index];
-            return card;
-        });
-          console.log(this.daftarCardBar)
-          for (let index = 0; index < this.perspektif_id.length; index++) {
-            this.cardBarFiltered = this.daftarCardBar.filter(cardbar => cardbar.perspektif_id==this.perspektif_id[index])
-            this.daftarCardBarFiltered.push(this.cardBarFiltered);
-          }
-          console.log(this.daftarCardBarFiltered)
-      })
-    })
+    console.log(bulan, tahun)
+    Observable.timer(0, 30000)
+      .takeWhile(() => this.alive)
+      .subscribe(() => {
+        this.daftarCardBarFiltered = [];
+        this._service.getPerspektifs().subscribe(res => {
+          this.daftarPerspektif = res.d
+          this.perspektif_id = res.d.map(perspektif => perspektif.id)
+
+          this._service.getCardBarByTahunDanBulanLevelNol(tahun, bulan.toString()).subscribe(res => {
+            this.daftarCardBar = Object.keys(res.d).map(function (index) {
+              let card = res.d[index];
+              return card;
+            });
+            console.log(this.daftarCardBar)
+            for (let index = 0; index < this.perspektif_id.length; index++) {
+              this.cardBarFiltered = this.daftarCardBar.filter(cardbar => cardbar.perspektif_id == this.perspektif_id[index])
+              this.daftarCardBarFiltered.push(this.cardBarFiltered);
+            }
+            console.log(this.daftarCardBarFiltered)
+          })
+        })
+
+      });
+
+
+
   }
 
   loop(e) {
-    let lastIndex = this.daftarCardBarFiltered.length;
-    
-    if (e.activeIndex === lastIndex-1) {
-      
+    // let lastIndex = this.daftarCardBarFiltered.length;
+
+    if (e.activeIndex === 4) {
+
       window.setTimeout(() => {
         this.topCarousel.slideTo(0);
-        
+
       }, 5000);
       window.clearTimeout();
       console.log("to slide 0 = ", e.activeIndex);
