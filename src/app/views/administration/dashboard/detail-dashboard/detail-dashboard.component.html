@@ -1,3 +1,13 @@
+<div class="row">
+  <div class="col-md-4">
+      <dx-select-box [dataSource]="tahunDropDown" 
+      [(value)]="generated.tahun"></dx-select-box>
+  </div>
+  <div class="col-md-3">
+      <dx-button icon="fa fa-database" text="Generate Widget" (click)="generate($event)"></dx-button>
+  </div>
+</div>
+
 <dx-data-grid id="gridContainer" [dataSource]="cardSource" [masterDetail]="{ enabled: true, template: 'detail' }"
   [showBorders]="true" keyExpr="widget_type" (onRowUpdating)="updateSlide($event)">
   <dxo-editing mode="batch" [allowUpdating]="true">
@@ -15,7 +25,7 @@
       </dxi-column>
       <dxi-column dataField="widget_title"></dxi-column>
       <dxi-column dataField="widget_label"></dxi-column>
-      
+
       <dxi-column dataField="color">
         <dxo-lookup [dataSource]="cardBoxColor" displayExpr="caption" valueExpr="color">
         </dxo-lookup>
@@ -47,7 +57,7 @@
       <dxi-column dataField="widget_title"></dxi-column>
       <dxi-column dataField="widget_label"></dxi-column>
       <dxi-column dataField="widget_size"></dxi-column>
-      
+
     </dx-data-grid>
   </div>
 </dx-data-grid>

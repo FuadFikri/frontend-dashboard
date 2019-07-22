@@ -11,11 +11,11 @@
 <div class="container">
 
   <div class="row">
-    <div class="col-sm-6 col-md-3" *ngFor="let item of array">
+    <div class="col-sm-6 col-md-3" *ngFor="let card of cards">
       <div class="card border-0 shadow-sm text-light bg-primary">
         <div class="card-header">
           <div class="myCard-title text-center">
-            Pendapatan Desember 
+            {{card.widget_title}}
           </div>
         </div>
         <div class="card-body">

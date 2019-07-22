@@ -92,4 +92,12 @@ export class DashboardService {
     const token = localStorage.getItem('token');
     return this.http.get(this.widgetURL + '/delete?token=' + token + '&widget_id=' + widget_id)
   }
+
+  getWidgetsId() {
+    return this.http.get <any> (this.widgetURL+ "/getWidgetId");
+  }
+
+  generateWidgets(tahun:String, widget_id:String) {
+    return this.http.get <any> (this.widgetURL+ "/generateWidgets?tahun="+tahun + "&widget_id="+widget_id);
+  }
 }

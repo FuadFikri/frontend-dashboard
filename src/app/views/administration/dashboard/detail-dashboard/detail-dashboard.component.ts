@@ -1,22 +1,32 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { DashboardService } from '../dashboard.service';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter
+} from '@angular/core';
+import {
+  DashboardService
+} from '../dashboard.service';
 import DataSource from 'devextreme/data/data_source';
 import ArrayStore from 'devextreme/data/array_store';
 import notify from 'devextreme/ui/notify';
-import { Widget } from '../Model';
+import {
+  Widget
+} from '../Model';
 @Component({
   selector: 'app-detail-dashboard',
   templateUrl: './detail-dashboard.component.html',
   styleUrls: ['./detail-dashboard.component.scss'],
-  providers:[DashboardService]
+  providers: [DashboardService]
 })
 
 export class DetailDashboardComponent implements OnInit {
-  cardSource:any=[];
-  boxSource:any=[];
-  doughnutSource:any=[];
-  widgets:any;
-  widgetDataStorage:any;
+  cardSource: any = [];
+  boxSource: any = [];
+  doughnutSource: any = [];
+  widgets: any;
+  widgetDataStorage: any;
   @Input() selectedDashboard;
   @Input() detailVisible;
   @Input() isEdit;
@@ -33,13 +43,18 @@ export class DetailDashboardComponent implements OnInit {
   cardBoxSize;
   cardBoxColor;
   cardBoxCloseable;
-  slidePositions = [
-    {"at_slide":"1"},
-    {"at_slide":"2"},
-    {"at_slide":"3"},
+  slidePositions = [{
+      "at_slide": "1"
+    },
+    {
+      "at_slide": "2"
+    },
+    {
+      "at_slide": "3"
+    },
   ];
   constructor(private dashboardService: DashboardService) {
-    this.widgetDataStorage=[];
+    this.widgetDataStorage = [];
   }
 
   ngOnInit() {
@@ -48,47 +63,47 @@ export class DetailDashboardComponent implements OnInit {
       this.cardSource.push(res.d[1]);
       this.doughnutSource.push(res.d[2]);
     });
-    console.log("selected dashboard = ",this.selectedDashboard);
+    console.log("selected dashboard = ", this.selectedDashboard);
     this.dashboardService.getWidgets().subscribe(res => {
       this.widgets = res.d;
       console.log(this.widgets);
     });
-    this.cardBoxSize  = this.dashboardService.getCardBoxSize();
+    this.cardBoxSize = this.dashboardService.getCardBoxSize();
     this.cardBoxColor = this.dashboardService.getCardBoxColor();
     this.cardBoxCloseable = this.dashboardService.getCardBoxCloseable();
   }
 
-    getWidgetList(key) {
-      let item = this.widgetDataStorage.find((i) => i.key === key);
-      if (!item) {
-          item = {
-              key: key,
-              dataSourceInstance: new DataSource({
-                  store: new ArrayStore({
-                      data: this.widgets,
-                      key: "widget_id"
-                  }),
-                  filter: ["widget_type", "=", key]
-              })
-          };
-          this.widgetDataStorage.push(item)
-      }
-      return item.dataSourceInstance;
+  getWidgetList(key) {
+    let item = this.widgetDataStorage.find((i) => i.key === key);
+    if (!item) {
+      item = {
+        key: key,
+        dataSourceInstance: new DataSource({
+          store: new ArrayStore({
+            data: this.widgets,
+            key: "widget_id"
+          }),
+          filter: ["widget_type", "=", key]
+        })
+      };
+      this.widgetDataStorage.push(item)
+    }
+    return item.dataSourceInstance;
   }
 
-  update(e){
+  update(e) {
     this.data = e.newData;
     this.data.widget_id = e.oldData.widget_id;
     console.log(this.data);
-    
-    this.dashboardService.update(this.data).subscribe(res=> {
-      if(res.d==1){
+
+    this.dashboardService.update(this.data).subscribe(res => {
+      if (res.d == 1) {
         this.options.message = 'Widget Configuration Updated';
         notify(this.options, 'success', 3000);
-        console.log("updating success",this.data);
-      }else{
+        console.log("updating success", this.data);
+      } else {
         this.options.message = 'updating Failed';
-          notify(this.options, 'error', 3000);
+        notify(this.options, 'error', 3000);
         console.log("updating failed ", res);
       }
     }, err => {
@@ -98,32 +113,31 @@ export class DetailDashboardComponent implements OnInit {
     });
   }
 
-  updateSlide(e){
+  updateSlide(e) {
     this.data = e.newData;
     this.data.widget_type = e.oldData.widget_type;
     this.dashboardService.updateSlidePosition(this.data).subscribe(res => {
       console.log('update success', res);
       this.options.message = 'Widget Position Updated';
       notify(this.options, 'success', 3000);
-      console.log("updating success",this.data);
+      console.log("updating success", this.data);
     }, err => {
       this.options.message = 'updating Failed';
       notify(this.options, 'error', 3000);
       console.log("updating failed ", err);
-    }
-    );
+    });
   }
-  
-  delete(e){
+
+  delete(e) {
     let widget_id = e.key;
-    this.dashboardService.delete(widget_id).subscribe(res=> {
-      if(res.d==1){
+    this.dashboardService.delete(widget_id).subscribe(res => {
+      if (res.d == 1) {
         this.options.message = 'Widget Deleted';
         notify(this.options, 'success', 3000);
-        console.log("deleting success ",widget_id);
-      }else{
+        console.log("deleting success ", widget_id);
+      } else {
         this.options.message = 'deleting Failed';
-          notify(this.options, 'error', 3000);
+        notify(this.options, 'error', 3000);
         console.log("deleting failed ", res);
       }
     }, err => {
@@ -133,4 +147,32 @@ export class DetailDashboardComponent implements OnInit {
     });
   }
 
+
+  widget_id = [];
+
+  generate(e) {
+    console.log("heree", e)
+    console.log(this.generated)
+    let tahun = this.generated.tahun;
+    if (tahun) {
+      this.dashboardService.getWidgetsId().subscribe((res) => {
+        let widgets = []
+        widgets = res.d;
+        widgets.map(el => {
+          this.widget_id.push(el.widget_id);
+        })
+
+        this.widget_id.forEach(element => {
+          this.dashboardService.generateWidgets(tahun, element).subscribe(response => {
+            console.log(response);
+          })
+        });
+
+      })
+    }
+  }
+  generated = {
+    tahun: ""
+  }
+  tahunDropDown = ["2019", "2020", "2021", "2022"]
 }

@@ -16,37 +16,37 @@ export class PivotDataGridComponent implements OnInit {
   constructor(private dashService: DashboardService) {
     this.customizeTooltip = this.customizeTooltip.bind(this);
 
-    this.pivotGridDataSource = {
-      fields: [{
-        caption: "Region",
-        width: 120,
-        dataField: "region",
-        area: "row",
-        sortBySummaryField: "Total"
-      }, {
-        caption: "City",
-        dataField: "city",
-        width: 150,
-        area: "row"
-      }, {
-        dataField: "date",
-        dataType: "date",
-        area: "column"
-      }, {
-        groupName: "date",
-        groupInterval: "month",
-        visible: false
-      }, {
-        caption: "Total",
-        dataField: "amount",
-        dataType: "number",
-        summaryType: "sum",
-        format: "currency",
-        area: "data"
-      }],
-      store: dashService.getSales()
+  //   this.pivotGridDataSource = {
+  //     fields: [{
+  //       caption: "Region",
+  //       width: 120,
+  //       dataField: "region",
+  //       area: "row",
+  //       sortBySummaryField: "Total"
+  //     }, {
+  //       caption: "City",
+  //       dataField: "city",
+  //       width: 150,
+  //       area: "row"
+  //     }, {
+  //       dataField: "date",
+  //       dataType: "date",
+  //       area: "column"
+  //     }, {
+  //       groupName: "date",
+  //       groupInterval: "month",
+  //       visible: false
+  //     }, {
+  //       caption: "Total",
+  //       dataField: "amount",
+  //       dataType: "number",
+  //       summaryType: "sum",
+  //       format: "currency",
+  //       area: "data"
+  //     }],
+  //     store: dashService.getSales()
+  //   }
     }
-   }
 
   ngOnInit() {
   }
