@@ -86,7 +86,7 @@ const routes: Routes = [
       },
       {
         path: 'dashboard',
-        component: DashboardComponent,
+        component: DetailDashboardComponent,
         data: {
           title: 'Dashboard Administration'
         }

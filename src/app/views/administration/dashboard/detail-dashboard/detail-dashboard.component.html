@@ -1,161 +1,84 @@
-<dx-data-grid id="gridContainer"
-    [dataSource]="cardBoxSource"
-    [masterDetail]="{ enabled: true, template: 'detail' }"
-    [showBorders]="true"
-    keyExpr="widget_type"
-    (onRowUpdating)="updateSlide($event)"
-    >
-    <dxo-editing 
-                mode="batch"
-                [allowUpdating]="true">
-            </dxo-editing>
-    <dxi-column dataField="widget_type"  caption="Card Box Widget" [allowEditing]="false"></dxi-column>
-    <dxi-column dataField="at_slide"  caption="Slide Position">
-        <dxo-lookup
-                        [dataSource]="slidePositions"
-                        displayExpr="at_slide"
-                        valueExpr="at_slide">
-        </dxo-lookup>
-    </dxi-column>
+<dx-data-grid id="gridContainer" [dataSource]="cardSource" [masterDetail]="{ enabled: true, template: 'detail' }"
+  [showBorders]="true" keyExpr="widget_type" (onRowUpdating)="updateSlide($event)">
+  <dxo-editing mode="batch" [allowUpdating]="true">
+  </dxo-editing>
+  <dxi-column dataField="widget_type" caption="Card Widget" [allowEditing]="false"></dxi-column>
 
-    <div *dxTemplate="let widget_type of 'detail'">
-        <div class="master-detail-caption"></div>
-        <dx-data-grid 
-            [dataSource]="getWidgetList(widget_type.key)"
-            [showBorders]="true"
-            [columnAutoWidth]="true"
-            (onRowUpdating)="update($event)"
-            (onRowRemoving)="delete($event)">
-            <dxo-editing 
-                mode="batch"
-                [allowUpdating]="true"
-                [allowDeleting]="true">
-            </dxo-editing>
-                <dxi-column dataField="widget_sortnumber" sortOrder="asc" width=85 caption="Number">
-                    
-                </dxi-column>
-                <dxi-column dataField="widget_title"></dxi-column>
-                <dxi-column dataField="widget_label"></dxi-column>
-                <dxi-column dataField="closeable">
-                    <dxo-lookup
-                        [dataSource]="cardBoxCloseable"
-                        displayExpr="caption"
-                        valueExpr="value">
-                    </dxo-lookup>
-                </dxi-column>
-                <dxi-column dataField="color">
-                    <dxo-lookup
-                        [dataSource]="cardBoxColor"
-                        displayExpr="caption"
-                        valueExpr="color">
-                    </dxo-lookup>
-                </dxi-column>
-                <dxi-column dataField="widget_size" caption="Size">
-                    <dxo-lookup
-                        [dataSource]="cardBoxSize"
-                        displayExpr="caption"
-                        valueExpr="widget_size">
-                    </dxo-lookup>
-                </dxi-column>
-        </dx-data-grid>       
-    </div>  
+  <div *dxTemplate="let widget_type of 'detail'">
+    <div class="master-detail-caption"></div>
+    <dx-data-grid [dataSource]="getWidgetList(widget_type.key)" [showBorders]="true" [columnAutoWidth]="true"
+      (onRowUpdating)="update($event)" (onRowRemoving)="delete($event)">
+      <dxo-editing mode="batch" [allowUpdating]="true" [allowDeleting]="true">
+      </dxo-editing>
+      <dxi-column dataField="widget_sortnumber" sortOrder="asc" width=85 caption="Number">
+
+      </dxi-column>
+      <dxi-column dataField="widget_title"></dxi-column>
+      <dxi-column dataField="widget_label"></dxi-column>
+      
+      <dxi-column dataField="color">
+        <dxo-lookup [dataSource]="cardBoxColor" displayExpr="caption" valueExpr="color">
+        </dxo-lookup>
+      </dxi-column>
+      <dxi-column dataField="widget_size" caption="Size">
+        <dxo-lookup [dataSource]="cardBoxSize" displayExpr="caption" valueExpr="widget_size">
+        </dxo-lookup>
+      </dxi-column>
+    </dx-data-grid>
+  </div>
 </dx-data-grid>
 <br>
 
-<!-- circular -->
-<dx-data-grid id="gridContainer"
-    [dataSource]="circularSource"
-    [masterDetail]="{ enabled: true, template: 'detail' }"
-    keyExpr="widget_type"
-    [showBorders]="true"
-    (onRowUpdating)="updateSlide($event)">
-    <dxo-editing 
-                mode="batch"
-                [allowUpdating]="true">
-    </dxo-editing>
-    
-    <dxi-column dataField="widget_type"  caption="Circular Gauge Widget" [allowEditing]="false"></dxi-column>
-    <dxi-column dataField="at_slide"  caption="Slide Position">
-        <dxo-lookup
-                        [dataSource]="slidePositions"
-                        displayExpr="at_slide"
-                        valueExpr="at_slide">
-        </dxo-lookup>
-    </dxi-column>
 
-    <div *dxTemplate="let widget_type of 'detail'">
-        <div class="master-detail-caption"></div>
-        <dx-data-grid 
-            [dataSource]="getWidgetList(widget_type.key)"
-            [showBorders]="true"
-            [columnAutoWidth]="true"
-            (onRowUpdating)="update($event)"
-            (onRowRemoving)="delete($event)"  >
-            <dxo-editing 
-                mode="batch"
-                [allowUpdating]="true"
-                [allowDeleting]="true"
-                [allowAdding]="true">
-            </dxo-editing>
-                <dxi-column dataField="widget_sortnumber"></dxi-column>
-                <dxi-column dataField="widget_title"></dxi-column>
-                <dxi-column dataField="widget_label"></dxi-column>
-                <dxi-column dataField="widget_size"></dxi-column>
-                <dxi-column dataField="gauge_start"></dxi-column>
-                <dxi-column dataField="gauge_end"></dxi-column>
-                <dxi-column dataField="gauge_interval"></dxi-column>
-        </dx-data-grid>       
-    </div>  
+<dx-data-grid id="gridContainer" [dataSource]="boxSource" [masterDetail]="{ enabled: true, template: 'detail' }"
+  keyExpr="widget_type" [showBorders]="true" (onRowUpdating)="updateSlide($event)">
+  <dxo-editing mode="batch" [allowUpdating]="true">
+  </dxo-editing>
+
+  <dxi-column dataField="widget_type" caption="Box Widget" [allowEditing]="false"></dxi-column>
+
+  <div *dxTemplate="let widget_type of 'detail'">
+    <div class="master-detail-caption"></div>
+    <dx-data-grid [dataSource]="getWidgetList(widget_type.key)" [showBorders]="true" [columnAutoWidth]="true"
+      (onRowUpdating)="update($event)" (onRowRemoving)="delete($event)">
+      <dxo-editing mode="batch" [allowUpdating]="true" [allowDeleting]="true" [allowAdding]="true">
+      </dxo-editing>
+      <dxi-column dataField="widget_sortnumber"></dxi-column>
+      <dxi-column dataField="widget_title"></dxi-column>
+      <dxi-column dataField="widget_label"></dxi-column>
+      <dxi-column dataField="widget_size"></dxi-column>
+      
+    </dx-data-grid>
+  </div>
 </dx-data-grid>
 <!-- end  circular -->
 
 <br>
 
 <!-- bar gauge -->
-<dx-data-grid id="gridContainer"
-    [dataSource]="barGaugeSource"
-    [masterDetail]="{ enabled: true, template: 'detail' }"
-    keyExpr="widget_type"
-    [showBorders]="true"
-    (onRowUpdating)="updateSlide($event)">
-    <dxo-editing 
-                mode="batch"
-                [allowUpdating]="true">
-    </dxo-editing>
-    
-    
-    <dxi-column dataField="widget_type"  caption="Bar Gauge Widget" [allowEditing]="false"></dxi-column>
-    <dxi-column dataField="at_slide"  caption="Slide Position">
-        <dxo-lookup
-                        [dataSource]="slidePositions"
-                        displayExpr="at_slide"
-                        valueExpr="at_slide">
-        </dxo-lookup>
-    </dxi-column>
+<dx-data-grid id="gridContainer" [dataSource]="doughnutSource" [masterDetail]="{ enabled: true, template: 'detail' }"
+  keyExpr="widget_type" [showBorders]="true" (onRowUpdating)="updateSlide($event)">
+  <dxo-editing mode="batch" [allowUpdating]="true">
+  </dxo-editing>
 
-    <div *dxTemplate="let widget_type of 'detail'">
-        <div class="master-detail-caption"></div>
-        <dx-data-grid 
-            [dataSource]="getWidgetList(widget_type.key)"
-            [showBorders]="true"
-            [columnAutoWidth]="true"
-            (onRowUpdating)="update($event)"
-            (onRowRemoving)="delete($event)"  >
-            <dxo-editing 
-                mode="batch"
-                [allowUpdating]="true"
-                [allowDeleting]="true"
-                [allowAdding]="true">
-            </dxo-editing>
-                <dxi-column dataField="widget_sortnumber"></dxi-column>
-                <dxi-column dataField="widget_title"></dxi-column>
-                <dxi-column dataField="widget_label"></dxi-column>
-                <dxi-column dataField="widget_size"></dxi-column>
-                <dxi-column dataField="gauge_start"></dxi-column>
-                <dxi-column dataField="gauge_end"></dxi-column>
-                <dxi-column dataField="gauge_interval"></dxi-column>
-        </dx-data-grid>       
-    </div>  
+
+  <dxi-column dataField="widget_type" caption="Doughnut Widget" [allowEditing]="false"></dxi-column>
+
+  <div *dxTemplate="let widget_type of 'detail'">
+    <div class="master-detail-caption"></div>
+    <dx-data-grid [dataSource]="getWidgetList(widget_type.key)" [showBorders]="true" [columnAutoWidth]="true"
+      (onRowUpdating)="update($event)" (onRowRemoving)="delete($event)">
+      <dxo-editing mode="batch" [allowUpdating]="true" [allowDeleting]="true" [allowAdding]="true">
+      </dxo-editing>
+      <dxi-column dataField="widget_sortnumber"></dxi-column>
+      <dxi-column dataField="widget_title"></dxi-column>
+      <dxi-column dataField="widget_label"></dxi-column>
+      <dxi-column dataField="widget_size"></dxi-column>
+      <dxi-column dataField="gauge_start"></dxi-column>
+      <dxi-column dataField="gauge_end"></dxi-column>
+      <dxi-column dataField="gauge_interval"></dxi-column>
+    </dx-data-grid>
+  </div>
 </dx-data-grid>
 
 <!-- end bar gauge -->
