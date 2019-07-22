@@ -25,7 +25,7 @@
       </div>
 
       <br>
-
+      
       <dx-data-grid id="gridContainer" [dataSource]="perspektifSource"
         [masterDetail]="{ enabled: true, template: 'detail' }" keyExpr="id" [showBorders]="true"
         [columnHidingEnabled]="false" [rowAlternationEnabled]="true" [columnAutoWidth]="true" [wordWrapEnabled]="true"
@@ -43,6 +43,7 @@
 
         <div *dxTemplate="let perspektif of 'detail'">
           <div class="master-detail-caption"> </div>
+          
           <dx-data-grid [dataSource]="getCardBar(perspektif.key)" [showBorders]="true" [columnAutoWidth]="true"
             (onRowUpdating)="updateCardBar($event)" (onRowInserting)="insertCardBar($event,perspektif.key)">
 
@@ -57,8 +58,9 @@
             </dxi-column>
             <dxi-column dataField="target_rkap" caption="TARGET RKAP" dataType="number" [allowEditing]="false">
             </dxi-column>
-            <dxi-column dataField="target_bulanan" dataType="number" caption="TARGET {{ bulan }}">
+            <dxi-column dataField="target_bulanan" dataType="number" caption="TARGET {{ bulan }}" >
               <dxi-validation-rule type="required" message="Harus Diisi"></dxi-validation-rule>
+              <dxi-validation-rule type="range" [min]="0" message="Target bulanan tidak boleh bernilai negatif" ></dxi-validation-rule>
             </dxi-column>
             <dxi-column dataField="realisasi" caption="REALISASI" dataType="number">
               <dxi-validation-rule type="required" message="Harus Diisi"></dxi-validation-rule>
