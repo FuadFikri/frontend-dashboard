@@ -11,25 +11,22 @@
 <div class="container">
 
   <div class="row">
-    <div class="col-sm-6 col-md-3" *ngFor="let card of cards">
-      <div class="card border-0 shadow-sm text-light bg-primary">
+    <div class="col-sm-6 {{card.widget_size}}" *ngFor="let card of cards">
+      <div class="card border-0 shadow-sm text-light bg-{{card.color}}">
         <div class="card-header">
           <div class="myCard-title text-center">
             {{card.widget_title}}
           </div>
         </div>
         <div class="card-body">
-          <div class="btn-group float-right" dropdown>
-            <a (click)="hapus(card)" id="hapus" href="#">X</a>
-          </div>
-          <div class="chart-wrapper px-3" style="height:100px;">
+          <div class="chart-wrapper px-3" >
               
               <h4 class="font-weight-bold text-center uk-margin-large-top myCard-value">
                 {{card.widget_value_1}}
               </h4>
             </div>
-            <div class="text-center myCard-label"> {{card.widget_label}}</div>
-        </div>
+          </div>
+          <div class="text-center myCard-label"> {{card.widget_label}}</div>
       </div>
     </div>
   </div>

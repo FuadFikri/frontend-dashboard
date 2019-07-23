@@ -13,7 +13,7 @@ export class DashboardService {
   private widgetDataURL = this.a.SERVER_URL + '/system/WidgetData';
 
   cardBoxSize = [
-    {"widget_size":"col-md-6",
+    {"widget_size":"col-md-4",
     "caption" : "Wide"},
     {"widget_size":"col-md-3",
     "caption" : "Square"}
