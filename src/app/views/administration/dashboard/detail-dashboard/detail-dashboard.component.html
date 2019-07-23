@@ -18,19 +18,20 @@
     <div class="master-detail-caption"></div>
     <dx-data-grid [dataSource]="getWidgetList(widget_type.key)" [showBorders]="true" [columnAutoWidth]="true"
       (onRowUpdating)="update($event)" (onRowRemoving)="delete($event)">
-      <dxo-editing mode="batch" [allowUpdating]="true" [allowDeleting]="true">
+      <dxo-editing mode="batch" [allowUpdating]="true">
       </dxo-editing>
-      <dxi-column dataField="widget_sortnumber" sortOrder="asc" width=85 caption="Number">
+      <dxi-column dataField="widget_sortnumber" sortOrder="asc" width=85 caption="NUMBER">
 
       </dxi-column>
-      <dxi-column dataField="widget_title"></dxi-column>
-      <dxi-column dataField="widget_label"></dxi-column>
+      <dxi-column dataField="widget_title" caption="TITLE"></dxi-column>
+      <dxi-column dataField="widget_value_1" caption="VALUE"></dxi-column>
+      <dxi-column dataField="widget_label" caption="LABEL"></dxi-column>
 
-      <dxi-column dataField="color">
+      <dxi-column dataField="color" caption="COLOR">
         <dxo-lookup [dataSource]="cardBoxColor" displayExpr="caption" valueExpr="color">
         </dxo-lookup>
       </dxi-column>
-      <dxi-column dataField="widget_size" caption="Size">
+      <dxi-column dataField="widget_size" caption="SIZE">
         <dxo-lookup [dataSource]="cardBoxSize" displayExpr="caption" valueExpr="widget_size">
         </dxo-lookup>
       </dxi-column>

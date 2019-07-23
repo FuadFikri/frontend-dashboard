@@ -43,6 +43,9 @@ export class DetailDashboardComponent implements OnInit {
   cardBoxSize;
   cardBoxColor;
   cardBoxCloseable;
+  now: any;
+
+
   slidePositions = [{
       "at_slide": "1"
     },
@@ -55,18 +58,23 @@ export class DetailDashboardComponent implements OnInit {
   ];
   constructor(private dashboardService: DashboardService) {
     this.widgetDataStorage = [];
+    this.now = new Date();
+
   }
 
   ngOnInit() {
+    let tahun = (this.now.getFullYear()).toString();
+    let bulan = (this.now.getMonth()).toString();
     this.dashboardService.getWidgetType().subscribe(res => {
       this.boxSource.push(res.d[0]);
       this.cardSource.push(res.d[1]);
       this.doughnutSource.push(res.d[2]);
     });
-    console.log("selected dashboard = ", this.selectedDashboard);
-    this.dashboardService.getWidgets().subscribe(res => {
+
+
+    this.dashboardService.getWidgets(tahun, bulan).subscribe(res => {
       this.widgets = res.d;
-      console.log(this.widgets);
+      console.log("widgets bulan" + bulan, res);
     });
     this.cardBoxSize = this.dashboardService.getCardBoxSize();
     this.cardBoxColor = this.dashboardService.getCardBoxColor();
@@ -93,10 +101,73 @@ export class DetailDashboardComponent implements OnInit {
 
   update(e) {
     this.data = e.newData;
-    this.data.widget_id = e.oldData.widget_id;
+
     console.log(this.data);
 
-    this.dashboardService.update(this.data).subscribe(res => {
+    if ((this.data.widget_label || this.data.widget_value_1) && (this.data.widget_size || this.data.widget_title || this.data.color || this.data.widget_sortnumber)) {
+      console.log("update data dan widget")
+      this.data.widget_id = e.oldData.widget_id;
+      this.dashboardService.updateWidget(this.data).subscribe(res => {
+        console.log(res)
+      }, err => {
+        this.options.message = 'updating Failed';
+        notify(this.options, 'error', 3000);
+        console.log("updating failed ", err);
+      });
+
+      this.data = e.newData;
+      this.data.id_widget_data = e.oldData.id_widget_data;
+      this.dashboardService.updateWidgetData(this.data).subscribe(res => {
+        if (res.d == 1) {
+          this.options.message = 'Widget Configuration Updated';
+          notify(this.options, 'success', 3000);
+          console.log("updating success", res);
+        } else {
+          this.options.message = 'updating Failed';
+          notify(this.options, 'error', 3000);
+          console.log("updating failed ", res);
+        }
+      }, err => {
+        this.options.message = 'updating Failed';
+        notify(this.options, 'error', 3000);
+        console.log("updating failed ", err);
+      });
+    } else if (this.data.widget_size || this.data.widget_title || this.data.color || this.data.widget_sortnumber) {
+      console.log("update widget only")
+      this.data.widget_id = e.oldData.widget_id;
+      this.updateWidget();
+    } else {
+      console.log("update dataonly")
+      this.data = e.newData;
+      this.data.id_widget_data = e.oldData.id_widget_data;
+      this.updateWidgetData()
+    }
+
+
+  }
+
+  updateWidget() {
+    this.dashboardService.updateWidget(this.data).subscribe(res => {
+
+      if (res.d == 1) {
+        this.options.message = 'Widget Configuration Updated';
+        notify(this.options, 'success', 3000);
+        console.log("updating success", this.data);
+      } else {
+        this.options.message = 'updating Failed';
+        notify(this.options, 'error', 3000);
+        console.log("updating failed ", res);
+      }
+    }, err => {
+      this.options.message = 'updating Failed';
+      notify(this.options, 'error', 3000);
+      console.log("updating failed ", err);
+    });
+  }
+
+  updateWidgetData() {
+    this.dashboardService.updateWidgetData(this.data).subscribe(res => {
+
       if (res.d == 1) {
         this.options.message = 'Widget Configuration Updated';
         notify(this.options, 'success', 3000);
@@ -127,6 +198,8 @@ export class DetailDashboardComponent implements OnInit {
       console.log("updating failed ", err);
     });
   }
+
+
 
   delete(e) {
     let widget_id = e.key;

@@ -8,12 +8,14 @@ import { WidgetType, Widget } from './Model';
 export class DashboardService {
 
   private dashboardURL = this.a.SERVER_URL + '/system/DashboardRole';
-  private widgetURL = this.a.SERVER_URL + '/system/DashboardWidget';
+  private widgetJoinURL = this.a.SERVER_URL + '/system/DashboardWidget';
+  private widgetURL = this.a.SERVER_URL + '/system/Widget';
+  private widgetDataURL = this.a.SERVER_URL + '/system/WidgetData';
 
   cardBoxSize = [
-    {"widget_size":"col-lg-6",
+    {"widget_size":"col-md-6",
     "caption" : "Wide"},
-    {"widget_size":"col-lg-3",
+    {"widget_size":"col-md-3",
     "caption" : "Square"}
   ];
   cardBoxColor = [
@@ -36,10 +38,10 @@ export class DashboardService {
       token : token
     })
   }
-  getWidgets(): Observable<any> {
+  getWidgets(tahun: string, bulan: string): Observable<any> {
     const username = localStorage.getItem('username');
     const token = localStorage.getItem('token');
-    return this.http.post < any > (this.widgetURL + '/list', {
+    return this.http.post < any > (this.widgetJoinURL + '/getWidgetByTahunBulanType?tahun='+tahun+'&bulan='+bulan+'&widget_type=', {
       username : username,
       token : token
     })
@@ -48,13 +50,13 @@ export class DashboardService {
   getWidgetByDID(did:any): Observable<any> {
     const username = localStorage.getItem('username');
     const token = localStorage.getItem('token');
-    return this.http.get < any > (this.widgetURL +'/table?did=' + did);
+    return this.http.get < any > (this.widgetJoinURL +'/table?did=' + did);
   }
 
   getWidgetByType(widget_type:String): Observable<any> {
     const username = localStorage.getItem('username');
     const token = localStorage.getItem('token');
-    return this.http.get < any > (this.widgetURL +'/keyval?widget_type=' + widget_type.toUpperCase);
+    return this.http.get < any > (this.widgetJoinURL +'/keyval?widget_type=' + widget_type.toUpperCase);
   }
 
   getCardBoxSize(){
@@ -71,33 +73,39 @@ export class DashboardService {
 
   // return = widgettype dan at_slide nya
   getWidgetType(){
-    return this.http.get < any > (this.widgetURL +'/getWidgetType');
+    return this.http.get < any > (this.widgetJoinURL +'/getWidgetType');
   }
 
-  update(data: Widget): Observable<any> {
+  updateWidget(data: Widget): Observable<any> {
     const username = localStorage.getItem('username');
     const token = localStorage.getItem('token');
     console.log("before save", data);
     return this.http.post < any > (this.widgetURL + '/update', data)
+  }
+  updateWidgetData(data: Widget): Observable<any> {
+    const username = localStorage.getItem('username');
+    const token = localStorage.getItem('token');
+    console.log("before save", data);
+    return this.http.post < any > (this.widgetDataURL + '/update', data)
   }
 
   updateSlidePosition(data: Widget): Observable<any> {
     const username = localStorage.getItem('username');
     const token = localStorage.getItem('token');
     console.log("before save", data);
-    return this.http.post < any > (this.widgetURL + '/updateSlidePosition', data)
+    return this.http.post < any > (this.widgetJoinURL + '/updateSlidePosition', data)
   }
 
   delete(widget_id: any): Observable<any> {
     const token = localStorage.getItem('token');
-    return this.http.get(this.widgetURL + '/delete?token=' + token + '&widget_id=' + widget_id)
+    return this.http.get(this.widgetJoinURL + '/delete?token=' + token + '&widget_id=' + widget_id)
   }
 
   getWidgetsId() {
-    return this.http.get <any> (this.widgetURL+ "/getWidgetId");
+    return this.http.get <any> (this.widgetJoinURL+ "/getWidgetId");
   }
 
   generateWidgets(tahun:String, widget_id:String) {
-    return this.http.get <any> (this.widgetURL+ "/generateWidgets?tahun="+tahun + "&widget_id="+widget_id);
+    return this.http.get <any> (this.widgetJoinURL+ "/generateWidgets?tahun="+tahun + "&widget_id="+widget_id);
   }
 }
