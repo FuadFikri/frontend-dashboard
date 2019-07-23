@@ -31,6 +31,14 @@
   font-size: 20pt !important;
 
 }
+
+.myBoxValue {
+  font-size: 20pt !important;
+}
+.myBoxTitle{
+  font-size: 14pt !important;
+  font-weight: 500;
+}
 /* 
 ::ng-deep #pivotgrid {
   margin-top: 20px;

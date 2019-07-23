@@ -6,7 +6,7 @@ import { Observable, of, timer } from 'rxjs';
 import {  DxPivotGridComponent, DxChartComponent } from 'devextreme-angular';
 import { CarouselComponent } from 'ngx-carousel-lib';
 import { AuthenticationService } from './../../service/authentication.service';
-import { Widget } from './card-box/Model';
+import { Widget, KomposisiSo } from './card-box/Model';
 
 @Component({
   templateUrl: 'dashboard.component.html',
@@ -28,6 +28,7 @@ export class DashboardComponent implements OnInit {
   barGauges:Widget[];
   
   now;
+  komposisiSo:KomposisiSo[];
 
   @ViewChild(DxPivotGridComponent) pivotGrid: DxPivotGridComponent;
   @ViewChild(DxChartComponent) chart: DxChartComponent;
@@ -43,6 +44,10 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.komposisiSo = [
+      {name: "open", val:"1000"},
+      {name: "close", val:"3000"}
+    ]
 
     Observable.timer(0,30000) //get setiap 30s setelah detik ke 0
     .takeWhile(() => this.alive)

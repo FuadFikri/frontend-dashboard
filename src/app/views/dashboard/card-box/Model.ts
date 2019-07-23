@@ -22,3 +22,8 @@ export class Widget {
     description: string;
     visible:boolean;
   }
+
+  export class KomposisiSo{
+    name:any;
+    val:any;
+  }
