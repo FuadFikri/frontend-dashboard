@@ -6,7 +6,8 @@ import { Observable, of, timer } from 'rxjs';
 import {  DxPivotGridComponent, DxChartComponent } from 'devextreme-angular';
 import { CarouselComponent } from 'ngx-carousel-lib';
 import { AuthenticationService } from './../../service/authentication.service';
-import { Widget, KomposisiSo } from './card-box/Model';
+import { KomposisiSo } from './card-box/Model';
+import { Widget } from '../administration/dashboard/Model';
 
 @Component({
   templateUrl: 'dashboard.component.html',
@@ -26,9 +27,10 @@ export class DashboardComponent implements OnInit {
   circularGauge:Widget[];
   cards:any;
   barGauges:Widget[];
-  
+  doughnut:Widget;
   now;
   komposisiSo:KomposisiSo[];
+  
 
   @ViewChild(DxPivotGridComponent) pivotGrid: DxPivotGridComponent;
   @ViewChild(DxChartComponent) chart: DxChartComponent;
@@ -40,14 +42,15 @@ export class DashboardComponent implements OnInit {
   constructor(@Inject(DashboardService) private dashService: DashboardService,
               private authService: AuthenticationService) {
                 this.now = new Date();
-   
+
+
+                
+               
+                
   }
 
   ngOnInit(): void {
-    this.komposisiSo = [
-      {name: "open", val:"1000"},
-      {name: "close", val:"3000"}
-    ]
+    
 
     Observable.timer(0,30000) //get setiap 30s setelah detik ke 0
     .takeWhile(() => this.alive)
@@ -56,8 +59,18 @@ export class DashboardComponent implements OnInit {
       let bulan = (this.now.getMonth()).toString();
       this.dashService.getWidgetByTahunBulanType(tahun,bulan,"CARD").subscribe(resp=>{
         this.cards = resp.d;
-
       })
+      
+   
+      this.dashService.getWidgetByTahunBulanType(tahun,bulan,"DOUGHNUT").subscribe(resp=>{
+        this.doughnut = resp.d[0];
+        this.komposisiSo = [
+          {name: "open", val:resp.d[0].widget_value_1},
+          {name: "close", val:resp.d[0].widget_value_2}
+        ]
+        console.log( this.komposisiSo)
+      })
+      
     })
   }
 

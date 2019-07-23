@@ -79,15 +79,15 @@
     <div class="master-detail-caption"></div>
     <dx-data-grid [dataSource]="getWidgetList(widget_type.key)" [showBorders]="true" [columnAutoWidth]="true"
       (onRowUpdating)="update($event)" (onRowRemoving)="delete($event)">
-      <dxo-editing mode="batch" [allowUpdating]="true" [allowDeleting]="true" [allowAdding]="true">
+      <dxo-editing mode="batch" [allowUpdating]="true">
       </dxo-editing>
-      <dxi-column dataField="widget_sortnumber"></dxi-column>
-      <dxi-column dataField="widget_title"></dxi-column>
-      <dxi-column dataField="widget_label"></dxi-column>
-      <dxi-column dataField="widget_size"></dxi-column>
-      <dxi-column dataField="gauge_start"></dxi-column>
-      <dxi-column dataField="gauge_end"></dxi-column>
-      <dxi-column dataField="gauge_interval"></dxi-column>
+      <dxi-column dataField="widget_title" caption="TITLE" [allowEditing]="false"></dxi-column>
+      <dxi-column dataField="color" caption="TEMA">
+          <dxo-lookup [dataSource]="DoughnutColor">
+          </dxo-lookup>
+        </dxi-column>
+      <dxi-column dataField="widget_value_1" caption="OPEN"></dxi-column>
+      <dxi-column dataField="widget_value_2" caption="CLOSE"></dxi-column>
     </dx-data-grid>
   </div>
 </dx-data-grid>

@@ -42,7 +42,8 @@ export class DetailDashboardComponent implements OnInit {
   };
   cardBoxSize;
   cardBoxColor;
-  cardBoxCloseable;
+  DoughnutColor = [ 'Bright' , 'Harmony Light' , 'Ocean' , 'Pastel' , 'Soft' , 'Soft Pastel' , 'Vintage' , 'Violet' , 'Carmine' , 'Dark Moon' , 'Dark Violet' , 'Green Mist' , 'Soft Blue' , 'Material' , 'Office']
+  
   now: any;
 
 
@@ -78,7 +79,7 @@ export class DetailDashboardComponent implements OnInit {
     });
     this.cardBoxSize = this.dashboardService.getCardBoxSize();
     this.cardBoxColor = this.dashboardService.getCardBoxColor();
-    this.cardBoxCloseable = this.dashboardService.getCardBoxCloseable();
+    
   }
 
   getWidgetList(key) {
