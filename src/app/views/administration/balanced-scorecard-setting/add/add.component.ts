@@ -80,7 +80,7 @@ export class AddComponent implements OnInit {
     this.KPI.tahun = this.KPI.tahun.toString();
     this.KPI.target_rkap = this.KPI.target_rkap.toString();
     this.KPI.nama_kpi = this.KPI.nama_kpi.toString();
-    this.KPI.kpi_measurement = this.KPI.kpi_measurement.toString();
+    // this.KPI.kpi_measurement = this.KPI.kpi_measurement.toString();
     this.KPI.bobot = this.KPI.bobot.toString();
     this.KPI.satuan = this.KPI.satuan.toString();
     this.KPI.ukuran_id = this.KPI.ukuran_id.toString();
