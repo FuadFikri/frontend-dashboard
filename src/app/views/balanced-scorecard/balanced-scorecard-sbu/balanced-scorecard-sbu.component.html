@@ -1,10 +1,10 @@
 <div class="head">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-5">
       <img src="assets/img/logoIcon.png" alt="" srcset="" class="logo">
     </div>
-    <div class="col-md-6">
-      <div class="h4">{{daerah}}</div>
+    <div class="col-md-7">
+      <div id="nama_sbu">SBU {{daerah}}</div>
     </div>
   </div>
 </div>
@@ -26,7 +26,7 @@
         <div class="col-md-12">
           <div class="row" *ngIf="daftarCardBarFiltered[0]">
             <div class="col-md-12">
-              <card-bar [color]="primary" [data]="daftarCardBarFiltered[0]"></card-bar>
+              <card-bar-sbu [color]="primary" [data]="daftarCardBarFiltered[0]"></card-bar-sbu>
             </div>
           </div>
         </div>
@@ -47,7 +47,7 @@
         <div class="col-md-12">
           <div class="row" *ngIf="daftarCardBarFiltered[1]">
             <div class="col-md-12">
-              <card-bar [color]="primary" [data]="daftarCardBarFiltered[1]"></card-bar>
+              <card-bar-sbu [color]="primary" [data]="daftarCardBarFiltered[1]"></card-bar-sbu>
             </div>
           </div>
         </div>
@@ -68,7 +68,7 @@
         <div class="col-md-12">
           <div class="row" *ngIf="daftarCardBarFiltered[2]">
             <div class="col-md-12">
-              <card-bar [color]="primary" [data]="daftarCardBarFiltered[2]"></card-bar>
+              <card-bar-sbu [color]="primary" [data]="daftarCardBarFiltered[2]"></card-bar-sbu>
             </div>
           </div>
         </div>
@@ -89,7 +89,7 @@
         <div class="col-md-12">
           <div class="row" *ngIf="daftarCardBarFiltered[3]">
             <div class="col-md-12">
-              <card-bar [color]="primary" [data]="daftarCardBarFiltered[3]"></card-bar>
+              <card-bar-sbu [color]="primary" [data]="daftarCardBarFiltered[3]"></card-bar-sbu>
             </div>
           </div>
         </div>
@@ -110,7 +110,7 @@
         <div class="col-md-12">
           <div class="row" *ngIf="daftarCardBarFiltered[4]">
             <div class="col-md-12">
-              <card-bar [color]="primary" [data]="daftarCardBarFiltered[4]"></card-bar>
+              <card-bar-sbu [color]="primary" [data]="daftarCardBarFiltered[4]"></card-bar-sbu>
             </div>
           </div>
         </div>
@@ -133,7 +133,7 @@
                   <div class="col-md-12">
                     <div class="row" *ngIf="daftarCardBarFiltered[i]">
                       <div class="col-md-12">
-                        <card-bar [color]="primary" [data]="daftarCardBarFiltered[i]"></card-bar>
+                        <card-bar-sbu [color]="primary" [data]="daftarCardBarFiltered[i]"></card-bar-sbu>
                       </div>
                     </div>
                   </div>
@@ -160,7 +160,7 @@
           <div class="col-md-12">
             <div class="row" *ngIf="daftarCardBarFiltered[i]">
               <div class="col-md-12">
-                <card-bar [color]="primary" [data]="daftarCardBarFiltered[i]"></card-bar>
+                <card-bar-sbu [color]="primary" [data]="daftarCardBarFiltered[i]"></card-bar-sbu>
               </div>
             </div>
           </div>
