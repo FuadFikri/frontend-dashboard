@@ -12,7 +12,7 @@
 
 
   <div class="row">
-    
+
 
     <div class="col-sm-6 {{card.widget_size}}" *ngFor="let card of cards">
       <div class="card border-0 shadow-sm text-light bg-{{card.color}}">
@@ -33,42 +33,47 @@
       </div>
     </div>
 
-    <div class="col-sm-6 col-md-2">
-        <div class="card border-0 shadow-sm text-light bg-secondary">
-            <div class="card-header">
-                <div class="myBoxTitle text-center">
-                  Market Share
-                </div>
-              </div>
-          <div class="card-body">
-            <div class="chart-wrapper px-3">
+    <div class="col-md-3">
+
+        <dx-pie-chart id="pie" type="doughnut" *ngIf="doughnut" palette="{{doughnut.color}}" [dataSource]="komposisiSo">
+          <dxo-title text="KOMPOSISI SO ">
+            <dxo-font color="black" [size]="600" weight="900"></dxo-font>
+          </dxo-title>
+          <dxi-series argumentField="name">
+            <dxo-label [visible]="true">
+              <dxo-connector [visible]="true"></dxo-connector>
+            </dxo-label>
+          </dxi-series>
+          <dxo-legend [margin]="0" horizontalAlignment="center" verticalAlignment="top"></dxo-legend>
   
-              <h4 class="font-weight-bold text-center uk-margin-large-top myBoxValue">
-                {{card.widget_value_1
-              </h4>
-            </div>
+        </dx-pie-chart>
+  
+  
+      </div>
+
+    <div class="col-sm-6 col-md-2" *ngFor="let box of boxes">
+      <div class="card border-0 shadow-sm text-light bg-secondary">
+        <div class="card-header">
+          <div class="myBoxTitle text-center">
+            {{box.widget_title}}
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="chart-wrapper px-3">
+
+            <h4 class="font-weight-bold text-center uk-margin-large-top myBoxValue">
+              {{box.widget_value_1}}
+            </h4>
           </div>
         </div>
       </div>
+    </div>
+
+
+    
   </div>
 
-  <div class="col-md-4">
 
-      <dx-pie-chart id="pie" type="doughnut" *ngIf="doughnut" palette="{{doughnut.color}}" [dataSource]="komposisiSo">
-        <dxo-title text="KOMPOSISI SO ">
-          <dxo-font color="black" [size]="600" weight="900"></dxo-font>
-        </dxo-title>
-        <dxi-series argumentField="name">
-          <dxo-label [visible]="true">
-            <dxo-connector [visible]="true"></dxo-connector>
-          </dxo-label>
-        </dxi-series>
-        <dxo-legend [margin]="0" horizontalAlignment="center" verticalAlignment="top"></dxo-legend>
-
-      </dx-pie-chart>
-
-
-    </div>
 
 
 
