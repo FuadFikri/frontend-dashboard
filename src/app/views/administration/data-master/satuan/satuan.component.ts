@@ -1,6 +1,7 @@
 import {
   Component,
-  OnInit
+  OnInit,
+  ViewChild
 } from '@angular/core';
 
 import DataSource from 'devextreme/data/data_source';
@@ -8,6 +9,7 @@ import ArrayStore from 'devextreme/data/array_store';
 import notify from 'devextreme/ui/notify';
 import { SatuanService } from './satuan.service';
 import { Satuan } from './satuan.model';
+import { DxDataGridComponent } from 'devextreme-angular';
 @Component({
   selector: 'app-satuan',
   templateUrl: './satuan.component.html',
@@ -15,7 +17,7 @@ import { Satuan } from './satuan.model';
   providers: [SatuanService]
 })
 export class SatuanComponent implements OnInit {
-
+  @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
   satuan:Satuan;
   satuanSource;
   startEditAction:string = "dblClick"
@@ -49,6 +51,7 @@ export class SatuanComponent implements OnInit {
     this._service.insertSatuan(this.satuan).subscribe(resp => {
       if (resp.d == 1 && resp.s == 200) {
         this.options.message = 'Success Created';
+        this.refresh()
         notify(this.options, 'success', 3000);
         console.log('Created success', resp);
       } else {
@@ -86,7 +89,7 @@ export class SatuanComponent implements OnInit {
 
   updateSatuan(e) {
     this.satuan = e.newData;
-    this.satuan.id_satuan = e.key;
+    this.satuan.id_satuan = e.key.toString();
     console.log('before update', this.satuan);
     this._service.updateSatuan(this.satuan).subscribe(res => {
       if (res.d == 1) {
@@ -104,6 +107,13 @@ export class SatuanComponent implements OnInit {
       console.log('updating failed ', err);
 
     });
+  }
+
+  refresh() {
+    this._service.getSatuans().subscribe(res => {
+      this.satuanSource = res.d;
+    })
+    this.dataGrid.instance.refresh();
   }
 
 
