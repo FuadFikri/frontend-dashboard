@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-card-bar-sbu',
@@ -7,6 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CardBarSbuComponent implements OnInit {
 
+  @Input() color;
+  @Input()wide : boolean;
+  @Input() nama_kpi;
+  @Input() data;
+  hovered:boolean=false;
+  popupVisible=false;
+  realisasi:any;
+  buttonOptions: any = {
+    text: "Save",
+    type: "success",
+    useSubmitBehavior: false
+  }
+  
   constructor() { }
 
   ngOnInit() {
