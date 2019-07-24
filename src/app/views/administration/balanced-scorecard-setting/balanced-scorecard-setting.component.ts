@@ -126,7 +126,7 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
         console.log("total",total);
         console.log("res",res);
         
-        this.totalNilai.total = total.toPrecision(3);
+        this.totalNilai.total = total;
         console.log("final",this.totalNilai);
       })
   }
