@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-card-bar-sbu',
+  selector: 'card-bar-sbu',
   templateUrl: './card-bar-sbu.component.html',
   styleUrls: ['./card-bar-sbu.component.scss']
 })
