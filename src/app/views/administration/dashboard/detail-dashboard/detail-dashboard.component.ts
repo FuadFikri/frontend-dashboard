@@ -14,11 +14,12 @@ import notify from 'devextreme/ui/notify';
 import {
   Widget
 } from '../Model';
+import { BalancedScorecardService } from '../../balanced-scorecard-setting/balanced-scorecard.service';
 @Component({
   selector: 'app-detail-dashboard',
   templateUrl: './detail-dashboard.component.html',
   styleUrls: ['./detail-dashboard.component.scss'],
-  providers: [DashboardService]
+  providers: [DashboardService,BalancedScorecardService]
 })
 
 export class DetailDashboardComponent implements OnInit {
@@ -46,6 +47,12 @@ export class DetailDashboardComponent implements OnInit {
   
   now: any;
 
+  
+  kpi;
+
+  
+  //tahun ini
+
 
   slidePositions = [{
       "at_slide": "1"
@@ -57,7 +64,7 @@ export class DetailDashboardComponent implements OnInit {
       "at_slide": "3"
     },
   ];
-  constructor(private dashboardService: DashboardService) {
+  constructor(private dashboardService: DashboardService, private balancedScoreCardService: BalancedScorecardService) {
     this.widgetDataStorage = [];
     this.now = new Date();
 
@@ -66,6 +73,12 @@ export class DetailDashboardComponent implements OnInit {
   ngOnInit() {
     let tahun = (this.now.getFullYear()).toString();
     let bulan = (this.now.getMonth()).toString();
+    
+    this.balancedScoreCardService.getKpiPusat(tahun).subscribe(res => {
+      this.kpi = res.d;
+    })
+
+
     this.dashboardService.getWidgetType().subscribe(res => {
       this.boxSource.push(res.d[0]);
       this.cardSource.push(res.d[1]);
@@ -105,7 +118,7 @@ export class DetailDashboardComponent implements OnInit {
 
     console.log(this.data);
 
-    if ((this.data.widget_label || this.data.widget_value_1) && (this.data.widget_size || this.data.widget_title || this.data.color || this.data.widget_sortnumber)) {
+    if ((this.data.widget_label || this.data.widget_value_1) && (this.data.widget_size || this.data.widget_title || this.data.color || this.data.widget_sortnumber || this.data.kpi_id)) {
       console.log("update data dan widget")
       this.data.widget_id = e.oldData.widget_id;
       this.dashboardService.updateWidget(this.data).subscribe(res => {
@@ -133,7 +146,7 @@ export class DetailDashboardComponent implements OnInit {
         notify(this.options, 'error', 3000);
         console.log("updating failed ", err);
       });
-    } else if (this.data.widget_size || this.data.widget_title || this.data.color || this.data.widget_sortnumber) {
+    } else if (this.data.widget_size || this.data.widget_title || this.data.color || this.data.widget_sortnumber || this.data.kpi_id) {
       console.log("update widget only")
       this.data.widget_id = e.oldData.widget_id;
       this.updateWidget();

@@ -56,7 +56,11 @@
       </dxo-editing>
       <dxi-column dataField="widget_sortnumber"></dxi-column>
       <dxi-column dataField="widget_title"></dxi-column>
-      <dxi-column dataField="widget_label"></dxi-column>
+      <dxi-column dataField="kpi_id" caption="KPI" width="220">
+          <dxo-lookup [dataSource]="kpi" displayExpr="nama_kpi" valueExpr="id">
+            </dxo-lookup>
+      </dxi-column>
+      <dxi-column dataField="widget_value_1"></dxi-column>
       <dxi-column dataField="widget_size"></dxi-column>
 
     </dx-data-grid>

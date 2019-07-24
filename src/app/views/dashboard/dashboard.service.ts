@@ -36,6 +36,34 @@ export class DashboardService {
   getDoughnuts() {
     return this.http.get < any > (this.url + '/table?widget_type=DOUGHNUT');
   }
+  
+  updateBoxValue(id_kpi,widget_id,bulan, tahun) {
+    return this.http.get < any > (this.url + '/updateBoxValue?bulan='+bulan+'&id_kpi='+id_kpi+'&widget_id='+widget_id+'&tahun='+tahun);
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   getCardsData() {
     return this.http.get < any > (this.url + 'dataCards');
   }
@@ -46,5 +74,7 @@ export class DashboardService {
   getCircularGaugeData() {
     return this.http.get < any > (this.url + 'dataCircularGauges');
   }
+
+
 
 }

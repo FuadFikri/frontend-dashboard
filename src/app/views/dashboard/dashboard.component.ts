@@ -30,7 +30,7 @@ export class DashboardComponent implements OnInit {
   doughnut:Widget;
   now;
   komposisiSo:KomposisiSo[];
-  
+  boxes;
 
   @ViewChild(DxPivotGridComponent) pivotGrid: DxPivotGridComponent;
   @ViewChild(DxChartComponent) chart: DxChartComponent;
@@ -61,6 +61,20 @@ export class DashboardComponent implements OnInit {
         this.cards = resp.d;
       })
       
+      
+      this.dashService.getWidgetByTahunBulanType(tahun,bulan,"BOX").subscribe(resp=>{
+        let boxs = resp.d;
+        boxs.forEach(box => {
+          if (box.kpi_id) {
+            this.dashService.updateBoxValue(box.kpi_id, box.widget_id, bulan, tahun).subscribe(res => {
+              console.log("box updated",res.d);
+            })
+          }
+        });
+        this.boxes = boxs;
+        console.log("boxs",boxs);
+      })
+      
    
       this.dashService.getWidgetByTahunBulanType(tahun,bulan,"DOUGHNUT").subscribe(resp=>{
         this.doughnut = resp.d[0];
@@ -70,7 +84,6 @@ export class DashboardComponent implements OnInit {
         ]
         console.log( this.komposisiSo)
       })
-      
     })
   }
 

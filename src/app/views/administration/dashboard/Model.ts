@@ -28,4 +28,5 @@ export class Widget {
     id_widget_data:any;
     widget_value_1:any;
     widget_value_2:any;
+    kpi_id:any;
   }
