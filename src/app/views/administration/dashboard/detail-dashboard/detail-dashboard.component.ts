@@ -3,7 +3,8 @@ import {
   OnInit,
   Input,
   Output,
-  EventEmitter
+  EventEmitter,
+  ViewChild
 } from '@angular/core';
 import {
   DashboardService
@@ -14,18 +15,25 @@ import notify from 'devextreme/ui/notify';
 import {
   Widget
 } from '../Model';
-import { BalancedScorecardService } from '../../balanced-scorecard-setting/balanced-scorecard.service';
+import {
+  BalancedScorecardService
+} from '../../balanced-scorecard-setting/balanced-scorecard.service';
+import { DxButtonComponent, DxSelectBoxComponent } from 'devextreme-angular';
 @Component({
   selector: 'app-detail-dashboard',
   templateUrl: './detail-dashboard.component.html',
   styleUrls: ['./detail-dashboard.component.scss'],
-  providers: [DashboardService,BalancedScorecardService]
+  providers: [DashboardService, BalancedScorecardService]
 })
 
 export class DetailDashboardComponent implements OnInit {
+  @ViewChild(DxButtonComponent) dxButton: DxButtonComponent;
+  @ViewChild(DxSelectBoxComponent) dxSelect: DxSelectBoxComponent;
+  
   cardSource: any = [];
   boxSource: any = [];
   doughnutSource: any = [];
+  nkoSource: any = [];
   widgets: any;
   widgetDataStorage: any;
   @Input() selectedDashboard;
@@ -43,27 +51,13 @@ export class DetailDashboardComponent implements OnInit {
   };
   cardBoxSize;
   cardBoxColor;
-  DoughnutColor = [ 'Bright' , 'Harmony Light' , 'Ocean' , 'Pastel' , 'Soft' , 'Soft Pastel' , 'Vintage' , 'Violet' , 'Carmine' , 'Dark Moon' , 'Dark Violet' , 'Green Mist' , 'Soft Blue' , 'Material' , 'Office']
-  
+  DoughnutColor = ['Bright', 'Harmony Light', 'Ocean', 'Pastel', 'Soft', 'Soft Pastel', 'Vintage', 'Violet', 'Carmine', 'Dark Moon', 'Dark Violet', 'Green Mist', 'Soft Blue', 'Material', 'Office']
+  tahunDropDown = [];
   now: any;
+  boxSize;
 
-  
   kpi;
-
-  
-  //tahun ini
-
-
-  slidePositions = [{
-      "at_slide": "1"
-    },
-    {
-      "at_slide": "2"
-    },
-    {
-      "at_slide": "3"
-    },
-  ];
+  isCanGenerate: boolean;
   constructor(private dashboardService: DashboardService, private balancedScoreCardService: BalancedScorecardService) {
     this.widgetDataStorage = [];
     this.now = new Date();
@@ -73,7 +67,7 @@ export class DetailDashboardComponent implements OnInit {
   ngOnInit() {
     let tahun = (this.now.getFullYear()).toString();
     let bulan = (this.now.getMonth()).toString();
-    
+
     this.balancedScoreCardService.getKpiPusat(tahun).subscribe(res => {
       this.kpi = res.d;
     })
@@ -83,6 +77,7 @@ export class DetailDashboardComponent implements OnInit {
       this.boxSource.push(res.d[0]);
       this.cardSource.push(res.d[1]);
       this.doughnutSource.push(res.d[2]);
+      this.nkoSource.push(res.d[3]);
     });
 
 
@@ -92,7 +87,17 @@ export class DetailDashboardComponent implements OnInit {
     });
     this.cardBoxSize = this.dashboardService.getCardBoxSize();
     this.cardBoxColor = this.dashboardService.getCardBoxColor();
-    
+    this.boxSize = this.dashboardService.getBoxSize();
+
+    this.dashboardService.getLastTahun().subscribe(res => {
+      this.tahunDropDown.push(parseInt(res.d[0].tahun) + 1);
+      if (res.d[0].tahun > tahun) {
+        this.isCanGenerate = false;
+      } else {
+        this.isCanGenerate = true;
+      }
+    })
+
   }
 
   getWidgetList(key) {
@@ -254,6 +259,20 @@ export class DetailDashboardComponent implements OnInit {
             console.log(response);
           })
         });
+        this.tahunDropDown.pop();
+        this.dashboardService.getLastTahun().subscribe(res => {
+          this.tahunDropDown.push(parseInt(res.d[0].tahun) + 1);
+          if (res.d[0].tahun > tahun) {
+            this.isCanGenerate = false;
+          } else {
+            this.isCanGenerate = true;
+          }
+        })
+        this.dxSelect.instance.reset();
+        this.dxSelect.instance.repaint();
+        this.dxButton.instance.dispose()
+        this.options.message = 'Generating Widget Success';
+        notify(this.options, 'success', 3000);
 
       })
     }
@@ -261,5 +280,7 @@ export class DetailDashboardComponent implements OnInit {
   generated = {
     tahun: ""
   }
-  tahunDropDown = ["2019", "2020", "2021", "2022"]
+
+
+
 }

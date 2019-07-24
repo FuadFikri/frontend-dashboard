@@ -28,6 +28,12 @@ export class DashboardService {
     {"value":"1","caption":"True"},
     {"value":"0","caption":"False"}
   ];
+
+  boxSize = [
+    {"size":"col-md-3", "caption":"3"},
+    {"size":"col-md-4", "caption":"4"},
+    {"size":"col-md-5", "caption":"5"},
+  ]
   constructor(private http: HttpClient, private a: AppConstant) { }
 
   getAll(): Observable<any> {
@@ -61,6 +67,9 @@ export class DashboardService {
 
   getCardBoxSize(){
     return this.cardBoxSize;
+  }
+  getBoxSize() {
+    return this.boxSize;
   }
 
   getCardBoxColor() {
@@ -107,5 +116,10 @@ export class DashboardService {
 
   generateWidgets(tahun:String, widget_id:String) {
     return this.http.get <any> (this.widgetJoinURL+ "/generateWidgets?tahun="+tahun + "&widget_id="+widget_id);
+  }
+
+  // untuk dropdown generate widget
+  getLastTahun() {
+    return this.http.get <any> (this.widgetJoinURL + '/getLastTahun');
   }
 }

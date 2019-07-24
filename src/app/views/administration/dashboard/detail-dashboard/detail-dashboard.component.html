@@ -1,99 +1,147 @@
-<div class="row">
-  <div class="col-md-4">
-      <dx-select-box [dataSource]="tahunDropDown" 
-      [(value)]="generated.tahun"></dx-select-box>
-  </div>
-  <div class="col-md-3">
-      <dx-button icon="fa fa-database" text="Generate Widget" (click)="generate($event)"></dx-button>
+<div class="animated fadeIn">
+  <div class="card" id="new47">
+    <div class="card-header">
+      <strong>Dashboard Administration <span *ngIf="(isAdd || isEdit) && !isDetail">Add / Edit</span></strong>
+      <span *ngIf="isDetail" class="pull-right">
+        <dx-button id="btnBack" text="< Back" (onClick)="back()"></dx-button>
+      </span>
+    </div>
+    <div class="card-body">
+
+      <div class="row">
+        <div class="col-md-4">
+          <dx-select-box [dataSource]="tahunDropDown" [(value)]="generated.tahun"></dx-select-box>
+        </div>
+        <div class="col-md-3">
+          <dx-button icon="fa fa-database" text="Generate Widget" (click)="generate($event)" *ngIf="isCanGenerate">
+          </dx-button>
+        </div>
+      </div>
+
+
+
+      <dx-data-grid id="gridContainer" [dataSource]="cardSource" [masterDetail]="{ enabled: true, template: 'detail' }"
+        [showBorders]="true" keyExpr="widget_type" (onRowUpdating)="updateSlide($event)">
+        <dxo-editing mode="batch" [allowUpdating]="true">
+        </dxo-editing>
+        <dxi-column dataField="widget_type" caption="Card Widget" [allowEditing]="false"></dxi-column>
+
+        <div *dxTemplate="let widget_type of 'detail'">
+          <div class="master-detail-caption"></div>
+          <dx-data-grid [dataSource]="getWidgetList(widget_type.key)" [showBorders]="true" [columnAutoWidth]="true"
+            (onRowUpdating)="update($event)" (onRowRemoving)="delete($event)">
+            <dxo-editing mode="batch" [allowUpdating]="true">
+            </dxo-editing>
+            <dxi-column dataField="widget_sortnumber" sortOrder="asc" width=85 caption="NUMBER">
+
+            </dxi-column>
+            <dxi-column dataField="widget_title" caption="TITLE"></dxi-column>
+            <dxi-column dataField="widget_value_1" caption="VALUE"></dxi-column>
+            <dxi-column dataField="widget_label" caption="LABEL"></dxi-column>
+
+            <dxi-column dataField="color" caption="COLOR">
+              <dxo-lookup [dataSource]="cardBoxColor" displayExpr="caption" valueExpr="color">
+              </dxo-lookup>
+            </dxi-column>
+            <dxi-column dataField="widget_size" caption="SIZE">
+              <dxo-lookup [dataSource]="cardBoxSize" displayExpr="caption" valueExpr="widget_size">
+              </dxo-lookup>
+            </dxi-column>
+          </dx-data-grid>
+        </div>
+      </dx-data-grid>
+      <br>
+
+
+      <dx-data-grid id="gridContainer" [dataSource]="boxSource" [masterDetail]="{ enabled: true, template: 'detail' }"
+        keyExpr="widget_type" [showBorders]="true" (onRowUpdating)="updateSlide($event)">
+        <dxo-editing mode="batch" [allowUpdating]="true">
+        </dxo-editing>
+
+        <dxi-column dataField="widget_type" caption="Box Widget" [allowEditing]="false"></dxi-column>
+
+        <div *dxTemplate="let widget_type of 'detail'">
+          <div class="master-detail-caption"></div>
+          <dx-data-grid [dataSource]="getWidgetList(widget_type.key)" [showBorders]="true" [columnAutoWidth]="true"
+            (onRowUpdating)="update($event)" (onRowRemoving)="delete($event)">
+            <dxo-editing mode="batch" [allowUpdating]="true" [allowDeleting]="false" [allowAdding]="true">
+            </dxo-editing>
+            <dxi-column dataField="widget_sortnumber" width="55" caption="NUMBER"></dxi-column>
+            <dxi-column dataField="widget_title"></dxi-column>
+            <dxi-column dataField="kpi_id" caption="KPI" width="220">
+              <dxo-lookup [dataSource]="kpi" displayExpr="nama_kpi" valueExpr="id">
+              </dxo-lookup>
+            </dxi-column>
+            <dxi-column dataField="widget_value_1" caption="VALUE" [allowEditing]="false"></dxi-column>
+            <dxi-column dataField="widget_size" caption="SIZE">
+              <dxo-lookup [dataSource]="boxSize" displayExpr="caption" valueExpr="size">
+              </dxo-lookup>
+            </dxi-column>
+
+          </dx-data-grid>
+        </div>
+      </dx-data-grid>
+
+
+
+
+      <dx-data-grid id="gridContainer" [dataSource]="nkoSource" [masterDetail]="{ enabled: true, template: 'detail' }"
+        keyExpr="widget_type" [showBorders]="true">
+        <dxo-editing mode="batch" [allowUpdating]="true">
+        </dxo-editing>
+
+        <dxi-column dataField="widget_type" caption="Box Widget" [allowEditing]="false"></dxi-column>
+
+        <div *dxTemplate="let widget_type of 'detail'">
+          <div class="master-detail-caption"></div>
+          <dx-data-grid [dataSource]="getWidgetList(widget_type.key)" [showBorders]="true" [columnAutoWidth]="true"
+            (onRowUpdating)="update($event)" (onRowRemoving)="delete($event)">
+            <dxo-editing mode="batch" [allowUpdating]="true" [allowDeleting]="false" [allowAdding]="true">
+            </dxo-editing>
+
+            <dxi-column caption="TITLE" dataField="widget_title"></dxi-column>
+            <dxi-column dataField="widget_value_1" caption="VALUE" [allowEditing]="false"></dxi-column>
+            <!-- <dxi-column dataField="widget_size"></dxi-column> -->
+            <dxi-column dataField="color" caption="COLOR">
+              <dxo-lookup [dataSource]="cardBoxColor" displayExpr="caption" valueExpr="color">
+              </dxo-lookup>
+            </dxi-column>
+
+          </dx-data-grid>
+        </div>
+      </dx-data-grid>
+
+
+      <br>
+
+
+      <dx-data-grid id="gridContainer" [dataSource]="doughnutSource"
+        [masterDetail]="{ enabled: true, template: 'detail' }" keyExpr="widget_type" [showBorders]="true"
+        (onRowUpdating)="updateSlide($event)">
+        <dxo-editing mode="batch" [allowUpdating]="true">
+        </dxo-editing>
+
+
+        <dxi-column dataField="widget_type" caption="Doughnut Widget" [allowEditing]="false"></dxi-column>
+
+        <div *dxTemplate="let widget_type of 'detail'">
+          <div class="master-detail-caption"></div>
+          <dx-data-grid [dataSource]="getWidgetList(widget_type.key)" [showBorders]="true" [columnAutoWidth]="true"
+            (onRowUpdating)="update($event)" (onRowRemoving)="delete($event)">
+            <dxo-editing mode="batch" [allowUpdating]="true">
+            </dxo-editing>
+            <dxi-column dataField="widget_title" caption="TITLE" [allowEditing]="false"></dxi-column>
+            <dxi-column dataField="color" caption="TEMA">
+              <dxo-lookup [dataSource]="DoughnutColor">
+              </dxo-lookup>
+            </dxi-column>
+            <dxi-column dataField="widget_value_1" caption="OPEN" dataType="number"></dxi-column>
+            <dxi-column dataField="widget_value_2" caption="CLOSE" dataType="number"></dxi-column>
+          </dx-data-grid>
+        </div>
+      </dx-data-grid>
+
+      <!-- end bar gauge -->
+    </div>
   </div>
 </div>
-
-<dx-data-grid id="gridContainer" [dataSource]="cardSource" [masterDetail]="{ enabled: true, template: 'detail' }"
-  [showBorders]="true" keyExpr="widget_type" (onRowUpdating)="updateSlide($event)">
-  <dxo-editing mode="batch" [allowUpdating]="true">
-  </dxo-editing>
-  <dxi-column dataField="widget_type" caption="Card Widget" [allowEditing]="false"></dxi-column>
-
-  <div *dxTemplate="let widget_type of 'detail'">
-    <div class="master-detail-caption"></div>
-    <dx-data-grid [dataSource]="getWidgetList(widget_type.key)" [showBorders]="true" [columnAutoWidth]="true"
-      (onRowUpdating)="update($event)" (onRowRemoving)="delete($event)">
-      <dxo-editing mode="batch" [allowUpdating]="true">
-      </dxo-editing>
-      <dxi-column dataField="widget_sortnumber" sortOrder="asc" width=85 caption="NUMBER">
-
-      </dxi-column>
-      <dxi-column dataField="widget_title" caption="TITLE"></dxi-column>
-      <dxi-column dataField="widget_value_1" caption="VALUE"></dxi-column>
-      <dxi-column dataField="widget_label" caption="LABEL"></dxi-column>
-
-      <dxi-column dataField="color" caption="COLOR">
-        <dxo-lookup [dataSource]="cardBoxColor" displayExpr="caption" valueExpr="color">
-        </dxo-lookup>
-      </dxi-column>
-      <dxi-column dataField="widget_size" caption="SIZE">
-        <dxo-lookup [dataSource]="cardBoxSize" displayExpr="caption" valueExpr="widget_size">
-        </dxo-lookup>
-      </dxi-column>
-    </dx-data-grid>
-  </div>
-</dx-data-grid>
-<br>
-
-
-<dx-data-grid id="gridContainer" [dataSource]="boxSource" [masterDetail]="{ enabled: true, template: 'detail' }"
-  keyExpr="widget_type" [showBorders]="true" (onRowUpdating)="updateSlide($event)">
-  <dxo-editing mode="batch" [allowUpdating]="true">
-  </dxo-editing>
-
-  <dxi-column dataField="widget_type" caption="Box Widget" [allowEditing]="false"></dxi-column>
-
-  <div *dxTemplate="let widget_type of 'detail'">
-    <div class="master-detail-caption"></div>
-    <dx-data-grid [dataSource]="getWidgetList(widget_type.key)" [showBorders]="true" [columnAutoWidth]="true"
-      (onRowUpdating)="update($event)" (onRowRemoving)="delete($event)">
-      <dxo-editing mode="batch" [allowUpdating]="true" [allowDeleting]="true" [allowAdding]="true">
-      </dxo-editing>
-      <dxi-column dataField="widget_sortnumber"></dxi-column>
-      <dxi-column dataField="widget_title"></dxi-column>
-      <dxi-column dataField="kpi_id" caption="KPI" width="220">
-          <dxo-lookup [dataSource]="kpi" displayExpr="nama_kpi" valueExpr="id">
-            </dxo-lookup>
-      </dxi-column>
-      <dxi-column dataField="widget_value_1"></dxi-column>
-      <dxi-column dataField="widget_size"></dxi-column>
-
-    </dx-data-grid>
-  </div>
-</dx-data-grid>
-<!-- end  circular -->
-
-<br>
-
-<!-- bar gauge -->
-<dx-data-grid id="gridContainer" [dataSource]="doughnutSource" [masterDetail]="{ enabled: true, template: 'detail' }"
-  keyExpr="widget_type" [showBorders]="true" (onRowUpdating)="updateSlide($event)">
-  <dxo-editing mode="batch" [allowUpdating]="true">
-  </dxo-editing>
-
-
-  <dxi-column dataField="widget_type" caption="Doughnut Widget" [allowEditing]="false"></dxi-column>
-
-  <div *dxTemplate="let widget_type of 'detail'">
-    <div class="master-detail-caption"></div>
-    <dx-data-grid [dataSource]="getWidgetList(widget_type.key)" [showBorders]="true" [columnAutoWidth]="true"
-      (onRowUpdating)="update($event)" (onRowRemoving)="delete($event)">
-      <dxo-editing mode="batch" [allowUpdating]="true">
-      </dxo-editing>
-      <dxi-column dataField="widget_title" caption="TITLE" [allowEditing]="false"></dxi-column>
-      <dxi-column dataField="color" caption="TEMA">
-          <dxo-lookup [dataSource]="DoughnutColor">
-          </dxo-lookup>
-        </dxi-column>
-      <dxi-column dataField="widget_value_1" caption="OPEN"></dxi-column>
-      <dxi-column dataField="widget_value_2" caption="CLOSE"></dxi-column>
-    </dx-data-grid>
-  </div>
-</dx-data-grid>
-
-<!-- end bar gauge -->
