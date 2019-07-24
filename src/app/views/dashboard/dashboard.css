@@ -13,6 +13,10 @@
   margin-bottom: 4px;
 }
 
+[_nghost-c14] {
+  display: inline-block !important;
+}
+
 
 
 
@@ -36,7 +40,7 @@
   font-size: 20pt !important;
 }
 .myBoxTitle{
-  font-size: 14pt !important;
+  font-size: 17pt !important;
   font-weight: 500;
 }
 /* 

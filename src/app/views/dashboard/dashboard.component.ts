@@ -8,10 +8,11 @@ import { CarouselComponent } from 'ngx-carousel-lib';
 import { AuthenticationService } from './../../service/authentication.service';
 import { KomposisiSo } from './card-box/Model';
 import { Widget } from '../administration/dashboard/Model';
+import { BalancedScorecardService } from '../administration/balanced-scorecard-setting/balanced-scorecard.service';
 
 @Component({
   templateUrl: 'dashboard.component.html',
-  styleUrls: ['dashboard.css']
+  styleUrls: ['dashboard.css'],
 })
 
 
@@ -31,7 +32,8 @@ export class DashboardComponent implements OnInit {
   now;
   komposisiSo:KomposisiSo[];
   boxes;
-
+  nko:Widget;
+  nkoValue:any;
   @ViewChild(DxPivotGridComponent) pivotGrid: DxPivotGridComponent;
   @ViewChild(DxChartComponent) chart: DxChartComponent;
  
@@ -42,15 +44,9 @@ export class DashboardComponent implements OnInit {
   constructor(@Inject(DashboardService) private dashService: DashboardService,
               private authService: AuthenticationService) {
                 this.now = new Date();
-
-
-                
-               
-                
   }
 
   ngOnInit(): void {
-    
 
     Observable.timer(0,30000) //get setiap 30s setelah detik ke 0
     .takeWhile(() => this.alive)
@@ -60,7 +56,6 @@ export class DashboardComponent implements OnInit {
       this.dashService.getWidgetByTahunBulanType(tahun,bulan,"CARD").subscribe(resp=>{
         this.cards = resp.d;
       })
-      
       
       this.dashService.getWidgetByTahunBulanType(tahun,bulan,"BOX").subscribe(resp=>{
         let boxs = resp.d;
@@ -75,18 +70,26 @@ export class DashboardComponent implements OnInit {
         console.log("boxs",boxs);
       })
       
-   
       this.dashService.getWidgetByTahunBulanType(tahun,bulan,"DOUGHNUT").subscribe(resp=>{
         this.doughnut = resp.d[0];
         this.komposisiSo = [
           {name: "open", val:resp.d[0].widget_value_1},
           {name: "close", val:resp.d[0].widget_value_2}
         ]
-        console.log( this.komposisiSo)
+        
+      })
+      
+      this.dashService.updateNko(bulan,tahun).subscribe(res => {
+        
+        this.nkoValue = res.d[0]
+        console.log(res.d)  
+        this.dashService.getWidgetByTahunBulanType(tahun,bulan,"NKO").subscribe(resp=>{
+          this.nko = resp.d[0];
+          console.log(this.nko)
+        })
       })
     })
   }
-
 
   public ngOnDestroy(): void {
     this.alive = false; 

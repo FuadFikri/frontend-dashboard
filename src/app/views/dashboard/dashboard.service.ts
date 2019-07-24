@@ -42,6 +42,11 @@ export class DashboardService {
   }
   
   
+  updateNko(bulan, tahun) {
+    return this.http.get < any > (this.url + '/updateTotalNilai?bulan='+bulan+'&tahun='+tahun);
+  }
+  
+  
   
   
   
