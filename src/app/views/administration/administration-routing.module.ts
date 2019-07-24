@@ -21,6 +21,7 @@ import { AddSbuComponent } from './balanced-scorecard-sbu/add-sbu/add-sbu.compon
 import { DataSbuComponent } from './balanced-scorecard-sbu/data-sbu/data-sbu.component';
 import { KpiSbuComponent } from './balanced-scorecard-sbu/kpi-sbu/kpi-sbu.component';
 import { SbuListComponent } from './balanced-scorecard-sbu/sbu-list/sbu-list.component';
+import { SbuComponent } from './data-master/sbu/sbu.component';
 
 
 const routes: Routes = [
@@ -147,6 +148,10 @@ const routes: Routes = [
       {
         path: 'satuan',
         component: SatuanComponent,
+      },
+      {
+        path: 'sbu',
+        component: SbuComponent,
       }
       
     ]

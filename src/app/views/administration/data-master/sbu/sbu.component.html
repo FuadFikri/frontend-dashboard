@@ -1,3 +1,41 @@
-<p>
-  sbu works!
-</p>
+<div class="animated fadeIn item-center">
+  <div class="card" id="new47">
+    <div class="card-header">
+      <strong>Data Master SBU<span *ngIf="(isAdd || isEdit) && !isDetail">Add / Edit</span></strong>
+    </div>
+    <div class="card-body">
+      <div class="row">
+          <div class="col-md-3">
+              
+          </div>
+      </div>
+      <dx-data-grid id="gridContainer" [dataSource]="sbuSource" 
+              keyExpr="id_sbu" [showBorders]="true"
+              [columnHidingEnabled]="false"
+              [rowAlternationEnabled]="true"
+              [columnAutoWidth]="true"
+              [wordWrapEnabled]="true"
+              (onRowUpdating)="updateSbu($event)"
+              (onRowRemoving)="deleteSbu($event)"
+              (onRowInserting)="insertSbu($event)">
+              <dxo-editing mode="form"
+                  [allowUpdating]="true"
+                  [allowAdding]="true"
+                 [allowDeleting]="true"
+                 
+                  >
+              </dxo-editing>
+               
+              <dxi-column
+                  dataField="daerah"
+                  caption="SBU">         
+                  <dxi-validation-rule type="required"
+                  message="Harus diisi"></dxi-validation-rule>
+              </dxi-column>
+                            
+              
+              <!-- <dxi-sort-by-group-summary-info summaryItem="count"></dxi-sort-by-group-summary-info> -->
+            </dx-data-grid>
+    </div>
+  </div>
+</div>
