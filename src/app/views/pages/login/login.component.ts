@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         data => {
           // console.log('Hore');
-          this.router.navigate(['/']);
+          this.router.navigate(['/administration/dashboard']);
           // this.router.navigate([this.returnUrl]);
         },
         error => {
