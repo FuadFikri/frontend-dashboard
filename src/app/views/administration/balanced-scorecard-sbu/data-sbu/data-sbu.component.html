@@ -38,9 +38,9 @@
             <dxo-filter-row [visible]="true" [applyFilter]="auto"></dxo-filter-row>
 
 
-            <dxo-editing mode="batch" [allowUpdating]="true">
+            <dxo-editing mode="batch" [allowUpdating]="false">
             </dxo-editing>
-            <dxi-column caption="INDIKATOR KINERJA KUNCI " dataField="nama_kpi" [allowEditing]="false"></dxi-column>
+            <dxi-column caption="KPI SUBDIR " dataField="kpi_subdir" [allowEditing]="false"></dxi-column>
             <dxi-column caption="KPI MEASUREMENT" dataField="kpi_measurement" [allowEditing]="false"></dxi-column>
             <dxi-column caption="SATUAN" dataField="satuan" [allowEditing]="false"></dxi-column>
             <dxi-column caption="BOBOT" dataField="bobot" [allowEditing]="false"></dxi-column>
@@ -50,7 +50,7 @@
             </dxi-column>
             <dxi-column dataField="target_bulanan" dataType="number" caption="TARGET {{ bulan }}">
               <dxi-validation-rule type="required" message="Harus Diisi"></dxi-validation-rule>
-              <dxi-validation-rule type="range" [min]="0" message="Harus Diisi"></dxi-validation-rule>
+              <dxi-validation-rule type="range" [min]="0" message="Tidak bisa negatif"></dxi-validation-rule>
             </dxi-column>
             <dxi-column dataField="realisasi" caption="REALISASI" dataType="number">
               <dxi-validation-rule type="required" message="Harus Diisi"></dxi-validation-rule>
