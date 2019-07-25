@@ -189,7 +189,7 @@ export class BalancedScorecardComponent implements OnInit, OnDestroy {
       window.setTimeout(() => {
         this.topCarousel.slideTo(0);
 
-      }, 5000);
+      }, 15000);
       window.clearTimeout();
       console.log("to slide 0 = ", e.activeIndex);
       console.log("delay= ", this.topCarousel.delayAutoPlay);

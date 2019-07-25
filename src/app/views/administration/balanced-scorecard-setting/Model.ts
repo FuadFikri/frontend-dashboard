@@ -21,6 +21,7 @@ export class CardBar {
   ukuran: any
   keterangan: any;
   polarisasi: any;
+  kpi_sortnumber: any;
 
 
   constructor(id: any,
@@ -38,7 +39,8 @@ export class CardBar {
     nilai: any,
     ukuran: any,
     keterangan: any,
-    polarisasi: any) {
+    polarisasi: any,
+    kpi_sortnumber: any) {
 
   }
 
@@ -57,6 +59,7 @@ export class KPI {
   sumber: any;
   kpi_subdir: any;
   sbu_id:any;
+  kpi_sortnumber:any;
 
   constructor(
     id: any,
@@ -71,7 +74,8 @@ export class KPI {
     polarisasi_id: any,
     sumber: any,
     kpi_subdir: any,
-    sbu_id:any
+    sbu_id:any,
+    kpi_sortnumber:any
   ) {
 
   }
