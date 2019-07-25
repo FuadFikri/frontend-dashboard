@@ -5,6 +5,13 @@ import { AuthenticationService } from './../../service/authentication.service';
 @Component({
   selector: 'app-header',
   templateUrl: './app-header.component.html',
+  styles: [`
+  .logo {
+    height: 40px;
+    width: auto;
+    margin-left: 15px;
+  }
+  `],
   providers: [AuthenticationService]
 })
 export class AppHeaderComponent {
