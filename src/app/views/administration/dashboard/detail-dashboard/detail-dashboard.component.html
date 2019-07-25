@@ -13,7 +13,7 @@
           <dx-select-box [dataSource]="tahunDropDown" [(value)]="generated.tahun"></dx-select-box>
         </div>
         <div class="col-md-3">
-          <dx-button icon="fa fa-database" text="Generate Widget" (click)="generate($event)" *ngIf="isCanGenerate">
+          <dx-button  text="Generate Widget" (click)="generate($event)" *ngIf="isCanGenerate">
           </dx-button>
         </div>
       </div>
