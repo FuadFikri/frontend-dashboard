@@ -61,6 +61,8 @@
             </dxi-column>
             <dxi-column caption="SATUAN" dataField="satuan">
                 <dxi-validation-rule type="required"  message="satuan  harus diisi" ></dxi-validation-rule>
+                <dxo-lookup [dataSource]="satuanSource" displayExpr="satuan" valueExpr="satuan">
+                  </dxo-lookup>
             </dxi-column>
 
             <dxi-column dataField="ukuran_id" caption="UKURAN" [allowResizing]="true">

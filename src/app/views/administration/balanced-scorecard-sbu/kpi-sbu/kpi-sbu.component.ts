@@ -11,11 +11,12 @@ import { BalancedScorecardService } from '../../balanced-scorecard-setting/balan
 import { KPI, Perspektif } from '../../balanced-scorecard-setting/Model';
 import { ActivatedRoute } from '@angular/router';
 import { SbuService } from '../../data-master/sbu/sbu.service';
+import { SatuanService } from '../../data-master/satuan/satuan.service';
 @Component({
   selector: 'app-kpi-sbu',
   templateUrl: './kpi-sbu.component.html',
   styleUrls: ['./kpi-sbu.component.scss'],
-  providers: [BalancedScorecardService,SbuService]
+  providers: [BalancedScorecardService,SbuService,SatuanService]
 })
 export class KpiSbuComponent implements OnInit {
 
@@ -39,7 +40,8 @@ export class KpiSbuComponent implements OnInit {
   perspektif: any;
   daerah: any;
   sbu_id: any;
-  constructor(private _service: BalancedScorecardService, private router: ActivatedRoute,private sbuService: SbuService) {
+  satuanSource:any;
+  constructor(private _service: BalancedScorecardService, private router: ActivatedRoute,private sbuService: SbuService, private satuanService: SatuanService) {
     this.cardBarSource = [];
     this.now = new Date();
   }
@@ -76,10 +78,11 @@ export class KpiSbuComponent implements OnInit {
       });
       console.log('cards', this.cardBars);
     });
-
-    
-
       console.log(this.sbu_id)
+
+      this.satuanService.getSatuans().subscribe(res => {
+        this.satuanSource = res.d;
+      })
     })
   }
 
