@@ -1,6 +1,4 @@
-<!-- <ng-container *ngIf="wide; else small"> -->
 <div *ngFor="let item of data; let j=index">
-  <!-- <div  *ngIf="item.nama_kpi.length<45 && item.target_rkap.length<4; else elseBlock"> -->
   <div class="col-md-{{item.panjang_kolom}}">
     <div class="card text-white bg-{{color}}" style="height:170px; width:auto">
       <div class="card-body">
@@ -12,140 +10,49 @@
           </div>
           <div class="col-md-6" (mouseover)="hover=true" (mouseleave)="hover=false">
             <table id="tabel">
-              
-
-                <tr>
-                  <td width="20px" style="margin-right: 2px;">
-                    <p>{{item.target_rkap}}</p>
-                  </td>
-                  <td width="5px"></td>
-                  <td>
-                    <div class="progress progress-white progress-xs mt-3">
-                      <div aria-valuemax="max" aria-valuemin="0" aria-valuenow="25" class="progress-bar"
-                        role="progressbar" [style.width.%]="item.target_rkap"></div>
-                    </div>
-  
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <p>{{item.target_bulanan}}</p>
-                  </td>
-                  <td width="5px"></td>
-                  <td>
-                    <div class="progress progress-white progress-xs mt-3">
-                      <div aria-valuemax="item.target_bulanan" aria-valuemin="0" aria-valuenow="25" class="progress-bar"
-                        role="progressbar" [style.width.%]="item.target_bulanan"></div>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <p>{{item.realisasi}}</p>
-                  </td>
-                  <td width="5px"></td>
-                  <td>
-                    <div class="progress progress-white progress-xs mt-3">
-                      <div aria-valuemax="item.target_bulanan" aria-valuemin="0" aria-valuenow="25" class="progress-bar"
-                        role="progressbar" [style.width.%]="item.realisasi"></div>
-                    </div>
-                  </td>
-                </tr>
-              
+              <tr>
+                <td width="20px" style="margin-right: 2px;">
+                  <p>{{item.target_rkap}}</p>
+                </td>
+                <td width="5px"></td>
+                <td>
+                  <div class="progress progress-white progress-xs mt-3">
+                    <div aria-valuemax="max" aria-valuemin="0" aria-valuenow="25" class="progress-bar"
+                      role="progressbar" [style.width.%]="item.target_rkap"></div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>{{item.target_bulanan}}</p>
+                </td>
+                <td width="5px"></td>
+                <td>
+                  <div class="progress progress-white progress-xs mt-3">
+                    <div aria-valuemax="item.target_bulanan" aria-valuemin="0" aria-valuenow="25" class="progress-bar"
+                      role="progressbar" [style.width.%]="item.target_bulanan"></div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>{{item.realisasi}}</p>
+                </td>
+                <td width="5px"></td>
+                <td>
+                  <div class="progress progress-white progress-xs mt-3">
+                    <div aria-valuemax="item.target_bulanan" aria-valuemin="0" aria-valuenow="25" class="progress-bar"
+                      role="progressbar" [style.width.%]="item.realisasi"></div>
+                  </div>
+                </td>
+              </tr>
             </table>
-            <!-- <div class="row">
-              <div class="col-md-4">
-                <span>{{item.target_rkap}}</span>
-              </div>
-              <div class="col-md-12">
-                <div class="progress progress-white progress-xs mt-3">
-                  <div aria-valuemax="item.target_rkap" aria-valuemin="0" aria-valuenow="25" class="progress-bar"
-                    role="progressbar" [style.width.%]="item.target_rkap"></div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-4">
-                <span>{{item.target_bulanan}}</span>
-              </div>
-              <div class="col-md-8">
-                <div class="progress progress-white progress-xs mt-3">
-                  <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="25" class="progress-bar" role="progressbar"
-                    [style.width.%]="item.target_bulanan"></div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-4">
-                <span>{{item.realisasi}}</span>
-              </div>
-              <div class="col-md-8">
-                <div class="progress progress-white progress-xs mt-3">
-                  <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="25" class="progress-bar" role="progressbar"
-                    [style.width.%]="item.realisasi"></div>
-                </div>
-              </div>
-            </div> -->
           </div>
         </div>
       </div>
-      <!-- </div> -->
     </div>
-
   </div>
-  <!-- <ng-template #elseBlock>
-      <div class="col-md-4">
-          <div class="card text-white bg-{{color}}" style="height:auto; width:auto" >
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-md-4">
-                    <small >{{item.nama_kpi}}</small>
-                  </div>
-                  <div class="col-md-8" (mouseover)="hover=true" (mouseleave)="hover=false">
-                    <div class="row">
-                        <div class="col-md-10"></div>
-                        <div class="col-md-2" id="pencil"><i class="icon-pencil"  (click)="openModal()"></i></div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-3">
-                        <span [ngStyle]="{visibility: hover==true  ? 'visible' : 'hidden' }">{{item.target_rkap}}</span>
-                      </div>
-                      <div class="col-md-9">
-                        <div class="progress progress-white progress-xs mt-3">
-                          <div aria-valuemax="item.target_rkap" aria-valuemin="0" aria-valuenow="25" class="progress-bar" role="progressbar"
-                            [style.width.%]="item.target_rkap"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                          <span [ngStyle]="{visibility: hover==true  ? 'visible' : 'hidden' }">{{item.target_bulanan}}</span>
-                        </div>  
-                      <div class="col-md-9">
-                        <div class="progress progress-white progress-xs mt-3">
-                          <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="25" class="progress-bar" role="progressbar"
-                            [style.width.%]="item.target_bulanan"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-3">
-                        <span [ngStyle]="{visibility: hover==true  ? 'visible' : 'hidden' }">{{item.realisasi}}</span>
-                      </div>
-                      <div class="col-md-9">
-                        <div class="progress progress-white progress-xs mt-3">
-                          <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="25" class="progress-bar" role="progressbar"
-                            [style.width.%]="item.realisasi"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </ng-template>
-  </div> -->
+</div>
 
 
 

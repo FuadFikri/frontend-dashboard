@@ -1,4 +1,9 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  OnDestroy
+} from '@angular/core';
 import {
   CarouselComponent
 } from 'ngx-carousel-lib';
@@ -7,9 +12,15 @@ import 'rxjs/add/observable/timer';
 import {
   Observable
 } from 'rxjs';
-import { CardBar } from 'app/views/administration/balanced-scorecard-setting/Model';
-import { BalancedScorecardService } from 'app/views/administration/balanced-scorecard-setting/balanced-scorecard.service';
-import { ActivatedRoute } from '@angular/router';
+import {
+  CardBar
+} from 'app/views/administration/balanced-scorecard-setting/Model';
+import {
+  BalancedScorecardService
+} from 'app/views/administration/balanced-scorecard-setting/balanced-scorecard.service';
+import {
+  ActivatedRoute
+} from '@angular/router';
 @Component({
   selector: 'app-balanced-scorecard-sbu',
   templateUrl: './balanced-scorecard-sbu.component.html',
@@ -32,6 +43,32 @@ export class BalancedScorecardSbuComponent implements OnInit, OnDestroy {
   daftarCardBar;
   cardBarFiltered;
   daftarCardBarFiltered: CardBar[];
+
+  slideSatu;
+  slideDua;
+  slideTiga;
+  slideEmpat;
+  slideLima;
+
+  rkapSatu = [];
+  bulananSatu = [];
+  realisasiSatu = [];
+
+  rkapDua = [];
+  bulananDua = [];
+  realisasiDua = [];
+
+  rkapTiga = [];
+  bulananTiga = [];
+  realisasiTiga = [];
+
+  rkapEmpat = [];
+  bulananEmpat = [];
+  realisasiEmpat = [];
+
+  rkapLima = [];
+  bulananLima = [];
+  realisasiLima = [];
 
   now;
   alive = true;
@@ -59,7 +96,7 @@ export class BalancedScorecardSbuComponent implements OnInit, OnDestroy {
           this.daftarPerspektif = res.d
           this.perspektif_id = res.d.map(perspektif => perspektif.id)
 
-          this._service.getCardBarByTahunDanBulanLevelSatu(tahun, bulan.toString(),this.daerah).subscribe(res => {
+          this._service.getCardBarByTahunDanBulanLevelSatu(tahun, bulan.toString(), this.daerah).subscribe(res => {
             this.daftarCardBar = Object.keys(res.d).map(function (index) {
               let card = res.d[index];
               return card;
@@ -69,7 +106,77 @@ export class BalancedScorecardSbuComponent implements OnInit, OnDestroy {
               this.cardBarFiltered = this.daftarCardBar.filter(cardbar => cardbar.perspektif_id == this.perspektif_id[index])
               this.daftarCardBarFiltered.push(this.cardBarFiltered);
             }
-            console.log(this.daftarCardBarFiltered)
+            this.slideSatu = this.daftarCardBarFiltered[0];
+            this.slideDua = this.daftarCardBarFiltered[1];
+            this.slideTiga = this.daftarCardBarFiltered[2];
+            this.slideEmpat = this.daftarCardBarFiltered[3];
+            this.slideLima = this.daftarCardBarFiltered[4];
+
+            this.rkapSatu = [];
+            this.bulananSatu = [];
+            this.realisasiSatu = [];
+            this.slideSatu.forEach(element => {
+              this.rkapSatu.push(parseInt(element.target_rkap))
+            });
+            this.slideSatu.forEach(el => {
+              this.bulananSatu.push(parseInt(el.target_bulanan))
+            })
+            this.slideSatu.forEach(el => {
+              this.realisasiSatu.push(parseInt(el.realisasi))
+            })
+
+            this.rkapDua = [];
+            this.bulananDua = [];
+            this.realisasiDua = [];
+            this.slideDua.forEach(element => {
+              this.rkapDua.push(parseInt(element.target_rkap))
+            });
+            this.slideDua.forEach(el => {
+              this.bulananDua.push(parseInt(el.target_bulanan))
+            })
+            this.slideDua.forEach(el => {
+              this.realisasiDua.push(parseInt(el.realisasi))
+            })
+
+            this.rkapTiga = [];
+            this.bulananTiga = [];
+            this.realisasiTiga = [];
+            this.slideTiga.forEach(element => {
+              this.rkapTiga.push(parseInt(element.target_rkap))
+            });
+            this.slideTiga.forEach(el => {
+              this.bulananTiga.push(parseInt(el.target_bulanan))
+            })
+            this.slideTiga.forEach(el => {
+              this.realisasiTiga.push(parseInt(el.realisasi))
+            })
+
+
+            this.rkapEmpat = [];
+            this.bulananEmpat = [];
+            this.realisasiEmpat = [];
+            this.slideEmpat.forEach(element => {
+              this.rkapEmpat.push(parseInt(element.target_rkap))
+            });
+            this.slideEmpat.forEach(el => {
+              this.bulananEmpat.push(parseInt(el.target_bulanan))
+            })
+            this.slideEmpat.forEach(el => {
+              this.realisasiEmpat.push(parseInt(el.realisasi))
+            })
+
+            this.rkapLima = [];
+            this.bulananLima = [];
+            this.realisasiLima = [];
+            this.slideLima.forEach(element => {
+              this.rkapLima.push(parseInt(element.target_rkap))
+            });
+            this.slideLima.forEach(el => {
+              this.bulananLima.push(parseInt(el.target_bulanan))
+            })
+            this.slideLima.forEach(el => {
+              this.realisasiLima.push(parseInt(el.realisasi))
+            })
           })
         })
       });
@@ -90,6 +197,16 @@ export class BalancedScorecardSbuComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.alive=false;
+    this.alive = false;
+  }
+
+  format(value) {
+    return (value * 100).toFixed() + '%';
+  }
+  formatRKAP(value) {
+    return
+  }
+  formatBulanan(value) {
+    return (value * 100).toFixed() + '% RKAP';
   }
 }
