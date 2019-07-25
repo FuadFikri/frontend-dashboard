@@ -66,7 +66,7 @@ export class BalancedScorecardSbuComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   url=['/administration/balanced-scorecard/data-sbu/'];
   
-  daerah:String;
+  daerah:string;
   resourceUrlRole: string;
   
   constructor(private service: BalancedScorecardService, private a: AppConstant, private _route: ActivatedRoute) {
@@ -74,6 +74,7 @@ export class BalancedScorecardSbuComponent implements OnInit, OnDestroy {
     this.now = new Date();
     this.queryParams.tahun = this.now.getFullYear().toString();
     this.resourceUrlRole= a.SERVER_URL;
+    this.totalNilai = new TotalNilai("0");
   }
   ngOnInit() {
     let daerah = this._route.snapshot.paramMap.get("daerah");
@@ -98,7 +99,20 @@ export class BalancedScorecardSbuComponent implements OnInit, OnDestroy {
         return card;
       });
       console.log('cards', this.cardBars);
+
+
+      // hitung total bobot
+      this.bobots = Object.keys(resp.d).map(function (index) {
+        const bobot = resp.d[index].bobot;
+        return bobot;
+      });
+      
+      this.bobots.forEach(element => {
+        this.totalBobot += parseInt(element);
+      });
     });
+
+    this.getTotalNilai()
 
     
 
@@ -107,13 +121,13 @@ export class BalancedScorecardSbuComponent implements OnInit, OnDestroy {
    // total nilai keseluruhan bulan ini /=>paling bawah 
    getTotalNilai() {
     const tahun = this.now.getFullYear().toString();
-    this.service.getTotalNilai(tahun, this.bulanDropDown[(this.now.getMonth())-1].id)
+    this.service.getTotalNilaiLevelSatu(tahun, this.bulanDropDown[(this.now.getMonth())-1].id, this.daerah)
       .subscribe(res => {
         let total = new Number(res.d[0].sum);
         console.log("total",total);
         console.log("res",res);
         
-        this.totalNilai.total = total.toPrecision(3);
+        this.totalNilai.total = total;
         console.log("final",this.totalNilai);
       })
   }

@@ -175,7 +175,10 @@ export class BalancedScorecardService {
     return this.http.post <any> (this._urlNilai + "/uploadFile",data);
   }
 
-  getTotalNilai(tahun:string, bulan:string) {
-    return this.http.get <any> (this._urlCardBar + '/totalNilai?tahun='+tahun + '&bulan='+bulan);
+  getTotalNilaiLevelNol(tahun:string, bulan:string) {
+    return this.http.get <any> (this._urlCardBar + '/totalNilai?tahun='+tahun + '&bulan='+bulan +'&daerah=pusat');
+  }
+  getTotalNilaiLevelSatu(tahun:string, bulan:string, daerah:string) {
+    return this.http.get <any> (this._urlCardBar + '/totalNilai?tahun='+tahun + '&bulan='+bulan+'&daerah='+daerah);
   }
 }

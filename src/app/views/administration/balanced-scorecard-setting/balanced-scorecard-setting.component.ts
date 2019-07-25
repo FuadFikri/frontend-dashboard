@@ -120,7 +120,7 @@ export class BalancedScorecardSettingComponent implements OnInit, OnDestroy {
   // total nilai keseluruhan bulan ini /=>paling bawah 
   getTotalNilai() {
     const tahun = this.now.getFullYear().toString();
-    this.service.getTotalNilai(tahun, this.bulanDropDown[(this.now.getMonth())-1].id)
+    this.service.getTotalNilaiLevelNol(tahun, this.bulanDropDown[(this.now.getMonth())-1].id)
       .subscribe(res => {
         let total = new Number(res.d[0].sum);
         console.log("total",total);
