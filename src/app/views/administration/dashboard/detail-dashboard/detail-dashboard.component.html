@@ -9,11 +9,15 @@
     <div class="card-body">
 
       <div class="row">
-        <div class="col-md-4">
-          <dx-select-box [dataSource]="tahunDropDown" [(value)]="generated.tahun"></dx-select-box>
+        <div class="col-md-3">
+          <dx-select-box [dataSource]="tahunDropDown" [(value)]="generated.tahun" *ngIf="isCanGenerate"></dx-select-box>
         </div>
         <div class="col-md-3">
           <dx-button  text="Generate Widget" (click)="generate($event)" *ngIf="isCanGenerate">
+          </dx-button>
+        </div>
+        <div class="col-md-3 offset-3">
+          <dx-button  text="Lihat Dashboard" (click)="lihat_dashboard()"  type="success">
           </dx-button>
         </div>
       </div>
@@ -32,18 +36,26 @@
             (onRowUpdating)="update($event)" (onRowRemoving)="delete($event)">
             <dxo-editing mode="batch" [allowUpdating]="true">
             </dxo-editing>
-            <dxi-column dataField="widget_sortnumber" sortOrder="asc" width=85 caption="NUMBER">
-
+            <dxi-column dataField="widget_sortnumber"   sortOrder="asc" width=85 caption="NUMBER">
+              <dxi-validation-rule type="required" message="Harus Diisi"></dxi-validation-rule>
             </dxi-column>
-            <dxi-column dataField="widget_title" caption="TITLE"></dxi-column>
-            <dxi-column dataField="widget_value_1" caption="VALUE"></dxi-column>
-            <dxi-column dataField="widget_label" caption="LABEL"></dxi-column>
+            <dxi-column dataField="widget_title" caption="TITLE">
+              <dxi-validation-rule type="required" message="Harus Diisi"></dxi-validation-rule>
+            </dxi-column>
+            <dxi-column dataField="widget_value_1" caption="VALUE">
+              <dxi-validation-rule type="required" message="Harus Diisi"></dxi-validation-rule>
+            </dxi-column>
+            <dxi-column dataField="widget_label" caption="LABEL">
+              <dxi-validation-rule type="required" message="Harus Diisi"></dxi-validation-rule>
+            </dxi-column>
 
             <dxi-column dataField="color" caption="COLOR">
+                <dxi-validation-rule type="required" message="Harus Diisi"></dxi-validation-rule>
               <dxo-lookup [dataSource]="cardBoxColor" displayExpr="caption" valueExpr="color">
               </dxo-lookup>
             </dxi-column>
             <dxi-column dataField="widget_size" caption="SIZE">
+                <dxi-validation-rule type="required" message="Harus Diisi"></dxi-validation-rule>
               <dxo-lookup [dataSource]="cardBoxSize" displayExpr="caption" valueExpr="widget_size">
               </dxo-lookup>
             </dxi-column>
@@ -66,14 +78,22 @@
             (onRowUpdating)="update($event)" (onRowRemoving)="delete($event)">
             <dxo-editing mode="batch" [allowUpdating]="true" [allowDeleting]="false" [allowAdding]="true">
             </dxo-editing>
-            <dxi-column dataField="widget_sortnumber" width="55" caption="NUMBER"></dxi-column>
-            <dxi-column dataField="widget_title"></dxi-column>
+            <dxi-column dataField="widget_sortnumber" width="55" caption="NUMBER">
+                <dxi-validation-rule type="required" message="Harus Diisi"></dxi-validation-rule>
+            </dxi-column>
+            <dxi-column dataField="widget_title">
+                <dxi-validation-rule type="required" message="Harus Diisi"></dxi-validation-rule>
+            </dxi-column>
             <dxi-column dataField="kpi_id" caption="KPI" width="220">
+                <dxi-validation-rule type="required" message="Harus Diisi"></dxi-validation-rule>
               <dxo-lookup [dataSource]="kpi" displayExpr="nama_kpi" valueExpr="id">
               </dxo-lookup>
             </dxi-column>
-            <dxi-column dataField="widget_value_1" caption="VALUE" [allowEditing]="false"></dxi-column>
+            <dxi-column dataField="widget_value_1" caption="VALUE" [allowEditing]="false">
+                <dxi-validation-rule type="required" message="Harus Diisi"></dxi-validation-rule>
+            </dxi-column>
             <dxi-column dataField="widget_size" caption="SIZE">
+                <dxi-validation-rule type="required" message="Harus Diisi"></dxi-validation-rule>
               <dxo-lookup [dataSource]="boxSize" displayExpr="caption" valueExpr="size">
               </dxo-lookup>
             </dxi-column>
@@ -99,10 +119,13 @@
             <dxo-editing mode="batch" [allowUpdating]="true" [allowDeleting]="false" [allowAdding]="true">
             </dxo-editing>
 
-            <dxi-column caption="TITLE" dataField="widget_title"></dxi-column>
+            <dxi-column caption="TITLE" dataField="widget_title">
+                <dxi-validation-rule type="required" message="Harus Diisi"></dxi-validation-rule>
+            </dxi-column>
             <dxi-column dataField="widget_value_1" caption="VALUE" [allowEditing]="false"></dxi-column>
             <!-- <dxi-column dataField="widget_size"></dxi-column> -->
             <dxi-column dataField="color" caption="COLOR">
+                <dxi-validation-rule type="required" message="Harus Diisi"></dxi-validation-rule>
               <dxo-lookup [dataSource]="cardBoxColor" displayExpr="caption" valueExpr="color">
               </dxo-lookup>
             </dxi-column>
@@ -130,13 +153,20 @@
             (onRowUpdating)="update($event)" (onRowRemoving)="delete($event)">
             <dxo-editing mode="batch" [allowUpdating]="true">
             </dxo-editing>
-            <dxi-column dataField="widget_title" caption="TITLE" [allowEditing]="false"></dxi-column>
+            <dxi-column dataField="widget_title" caption="TITLE" [allowEditing]="false">
+                <dxi-validation-rule type="required" message="Harus Diisi"></dxi-validation-rule>
+            </dxi-column>
             <dxi-column dataField="color" caption="TEMA">
+                <dxi-validation-rule type="required" message="Harus Diisi"></dxi-validation-rule>
               <dxo-lookup [dataSource]="DoughnutColor">
               </dxo-lookup>
             </dxi-column>
-            <dxi-column dataField="widget_value_1" caption="OPEN" dataType="number"></dxi-column>
-            <dxi-column dataField="widget_value_2" caption="CLOSE" dataType="number"></dxi-column>
+            <dxi-column dataField="widget_value_1" caption="OPEN" dataType="number">
+                <dxi-validation-rule type="required" message="Harus Diisi"></dxi-validation-rule>
+            </dxi-column>
+            <dxi-column dataField="widget_value_2" caption="CLOSE" dataType="number">
+                <dxi-validation-rule type="required" message="Harus Diisi"></dxi-validation-rule>
+            </dxi-column>
           </dx-data-grid>
         </div>
       </dx-data-grid>

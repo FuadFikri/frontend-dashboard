@@ -281,6 +281,19 @@ export class DetailDashboardComponent implements OnInit {
     tahun: ""
   }
 
+  lihat_dashboard() {
+    // open link in new tab
+    
+    let url = location.origin
+    let fullUrl = url + "/dashboard"
+    const newTab = window.open(fullUrl, '_blank')
+    // set opener to null so that no one can references it
+    newTab.opener = null
+  }
 
+  sortNumber;
+  sortNumberComparison = () => {
+    return this.sortNumber
+  }
 
 }
