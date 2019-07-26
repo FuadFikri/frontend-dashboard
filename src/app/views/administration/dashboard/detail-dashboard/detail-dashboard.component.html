@@ -76,7 +76,7 @@
           <div class="master-detail-caption"></div>
           <dx-data-grid [dataSource]="getWidgetList(widget_type.key)" [showBorders]="true" [columnAutoWidth]="true"
             (onRowUpdating)="update($event)" (onRowRemoving)="delete($event)">
-            <dxo-editing mode="batch" [allowUpdating]="true" [allowDeleting]="false" [allowAdding]="true">
+            <dxo-editing mode="batch" [allowUpdating]="true" [allowDeleting]="false">
             </dxo-editing>
             <dxi-column dataField="widget_sortnumber" width="55" caption="NUMBER">
                 <dxi-validation-rule type="required" message="Harus Diisi"></dxi-validation-rule>
