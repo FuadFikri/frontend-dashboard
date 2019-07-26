@@ -47,7 +47,8 @@ export class SbuListComponent implements OnInit {
     // open link in new tab
     let daerah = cell.data.daerah;
     let url = location.origin
-    let fullUrl = url + "/#/balanced-scorecard-sbu/" + daerah;
+    let path = location.pathname
+    let fullUrl =url + path + "/#/balanced-scorecard-sbu/" + daerah;
     const newTab = window.open(fullUrl, '_blank')
     // set opener to null so that no one can references it
     newTab.opener = null
