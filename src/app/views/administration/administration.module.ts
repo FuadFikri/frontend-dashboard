@@ -77,6 +77,7 @@ import { DataSbuComponent } from './balanced-scorecard-sbu/data-sbu/data-sbu.com
 import { KpiSbuComponent } from './balanced-scorecard-sbu/kpi-sbu/kpi-sbu.component';
 import { SbuComponent } from './data-master/sbu/sbu.component';
 import { SbuListComponent } from './balanced-scorecard-sbu/sbu-list/sbu-list.component';
+import { DashboardDataComponent } from './dashboard/dashboard-data/dashboard-data.component';
 
 
 
@@ -142,6 +143,7 @@ import { SbuListComponent } from './balanced-scorecard-sbu/sbu-list/sbu-list.com
     KpiSbuComponent,
     SbuComponent,
     SbuListComponent,
+    DashboardDataComponent,
     
   ],
   exports: [

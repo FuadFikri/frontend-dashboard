@@ -22,6 +22,7 @@ import { DataSbuComponent } from './balanced-scorecard-sbu/data-sbu/data-sbu.com
 import { KpiSbuComponent } from './balanced-scorecard-sbu/kpi-sbu/kpi-sbu.component';
 import { SbuListComponent } from './balanced-scorecard-sbu/sbu-list/sbu-list.component';
 import { SbuComponent } from './data-master/sbu/sbu.component';
+import { DashboardDataComponent } from './dashboard/dashboard-data/dashboard-data.component';
 
 
 const routes: Routes = [
@@ -88,6 +89,13 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: DetailDashboardComponent,
+        data: {
+          title: 'Dashboard Administration'
+        }
+      },
+      {
+        path: 'dashboard/data',
+        component: DashboardDataComponent,
         data: {
           title: 'Dashboard Administration'
         }

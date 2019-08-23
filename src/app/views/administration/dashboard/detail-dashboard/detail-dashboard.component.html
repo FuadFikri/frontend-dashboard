@@ -90,7 +90,7 @@
               </dxo-lookup>
             </dxi-column>
             <dxi-column dataField="widget_value_1" caption="VALUE" [allowEditing]="false">
-                <dxi-validation-rule type="required" message="Harus Diisi"></dxi-validation-rule>
+                <!-- <dxi-validation-rule type="required" message="Harus Diisi"></dxi-validation-rule> -->
             </dxi-column>
             <dxi-column dataField="widget_size" caption="SIZE">
                 <dxi-validation-rule type="required" message="Harus Diisi"></dxi-validation-rule>
@@ -116,7 +116,7 @@
           <div class="master-detail-caption"></div>
           <dx-data-grid [dataSource]="getWidgetList(widget_type.key)" [showBorders]="true" [columnAutoWidth]="true"
             (onRowUpdating)="update($event)" (onRowRemoving)="delete($event)">
-            <dxo-editing mode="batch" [allowUpdating]="true" [allowDeleting]="false" [allowAdding]="true">
+            <dxo-editing mode="batch" [allowUpdating]="true" [allowDeleting]="false" [allowAdding]="false">
             </dxo-editing>
 
             <dxi-column caption="TITLE" dataField="widget_title">
