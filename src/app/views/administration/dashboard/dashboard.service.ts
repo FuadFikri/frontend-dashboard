@@ -122,4 +122,11 @@ export class DashboardService {
   getLastTahun() {
     return this.http.get <any> (this.widgetJoinURL + '/getLastTahun');
   }
+
+  getCardsData() {
+    return this.http.get <any> (this.widgetJoinURL + '/table?widget_type=CARD');
+  }
+  getDonatData() {
+    return this.http.get <any> (this.widgetJoinURL + '/table?widget_type=DOUGHNUT');
+  }
 }

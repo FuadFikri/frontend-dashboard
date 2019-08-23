@@ -1,3 +1,79 @@
-<p>
-  dashboard-data works!
-</p>
+<div class="animated fadeIn">
+  <div class="card" id="new47">
+    <div class="card-header">
+      <strong>Dashboard Administration <span *ngIf="(isAdd || isEdit) && !isDetail">Add / Edit</span></strong>
+      <span *ngIf="isDetail" class="pull-right">
+        <dx-button id="btnBack" text="< Back" (onClick)="back()"></dx-button>
+      </span>
+    </div>
+    <div class="card-body">
+
+      <div class="row">
+        <div class="col-md-3">
+          <dx-select-box [dataSource]="tahunDropDown" [(value)]="generated.tahun" *ngIf="isCanGenerate"></dx-select-box>
+        </div>
+        <div class="col-md-3">
+          <dx-button  text="Generate Widget" (click)="generate($event)" *ngIf="isCanGenerate">
+          </dx-button>
+        </div>
+      </div>
+
+
+
+      
+          <dx-data-grid [dataSource]="cardSource" [showBorders]="true" [columnAutoWidth]="true"
+            (onRowUpdating)="update($event)" (onRowRemoving)="delete($event)">
+            <dxo-filter-row [visible]="true" [applyFilter]="auto"></dxo-filter-row>
+            <dxo-editing mode="batch" [allowUpdating]="false">
+            </dxo-editing>
+            <dxi-column dataField="widget_title" caption="TITLE">
+              <dxi-validation-rule type="required" message="Harus Diisi"></dxi-validation-rule>
+            </dxi-column>
+            <dxi-column dataField="widget_value_1" caption="VALUE">
+              <dxi-validation-rule type="required" message="Harus Diisi"></dxi-validation-rule>
+            </dxi-column>
+            <dxi-column dataField="widget_label" caption="LABEL">
+              <dxi-validation-rule type="required" message="Harus Diisi"></dxi-validation-rule>
+            </dxi-column>
+            <dxi-column dataField="bulan" [allowResizing]="true" [allowEditing]="false">
+              <dxo-lookup [dataSource]="bulanDropDown" displayExpr="bulan" valueExpr="id">
+              </dxo-lookup>
+            </dxi-column>
+
+            <dxi-column dataField="tahun" caption="Tahun">
+              <dxi-validation-rule type="required" message="Harus Diisi"></dxi-validation-rule>
+            </dxi-column>
+
+          </dx-data-grid>
+        
+      <br>
+
+
+
+     
+          <dx-data-grid [dataSource]="doughnutSource" [showBorders]="true" [columnAutoWidth]="true"
+            (onRowUpdating)="update($event)" (onRowRemoving)="delete($event)">
+            <dxo-editing mode="batch" [allowUpdating]="false">
+            </dxo-editing>
+            <dxo-filter-row [visible]="true" [applyFilter]="auto"></dxo-filter-row>
+            <dxi-column dataField="widget_value_1" caption="OPEN" dataType="number">
+                <dxi-validation-rule type="required" message="Harus Diisi"></dxi-validation-rule>
+            </dxi-column>
+            <dxi-column dataField="widget_value_2" caption="CLOSE" dataType="number">
+                <dxi-validation-rule type="required" message="Harus Diisi"></dxi-validation-rule>
+            </dxi-column>
+            <dxi-column dataField="bulan" [allowResizing]="true" [allowEditing]="false">
+              <dxo-lookup [dataSource]="bulanDropDown" displayExpr="bulan" valueExpr="id">
+              </dxo-lookup>
+            </dxi-column>
+
+            <dxi-column dataField="tahun" caption="Tahun">
+              <dxi-validation-rule type="required" message="Harus Diisi"></dxi-validation-rule>
+            </dxi-column>
+          </dx-data-grid>
+        
+
+      <!-- end bar gauge -->
+    </div>
+  </div>
+</div>
