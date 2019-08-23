@@ -15,8 +15,8 @@ export class AppConstant {
     if (isDevMode()) {
       // this.SERVER_URL = 'http://portalapp.iconpln.co.id:1366';
       // this.SERVER_URL = 'http://10.14.153.41:1366';
-      // this.SERVER_URL = 'http://localhost:9092';
-      this.SERVER_URL = 'http://10.14.23.129:8080/dashboard-webservice';
+      this.SERVER_URL = 'http://localhost:9092';
+      // this.SERVER_URL = 'http://10.14.23.129:8080/dashboard-webservice';
       //http://localhost:9092 http://10.14.22.209:8080/erkap-webservice
     } else {
       this.SERVER_URL = document.location.protocol + '//' +
