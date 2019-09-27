@@ -297,4 +297,52 @@ export class DetailDashboardComponent implements OnInit {
     return this.sortNumber
   }
 
+  updateDonat(e) {
+    this.data = e.newData;
+
+    console.log(this.data);
+
+    if ((this.data.widget_value_1 || this.data.widget_value_2) && this.data.color) {
+      console.log("update data dan widget")
+      this.data.widget_id = e.oldData.widget_id;
+      this.dashboardService.updateWidget(this.data).subscribe(res => {
+        console.log(res)
+      }, err => {
+        this.options.message = 'updating Failed';
+        notify(this.options, 'error', 3000);
+        console.log("updating failed ", err);
+      });
+
+      this.data = e.newData;
+      this.data.id_widget_data = e.oldData.id_widget_data;
+      this.dashboardService.updateWidgetData(this.data).subscribe(res => {
+        if (res.d == 1) {
+          this.options.message = 'Widget Configuration Updated';
+          notify(this.options, 'success', 3000);
+          console.log("updating success", res);
+        } else {
+          this.options.message = 'updating Failed';
+          notify(this.options, 'error', 3000);
+          console.log("updating failed ", res);
+        }
+      }, err => {
+        this.options.message = 'updating Failed';
+        notify(this.options, 'error', 3000);
+        console.log("updating failed ", err);
+      });
+    } else if (this.data.color) {
+      console.log("update widget only")
+      this.data.widget_id = e.oldData.widget_id;
+      this.updateWidget();
+    } else {
+      console.log("update dataonly")
+      this.data = e.newData;
+      this.data.id_widget_data = e.oldData.id_widget_data;
+      this.data.widget_value_1 = this.data.widget_value_1.toString();
+      this.data.widget_value_2 = this.data.widget_value_2.toString();
+      this.updateWidgetData()
+    }
+  }
+
+
 }

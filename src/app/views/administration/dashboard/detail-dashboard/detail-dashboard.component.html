@@ -150,7 +150,7 @@
         <div *dxTemplate="let widget_type of 'detail'">
           <div class="master-detail-caption"></div>
           <dx-data-grid [dataSource]="getWidgetList(widget_type.key)" [showBorders]="true" [columnAutoWidth]="true"
-            (onRowUpdating)="update($event)" (onRowRemoving)="delete($event)">
+            (onRowUpdating)="updateDonat($event)" (onRowRemoving)="delete($event)">
             <dxo-editing mode="batch" [allowUpdating]="true">
             </dxo-editing>
             <dxi-column dataField="widget_title" caption="TITLE" [allowEditing]="false">

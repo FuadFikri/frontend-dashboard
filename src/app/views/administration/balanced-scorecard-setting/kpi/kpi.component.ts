@@ -156,6 +156,9 @@ export class KpiComponent implements OnInit {
 
   updateKPI(e) {
     this.kpi = e.newData;
+    if(this.kpi.kpi_sortnumber){
+      this.kpi.kpi_sortnumber = this.kpi.kpi_sortnumber.toString();
+    }
     this.kpi.id = e.key;
     this._service.updateKPI(this.kpi).subscribe(resp => {
       if (resp.d == 1 && resp.s == 200) {
