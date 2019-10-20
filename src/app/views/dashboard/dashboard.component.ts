@@ -36,7 +36,23 @@ export class DashboardComponent implements OnInit {
   nkoValue:any;
   @ViewChild(DxPivotGridComponent) pivotGrid: DxPivotGridComponent;
   @ViewChild(DxChartComponent) chart: DxChartComponent;
- 
+  bulan;
+  tahun;
+  bulanSource = [
+    'X',
+    'JANUARI',
+     'FEBRUARI',
+     'MARET',
+     'APRIL',
+     'MEI',
+     'JUNI',
+     'JULI',
+     'AGUSTUS',
+     'SEPTEMBER',
+     'OKTOBER',
+     'NOVEMBER',
+     'DESEMBER'
+  ];
 
 
   pivotGridDataSource: any;
@@ -44,11 +60,14 @@ export class DashboardComponent implements OnInit {
   constructor(@Inject(DashboardService) private dashService: DashboardService,
               private authService: AuthenticationService) {
                 this.now = new Date();
+                this.tahun = this.now.getFullYear().toString();
+                this.bulan = this.bulanSource[this.now.getMonth().toString()];
+
   }
 
   ngOnInit(): void {
 
-    Observable.timer(0,30000) //get setiap 30s setelah detik ke 0
+    Observable.timer(0,15000) //get setiap 30s setelah detik ke 0
     .takeWhile(() => this.alive)
     .subscribe(() =>  {
       let tahun = (this.now.getFullYear()).toString();
@@ -56,7 +75,7 @@ export class DashboardComponent implements OnInit {
       this.dashService.getWidgetByTahunBulanType(tahun,bulan,"CARD").subscribe(resp=>{
         this.cards = resp.d;
       })
-      
+
       this.dashService.getWidgetByTahunBulanType(tahun,bulan,"BOX").subscribe(resp=>{
         let boxs = resp.d;
         boxs.forEach(box => {
@@ -69,20 +88,20 @@ export class DashboardComponent implements OnInit {
         this.boxes = boxs;
         console.log("boxs",boxs);
       })
-      
+
       this.dashService.getWidgetByTahunBulanType(tahun,bulan,"DOUGHNUT").subscribe(resp=>{
         this.doughnut = resp.d[0];
         this.komposisiSo = [
           {name: "open", val:resp.d[0].widget_value_1},
           {name: "close", val:resp.d[0].widget_value_2}
         ]
-        
+
       })
-      
+
       this.dashService.updateNko(bulan,tahun).subscribe(res => {
-        
+
         this.nkoValue = res.d[0]
-        console.log(res.d)  
+        console.log(res.d)
         this.dashService.getWidgetByTahunBulanType(tahun,bulan,"NKO").subscribe(resp=>{
           this.nko = resp.d[0];
           console.log(this.nko)
@@ -92,7 +111,7 @@ export class DashboardComponent implements OnInit {
   }
 
   public ngOnDestroy(): void {
-    this.alive = false; 
+    this.alive = false;
   }
 
   loop(e) {
@@ -108,5 +127,5 @@ export class DashboardComponent implements OnInit {
   }
 
 
-  
+
 }
