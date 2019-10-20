@@ -25,7 +25,7 @@ import {
   providers: [BalancedScorecardService]
 })
 export class BalancedScorecardComponent implements OnInit, OnDestroy {
-  
+
   @ViewChild('topCarousel') topCarousel: CarouselComponent;
   primary = "primary";
   info = "info";
@@ -50,7 +50,7 @@ export class BalancedScorecardComponent implements OnInit, OnDestroy {
   rkapSatu=[];
   bulananSatu=[];
   realisasiSatu=[];
-  
+
   rkapDua=[];
   bulananDua=[];
   realisasiDua=[];
@@ -69,10 +69,29 @@ export class BalancedScorecardComponent implements OnInit, OnDestroy {
 
   now;
   alive = true;
+  bulan;
+  tahun;
+  bulanSource = [
+    'X',
+    'JANUARI',
+     'FEBRUARI',
+     'MARET',
+     'APRIL',
+     'MEI',
+     'JUNI',
+     'JULI',
+     'AGUSTUS',
+     'SEPTEMBER',
+     'OKTOBER',
+     'NOVEMBER',
+     'DESEMBER'
+  ];
 
   constructor(private _service: BalancedScorecardService) {
     this.daftarCardBarFiltered = [];
     this.now = new Date()
+    this.tahun = this.now.getFullYear().toString();
+    this.bulan = this.bulanSource[this.now.getMonth().toString()];
   }
 
   ngOnInit() {
@@ -105,7 +124,7 @@ export class BalancedScorecardComponent implements OnInit, OnDestroy {
             this.slideTiga = this.daftarCardBarFiltered[2];
             this.slideEmpat = this.daftarCardBarFiltered[3];
             this.slideLima = this.daftarCardBarFiltered[4];
-            
+
             this.rkapSatu = [];
             this.bulananSatu = [];
             this.realisasiSatu = [];
@@ -144,8 +163,8 @@ export class BalancedScorecardComponent implements OnInit, OnDestroy {
             this.slideTiga.forEach(el => {
               this.realisasiTiga.push(parseInt(el.realisasi))
             })
-            
-            
+
+
             this.rkapEmpat = [];
             this.bulananEmpat = [];
             this.realisasiEmpat = [];
@@ -158,7 +177,7 @@ export class BalancedScorecardComponent implements OnInit, OnDestroy {
             this.slideEmpat.forEach(el => {
               this.realisasiEmpat.push(parseInt(el.realisasi))
             })
-            
+
             this.rkapLima = [];
             this.bulananLima = [];
             this.realisasiLima = [];
@@ -171,7 +190,7 @@ export class BalancedScorecardComponent implements OnInit, OnDestroy {
             this.slideLima.forEach(el => {
               this.realisasiLima.push(parseInt(el.realisasi))
             })
-            
+
           })
         })
 
