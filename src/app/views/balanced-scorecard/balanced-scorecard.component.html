@@ -8,11 +8,11 @@
   </div>
 </div>
 
-<carousel-component #topCarousel [autoPlay]="true" [delayAutoPlay]="30000" (onSlideChange)="loop($event)"  [margin]="50">
-      
+<carousel-component #topCarousel [autoPlay]="true" [delayAutoPlay]="30000" (onSlideChange)="loop($event)" [margin]="50">
+
   <!-- slide 1 -->
   <div class="item-carousel">
-    <div id="kotak" >
+    <div id="kotak">
       <div class="row">
         <div class="col-md-2">
           <button type="button" class="btn btn-warning align-middle" *ngIf="daftarPerspektif">
@@ -26,75 +26,73 @@
           <div class="row" *ngIf="slideSatu">
             <div class="col-md-12">
               <!-- card bar -->
-                <div *ngFor="let item of slideSatu; let j=index">
-                    <div class="col-md-{{item.panjang_kolom}}">
-                      <div class="card text-black text-left bg-secondary" style="height:170px; width:auto">
-                        <div class="card-body">
-                          <div class="row">
-                            <div class="col-md-6">
-                              <p class="my-title">
-                                {{item.nama_kpi}}
-                              </p>
-                            </div>
-                            <div class="col-md-6" (mouseover)="hover=true" (mouseleave)="hover=false">
-                              <table id="tabel">
-                                <tr>
-                                  <td width="20px" style="margin-right: 2px;">
-                                    <p>{{item.target_rkap}}</p>
-                                  </td>
-                                  <td width="5px"></td>
-                                  <td>
-                                     
-                                      <dx-progress-bar #progressBar
-                                      id="progress-bar-status"
-                                       width="100%"
-                                      [min]="0"
-                                      [statusFormat]="formatRKAP"
-                                      [max]="rkapSatu[j]"
-                                      [value]="rkapSatu[j]">
-                                  </dx-progress-bar>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td>
-                                    <p>{{item.target_bulanan}}</p>
-                                  </td>
-                                  <td width="5px"></td>
-                                  <td>
-                                     <dx-progress-bar #progressBar
-                                      id="progress-bar-status"
-                                       width="100%"
-                                      [min]="0"
-                                      [statusFormat]="formatBulanan"
-                                      [max]="rkapSatu[j]"
-                                      [value]="bulananSatu[j]">
-                                  </dx-progress-bar>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td>
-                                    <p>{{item.realisasi}}</p>
-                                  </td>
-                                  <td width="5px"></td>
-                                  <td>
-                                      <dx-progress-bar #progressBar
-                                      id="progress-bar-status"
-                                       width="100%"
-                                      [min]="0"
-                                      [statusFormat]="format"
-                                      [max]="bulananSatu[j]"
-                                      [value]="realisasiSatu[j]">
-                                  </dx-progress-bar>
-                                  </td>
-                                </tr>
-                              </table>
-                            </div>
-                          </div>
+              <div *ngFor="let item of slideSatu; let j=index">
+                <div class="col-md-{{item.panjang_kolom}}">
+                  <div class="card text-black text-left bg-secondary" style="height:210px; width:auto">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <p class="my-title">
+                            {{item.nama_kpi}}
+                          </p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12" (mouseover)="hover=true" (mouseleave)="hover=false">
+                          <table id="tabel">
+                            <tr>
+                              <td width="15px" style="margin-right: 2px;">
+                                <p  class="ket">RKAP</p>
+                              </td>
+                              <td width="5px"></td>
+                              <td width="20px" style="margin-right: 2px;">
+                                <p>{{item.target_rkap}}</p>
+                              </td>
+                              <td width="5px"></td>
+                              <td>
+                                <dx-progress-bar #progressBar id="progress-bar-status" width="100%" [min]="0"
+                                  [statusFormat]="formatRKAP" [max]="rkapSatu[j]" [value]="rkapSatu[j]">
+                                </dx-progress-bar>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td width="15px" style="margin-right: 2px;">
+                                <p  class="ket">Target bulan</p>
+                              </td>
+                              <td width="5px"></td>
+                              <td>
+                                <p>{{item.target_bulanan}}</p>
+                              </td>
+                              <td width="5px"></td>
+                              <td>
+                                <dx-progress-bar #progressBar id="progress-bar-status" width="100%" [min]="0"
+                                  [statusFormat]="formatBulanan" [max]="rkapSatu[j]" [value]="bulananSatu[j]">
+                                </dx-progress-bar>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td width="15px" style="margin-right: 2px;">
+                                <p class="ket">Realisasi</p>
+                              </td>
+                              <td width="5px"></td>
+                              <td>
+                                <p>{{item.realisasi}}</p>
+                              </td>
+                              <td width="5px"></td>
+                              <td>
+                                <dx-progress-bar #progressBar id="progress-bar-status" width="100%" [min]="0"
+                                  [statusFormat]="format" [max]="bulananSatu[j]" [value]="realisasiSatu[j]">
+                                </dx-progress-bar>
+                              </td>
+                            </tr>
+                          </table>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <!-- end card bar -->
+                </div>
+              </div>
+              <!-- end card bar -->
             </div>
           </div>
         </div>
@@ -103,12 +101,12 @@
   </div>
   <!-- end slide 1 -->
 
-<!-- slide 2 -->
+  <!-- slide 2 -->
   <div class="item-carousel">
-    <div id="kotak" >
+    <div id="kotak">
       <div class="row">
         <div class="col-md-2">
-          <button type="button" class="btn btn-warning align-middle" >
+          <button type="button" class="btn btn-warning align-middle">
             {{daftarPerspektif[1].nama_perspektif}}
           </button>
         </div>
@@ -118,76 +116,74 @@
         <div class="col-md-12">
           <div class="row" *ngIf="daftarCardBarFiltered[1]">
             <div class="col-md-12">
-               <!-- card bar -->
-               <div *ngFor="let item of slideDua; let j=index">
-                  <div class="col-md-{{item.panjang_kolom}}">
-                    <div class="card text-black text-left bg-secondary" style="height:170px; width:auto">
-                      <div class="card-body">
-                        <div class="row">
-                          <div class="col-md-6">
-                            <p class="my-title">
-                              {{item.nama_kpi}}
-                            </p>
+              <!-- card bar -->
+              <div *ngFor="let item of slideDua; let j=index">
+                <div class="col-md-{{item.panjang_kolom}}">
+                    <div class="card text-black text-left bg-secondary" style="height:210px; width:auto">
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col-md-12">
+                              <p class="my-title">
+                                {{item.nama_kpi}}
+                              </p>
+                            </div>
                           </div>
-                          <div class="col-md-6" (mouseover)="hover=true" (mouseleave)="hover=false">
-                            <table id="tabel">
-                              <tr>
-                                <td width="20px" style="margin-right: 2px;">
-                                  <p>{{item.target_rkap}}</p>
-                                </td>
-                                <td width="5px"></td>
-                                <td>
-                                   
-                                    <dx-progress-bar #progressBar
-                                    id="progress-bar-status"
-                                     width="100%"
-                                    [min]="0"
-                                    [statusFormat]="formatRKAP"
-                                    [max]="rkapDua[j]"
-                                    [value]="rkapDua[j]">
-                                </dx-progress-bar>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <p>{{item.target_bulanan}}</p>
-                                </td>
-                                <td width="5px"></td>
-                                <td>
-                                   <dx-progress-bar #progressBar
-                                    id="progress-bar-status"
-                                     width="100%"
-                                    [min]="0"
-                                    [statusFormat]="formatBulanan"
-                                    [max]="rkapDua[j]"
-                                    [value]="bulananDua[j]">
-                                </dx-progress-bar>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <p>{{item.realisasi}}</p>
-                                </td>
-                                <td width="5px"></td>
-                                <td>
-                                    <dx-progress-bar #progressBar
-                                    id="progress-bar-status"
-                                     width="100%"
-                                    [min]="0"
-                                    [statusFormat]="format"
-                                    [max]="bulananDua[j]"
-                                    [value]="realisasiDua[j]">
-                                </dx-progress-bar>
-                                </td>
-                              </tr>
-                            </table>
+                          <div class="row">
+                            <div class="col-md-12" (mouseover)="hover=true" (mouseleave)="hover=false">
+                              <table id="tabel">
+                                <tr>
+                                  <td width="15px" style="margin-right: 2px;">
+                                    <p  class="ket">RKAP</p>
+                                  </td>
+                                  <td width="5px"></td>
+                                  <td width="20px" style="margin-right: 2px;">
+                                    <p>{{item.target_rkap}}</p>
+                                  </td>
+                                  <td width="5px"></td>
+                                  <td>
+                                    <dx-progress-bar #progressBar id="progress-bar-status" width="100%" [min]="0"
+                                      [statusFormat]="formatRKAP" [max]="rkapSatu[j]" [value]="rkapSatu[j]">
+                                    </dx-progress-bar>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td width="15px" style="margin-right: 2px;">
+                                    <p  class="ket">Target bulan</p>
+                                  </td>
+                                  <td width="5px"></td>
+                                  <td>
+                                    <p>{{item.target_bulanan}}</p>
+                                  </td>
+                                  <td width="5px"></td>
+                                  <td>
+                                    <dx-progress-bar #progressBar id="progress-bar-status" width="100%" [min]="0"
+                                      [statusFormat]="formatBulanan" [max]="rkapSatu[j]" [value]="bulananSatu[j]">
+                                    </dx-progress-bar>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td width="15px" style="margin-right: 2px;">
+                                    <p class="ket">Realisasi</p>
+                                  </td>
+                                  <td width="5px"></td>
+                                  <td>
+                                    <p>{{item.realisasi}}</p>
+                                  </td>
+                                  <td width="5px"></td>
+                                  <td>
+                                    <dx-progress-bar #progressBar id="progress-bar-status" width="100%" [min]="0"
+                                      [statusFormat]="format" [max]="bulananSatu[j]" [value]="realisasiSatu[j]">
+                                    </dx-progress-bar>
+                                  </td>
+                                </tr>
+                              </table>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
                 </div>
-                <!-- end card bar -->
+              </div>
+              <!-- end card bar -->
             </div>
           </div>
         </div>
@@ -198,9 +194,9 @@
 
 
 
-<!-- slide 3 -->
+  <!-- slide 3 -->
   <div class="item-carousel">
-    <div id="kotak" >
+    <div id="kotak">
       <div class="row">
         <div class="col-md-2">
           <button type="button" class="btn btn-warning align-middle">
@@ -213,87 +209,85 @@
         <div class="col-md-12">
           <div class="row" *ngIf="daftarCardBarFiltered[2]">
             <div class="col-md-12">
-               <!-- card bar -->
-               <div *ngFor="let item of slideTiga; let j=index">
-                  <div class="col-md-{{item.panjang_kolom}}">
-                    <div class="card text-black text-left bg-secondary" style="height:170px; width:auto">
-                      <div class="card-body">
-                        <div class="row">
-                          <div class="col-md-6">
-                            <p class="my-title">
-                              {{item.nama_kpi}}
-                            </p>
+              <!-- card bar -->
+              <div *ngFor="let item of slideTiga; let j=index">
+                <div class="col-md-{{item.panjang_kolom}}">
+                    <div class="card text-black text-left bg-secondary" style="height:210px; width:auto">
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col-md-12">
+                              <p class="my-title">
+                                {{item.nama_kpi}}
+                              </p>
+                            </div>
                           </div>
-                          <div class="col-md-6" (mouseover)="hover=true" (mouseleave)="hover=false">
-                            <table id="tabel">
-                              <tr>
-                                <td width="20px" style="margin-right: 2px;">
-                                  <p>{{item.target_rkap}}</p>
-                                </td>
-                                <td width="5px"></td>
-                                <td>
-                                   
-                                    <dx-progress-bar #progressBar
-                                    id="progress-bar-status"
-                                     width="100%"
-                                    [min]="0"
-                                    [statusFormat]="formatRKAP"
-                                    [max]="rkapTiga[j]"
-                                    [value]="rkapTiga[j]">
-                                </dx-progress-bar>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <p>{{item.target_bulanan}}</p>
-                                </td>
-                                <td width="5px"></td>
-                                <td>
-                                   <dx-progress-bar #progressBar
-                                    id="progress-bar-status"
-                                     width="100%"
-                                    [min]="0"
-                                    [statusFormat]="formatBulanan"
-                                    [max]="rkapTiga[j]"
-                                    [value]="bulananTiga[j]">
-                                </dx-progress-bar>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <p>{{item.realisasi}}</p>
-                                </td>
-                                <td width="5px"></td>
-                                <td>
-                                    <dx-progress-bar #progressBar
-                                    id="progress-bar-status"
-                                     width="100%"
-                                    [min]="0"
-                                    [statusFormat]="format"
-                                    [max]="bulananTiga[j]"
-                                    [value]="realisasiTiga[j]">
-                                </dx-progress-bar>
-                                </td>
-                              </tr>
-                            </table>
+                          <div class="row">
+                            <div class="col-md-12" (mouseover)="hover=true" (mouseleave)="hover=false">
+                              <table id="tabel">
+                                <tr>
+                                  <td width="15px" style="margin-right: 2px;">
+                                    <p  class="ket">RKAP</p>
+                                  </td>
+                                  <td width="5px"></td>
+                                  <td width="20px" style="margin-right: 2px;">
+                                    <p>{{item.target_rkap}}</p>
+                                  </td>
+                                  <td width="5px"></td>
+                                  <td>
+                                    <dx-progress-bar #progressBar id="progress-bar-status" width="100%" [min]="0"
+                                      [statusFormat]="formatRKAP" [max]="rkapSatu[j]" [value]="rkapSatu[j]">
+                                    </dx-progress-bar>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td width="15px" style="margin-right: 2px;">
+                                    <p  class="ket">Target bulan</p>
+                                  </td>
+                                  <td width="5px"></td>
+                                  <td>
+                                    <p>{{item.target_bulanan}}</p>
+                                  </td>
+                                  <td width="5px"></td>
+                                  <td>
+                                    <dx-progress-bar #progressBar id="progress-bar-status" width="100%" [min]="0"
+                                      [statusFormat]="formatBulanan" [max]="rkapSatu[j]" [value]="bulananSatu[j]">
+                                    </dx-progress-bar>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td width="15px" style="margin-right: 2px;">
+                                    <p class="ket">Realisasi</p>
+                                  </td>
+                                  <td width="5px"></td>
+                                  <td>
+                                    <p>{{item.realisasi}}</p>
+                                  </td>
+                                  <td width="5px"></td>
+                                  <td>
+                                    <dx-progress-bar #progressBar id="progress-bar-status" width="100%" [min]="0"
+                                      [statusFormat]="format" [max]="bulananSatu[j]" [value]="realisasiSatu[j]">
+                                    </dx-progress-bar>
+                                  </td>
+                                </tr>
+                              </table>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
                 </div>
-                <!-- end card bar -->
+              </div>
+              <!-- end card bar -->
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-<!-- end slide 3 -->
+  <!-- end slide 3 -->
 
-<!-- slide 4 -->
+  <!-- slide 4 -->
   <div class="item-carousel">
-    <div id="kotak" >
+    <div id="kotak">
       <div class="row">
         <div class="col-md-2">
           <button type="button" class="btn btn-warning align-middle">
@@ -306,87 +300,85 @@
         <div class="col-md-12">
           <div class="row" *ngIf="daftarCardBarFiltered[3]">
             <div class="col-md-12">
-               <!-- card bar -->
-               <div *ngFor="let item of slideEmpat; let j=index">
-                  <div class="col-md-{{item.panjang_kolom}}">
-                    <div class="card text-black text-left bg-secondary" style="height:170px; width:auto">
-                      <div class="card-body">
-                        <div class="row">
-                          <div class="col-md-6">
-                            <p class="my-title">
-                              {{item.nama_kpi}}
-                            </p>
+              <!-- card bar -->
+              <div *ngFor="let item of slideEmpat; let j=index">
+                <div class="col-md-{{item.panjang_kolom}}">
+                    <div class="card text-black text-left bg-secondary" style="height:210px; width:auto">
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col-md-12">
+                              <p class="my-title">
+                                {{item.nama_kpi}}
+                              </p>
+                            </div>
                           </div>
-                          <div class="col-md-6" (mouseover)="hover=true" (mouseleave)="hover=false">
-                            <table id="tabel">
-                              <tr>
-                                <td width="20px" style="margin-right: 2px;">
-                                  <p>{{item.target_rkap}}</p>
-                                </td>
-                                <td width="5px"></td>
-                                <td>
-                                   
-                                    <dx-progress-bar #progressBar
-                                    id="progress-bar-status"
-                                     width="100%"
-                                    [min]="0"
-                                    [statusFormat]="formatRKAP"
-                                    [max]="rkapEmpat[j]"
-                                    [value]="rkapEmpat[j]">
-                                </dx-progress-bar>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <p>{{item.target_bulanan}}</p>
-                                </td>
-                                <td width="5px"></td>
-                                <td>
-                                   <dx-progress-bar #progressBar
-                                    id="progress-bar-status"
-                                     width="100%"
-                                    [min]="0"
-                                    [statusFormat]="formatBulanan"
-                                    [max]="rkapEmpat[j]"
-                                    [value]="bulananEmpat[j]">
-                                </dx-progress-bar>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <p>{{item.realisasi}}</p>
-                                </td>
-                                <td width="5px"></td>
-                                <td>
-                                    <dx-progress-bar #progressBar
-                                    id="progress-bar-status"
-                                     width="100%"
-                                    [min]="0"
-                                    [statusFormat]="format"
-                                    [max]="bulananEmpat[j]"
-                                    [value]="realisasiEmpat[j]">
-                                </dx-progress-bar>
-                                </td>
-                              </tr>
-                            </table>
+                          <div class="row">
+                            <div class="col-md-12" (mouseover)="hover=true" (mouseleave)="hover=false">
+                              <table id="tabel">
+                                <tr>
+                                  <td width="15px" style="margin-right: 2px;">
+                                    <p  class="ket">RKAP</p>
+                                  </td>
+                                  <td width="5px"></td>
+                                  <td width="20px" style="margin-right: 2px;">
+                                    <p>{{item.target_rkap}}</p>
+                                  </td>
+                                  <td width="5px"></td>
+                                  <td>
+                                    <dx-progress-bar #progressBar id="progress-bar-status" width="100%" [min]="0"
+                                      [statusFormat]="formatRKAP" [max]="rkapSatu[j]" [value]="rkapSatu[j]">
+                                    </dx-progress-bar>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td width="15px" style="margin-right: 2px;">
+                                    <p  class="ket">Target bulan</p>
+                                  </td>
+                                  <td width="5px"></td>
+                                  <td>
+                                    <p>{{item.target_bulanan}}</p>
+                                  </td>
+                                  <td width="5px"></td>
+                                  <td>
+                                    <dx-progress-bar #progressBar id="progress-bar-status" width="100%" [min]="0"
+                                      [statusFormat]="formatBulanan" [max]="rkapSatu[j]" [value]="bulananSatu[j]">
+                                    </dx-progress-bar>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td width="15px" style="margin-right: 2px;">
+                                    <p class="ket">Realisasi</p>
+                                  </td>
+                                  <td width="5px"></td>
+                                  <td>
+                                    <p>{{item.realisasi}}</p>
+                                  </td>
+                                  <td width="5px"></td>
+                                  <td>
+                                    <dx-progress-bar #progressBar id="progress-bar-status" width="100%" [min]="0"
+                                      [statusFormat]="format" [max]="bulananSatu[j]" [value]="realisasiSatu[j]">
+                                    </dx-progress-bar>
+                                  </td>
+                                </tr>
+                              </table>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
                 </div>
-                <!-- end card bar -->
+              </div>
+              <!-- end card bar -->
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-<!-- end slide 4 -->
+  <!-- end slide 4 -->
 
-<!-- slide 5 -->
+  <!-- slide 5 -->
   <div class="item-carousel">
-    <div id="kotak" >
+    <div id="kotak">
       <div class="row">
         <div class="col-md-2">
           <button type="button" class="btn btn-warning align-middle">
@@ -399,76 +391,74 @@
         <div class="col-md-12">
           <div class="row" *ngIf="daftarCardBarFiltered[4]">
             <div class="col-md-12">
-               <!-- card bar -->
-               <div *ngFor="let item of slideLima; let j=index">
-                  <div class="col-md-{{item.panjang_kolom}}">
-                    <div class="card text-black text-left bg-secondary" style="height:170px; width:auto">
-                      <div class="card-body">
-                        <div class="row">
-                          <div class="col-md-6">
-                            <p class="my-title">
-                              {{item.nama_kpi}}
-                            </p>
+              <!-- card bar -->
+              <div *ngFor="let item of slideLima; let j=index">
+                <div class="col-md-{{item.panjang_kolom}}">
+                    <div class="card text-black text-left bg-secondary" style="height:210px; width:auto">
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col-md-12">
+                              <p class="my-title">
+                                {{item.nama_kpi}}
+                              </p>
+                            </div>
                           </div>
-                          <div class="col-md-6" (mouseover)="hover=true" (mouseleave)="hover=false">
-                            <table id="tabel">
-                              <tr>
-                                <td width="20px" style="margin-right: 2px;">
-                                  <p>{{item.target_rkap}}</p>
-                                </td>
-                                <td width="5px"></td>
-                                <td>
-                                   
-                                    <dx-progress-bar #progressBar
-                                    id="progress-bar-status"
-                                     width="100%"
-                                    [min]="0"
-                                    [statusFormat]="formatRKAP"
-                                    [max]="rkapLima[j]"
-                                    [value]="rkapLima[j]">
-                                </dx-progress-bar>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <p>{{item.target_bulanan}}</p>
-                                </td>
-                                <td width="5px"></td>
-                                <td>
-                                   <dx-progress-bar #progressBar
-                                    id="progress-bar-status"
-                                     width="100%"
-                                    [min]="0"
-                                    [statusFormat]="formatBulanan"
-                                    [max]="rkapLima[j]"
-                                    [value]="bulananLima[j]">
-                                </dx-progress-bar>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <p>{{item.realisasi}}</p>
-                                </td>
-                                <td width="5px"></td>
-                                <td>
-                                    <dx-progress-bar #progressBar
-                                    id="progress-bar-status"
-                                     width="100%"
-                                    [min]="0"
-                                    [statusFormat]="format"
-                                    [max]="bulananLima[j]"
-                                    [value]="realisasiLima[j]">
-                                </dx-progress-bar>
-                                </td>
-                              </tr>
-                            </table>
+                          <div class="row">
+                            <div class="col-md-12" (mouseover)="hover=true" (mouseleave)="hover=false">
+                              <table id="tabel">
+                                <tr>
+                                  <td width="15px" style="margin-right: 2px;">
+                                    <p  class="ket">RKAP</p>
+                                  </td>
+                                  <td width="5px"></td>
+                                  <td width="20px" style="margin-right: 2px;">
+                                    <p>{{item.target_rkap}}</p>
+                                  </td>
+                                  <td width="5px"></td>
+                                  <td>
+                                    <dx-progress-bar #progressBar id="progress-bar-status" width="100%" [min]="0"
+                                      [statusFormat]="formatRKAP" [max]="rkapSatu[j]" [value]="rkapSatu[j]">
+                                    </dx-progress-bar>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td width="15px" style="margin-right: 2px;">
+                                    <p  class="ket">Target bulan</p>
+                                  </td>
+                                  <td width="5px"></td>
+                                  <td>
+                                    <p>{{item.target_bulanan}}</p>
+                                  </td>
+                                  <td width="5px"></td>
+                                  <td>
+                                    <dx-progress-bar #progressBar id="progress-bar-status" width="100%" [min]="0"
+                                      [statusFormat]="formatBulanan" [max]="rkapSatu[j]" [value]="bulananSatu[j]">
+                                    </dx-progress-bar>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td width="15px" style="margin-right: 2px;">
+                                    <p class="ket">Realisasi</p>
+                                  </td>
+                                  <td width="5px"></td>
+                                  <td>
+                                    <p>{{item.realisasi}}</p>
+                                  </td>
+                                  <td width="5px"></td>
+                                  <td>
+                                    <dx-progress-bar #progressBar id="progress-bar-status" width="100%" [min]="0"
+                                      [statusFormat]="format" [max]="bulananSatu[j]" [value]="realisasiSatu[j]">
+                                    </dx-progress-bar>
+                                  </td>
+                                </tr>
+                              </table>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
                 </div>
-                <!-- end card bar -->
+              </div>
+              <!-- end card bar -->
             </div>
           </div>
         </div>
@@ -476,7 +466,7 @@
     </div>
   </div>
   <!-- ?end slide  -->
-  
 
-   
-  </carousel-component>
+
+
+</carousel-component>
